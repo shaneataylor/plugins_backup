@@ -4,7 +4,7 @@
     </description>
   <taskdef resource="net/sf/antcontrib/antcontrib.properties">
   <classpath>
-    <pathelement location="../deps/ant-contrib/ant-contrib-1.0b3.jar"/>
+    <pathelement location="../deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
   </classpath>
   </taskdef>
   <property name="source.dir" location="." />
