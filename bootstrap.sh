@@ -15,7 +15,7 @@
 # TODO: add dependancy check 
 # TOOD: complete fetchcmd() function - use `fetch` or `wget` if curl is 
 #       unavailable.
-#       
+# TODO: get unpack to guess the destination directory instead of having to pass it.      
 # TODO: move this to a specialized build tool.
 #
 SOURCE_REPO=file:///$HOME/Documents/dita_source_files.git
@@ -31,27 +31,27 @@ function fetchcmd()
     
     if [ ! -f "downloads/$OUTFILE" ]; then
         curl -L --output downloads/$OUTFILE $URL
+    else
+        echo "File $OUTFILE already downloaded. Skipping"
     fi
 }
 
 function unpack()
 {
     FILE=$1
-    TYPE=$2
-    DEST=$3
+    TYPE=$3
+    DEST=$2
     
     if [ -d "deps/$DEST" ]; then
-        return
+        echo "Destination directory deps/$DEST already exists. Skipping"
+        return 0
     fi 
     
     if [ "$TYPE" = 'ZIP' ]; then
         mkdir -p deps/$DEST
         unzip -d deps/$DEST downloads/$FILE
     else
-        OLDCWD=$PWD
-        cd deps
-        tar -zxvf ../downloads/$FILE
-        cd $OLDCWD
+        tar -C deps -zxvf downloads/$FILE
     fi
 }
 
@@ -73,7 +73,7 @@ echo "Downloading Ant-Contrib Tasks 1.0b3"
 fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip ant-contrib-1.0b3-bin.zip
 
 echo "Unpacking DITA-OT"
-unpack DITA-OT1.5.3_full_easy_install_bin.tar.gz
+unpack DITA-OT1.5.3_full_easy_install_bin.tar.gz DITA-OT1.5.3
 
 # echo "Unpacking DITA4Publishers"
 # mkdir dita4publishers-0.9.16
@@ -82,16 +82,16 @@ unpack DITA-OT1.5.3_full_easy_install_bin.tar.gz
 # unzip -d DITA-OT1.5.3/plugins dita4publishers-0.9.16/dita4publishers-toolkit-plugins-0.9.16.zip
 
 echo "Unpacking ANT"
-unpack apache-ant-1.8.2-bin.tar.gz
+unpack apache-ant-1.8.2-bin.tar.gz apache-ant-1.8.2
 
 echo "Unpacking ANT-Contrib"
-unpack ant-contrib-1.0b3-bin.zip 'ZIP' ant-contrib
+unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 
 echo "Unpacking FOP"
-unpack fop-1.0-bin.tar.gz
+unpack fop-1.0-bin.tar.gz fop-1.0
 
 echo "Unpacking Onygen"
-unpack oxygen.tar.gz
+unpack oxygen.tar.gz oxygen
 
 echo "Checking out DITA source files"
 #git archive --prefix=dita_source_files/ --format=tar --remote=$SOURCE_REPO $SOURCE_BRANCH | tar -xf -
