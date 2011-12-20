@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: fop.xconf,v 1.1.2.1 2008/12/16 01:42:50 imagiczhang Exp $ -->
+
+<!--
+
+This is an example configuration file for FOP.
+This file contains the same settings as the default values
+and will have no effect if used unchanged.
+
+Relative config url's will be resolved relative to
+the location of this file.
+
+-->
+
+<!-- NOTE: This is the version of the configuration -->
+<fop
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation=
+"http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/src/foschema/fop-configuration.xsd?view=co">
+  <strict-configuration>false</strict-configuration>
+  
+  <base>.</base>
+  <font-base>../dita_source_files/customizations/pdf_customization/Customization/fonts/</font-base>
+  
+  <!-- Source resolution in dpi (dots/pixels per inch) for determining the size of pixels in SVG and bitmap images, default: 72dpi -->
+  <source-resolution>72</source-resolution>
+  <!-- Target resolution in dpi (dots/pixels per inch) for specifying the target resolution for generated bitmaps, default: 72dpi -->
+  <target-resolution>150</target-resolution>
+  
+  <!-- Default page-height and page-width, in case
+       value is specified as auto -->
+  <default-page-settings height="11in" width="8.26in"/>
+  
+  <!-- Information for specific renderers -->
+  <!-- Uses renderer mime type for renderers -->
+  <renderers>
+    <renderer mime="application/pdf">
+      <filterList>
+        <!-- provides compression using zlib flate (default is on) -->
+        <value>flate</value>
+  
+        <!-- encodes binary data into printable ascii characters (default off)
+             This provides about a 4:5 expansion of data size -->
+        <!-- <value>ascii-85</value> -->
+  
+        <!-- encodes binary data with hex representation (default off)
+             This filter is not recommended as it doubles the data size -->
+        <!-- <value>ascii-hex</value> -->
+      </filterList>
+      
+      <!-- Tested: both of the following settings did NOT help Adobe Reader display colors consistently -->
+
+      <!-- Note: incompatible with disable-srgb-colorspace option below -->
+      <!-- 
+<output-profile>/Applications/oxygen/frameworks/dita/DITA-OT/demo/fo/Customization/AdobeRGB1998.icc</output-profile>
+      -->
+      <!-- 
+        <disable-srgb-colorspace>true</disable-srgb-colorspace>
+      -->
+      
+      <!-- Security options -->
+      <!-- 
+      <encryption-params>
+      <user-password>testuserpass</user-password>
+      <owner-password>testownerpass</owner-password>
+      <noprint/>
+      <nocopy/>
+      <noedit/>
+      <noannotations/>
+      </encryption-params>
+       -->
+
+      <fonts>
+        <!-- ADDING SYSTEM FONT AUTO-DETECTION DOES NOT WORK WELL
+          <auto-detect/>
+        -->
+        
+        <!-- embedded fonts -->
+        <!--
+        This information must exactly match the font specified
+        in the fo file. Otherwise it will use a default font.
+
+        For example,
+        <fo:inline font-family="Arial" font-weight="bold" font-style="normal">
+            Arial-normal-normal font
+        </fo:inline>
+        for the font triplet specified by:
+        <font-triplet name="Arial" style="normal" weight="bold"/>
+
+        If you do not want to embed the font in the pdf document
+        then do not include the "embed-url" attribute.
+        The font will be needed where the document is viewed
+        for it to be displayed properly.
+
+        possible styles: normal | italic | oblique | backslant
+        possible weights: normal | bold | 100 | 200 | 300 | 400
+                          | 500 | 600 | 700 | 800 | 900
+        (normal = 400, bold = 700)
+        -->
+        
+        <!-- ARIAL -->
+        <font metrics-url="Arial.xml" kerning="yes" embed-url="Arial.ttf">
+          <font-triplet name="Arial" style="normal" weight="normal"/>
+        </font>
+        <font metrics-url="Arial Bold.xml" kerning="yes" embed-url="Arial Bold.ttf">
+          <font-triplet name="Arial" style="normal" weight="bold"/>
+        </font>
+        <font metrics-url="Arial Italic.xml" kerning="yes" embed-url="Arial Italic.ttf">
+          <font-triplet name="Arial" style="italic" weight="normal"/>
+        </font>
+        <font metrics-url="Arial Bold Italic.xml" kerning="yes" embed-url="Arial Bold Italic.ttf">
+          <font-triplet name="Arial" style="italic" weight="bold"/>
+        </font>
+        
+        <!-- CONSOLAS -->
+        <font metrics-url="Consolas.xml" kerning="yes" embed-url="Consolas.ttf">
+          <font-triplet name="Consolas" style="normal" weight="normal"/>
+        </font>
+        <font metrics-url="Consolas Bold.xml" kerning="yes" embed-url="Consolas Bold.ttf">
+          <font-triplet name="Consolas" style="normal" weight="bold"/>
+        </font>
+        <font metrics-url="Consolas Italic.xml" kerning="yes" embed-url="Consolas Italic.ttf">
+          <font-triplet name="Consolas" style="italic" weight="normal"/>
+        </font>
+        <font metrics-url="Consolas Bold Italic.xml" kerning="yes" embed-url="Consolas Bold Italic.ttf">
+          <font-triplet name="Consolas" style="italic" weight="bold"/>
+        </font>
+        
+        <!-- VERDANA -->
+        <font metrics-url="Verdana.xml" kerning="yes" embed-url="Verdana.ttf">
+          <font-triplet name="Verdana" style="normal" weight="normal"/>
+        </font>
+        <font metrics-url="Verdana Bold.xml" kerning="yes" embed-url="Verdana Bold.ttf">
+          <font-triplet name="Verdana" style="normal" weight="bold"/>
+        </font>
+        <font metrics-url="Verdana Italic.xml" kerning="yes" embed-url="Verdana Italic.ttf">
+          <font-triplet name="Verdana" style="italic" weight="normal"/>
+        </font>
+        <font metrics-url="Verdana Bold Italic.xml" kerning="yes" embed-url="Verdana Bold Italic.ttf">
+          <font-triplet name="Verdana" style="italic" weight="bold"/>
+        </font>
+        
+        <!-- STIX -->
+        <font metrics-url="stixgeneral-webfont.xml" kerning="yes" embed-url="stixgeneral-webfont.ttf">
+          <font-triplet name="STIXGeneral" style="normal" weight="normal"/>
+        </font>
+        <font metrics-url="stixgeneralbol-webfont.xml" kerning="yes" embed-url="stixgeneralbol-webfont.ttf">
+          <font-triplet name="STIXGeneral" style="normal" weight="bold"/>
+        </font>
+        <font metrics-url="stixgeneralitalic-webfont.xml" kerning="yes" embed-url="stixgeneralitalic-webfont.ttf">
+          <font-triplet name="STIXGeneral" style="italic" weight="normal"/>
+        </font>
+        <font metrics-url="stixgeneralbolita-webfont.xml" kerning="yes" embed-url="stixgeneralbolita-webfont.ttf">
+          <font-triplet name="STIXGeneral" style="italic" weight="bold"/>
+        </font>
+        
+      </fonts>
+
+      <!-- This option lets you specify additional options on an XML handler -->
+      <!--xml-handler namespace="http://www.w3.org/2000/svg">
+        <stroke-text>false</stroke-text>
+        </xml-handler-->
+      
+      
+    </renderer>
+
+    <renderer mime="application/postscript">
+      <!-- This option forces the PS renderer to rotate landscape pages -->
+      <!--auto-rotate-landscape>true</auto-rotate-landscape-->
+      
+      <!-- This option lets you specify additional options on an XML handler -->
+      <!--xml-handler namespace="http://www.w3.org/2000/svg">
+        <stroke-text>false</stroke-text>
+      </xml-handler-->
+    </renderer>
+
+    <renderer mime="application/vnd.hp-PCL">
+    </renderer>
+
+    <!-- MIF does not have a renderer
+    <renderer mime="application/vnd.mif">
+    </renderer>
+    -->
+
+<!--     <renderer mime="image/svg+xml">
+      <format type="paginated"/>
+      <link value="true"/>
+      <strokeText value="false"/>
+    </renderer> -->
+
+<!--     <renderer mime="application/awt">
+    </renderer>
+ -->
+    <renderer mime="image/png">
+      <!--transparent-page-background>true</transparent-page-background-->
+    </renderer>
+
+    <renderer mime="image/tiff">
+      <!--transparent-page-background>true</transparent-page-background-->
+      <!--compression>CCITT T.6</compression-->
+    </renderer>
+
+<!--     <renderer mime="text/xml">
+    </renderer> -->
+
+    <!-- RTF does not have a renderer
+    <renderer mime="text/rtf">
+    </renderer>
+    -->
+
+<!--     <renderer mime="text/plain">
+      <pageSize columns="80"/>
+    </renderer> -->
+
+  </renderers>
+
+</fop>
+

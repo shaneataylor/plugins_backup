@@ -1,0 +1,50 @@
+
+<project name="techcomm" default="all" basedir="dita_source_files">
+    <description>
+      Build the WebAssign Technical Communications Deliverables.
+  </description>
+    <property name="customization.dir" value="${source.dir}/customizations/webhelp_customization"/>
+    
+    <property name="transtype" value="webhelp"/>
+    
+    <property name="args.css" value="${customization.dir}/webassign_help.css" />
+    <property name="args.hdr" value="${customization.dir}/webassign_help_header.html" />
+    <property name="args.copycss" value="yes" />
+    <property name="args.ftr" value="${customization.dir}/webassign_help_footer.html" />
+    <property name="args.hide.parent.link" value="yes" />
+    <property name="args.copycss" value="yes" />
+    <property name="args.xhtml.toc" value="toc" />
+    <property name="args.breadcrumbs" value="yes" />
+    <property name="args.outext" value=".html" />
+    <property name="dita.extname" value=".xml" />
+    
+    <import file="${dita.dir}/build.xml" />
+    
+    <target name="all">
+        <antcall target="student" />
+        <antcall target="instructor" />
+    </target>
+    
+    <target name="instructor">
+        <antcall target="init">
+            <param name="output.dir" location="../out/instructor_guide" />
+            <param name="custom.webhelp.search" value="google_instructor" />
+            <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
+            <param name="dita.input" value="${source.dir}/m_i_help.ditamap"/>
+            <param name="dita.input.valfile" value="${source.dir}/d_i_help.ditaval" />
+            <param name="dita.temp.dir" location="../temp/m_i_help" />
+        </antcall>
+    </target>
+    
+    <target name="student">
+        <antcall target="init">
+            <param name="output.dir" location="../out/student_guide" />
+            <param name="custom.webhelp.search" value="google_student" />
+            <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
+            <param name="dita.input" value="${source.dir}/m_s_help.ditamap"/>
+            <param name="dita.input.valfile" value="${source.dir}/d_s_help.ditaval" />
+            <param name="dita.temp.dir" location="../temp/m_s_help" />
+        </antcall>
+    </target>
+    
+</project>

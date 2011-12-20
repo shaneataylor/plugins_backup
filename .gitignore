@@ -1,0 +1,25 @@
+# Packages #
+############
+*.gz
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Expaned directories
+######################
+dita_source_files/*
+downloads/*
+deps/*
+out/*
+temp/*
+logs/*

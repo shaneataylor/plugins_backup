@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>Technical Communication's Documentation Build</title>
+<meta name="author" content="Josh Johnson &lt;jjohnson&#64;webassign.net&gt;" />
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7056 2011-06-17 10:50:48Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="technical-communication-s-documentation-build">
+<h1 class="title">Technical Communication's Documentation Build</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Josh Johnson &lt;<a class="reference external" href="mailto:jjohnson&#64;webassign.net">jjohnson&#64;webassign.net</a>&gt;</td></tr>
+<tr class="field"><th class="docinfo-name">ref:</th><td class="field-body"><a class="reference external" href="https://staff.webassign.net/wiki/index.php/CI_Build/Technical_Communications_Unassisted_Build">https://staff.webassign.net/wiki/index.php/CI_Build/Technical_Communications_Unassisted_Build</a></td>
+</tr>
+<tr class="field"><th class="docinfo-name">ref:</th><td class="field-body"><a class="reference external" href="http://dita-ot.sourceforge.net/">http://dita-ot.sourceforge.net/</a></td>
+</tr>
+<tr class="field"><th class="docinfo-name">ref:</th><td class="field-body"><a class="reference external" href="http://ant.apache.org/">http://ant.apache.org/</a></td>
+</tr>
+<tr class="field"><th class="docinfo-name">ref:</th><td class="field-body"><a class="reference external" href="http://xmlgraphics.apache.org/fop/">http://xmlgraphics.apache.org/fop/</a></td>
+</tr>
+<tr class="field"><th class="docinfo-name">ref:</th><td class="field-body"><a class="reference external" href="http://www.oxygenxml.com/">http://www.oxygenxml.com/</a></td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>WARNING:</strong> We have not migrated TechComm to using the git server yet. This build is configured to use a locally-hosted repository to check out the source. Set the <cite>SOURCE_REPO</cite> variable in <cite>bootstrap.sh</cite> before proceeding.</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>WARNING:</strong> This build does not work with the current source. Please apply <cite>source_changes.patch</cite> to your source before proceeding.</p>
+</div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#quick-start" id="id2">Quick Start</a></li>
+<li><a class="reference internal" href="#working-with-build-sh" id="id3">Working With <cite>build.sh</cite></a><ul>
+<li><a class="reference internal" href="#available-targets" id="id4">Available Targets</a></li>
+<li><a class="reference internal" href="#useful-ant-properties" id="id5">Useful Ant Properties</a></li>
+<li><a class="reference internal" href="#usage-examples" id="id6">Usage Examples</a><ul>
+<li><a class="reference internal" href="#just-generate-one-target" id="id7">Just Generate One Target</a></li>
+<li><a class="reference internal" href="#log-to-a-different-file-pass-ant-properties" id="id8">Log To A Different File (Pass Ant Properties)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-layout" id="id9">File Layout</a><ul>
+<li><a class="reference internal" href="#git" id="id10">./.git</a></li>
+<li><a class="reference internal" href="#deps" id="id11">./deps</a></li>
+<li><a class="reference internal" href="#dita-source-files" id="id12">./dita_source_files</a><ul>
+<li><a class="reference internal" href="#todo" id="id13">TODO</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#downloads" id="id14">./downloads</a></li>
+<li><a class="reference internal" href="#logs" id="id15">./logs</a><ul>
+<li><a class="reference internal" href="#id1" id="id16">TODO</a></li>
+<li><a class="reference internal" href="#out" id="id17">./out</a></li>
+<li><a class="reference internal" href="#temp" id="id18">./temp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="quick-start">
+<h1><a class="toc-backref" href="#id2">Quick Start</a></h1>
+<p>To prepare for the build, simply run <cite>bootstrap.sh</cite> in this directory.</p>
+<p>This will download all necessary files, unpack them, and do some basic setup.</p>
+<p>Then all you have to do is run <cite>build.sh</cite> from this directory, and the build will proceed.</p>
+<dl class="docutils">
+<dt>Look for output files in <cite>out</cite>:</dt>
+<dd><ul class="first last simple">
+<li>Student guide is in <cite>out/m_s_student_guide.pdf</cite></li>
+<li>Instructor guide is in <cite>out/m_i_student_gude.pdf</cite></li>
+<li>Creating Questions is in <cite>out/m_i_creating_questions_guide.pdf</cite></li>
+<li>Instructor WebHelp is in <cite>out/instructor_guide/index.html</cite></li>
+<li>Student WebHelp is in <cite>out/student_guide/index.html</cite></li>
+</ul>
+</dd>
+</dl>
+<p>The log file is <cite>build.log</cite> by default. Look there if there are any problems.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The current version of <cite>bootstrap.sh</cite> assumes you have <cite>curl</cite> and <cite>java</cite> already installed in your system, along with <cite>unzip</cite> and <cite>tar</cite>.</p>
+</div>
+</div>
+<div class="section" id="working-with-build-sh">
+<h1><a class="toc-backref" href="#id3">Working With <cite>build.sh</cite></a></h1>
+<p><cite>build.sh</cite> will pass any parameters along to Ant as-is. You can specify what specific
+target you want to build, or add additonal run-time parameters.</p>
+<div class="section" id="available-targets">
+<h2><a class="toc-backref" href="#id4">Available Targets</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">instructor_guide:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">&quot;WebAssign Instructor Guide&quot; - PDF</td>
+</tr>
+<tr class="field"><th class="field-name">student_guide:</th><td class="field-body">&quot;WebAssign Student Guide&quot; - PDF</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">creating_questions:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">&quot;WebAssign Creating Questions Guide&quot; - PDF</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">instructor_webhelp:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">&quot;WebAssign Instructor Help System&quot; - HTML Help</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">student_webhelp:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">&quot;WebAssign Student Help System&quot; - HTML Help</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="useful-ant-properties">
+<h2><a class="toc-backref" href="#id5">Useful Ant Properties</a></h2>
+<p>You can also pass properties via the command line to override any that are used within the build scripts.</p>
+<p>They are specified with the <cite>-D</cite> flag.</p>
+<p>Here's a short list of properties you may want to override (but most likely won't). See <a class="reference external" href="http://dita-ot.sourceforge.net/1.5.3/quickstartguide/reference/dita-ot_ant_properties.html">http://dita-ot.sourceforge.net/1.5.3/quickstartguide/reference/dita-ot_ant_properties.html</a> and the XML files in this directory for a full list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">local.build.log:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">Path to the file to log to (will be overridden with each build)</td>
+</tr>
+<tr class="field"><th class="field-name">args.debug:</th><td class="field-body">yes/no, provides more output to the log for debugging</td>
+</tr>
+<tr class="field"><th class="field-name">clean.temp:</th><td class="field-body">yes/no, delete temporary files (default is yes)</td>
+</tr>
+<tr class="field"><th class="field-name">clean.output:</th><td class="field-body">yes/no, delete the output files before building (default is yes)</td>
+</tr>
+<tr class="field"><th class="field-name">output.dir:</th><td class="field-body">path to the output directory (be careful here; this is set differently in the build for PDFs and each WebHelp output)</td>
+</tr>
+<tr class="field"><th class="field-name">oxygen.dir:</th><td class="field-body">path to an unzipped distribution of Oxygen</td>
+</tr>
+<tr class="field"><th class="field-name">dita.dir:</th><td class="field-body">path to DITA-OT files</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usage-examples">
+<h2><a class="toc-backref" href="#id6">Usage Examples</a></h2>
+<div class="section" id="just-generate-one-target">
+<h3><a class="toc-backref" href="#id7">Just Generate One Target</a></h3>
+<p>This is accomplished by just passing one of the targets mentioned above as a command-line argument to <cite>build.sh</cite>:</p>
+<pre class="literal-block">
+$ ./build.sh instructor_guide
+</pre>
+<p>This will just build the &quot;WebAssign Instructor Guide&quot; PDF.</p>
+</div>
+<div class="section" id="log-to-a-different-file-pass-ant-properties">
+<h3><a class="toc-backref" href="#id8">Log To A Different File (Pass Ant Properties)</a></h3>
+<p>Properties are passed using the <cite>-D</cite> flag. I've always seen it in quotes; not sure if that is strictly necessary.</p>
+<pre class="literal-block">
+$ ./build.sh &quot;-Dlocal.build.log=../mylog.log&quot;
+</pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The paths are relative to the <cite>dita_source_files</cite> directory.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="file-layout">
+<h1><a class="toc-backref" href="#id9">File Layout</a></h1>
+<p>All scripts and the general build mechanism run out of this directory.</p>
+<p>In this directory:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="30%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">File</th>
+<th class="head">Purpose</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>.gitignore</td>
+<td>Prevents git from
+seeing various files
+as part of the code
+base</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>bootstrap.sh</td>
+<td>Downloads and configures
+all tools and packages</td>
+<td>Doesn't install java
+curl, unzip or tar</td>
+</tr>
+<tr><td>build.log</td>
+<td>The default build log</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>build.sh</td>
+<td>Build script</td>
+<td>Assumes java is in
+your $PATH</td>
+</tr>
+<tr><td>build.xml</td>
+<td>Core build configuration</td>
+<td><p class="first">Uses Apache Ant.</p>
+<p class="last">Calls the other build scripts,
+sets common settings</p>
+</td>
+</tr>
+<tr><td>build_pdf.xml</td>
+<td>Build config for PDFs</td>
+<td>Not sure if this will work alone.</td>
+</tr>
+<tr><td>build_webhelp.xml</td>
+<td>Build config for web
+help</td>
+<td>Not sure if this will work alone.</td>
+</tr>
+<tr><td>fop.xconf</td>
+<td>Configuration file for
+FOP</td>
+<td>Necessary to get PDFs to generate
+properly with relative font paths</td>
+</tr>
+<tr><td>README.rst</td>
+<td>This file. Documentation</td>
+<td>Written in reStructuredText.</td>
+</tr>
+<tr><td>README.html</td>
+<td>This file, transformed
+into HTML</td>
+<td>Converted with stock docutils</td>
+</tr>
+<tr><td>source_changes.patch</td>
+<td>Patch file containing
+changes I made to get
+the source to build.</td>
+<td>Only temporary until TechComm
+switches over to the git repository
+on wart.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="git">
+<h2><a class="toc-backref" href="#id10">./.git</a></h2>
+<p>If this build was checked out of git, this is the 'attic' directory. Hooks go here.</p>
+</div>
+<div class="section" id="deps">
+<h2><a class="toc-backref" href="#id11">./deps</a></h2>
+<p>All dependant tools and java libraries are expanded here.</p>
+</div>
+<div class="section" id="dita-source-files">
+<h2><a class="toc-backref" href="#id12">./dita_source_files</a></h2>
+<p>This is where the Technical Communications' soure files are checked out.</p>
+<div class="section" id="todo">
+<h3><a class="toc-backref" href="#id13">TODO</a></h3>
+<p>Explain the file structure within the code base.</p>
+</div>
+</div>
+<div class="section" id="downloads">
+<h2><a class="toc-backref" href="#id14">./downloads</a></h2>
+<p>All of the tarballs for all of the dependancies are downloaded to this directory.</p>
+</div>
+<div class="section" id="logs">
+<h2><a class="toc-backref" href="#id15">./logs</a></h2>
+<p>This is generated by the build. Not sure what it really does. The files inside look more like intermediate products of the process than they look like logs.</p>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id16">TODO</a></h3>
+<p>Put all logs in this directory, or get the build to put it somewhere else.</p>
+</div>
+<div class="section" id="out">
+<h3><a class="toc-backref" href="#id17">./out</a></h3>
+<p>Generated by the build. This is where all of the generated documentation is stored.</p>
+</div>
+<div class="section" id="temp">
+<h3><a class="toc-backref" href="#id18">./temp</a></h3>
+<p>Generated by the build. Stores intermediate files. DITA-OT does a lot with multiple passes of XSLT transformations. This directory is cleaned out after each build.</p>
+<p>To change that, either alter the property in <cite>build.xml</cite> or pass  <cite>&quot;-Dclean.temp=no&quot;</cite> as an argument to <cite>build.sh</cite>.</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
