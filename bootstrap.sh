@@ -15,15 +15,42 @@
 # TODO: add dependancy check 
 # TOOD: complete fetchcmd() function - use `fetch` or `wget` if curl is 
 #       unavailable.
-# TODO: get unpack to guess the destination directory instead of having to pass it.      
+# TODO: get unpack to guess the destination directory instead of having to pass
+#       it.      
 # TODO: move this to a specialized build tool.
+# TODO: log output to a file and restrict console output to letting the user 
+#       know pass/fail of each step
 #
+# TODO: More inline documentation
+# TODO: is it possible to query the remote git repo and check for changes?
 SOURCE_REPO=file:///$HOME/Documents/dita_source_files.git
 SOURCE_BRANCH='master'
 
 WEBHELP_CUSTOM='dita_source_files/customizations/webhelp_customization'
 DITA_DIR='deps/DITA-OT1.5.3'
 
+ORIG_CWD=$PWD
+
+# cleanup if the script fails
+function cleanup()
+{
+    if [ ! "$ORIG_CWD" = "$PWD" ]; then
+        cd $ORIG_CWD
+    fi
+}
+
+trap cleanup SIGINT SIGTERM EXIT;
+
+# fetches a package from a url
+#
+# Usage: 
+#    fetchcmd [URL] [OUTFILE]
+#
+# Parameters:
+#    URL - the url to pull from
+#    OUTFILE - what to name the downloaded file
+#
+# TODO: support other download tools, espcially 'fetch'
 function fetchcmd()
 {
     URL=$1
@@ -36,6 +63,17 @@ function fetchcmd()
     fi
 }
 
+# Unpacks an archive file
+#
+# Usage:
+#    unpack FILE DEST [TYPE]
+#
+# Parameters:
+#    FILE - the archive to unpack
+#    DEST - the name of the directory it will go into
+#    TYPE - optional, used to differentiate between zip and tar/gz archives.
+#           The only understood value is 'ZIP' to indicate a zip archive. tar/gz
+#           is assumed otherwise.
 function unpack()
 {
     FILE=$1
@@ -53,6 +91,24 @@ function unpack()
     else
         tar -C deps -zxvf downloads/$FILE
     fi
+}
+
+# install a DITA-OT plugin
+# 
+# Usage:
+#     install_plugin LOCATION NAME
+# 
+# Parameters:
+#     LOCATION - the directory where the plugin is stored.
+#     NAME - user-friendly name for the plugin, use to notify the user
+function install_plugin()
+{
+    LOCATION=$1
+    NAME=$2
+    
+    echo "Installing $NAME plugin..."
+    cp -Rf $LOCATION $DITA_DIR/plugins
+    ./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
 }
 
 echo "Creating requisite directories"
@@ -93,13 +149,25 @@ unpack fop-1.0-bin.tar.gz fop-1.0
 echo "Unpacking Onygen"
 unpack oxygen.tar.gz oxygen
 
-echo "Checking out DITA source files"
-#git archive --prefix=dita_source_files/ --format=tar --remote=$SOURCE_REPO $SOURCE_BRANCH | tar -xf -
-git clone $SOURCE_REPO -b $SOURCE_BRANCH
+# Update the checked-out source if it exists, otherwise clone 
+# 
+# this will get the code without checking it out:
+#     git archive --prefix=dita_source_files/ --format=tar --remote=$SOURCE_REPO $SOURCE_BRANCH | tar -xf -
+if [ -d ./dita_source_files ]; then
+    echo "Updating DITA source files" 
+    cd dita_source_files
+    git pull
+    cd $ORIG_CWD
+else
+    echo "Checking out DITA source files" 
+    git clone $SOURCE_REPO -b $SOURCE_BRANCH
+fi
 
 echo "Installing webhelp plugin and customizations into DITA-OT"
 
-cp -Rf deps/oxygen/frameworks/dita/DITA-OT/plugins/webhelp $DITA_DIR/plugins
+install_plugin deps/oxygen/frameworks/dita/DITA-OT/plugins/webhelp
+
+echo "Copying Web Help customizations"
 cp -fv $WEBHELP_CUSTOM/strings-en-us.xml $DITA_DIR/xsl/common
 cp -fv $WEBHELP_CUSTOM/dita2webhelpImpl.xsl $DITA_DIR/plugins/webhelp/xsl
 cp -fv $WEBHELP_CUSTOM/map2webhelptoc.xsl $DITA_DIR/plugins/webhelp/xsl
@@ -110,13 +178,13 @@ cp -fv $WEBHELP_CUSTOM/assets/images/* $DITA_DIR/plugins/webhelp/resources/asset
 echo "Doing intial integration (installs plugins)"
 ./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
 
-OLDCWD=$PWD
 cd dita_source_files
 echo -n "Patching source code..."
-PATCH_OK = `git apply --check ../source_changes.patch`
+PATCH_OK=`git apply --check ../source_changes.patch`
 if [ $PATCH_OK ]; then
     git apply ../source_changes.patch
     echo " patch applied"
 else
     echo " patch check FAILED. Either code is already up to date or something is wrong with the patch"
 fi
+cd $ORIG_CWD
