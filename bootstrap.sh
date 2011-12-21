@@ -108,7 +108,7 @@ cp -fv $WEBHELP_CUSTOM/assets/images/* $DITA_DIR/plugins/webhelp/resources/asset
 
 
 echo "Doing intial integration (installs plugins)"
-./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml
+./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
 
 OLDCWD=$PWD
 cd dita_source_files
