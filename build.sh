@@ -28,7 +28,6 @@ NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9.jar:$DITA_DIR/lib/saxon/saxon9-dom.jar
 NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-dom4j.jar:$DITA_DIR/lib/saxon/saxon9-jdom.jar:$NEW_CLASSPATH"
 NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-s9api.jar:$DITA_DIR/lib/saxon/saxon9-sql.jar:$NEW_CLASSPATH"
 NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-xom.jar:$DITA_DIR/lib/saxon/saxon9-xpath.jar:$DITA_DIR/lib/saxon/saxon9-xqj.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$WORKING_DIR/ant-contrib/ant-contrib-1.0b3.jar:$NEW_CLASSPATH"
 # NEW_CLASSPATH="$DITA_DIR/demo/fo/lib/fo.jar:$NEW_CLASSPATH"
 # NEW_CLASSPATH="$FOP_HOME/lib/avalon-framework-4.2.0.jar:$NEW_CLASSPATH"
 # NEW_CLASSPATH="$FOP_HOME/lib/commons-io-1.3.1.jar:$NEW_CLASSPATH"
