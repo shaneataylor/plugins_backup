@@ -123,8 +123,6 @@ echo "Downloading ANT 1.8"
 fetchcmd http://www.trieuvan.com/apache//ant/binaries/apache-ant-1.8.2-bin.tar.gz apache-ant-1.8.2-bin.tar.gz
 #echo "Downloading DITA4Publishers Plugins 0.9.16"
 #fetchcmd http://downloads.sourceforge.net/sourceforge/dita4publishers/2011-03-21/dita4publishers-0.9.16.zip dita4publishers-0.9.16.zip
-echo "Downloading Oxygen 12.2"
-fetchcmd http://archives.oxygenxml.com/Oxygen/Editor/InstData12.2/All/oxygen.tar.gz oxygen.tar.gz
 echo "Downloading Ant-Contrib Tasks 1.0b3"
 fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip ant-contrib-1.0b3-bin.zip
 
@@ -146,8 +144,6 @@ unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 echo "Unpacking FOP"
 unpack fop-1.0-bin.tar.gz fop-1.0
 
-echo "Unpacking Onygen"
-unpack oxygen.tar.gz oxygen
 
 # Update the checked-out source if it exists, otherwise clone 
 # 
@@ -165,15 +161,7 @@ fi
 
 echo "Installing webhelp plugin and customizations into DITA-OT"
 
-install_plugin deps/oxygen/frameworks/dita/DITA-OT/plugins/webhelp
+install_plugin dita_ot_plugins/webhelp "Oxygen webhelp"
+install_plugin dita_ot_plugins/net.webassign.pdf "WebAssign PDF"
+install_plugin dita_ot_plugins/net.webassign.webhelp "WebAssign webhelp"
 
-echo "Copying Web Help customizations"
-cp -fv $WEBHELP_CUSTOM/strings-en-us.xml $DITA_DIR/xsl/common
-cp -fv $WEBHELP_CUSTOM/dita2webhelpImpl.xsl $DITA_DIR/plugins/webhelp/xsl
-cp -fv $WEBHELP_CUSTOM/map2webhelptoc.xsl $DITA_DIR/plugins/webhelp/xsl
-cp -fv $WEBHELP_CUSTOM/assets/* $DITA_DIR/plugins/webhelp/resources/assets
-cp -fv $WEBHELP_CUSTOM/assets/images/* $DITA_DIR/plugins/webhelp/resources/assets/images
-
-
-echo "Doing intial integration (installs plugins)"
-./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
