@@ -23,10 +23,9 @@
 #
 # TODO: More inline documentation
 # TODO: is it possible to query the remote git repo and check for changes?
-SOURCE_REPO=ssh://wart/home/git/dita_source_files.git
+SOURCE_REPO=git:comm/dita_source_files.git
 SOURCE_BRANCH='master'
 
-WEBHELP_CUSTOM='dita_source_files/customizations/webhelp_customization'
 DITA_DIR='deps/DITA-OT1.5.3'
 
 ORIG_CWD=$PWD
