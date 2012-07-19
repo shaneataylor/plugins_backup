@@ -1,6 +1,7 @@
 #!/bin/bash 
 #
 # Author: Josh Johnson <jjohnson@webassign.net>
+# Portions by Shane Taylor <shanet@webassign.net>
 #
 # Bootstrap script - downloads and unpacks necessary tools
 #
@@ -12,7 +13,7 @@
 #
 # Java is assumed to be installed.
 #
-# TODO: add dependancy check 
+# TODO: add dependency check 
 # TOOD: complete fetchcmd() function - use `fetch` or `wget` if curl is 
 #       unavailable.
 # TODO: get unpack to guess the destination directory instead of having to pass
@@ -26,7 +27,7 @@
 SOURCE_REPO=git:comm/dita_source_files.git
 SOURCE_BRANCH='master'
 
-DITA_DIR='deps/DITA-OT1.5.3'
+DITA_DIR='deps/DITA-OT1.6.1'
 
 ORIG_CWD=$PWD
 
@@ -107,41 +108,35 @@ function install_plugin()
     
     echo "Installing $NAME plugin..."
     cp -Rf $LOCATION $DITA_DIR/plugins
-    ./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
+    $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
 }
 
-echo "Creating requisite directories"
+echo -e "\nCreating requisite directories"
 mkdir -p downloads
 mkdir -p deps
 
-echo "Downloading DITA-OT 1.5.3"
-fetchcmd 'http://downloads.sourceforge.net/sourceforge/dita-ot/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.5.3/DITA-OT1.5.3_full_easy_install_bin.tar.gz' DITA-OT1.5.3_full_easy_install_bin.tar.gz
-echo "Downloading FOP 1.0"
-fetchcmd http://apache.mesi.com.ar//xmlgraphics/fop/binaries/fop-1.0-bin.tar.gz fop-1.0-bin.tar.gz
-echo "Downloading ANT 1.8"
-fetchcmd http://www.trieuvan.com/apache//ant/binaries/apache-ant-1.8.2-bin.tar.gz apache-ant-1.8.2-bin.tar.gz
-#echo "Downloading DITA4Publishers Plugins 0.9.16"
-#fetchcmd http://downloads.sourceforge.net/sourceforge/dita4publishers/2011-03-21/dita4publishers-0.9.16.zip dita4publishers-0.9.16.zip
-echo "Downloading Ant-Contrib Tasks 1.0b3"
+echo -e "\nDownloading DITA-OT 1.6.1"
+fetchcmd 'http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.6/DITA-OT1.6.1_full_easy_install_bin.tar.gz' DITA-OT1.6.1_full_easy_install_bin.tar.gz
+
+echo -e "\nUnpacking DITA-OT"
+unpack DITA-OT1.6.1_full_easy_install_bin.tar.gz DITA-OT1.6.1
+
+echo -e "\nEnable execution for DITA-OT Ant"
+if [ -f "$DITA_DIR"/tools/ant/bin/ant ] && [ ! -x "$DITA_DIR"/tools/ant/bin/ant ]; then
+  chmod +x "$DITA_DIR"/tools/ant/bin/ant
+fi
+
+echo -e "\nDownloading Ant-Contrib Tasks 1.0b3"
 fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip ant-contrib-1.0b3-bin.zip
 
-echo "Unpacking DITA-OT"
-unpack DITA-OT1.5.3_full_easy_install_bin.tar.gz DITA-OT1.5.3
-
-# echo "Unpacking DITA4Publishers"
-# mkdir dita4publishers-0.9.16
-# unzip -d dita4publishers-0.9.16 dita4publishers-0.9.16.zip
-# echo "Unpacking DITA4Publishers Plugins to DITA-OT1.5.3/plugins"
-# unzip -d DITA-OT1.5.3/plugins dita4publishers-0.9.16/dita4publishers-toolkit-plugins-0.9.16.zip
-
-echo "Unpacking ANT"
-unpack apache-ant-1.8.2-bin.tar.gz apache-ant-1.8.2
-
-echo "Unpacking ANT-Contrib"
+echo -e "\nUnpacking ANT-Contrib"
 unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 
-echo "Unpacking FOP"
-unpack fop-1.0-bin.tar.gz fop-1.0
+echo -e "\nInstalling DITA-OT plugins"
+
+install_plugin dita_ot_plugins/webhelp "Oxygen webhelp"
+install_plugin dita_ot_plugins/net.webassign.pdf "WebAssign PDF"
+install_plugin dita_ot_plugins/net.webassign.webhelp "WebAssign webhelp"
 
 
 # Update the checked-out source if it exists, otherwise clone 
@@ -149,18 +144,12 @@ unpack fop-1.0-bin.tar.gz fop-1.0
 # this will get the code without checking it out:
 #     git archive --prefix=dita_source_files/ --format=tar --remote=$SOURCE_REPO $SOURCE_BRANCH | tar -xf -
 if [ -d ./dita_source_files ]; then
-    echo "Updating DITA source files" 
+    echo -e "\nUpdating DITA source files" 
     cd dita_source_files
     git pull
     cd $ORIG_CWD
 else
-    echo "Checking out DITA source files" 
+    echo -e "\nChecking out DITA source files" 
     git clone $SOURCE_REPO -b $SOURCE_BRANCH
 fi
-
-echo "Installing webhelp plugin and customizations into DITA-OT"
-
-install_plugin dita_ot_plugins/webhelp "Oxygen webhelp"
-install_plugin dita_ot_plugins/net.webassign.pdf "WebAssign PDF"
-install_plugin dita_ot_plugins/net.webassign.webhelp "WebAssign webhelp"
 
