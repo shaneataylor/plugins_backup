@@ -177,15 +177,3 @@ cp -fv $WEBHELP_CUSTOM/assets/images/* $DITA_DIR/plugins/webhelp/resources/asset
 
 echo "Doing intial integration (installs plugins)"
 ./deps/apache-ant-1.8.2/bin/ant -f $DITA_DIR/integrator.xml 
-###########
-# This is no longer needed - feel free to remove in a later commit.
-# cd dita_source_files
-# echo -n "Patching source code..."
-# PATCH_OK=`git apply --check ../source_changes.patch`
-# if [ $PATCH_OK ]; then
-#     git apply ../source_changes.patch
-#     echo " patch applied"
-# else
-#     echo " patch check FAILED. Either code is already up to date or something is wrong with the patch"
-# fi
-# cd $ORIG_CWD
