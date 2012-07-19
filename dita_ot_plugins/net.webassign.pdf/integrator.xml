@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extend the toolkit's XHTML processing to generate WebHelp output. -->
+<project name="integrator"  basedir=".">
+  <import file="targets.xml"/>
+</project>

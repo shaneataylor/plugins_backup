@@ -1,0 +1,29 @@
+#!/bin/sh 
+
+# IF NEEDED, UPDATE THE FOLOWING PATHS
+cd /Applications/oxygen/frameworks/dita/DITA-OT/demo/fo/Customization/font-metrics
+export CPS=/Applications/oxygen/lib/fop.jar:/Applications/oxygen/lib/avalon-framework-4.2.0.jar:/Applications/oxygen/lib/xercesImpl.jar
+export FONT_DIR='/Library/Fonts' 
+
+# AS NEEDED, REPLACE THE FONT FILE NAMES IN THE FOLLOWING LIST
+
+
+# java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader -ttcname "Cambria Math" "cambria.ttc" "Cambria Math.xml"
+
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Arial Bold Italic.ttf" "Arial Bold Italic.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Arial Bold.ttf" "Arial Bold.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Arial Italic.ttf" "Arial Italic.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Arial.ttf" "Arial.xml"
+
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Verdana Bold Italic.ttf" "Verdana Bold Italic.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Verdana Bold.ttf" "Verdana Bold.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Verdana Italic.ttf" "Verdana Italic.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/Verdana.ttf" "Verdana.xml"
+
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/stixgeneral-webfont.ttf" "stixgeneral-webfont.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/stixgeneralbol-webfont.ttf" "stixgeneralbol-webfont.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/stixgeneralitalic-webfont.ttf" "stixgeneralitalic-webfont.xml"
+java -cp "$CPS" org.apache.fop.fonts.apps.TTFReader "$FONT_DIR/stixgeneralbolita-webfont.ttf" "stixgeneralbolita-webfont.xml"
+
+
+

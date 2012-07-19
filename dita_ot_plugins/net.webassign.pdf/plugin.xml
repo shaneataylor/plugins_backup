@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="net.webassign.pdf">
+  <feature extension="package.support.name" value="WebAssign Communications Team"/>
+  <feature extension="package.support.email" value="docs@webassign.net"/>
+  <feature extension="package.version" value="1.0"/>
+  
+  <feature extension="dita.conductor.target.relative" value="integrator.xml" type="file"/>
+  <feature extension="depend.preprocess.pre" value="net.webassign.pdf.inits"/>
+  <feature extension="dita.xsl.xslfo" value="xsl/customizations.xsl" type="file"/> 
+</plugin>

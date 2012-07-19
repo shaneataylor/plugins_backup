@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extend the toolkit's XHTML processing to generate WebHelp output. -->
+<project name="net.webassign.webhelp.integrator" default="dita2webassign.webhelp" basedir=".">
+	
+  <target name="dita2webassign.webhelp" 
+    depends="build-init, preprocess, copy-webhelp-resources, copy-webassign-resources, dita.out.map.webassign.webhelp.toc, copy-revflag,
+    copy-css , dita.topics.xhtml, dita.inner.topics.webassign.webhelp,
+    dita.outer.topics.xhtml, webhelp-index" />
+ 
+  
+  
+  <!-- Customize header and footer of each topic. -->
+  <target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
+    <property name="out.ext" value=".html"/>
+    <property name="transtype.ext" value=".xsl"/>
+    <property name="args.xsl"
+      value="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}dita2webhelp.xsl"/>
+    <makeurl file="${dita.input.valfile}" property="dita.input.valfile.url" validate="no"></makeurl>
+    
+    <xslt processor="trax" 
+      basedir="${dita.temp.dir}" 
+      destdir="${output.dir}" 
+      includesfile="${dita.temp.dir}${file.separator}${fullditatopicfile}" 
+      classpathref="dost.class.path" 
+      extension="${out.ext}" 
+      style="${args.xsl}" 
+      filenameparameter="filename" 
+      filedirparameter="filedir">
+      <excludesfile name="${dita.temp.dir}${file.separator}${resourceonlyfile}" if="resourceonlyfile"></excludesfile>
+      <includesfile name="${dita.temp.dir}${file.separator}${chunkedtopicfile}" if="chunkedtopicfile"></includesfile>
+      <param name="TRANSTYPE" expression="${transtype}"></param>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext"></param>
+      <param name="FILTERFILE" expression="${dita.input.valfile.url}" if="dita.input.valfile"></param>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file"></param>
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath"></param>
+      <param name="HDF" expression="${args.hdf}" if="args.hdf"></param>
+      <param name="HDR" expression="${args.hdr}" if="args.hdr"></param>
+      <param name="FTR" expression="${args.ftr}" if="args.ftr"></param>
+      <param name="DRAFT" expression="${args.draft}" if="args.draft"></param>
+      <param name="ARTLBL" expression="${args.artlbl}" if="args.artlbl"></param>
+      <param name="GENERATE-TASK-LABELS" expression="${args.gen.task.lbl}" if="args.gen.task.lbl"></param>
+      <param name="PRESERVE-DITA-CLASS" expression="${args.xhtml.classattr}" if="args.xhtml.classattr"></param>
+      <param name="NOPARENTLINK" expression="${args.hide.parent.link}" if="args.hide.parent.link"></param>
+      <param name="BREADCRUMBS" expression="${args.breadcrumbs}" if="args.breadcrumbs"></param>
+      <param name="INDEXSHOW" expression="${args.indexshow}" if="args.indexshow"></param>
+      <param name="genDefMeta" expression="${args.gen.default.meta}" if="args.gen.default.meta"></param>
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext"></param>
+      <param name="BASEDIR" expression="${basedir}"></param>
+      <param name="OUTPUTDIR" expression="${output.dir}"></param>
+      <param name="DBG" expression="${args.debug}" if="args.debug"></param>
+      <!--<param name="CUSTOM_RATE_PAGE_URL" expression="${custom.rate.page.url}" if="custom.rate.page.url"/>-->
+      <param name="CUSTOM_WEBHELP_SEARCH" expression="${custom.webhelp.search}"/>
+      <param name="CUSTOM_BASEDIR" expression="${dita.temp.dir}"/>
+      <mapper type="regexp" from="^(${tempdirToinputmapdir.relative.value})(.*?)(\.(xml|dita))$$" to="\2${out.ext}"></mapper>
+    </xslt>
+  </target>
+  
+  <!-- The Oxygen webhelp task does not work as written with OT1.5.4 -->
+  <target name="webassign.detectIndexerLang">
+    <property name="indexer.lang" value="en"/>
+    <property name="inputMap" value="${dita.temp.dir}${file.separator}${user.input.file}"/>
+    
+    <taskdef name="detect-lang" classname="com.suite.sol.ditaot.DetectLang">
+      <classpath path="${dita.dir}/demo/fo/lib/fo.jar"/>
+    </taskdef>
+    
+    <!-- Set document.locale from xml:lang -->
+    <!-- The map takes precedence, followed by the first topic -->
+    <detect-lang documentPath="${inputMap}"/>
+    
+    <!-- Set indexer.lang property -->
+    <!-- commented out because this fails in OT1.5.4 -->
+    <!--<if>
+      <isset property="document.locale"/>
+      <then>
+        <propertyregex property="indexer.lang" input="${document.locale}" 
+          regexp="(..)" 
+          select="\1"
+          defaultvalue="en"
+          override="true"/>
+      </then>
+    </if>-->
+    
+  </target>
+  
+  <!-- Customize table of contents. -->
+  <target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
+    <xslt processor="trax"
+      basedir="${dita.temp.dir}"
+      destdir="${output.dir}"
+      includesfile="${dita.temp.dir}${file.separator}${user.input.file.listfile}"
+      classpathref="dost.class.path"
+      style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}map2xhtmtoc.xsl">
+      <excludesfile name="${dita.temp.dir}${file.separator}${resourceonlyfile}" if="resourceonlyfile"/>
+      <param name="DITAEXT" expression="${dita.ext}" if="dita.ext" />
+      <param name="OUTEXT" expression="${out.ext}" if="out.ext" />
+      <param name="contenttarget" expression="${args.xhtml.contenttarget}" if="args.xhtml.contenttarget"/>
+      <param name="CSS" expression="${args.css.file}" if="args.css.file" />
+      <param name="CSSPATH" expression="${user.csspath}" if="user.csspath" />
+      <param name="OUTPUTCLASS" expression="${args.xhtml.toc.class}" if="args.xhtml.toc.class" />
+      <param name="CUSTOM_WEBHELP_SEARCH" expression="${custom.webhelp.search}" if="custom.webhelp.search"/>
+      <param name="CUSTOM_PHP_SEARCH_TARGET" expression="${custom.php.search.target}" if="custom.php.search.target"/>
+      <param name="WEBHELP_COPYRIGHT" expression="${webhelp.copyright}" if="webhelp.copyright"/>
+      <param name="INDEXER_LANGUAGE" expression="${indexer.lang}" if="indexer.lang"/>
+      <mapper type="glob" from="${user.input.file}" to="${args.xhtml.toc}${out.ext}" />
+    </xslt>
+  </target>
+  
+  <!-- New target to copy WebAssign resource files -->
+  <target name="copy-webassign-resources">
+    <copy todir="${output.dir}">
+      <fileset
+        dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
+        includes="**${file.separator}*"
+        excludes=".svn"/>
+    </copy>
+  </target>
+</project>

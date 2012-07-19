@@ -1,0 +1,8 @@
+
+Communications has licenses for Oxygen, so use of this plugin in the builds should be fine.
+
+The net.webassign.webhelp plugin currently extends the Oxygen webhelp plugin to provide
+the customizations we need for WebAssign.
+
+The long-term plan is to remove dependency on the Oxygen webhelp plugin and rebase 
+net.webassign.webhelp on the DITA OT XHTML transformation.

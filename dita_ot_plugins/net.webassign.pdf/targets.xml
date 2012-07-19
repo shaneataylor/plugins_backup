@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+
+<project name="net.webassign.pdf"  basedir=".">
+    <target name="net.webassign.pdf.inits">
+        <!-- Default values for transforms with this plugin in place -->
+        <!-- 
+            Use the Customization directory in the plugin by default.
+            Later, extend this to set the customization directory based on a new build parameter
+            to facilitate multiple formats.
+        -->
+        <property name="customization.dir" value="${dita.dir}/plugins/net.webassign.pdf/Customization"/>
+        <echo level="info">Set PDF customization path to ${customization.dir}.</echo>
+        
+        <property name="args.fo.include.rellinks" value="nofamily"/>
+        <echo level="info">Set related links to ${args.fo.include.rellinks}.</echo>
+        
+        <property name="args.fo.userconfig" value="${dita.dir}/plugins/net.webassign.pdf/Customization/fop/fop.xconf"/>
+        <echo level="info">Set FO configuration path to ${args.fo.userconfig}.</echo>
+        
+        <!-- Create fop.xconf file that points to fonts relative to the plugin location
+             since fop.xconf does not allow font-base to be a relative path -->
+        <echo file="${args.fo.userconfig}"><![CDATA[<?xml version="1.0"?>
+<fop version="1.0">
+    <!-- This file created by net.webassign.pdf.inits -->
+    <accessibility>true</accessibility>
+    <base>./</base>
+    <font-base>]]>${dita.dir}<![CDATA[/plugins/net.webassign.pdf/Customization/fop/fonts</font-base>
+    <strict-validation>false</strict-validation>
+    <source-resolution>72</source-resolution>
+    <target-resolution>150</target-resolution>
+    <default-page-settings height="11in" width="8.26in"/>
+    <renderers>
+        <renderer mime="application/pdf">
+            <filterList>
+                <value>flate</value>
+            </filterList>
+            <fonts>
+                <font metrics-url="Arial.xml" kerning="yes" embed-url="Arial.ttf">
+                    <font-triplet name="Arial" style="normal" weight="normal"/>
+                </font>
+                <font metrics-url="Arial Bold.xml" kerning="yes" embed-url="Arial Bold.ttf">
+                    <font-triplet name="Arial" style="normal" weight="bold"/>
+                </font>
+                <font metrics-url="Arial Italic.xml" kerning="yes" embed-url="Arial Italic.ttf">
+                    <font-triplet name="Arial" style="italic" weight="normal"/>
+                </font>
+                <font metrics-url="Arial Bold Italic.xml" kerning="yes"
+                    embed-url="Arial Bold Italic.ttf">
+                    <font-triplet name="Arial" style="italic" weight="bold"/>
+                </font>
+                <font metrics-url="Consolas.xml" kerning="yes" embed-url="Consolas.ttf">
+                    <font-triplet name="Consolas" style="normal" weight="normal"/>
+                </font>
+                <font metrics-url="Consolas Bold.xml" kerning="yes" embed-url="Consolas Bold.ttf">
+                    <font-triplet name="Consolas" style="normal" weight="bold"/>
+                </font>
+                <font metrics-url="Consolas Italic.xml" kerning="yes"
+                    embed-url="Consolas Italic.ttf">
+                    <font-triplet name="Consolas" style="italic" weight="normal"/>
+                </font>
+                <font metrics-url="Consolas Bold Italic.xml" kerning="yes"
+                    embed-url="Consolas Bold Italic.ttf">
+                    <font-triplet name="Consolas" style="italic" weight="bold"/>
+                </font>
+                <font metrics-url="Verdana.xml" kerning="yes" embed-url="Verdana.ttf">
+                    <font-triplet name="Verdana" style="normal" weight="normal"/>
+                </font>
+                <font metrics-url="Verdana Bold.xml" kerning="yes" embed-url="Verdana Bold.ttf">
+                    <font-triplet name="Verdana" style="normal" weight="bold"/>
+                </font>
+                <font metrics-url="Verdana Italic.xml" kerning="yes" embed-url="Verdana Italic.ttf">
+                    <font-triplet name="Verdana" style="italic" weight="normal"/>
+                </font>
+                <font metrics-url="Verdana Bold Italic.xml" kerning="yes"
+                    embed-url="Verdana Bold Italic.ttf">
+                    <font-triplet name="Verdana" style="italic" weight="bold"/>
+                </font>
+                <font metrics-url="stixgeneral-webfont.xml" kerning="yes"
+                    embed-url="stixgeneral-webfont.ttf">
+                    <font-triplet name="STIXGeneral" style="normal" weight="normal"/>
+                </font>
+                <font metrics-url="stixgeneralbol-webfont.xml" kerning="yes"
+                    embed-url="stixgeneralbol-webfont.ttf">
+                    <font-triplet name="STIXGeneral" style="normal" weight="bold"/>
+                </font>
+                <font metrics-url="stixgeneralitalic-webfont.xml" kerning="yes"
+                    embed-url="stixgeneralitalic-webfont.ttf">
+                    <font-triplet name="STIXGeneral" style="italic" weight="normal"/>
+                </font>
+                <font metrics-url="stixgeneralbolita-webfont.xml" kerning="yes"
+                    embed-url="stixgeneralbolita-webfont.ttf">
+                    <font-triplet name="STIXGeneral" style="italic" weight="bold"/>
+                </font>
+            </fonts>
+        </renderer>
+        <renderer mime="application/postscript"> </renderer>
+        <renderer mime="application/vnd.hp-PCL"> </renderer>
+        <renderer mime="image/svg+xml">
+            <format type="paginated"/>
+            <link value="true"/>
+            <strokeText value="false"/>
+        </renderer>
+        <renderer mime="application/awt"> </renderer>
+        <renderer mime="image/png"> </renderer>
+        <renderer mime="image/tiff"> </renderer>
+        <renderer mime="text/xml"> </renderer>
+        <renderer mime="text/plain">
+            <pageSize columns="80"/>
+        </renderer>
+    </renderers>
+</fop>]]></echo>
+        <echo level="info">Created FO configuration file at ${args.fo.userconfig}.</echo>
+        
+        
+        
+        
+    </target>
+    
+    
+</project>
