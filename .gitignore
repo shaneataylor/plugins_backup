@@ -22,4 +22,7 @@ downloads/*
 deps/*
 out/*
 temp/*
-logs/*
+logs/*.xml
+logs/*.log
+logs/*.list
+logs/*.properties
