@@ -13,10 +13,10 @@
   <property name="clean.output" value="yes" />
   <property name="generate.copy.outer" value="1" />
   <property name="oxygen.dir" location="../oxygen"/>
-  <property name="local.build.log" location="../build.log" />
+  <property name="local.build.log" location="../logs/build.log" />
   
   <target name="init">
-    <echo level="error">Logging to ${local.build.log}</echo>
+    <echo level="info">Logging to ${local.build.log}</echo>
     <record name="${local.build.log}" loglevel="verbose" append="false"/>
   </target>
       
@@ -46,7 +46,11 @@
     <ant antfile="../build_pdf.xml" target="student" />
   </target>
   <target name="student_webhelp" depends="init">
-    <echo level="error">Building Student HTML WebHelp</echo>
+    <echo level="info">Building Student HTML WebHelp</echo>
     <ant antfile="../build_webhelp.xml" target="student" />
+  </target>
+  <target name="admin_webhelp" depends="init">
+    <echo level="info">Building Admin HTML WebHelp</echo>
+    <ant antfile="../build_webhelp.xml" target="admin" />
   </target>
 </project>
