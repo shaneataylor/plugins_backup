@@ -18,10 +18,10 @@
         <!-- Don't use default attribute set, which adds rx:link-back attribute -->
         <fo:root xsl:use-attribute-sets="__fo__root__custom">
             
-            <xsl:comment>
+            <!--<xsl:comment>
                 <xsl:text>Layout masters = </xsl:text>
                 <xsl:value-of select="$layout-masters"/>
-            </xsl:comment>
+            </xsl:comment>-->
             
             <xsl:call-template name="createLayoutMasters"/>
             

@@ -14,16 +14,7 @@
 
     <!-- OVERRIDE DEFAULT LAYOUT MASTERS -->
     <xsl:template name="createLayoutMasters">
-        <xsl:choose>
-            <!-- Check whether the old style layout-masters.xml is in use, and if so, use it. -->
-            <xsl:when test="document($layout-masters)/fo:layout-master-set
-                and not(document($layout-masters)/processing-instruction()[name()='opentopic' and string()='do not use'])">
-                <xsl:apply-templates select="document($layout-masters)/*" mode="layout-masters-processing"/>
-            </xsl:when>
-            <xsl:otherwise>
                 <xsl:call-template name="createDefaultLayoutMasters"/>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="createDefaultLayoutMasters">

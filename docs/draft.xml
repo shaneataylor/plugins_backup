@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA General Task//EN" "task.dtd">
+<task id="taskId">
+    <title>DRAFT Info for Using Automated Build</title>
+    <shortdesc/>
+    <taskbody>
+        <steps>
+            <step>
+                <cmd>First time only: Clone the build_techcomm repository.</cmd>
+                <info>The build-techcomm repository is located here:
+                        <filepath>ssh://wart/home/git/build-techcomm.git</filepath></info>
+                <choicetable>
+                    <chrow>
+                        <choption>From the command line</choption>
+                        <chdesc>
+                            <ol>
+                                <li>Change to the path where you want your local copy of the
+                                    repository to be.</li>
+                                <li>Type the following
+                                    command.<codeblock>git clone ssh://wart/home/git/build-techcomm.git</codeblock></li>
+                            </ol>
+                        </chdesc>
+                    </chrow>
+                    <chrow>
+                        <choption>From GitBox</choption>
+                        <chdesc/>
+                    </chrow>
+                </choicetable>
+            </step>
+            <step>
+                <cmd>Each time the build files change: Fetch the latest version of the
+                    build_techcomm repository and run bootstrap.sh.</cmd>
+                <substeps>
+                    <substep>
+                        <cmd>Fetch the repo.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Navigate to the build_techcomm repo path.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Type <codeph>. bootstrap.sh</codeph></cmd>
+                        <stepresult>
+                            <p>See the <xref href="bootstrap_output.txt" format="txt">bootstrap
+                                    output</xref></p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step>
+                <cmd>Build the deliverables.</cmd>
+                <info>Type <codeph>./build.sh</codeph></info>
+                <stepresult>
+                    <codeblock>Running ant... Check 'build.log' for additional output.
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building all targets (instructor_guide, student_guide, creating_questions, instructor_webhelp, student_webhelp)
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building Instructor Guide PDF
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_setting_significant_figure_checking_options_for_classes.xml, Element = xref:1)
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building Student Guide PDF
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/c_a_releasenotes_older.xml, Element = xref:31)
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific concept element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/c_a_releasenotes_older.xml, Element = xref:32)
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building Creating Questions PDF
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific concept element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_creating_fill_in_the_blank_questions.xml, Element = xref:2)
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_displaying_images_in_questions.xml, Element = xref:1)
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building Instructor HTML WebHelp
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific concept element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_creating_fill_in_the_blank_questions.xml, Element = xref:2)
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_displaying_images_in_questions.xml, Element = xref:1)
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/t_i_setting_significant_figure_checking_options_for_classes.xml, Element = xref:1)
+     [echo] Indexer language=en
+     [xslt] [DOTX043I][INFO]: The link to 'c_i_numerical_tolerance.xml' may appear more than once in '.html'. If you do not want two occurrences of a link to the same href, remove one of the links or define the same attributes on both link elements.  Note that links generated from a &amp;lt;reltable&amp;gt; in a DITA Map will have the role attribute set to "friend".The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/m_i_reltables.ditamap, Element = topicref:86)
+     [xslt] [DOTX043I][INFO]: The link to 't_i_using_arrays.xml' may appear more than once in '.html'. If you do not want two occurrences of a link to the same href, remove one of the links or define the same attributes on both link elements.  Note that links generated from a &amp;lt;reltable&amp;gt; in a DITA Map will have the role attribute set to "friend".The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/m_i_creating_questions_guide.ditamap, Element = topicref:121)
+     [echo] Logging to /Users/staylor/Documents/Repos/build-techcomm/build.log
+     [echo] Building Student HTML WebHelp
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific task element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/c_a_releasenotes_older.xml, Element = xref:31)
+     [xslt] [DOTX029I][INFO]: The type attribute on a xref element does not match the target topic. The type attribute was set to topic, but the xref points to a more specific concept element. This may cause your links to sort incorrectly in the output, and link text may not be properly retrieved. Note that the type attribute cascades in maps, so the value 'topic' may come from an ancestor element. Ensure the type attribute matches the actual type of the target.The location of this problem was at (File = /Users/staylor/Documents/Repos/build-techcomm/dita_source_files/c_a_releasenotes_older.xml, Element = xref:32)
+     [echo] Indexer language=en
+
+BUILD SUCCESSFUL
+Total time: 10 minutes 19 seconds
+
+</codeblock>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task>

@@ -61,7 +61,10 @@
                         <!-- ADD TESTING FOR CHILDREN -->
                         <xsl:when
                             test="not($chapterLayout='BASIC') and .//*[(contains(@class,' topic/topic '))]">
-                            <xsl:call-template name="createMiniToc"/>
+							<!-- Commenting out deprecated named template createMiniToc here and elsewhere. 
+							     By itself, this change does not fix build error. -->
+                            <!--<xsl:call-template name="createMiniToc"/>-->
+                            <xsl:apply-templates select="." mode="createMiniToc"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <fo:block>
@@ -119,7 +122,8 @@
                         <!-- ADD TESTING FOR CHILDREN -->
                         <xsl:when
                             test="not($appendixLayout='BASIC') and .//*[(contains(@class,' topic/topic '))]">
-                            <xsl:call-template name="createMiniToc"/>
+                            <!--<xsl:call-template name="createMiniToc"/>-->
+                            <xsl:apply-templates select="." mode="createMiniToc"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <fo:block>
@@ -178,7 +182,8 @@
                         <!-- ADD TESTING FOR CHILDREN -->
                         <xsl:when
                             test="not($partLayout='BASIC') and .//*[(contains(@class,' topic/topic '))]">
-                            <xsl:call-template name="createMiniToc"/>
+                            <!--<xsl:call-template name="createMiniToc"/>-->
+                            <xsl:apply-templates select="." mode="createMiniToc"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <fo:block>
@@ -406,9 +411,9 @@
     </xsl:template>
 
     <!-- Create chapter-level TOC. Modified because related links incorrectly indented -->
-    <xsl:template name="createMiniToc">
+    <!--<xsl:template name="createMiniToc">
         <xsl:apply-templates select="." mode="createMiniToc"/>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="*" mode="createMiniToc">
         <fo:table xsl:use-attribute-sets="__toc__mini__table">
             <fo:table-column xsl:use-attribute-sets="__toc__mini__table__column_1"/>

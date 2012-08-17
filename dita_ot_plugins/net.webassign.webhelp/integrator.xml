@@ -61,7 +61,7 @@
     <property name="inputMap" value="${dita.temp.dir}${file.separator}${user.input.file}"/>
     
     <taskdef name="detect-lang" classname="com.suite.sol.ditaot.DetectLang">
-      <classpath path="${dita.dir}/plugins/org.dita.pdf2/lib/fo.jar"/>
+      <classpath path="${dita.dir}/demo/fo/lib/fo.jar"/>
     </taskdef>
     
     <!-- Set document.locale from xml:lang -->

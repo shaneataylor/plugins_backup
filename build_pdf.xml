@@ -3,67 +3,60 @@
     <description>
         Build the WebAssign Technical Communications Deliverables.
     </description>
+    <!-- Common build properties for all PDF builds -->
+    
+    <property name="args.logdir" location="../logs"/>
     <property name="output.dir" location="../out" />
-    <property name="transtype" value="pdf2" />
-    <property name="customization.dir" location="${source.dir}/customizations/pdf_customization/Customization"/>
-    <property name="xml.catalog.files" value="${customization.dir}/catalog.xml;${dita.dir}/demo/fo/cfg/catalog.xml"/>
-    <property name="args.fo.userconfig" location="../fop.xconf" />
-    <property name="args.fo.include.rellinks" value="nofamily" />
-    <property name="pdf.formatter" value="fop" />
-    <property name="use.fop.pdf.formatter" value="yes" />
-
+    <property name="transtype" value="pdf" /><!-- WAS pdf2 -->
+    <property name="args.rellinks" value="nofamily" /><!-- WAS args.fo.include.rellinks -->
+    <property name="args.debug" value="yes" />
+    
+    <!--<property name="args.fo.userconfig" location="../fop.xconf" />-->
+        <!-- 
+             Property args.fo.userconfig is not needed with current net.webassign.pdf plugin, 
+             which works around a limitation present in OT 1.5.4.  
+        -->
     <property name="retain.topic.fo" value="yes" />
     <property name="dita.temp.dir" location="../temp" />
-    <property name="pdf2.temp.dir" location="../temp" />
-
-    <property name="onlytopic.in.map" value="false" />
-    <property name="outer.control" value="warn" />
-    <property name="custom.include.rellinks" value="nofamily" />
-    <property name="args.grammar.cache" value="yes" />
     
-    <!-- override transform.fo2pdf.fop due to weirdness with FOP ant task -->
-    <target name="transform.fo2pdf.fop" if="use.fop.pdf.formatter">
-        <condition property="outputFile" value="${dita.map.output.dir}/${outputFile.base}.pdf">
-            <not>
-                <isset property="outputFile"/>
-            </not>
-        </condition>
-	        <!-- OXYGEN PATCH Run the FOP as an external process , fails on error-->
-        <java classname="org.apache.fop.cli.Main" fork="yes" classpath="${java.class.path}" dir="${dita.map.output.dir}" failonerror="true" maxmemory="${maxJavaMemory}">
-	         <!-- OXYGEN PATCH for jvmargs -->
-            <jvmarg line="${baseJVMArgLine}"/>
-            <arg line='-r -x -d -fo "${dita.map.output.dir}/topic.fo" -pdf "${outputFile}" -c "${args.fo.userconfig}"'/>
-        </java>
-    </target> 
-
+    <property name="clean.temp" value="no"/>
+    <property name="dita.dir" location="../deps/DITA-OT1.6.1"/><!-- If possible, set from environment -->
+    
+    <!-- Probably not needed -->
+    <!--
+        <property name="customization.dir" location="${source.dir}/customizations/pdf_customization/Customization"/>
+        <property name="xml.catalog.files" value="${customization.dir}/catalog.xml;${dita.dir}/demo/fo/cfg/catalog.xml"/>
+        <property name="pdf.formatter" value="fop" />
+        <property name="use.fop.pdf.formatter" value="yes" />
+        <property name="pdf2.temp.dir" location="../temp" />
+    -->
+    
     <import file="${dita.dir}/build.xml" />
 
     <target name="all">
         <antcall target="student" />
         <antcall target="instructor" />
-        <antcall target="questions" />
+        <antcall target="creating_questions" />
     </target>
 
     <target name="student">
-        <property name="dita.input.filename" value="${source.dir}/m_s_student_guide.ditamap" />
-        <property name="dita.input.valfile" value="${source.dir}/d_s_student_guide.ditaval" />
+        <property name="args.filter" value="${source.dir}/d_s_student_guide.ditaval" /><!-- WAS dita.input.valfile -->
         <property name="args.input" value="${source.dir}/m_s_student_guide.ditamap"/>
 
         <antcall target="init" />
     </target>
 
     <target name="instructor">
-        <property name="dita.input.filename" value="${source.dir}/m_i_instructor_guide.ditamap" />
-        <property name="dita.input.valfile" value="${source.dir}/d_i_guides.ditaval" />
+        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- WAS dita.input.valfile -->
         <property name="args.input" value="${source.dir}/m_i_instructor_guide.ditamap"/>
 
         <antcall target="init" />
     </target>
     
     <target name="creating_questions">
-        <property name="dita.input.filename" value="${source.dir}/m_i_creating_questions_guide.ditamap" />
         <property name="args.input" value="${source.dir}/m_i_creating_questions_guide.ditamap"/>
-
+        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- WAS dita.input.valfile -->
+        
         <antcall target="init" />
     </target>
 </project>

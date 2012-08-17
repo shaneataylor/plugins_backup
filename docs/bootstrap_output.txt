@@ -1,0 +1,64 @@
+staylor|~/Documents/Repos/build-techcomm:: . bootstrap.sh 
+Creating requisite directories
+Downloading DITA-OT 1.5.3
+File DITA-OT1.5.3_full_easy_install_bin.tar.gz already downloaded. Skipping
+Downloading FOP 1.0
+File fop-1.0-bin.tar.gz already downloaded. Skipping
+Downloading ANT 1.8
+File apache-ant-1.8.2-bin.tar.gz already downloaded. Skipping
+Downloading Oxygen 12.2
+File oxygen.tar.gz already downloaded. Skipping
+Downloading Ant-Contrib Tasks 1.0b3
+File ant-contrib-1.0b3-bin.zip already downloaded. Skipping
+Unpacking DITA-OT
+Destination directory deps/DITA-OT1.5.3 already exists. Skipping
+Unpacking ANT
+Destination directory deps/apache-ant-1.8.2 already exists. Skipping
+Unpacking ANT-Contrib
+Destination directory deps/ant-contrib already exists. Skipping
+Unpacking FOP
+Destination directory deps/fop-1.0 already exists. Skipping
+Unpacking Onygen
+Destination directory deps/oxygen already exists. Skipping
+Checking out DITA source files
+Cloning into dita_source_files...
+remote: Counting objects: 3916, done.
+
+remote: Compressing objects: 100% (3715/3715), done.
+remote: Total 3916 (delta 1438), reused 324 (delta 194)
+Receiving objects: 100% (3916/3916), 47.90 MiB | 239 KiB/s, done.
+Resolving deltas: 100% (1438/1438), done.
+Installing webhelp plugin and customizations into DITA-OT
+dita_source_files/customizations/webhelp_customization/strings-en-us.xml -> deps/DITA-OT1.5.3/xsl/common/strings-en-us.xml
+dita_source_files/customizations/webhelp_customization/dita2webhelpImpl.xsl -> deps/DITA-OT1.5.3/plugins/webhelp/xsl/dita2webhelpImpl.xsl
+dita_source_files/customizations/webhelp_customization/map2webhelptoc.xsl -> deps/DITA-OT1.5.3/plugins/webhelp/xsl/map2webhelptoc.xsl
+cp: dita_source_files/customizations/webhelp_customization/assets/images is a directory (not copied).
+dita_source_files/customizations/webhelp_customization/assets/webassign.js -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/webassign.js
+dita_source_files/customizations/webhelp_customization/assets/webhelp.js -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/webhelp.js
+dita_source_files/customizations/webhelp_customization/assets/images/application_side_list.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/application_side_list.png
+dita_source_files/customizations/webhelp_customization/assets/images/application_view_list.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/application_view_list.png
+dita_source_files/customizations/webhelp_customization/assets/images/bestpractice_icon.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/bestpractice_icon.png
+dita_source_files/customizations/webhelp_customization/assets/images/comment.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/comment.png
+dita_source_files/customizations/webhelp_customization/assets/images/email.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/email.png
+dita_source_files/customizations/webhelp_customization/assets/images/expand_sprite_blue.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/expand_sprite_blue.png
+dita_source_files/customizations/webhelp_customization/assets/images/important_icon.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/important_icon.png
+dita_source_files/customizations/webhelp_customization/assets/images/note_icon.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/note_icon.png
+dita_source_files/customizations/webhelp_customization/assets/images/page_white.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/page_white.png
+dita_source_files/customizations/webhelp_customization/assets/images/page_white_edit.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/page_white_edit.png
+dita_source_files/customizations/webhelp_customization/assets/images/printer.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/printer.png
+dita_source_files/customizations/webhelp_customization/assets/images/tip_icon.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/tip_icon.png
+dita_source_files/customizations/webhelp_customization/assets/images/topic_icons.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/topic_icons.png
+dita_source_files/customizations/webhelp_customization/assets/images/webassign_help.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/webassign_help.png
+dita_source_files/customizations/webhelp_customization/assets/images/webassign_help_logo_16pt.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/webassign_help_logo_16pt.png
+dita_source_files/customizations/webhelp_customization/assets/images/webassign_help_logo_multisize.png -> deps/DITA-OT1.5.3/plugins/webhelp/resources/assets/images/webassign_help_logo_multisize.png
+Doing intial integration (installs plugins)
+Buildfile: /Users/staylor/Documents/Repos/build-techcomm/deps/DITA-OT1.5.3/integrator.xml
+
+integrate:
+[integrate] Failed to read supported image extensions from configuration, using defaults.
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+Patching source code...-bash: PATCH_OK: command not found
+ patch check FAILED. Either code is already up to date or something is wrong with the patch
+

@@ -107,6 +107,7 @@ function install_plugin()
     NAME=$2
     
     echo "Installing $NAME plugin..."
+    # NEED TO ADD: Remove existing plugin first, to get rid of cruft
     cp -Rf $LOCATION $DITA_DIR/plugins
     $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
 }
@@ -121,8 +122,8 @@ fetchcmd 'http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Relea
 echo -e "\nUnpacking DITA-OT"
 unpack DITA-OT1.6.1_full_easy_install_bin.tar.gz DITA-OT1.6.1
 
-echo -e "\nEnable execution for DITA-OT Ant"
 if [ -f "$DITA_DIR"/tools/ant/bin/ant ] && [ ! -x "$DITA_DIR"/tools/ant/bin/ant ]; then
+  echo -e "\nEnable execution for DITA-OT Ant"
   chmod +x "$DITA_DIR"/tools/ant/bin/ant
 fi
 
