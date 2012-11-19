@@ -23,13 +23,15 @@
 #       know pass/fail of each step
 #
 # TODO: More inline documentation
-# TODO: is it possible to query the remote git repo and check for changes?
-SOURCE_REPO=git:comm/dita_source_files.git
-SOURCE_BRANCH='master'
 
-DITA_DIR='deps/DITA-OT1.6.1'
+DITA_OT_VERSION='1.5.4'
+DITA_OT_URL="http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%20${DITA_OT_VERSION}"
+DITA_OT_FILENAME="DITA-OT${DITA_OT_VERSION}_full_easy_install_bin.tar.gz"
+
+DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
 
 ORIG_CWD=$PWD
+export DITA_DIR="${ORIG_CWD}/deps/DITA-OT${DITA_OT_VERSION}"
 
 # cleanup if the script fails
 function cleanup()
@@ -96,31 +98,45 @@ function unpack()
 # install a DITA-OT plugin
 # 
 # Usage:
-#     install_plugin LOCATION NAME
+#     install_plugin PLUGIN NAME
 # 
 # Parameters:
-#     LOCATION - the directory where the plugin is stored.
+#     PLUGIN - the folder in dita_ot_plugins where the plugin is stored.
 #     NAME - user-friendly name for the plugin, use to notify the user
 function install_plugin()
 {
-    LOCATION=$1
+    PLUGIN=$1
     NAME=$2
-    
-    echo "Installing $NAME plugin..."
-    # NEED TO ADD: Remove existing plugin first, to get rid of cruft
-    cp -Rf $LOCATION $DITA_DIR/plugins
+    if [ -d "$DITA_DIR/plugins/$PLUGIN" ]; then
+        # Remove old version of plugin & run integrator to get rid of cruft
+        echo -e "\nRemoving previous version of the $NAME plugin..."
+        rm -R $DITA_DIR/plugins/$PLUGIN
+        $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
+    fi
+    echo -e "\nInstalling $NAME plugin..."
+    cp -Rf dita_ot_plugins/$PLUGIN $DITA_DIR/plugins
     $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
 }
+
+echo -e "\nUpdating CLASSPATH"
+# Mimimum required to ensure integrator.xml works for plugin installation 
+NEW_CLASSPATH="$DITA_DIR/lib"
+if [ -n "$CLASSPATH" ]; then
+    export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
+else
+    export CLASSPATH="$NEW_CLASSPATH"
+fi
+
 
 echo -e "\nCreating requisite directories"
 mkdir -p downloads
 mkdir -p deps
 
-echo -e "\nDownloading DITA-OT 1.6.1"
-fetchcmd 'http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.6/DITA-OT1.6.1_full_easy_install_bin.tar.gz' DITA-OT1.6.1_full_easy_install_bin.tar.gz
+echo -e "\nDownloading DITA-OT $DITA_OT_VERSION"
+fetchcmd "${DITA_OT_URL}/${DITA_OT_FILENAME}" $DITA_OT_FILENAME
 
 echo -e "\nUnpacking DITA-OT"
-unpack DITA-OT1.6.1_full_easy_install_bin.tar.gz DITA-OT1.6.1
+unpack $DITA_OT_FILENAME DITA-OT${DITA_OT_VERSION}
 
 if [ -f "$DITA_DIR"/tools/ant/bin/ant ] && [ ! -x "$DITA_DIR"/tools/ant/bin/ant ]; then
   echo -e "\nEnable execution for DITA-OT Ant"
@@ -133,24 +149,14 @@ fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.
 echo -e "\nUnpacking ANT-Contrib"
 unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 
+echo -e "\nInstalling DITA-OT patches"
+cp -Rfpv dita_ot_patches/ $DITA_DIR
+# future: copy patches in a better way that omits hidden files & directories
+
 echo -e "\nInstalling DITA-OT plugins"
 
-install_plugin dita_ot_plugins/webhelp "Oxygen webhelp"
-install_plugin dita_ot_plugins/net.webassign.pdf "WebAssign PDF"
-install_plugin dita_ot_plugins/net.webassign.webhelp "WebAssign webhelp"
+install_plugin webhelp "Oxygen webhelp"
+install_plugin net.webassign.pdf "WebAssign PDF"
+install_plugin net.webassign.webhelp "WebAssign webhelp"
 
-
-# Update the checked-out source if it exists, otherwise clone 
-# 
-# this will get the code without checking it out:
-#     git archive --prefix=dita_source_files/ --format=tar --remote=$SOURCE_REPO $SOURCE_BRANCH | tar -xf -
-if [ -d ./dita_source_files ]; then
-    echo -e "\nUpdating DITA source files" 
-    cd dita_source_files
-    git pull
-    cd $ORIG_CWD
-else
-    echo -e "\nChecking out DITA source files" 
-    git clone $SOURCE_REPO -b $SOURCE_BRANCH
-fi
-
+# Moved extraction of DITA source files to build process
