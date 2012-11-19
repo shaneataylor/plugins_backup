@@ -63,6 +63,6 @@
         <property name="dita.input.valfile" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.5.4 -->
         
         <antcall target="init" />
-        <!-- no need to rename creating questions guide pdf -->
+        <move file="../out/m_i_creating_questions_guide.pdf" tofile="../out/Question_Coding_Reference.pdf" verbose="true"/>
     </target>
 </project>
