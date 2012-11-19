@@ -2,7 +2,7 @@
     <description>Provide git functionality to the ant tasks</description>
   <taskdef resource="net/sf/antcontrib/antcontrib.properties">
   <classpath>
-    <pathelement location="../deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
+    <pathelement location="deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
   </classpath>
   </taskdef>
   <property name="source.repo" value="git:comm/dita_source_files.git"/>
@@ -38,7 +38,7 @@
     <git command="clone">
       <args>
         <arg value="${source.repo}"/>
-        <arg value="${source.branch}"/>
+        <arg value="${source.dir}"/>
       </args>
     </git>
   </target>

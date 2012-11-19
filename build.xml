@@ -22,7 +22,6 @@
       
   <target name="all" depends="init">
     <echo level="info">Building all targets (instructor_guide, student_guide, creating_questions, instructor_webhelp, student_webhelp)</echo>
-    <antcall target="gitpull" />
     <antcall target="student_webhelp" />
     <antcall target="admin_webhelp" />
     <antcall target="instructor_webhelp" />
@@ -31,9 +30,7 @@
     <antcall target="creating_questions" />
   </target>
   
-  <target name="gitpull" depends="init">
-    <ant antfile="../git.xml" target="gitpull" />
-  </target>
+  
   <target name="instructor_guide" depends="init">
     <echo level="info">Building Instructor Guide PDF</echo>
     <ant antfile="../build_pdf.xml" target="instructor" />

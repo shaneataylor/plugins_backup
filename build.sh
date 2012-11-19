@@ -46,7 +46,7 @@ export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
 echo -e "\nPulling DITA files from git."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" gitpull
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" -buildfile git.xml gitpull
 
 echo -e "\nBuilding student help."
 $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_webhelp.xml" student_webhelp
