@@ -8,94 +8,62 @@
 #
 # Get the absolute path of our current directory
 WORKING_DIR=$PWD
+DITA_OT_VERSION='1.5.4'
 
-export DITA_DIR="$WORKING_DIR/deps/DITA-OT1.6.1"
+export DITA_DIR="$WORKING_DIR/deps/DITA-OT${DITA_OT_VERSION}"
 export ANT_HOME="$DITA_DIR/tools/ant"
-export FOP_HOME="$DITA_DIR/plugins/org.dita.pdf2/fop"
+export FOP_HOME="$DITA_DIR/demo/fo/fop"
 
+# Ensure the ant file is executable (sometimes OT installs without this)
 if [ -f "$ANT_HOME/bin/ant ] && [ ! -x "$ANT_HOME/bin/ant ]; then
-chmod +x "$ANT_HOME/bin/ant"
+    chmod +x "$ANT_HOME/bin/ant"
 fi
-
-export ANT_OPTS="-Xmx512m $ANT_OPTS"
-export ANT_OPTS="$ANT_OPTS -Djavax.xml.transform.TransformerFactory=net.sf.saxon.TransformerFactoryImpl"
 export PATH="$PATH:$ANT_HOME/bin"
 
-# From DITA-OT 1.6.1:
-NEW_CLASSPATH="$DITA_DIR/lib/dost.jar"
-NEW_CLASSPATH="$DITA_DIR/lib:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/commons-codec-1.4.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/resolver.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/icu4j.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/xercesImpl.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/xml-apis.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9.jar:$NEW_CLASSPATH"
-NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-dom.jar:$NEW_CLASSPATH"
+# Set the libs used by Ant
+NEW_CLASSPATH="$DITA_DIR"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/commons-codec-1.4.jar"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/dost.jar"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/icu4j.jar"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/resolver.jar"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/saxon/saxon9-dom.jar"
+NEW_CLASSPATH="$NEW_CLASSPATH:$DITA_DIR/lib/saxon/saxon9.jar"
 
-# Additional (deprecated?) classpaths from previous version of this file:
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-dom4j.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-jdom.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-s9api.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-sql.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-xom.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-xpath.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-xqj.jar:$NEW_CLASSPATH"
-
-if test -n "$CLASSPATH"
-then
-export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
+if [ -n "$CLASSPATH" ]; then
+    export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
 else
-export CLASSPATH="$NEW_CLASSPATH"
+    export CLASSPATH="$NEW_CLASSPATH"
 fi
 
+# Set the common options for Ant
+export ANT_OPTS="-Xmx512m"
+export ANT_OPTS="$ANT_OPTS -Djavax.xml.transform.TransformerFactory=net.sf.saxon.TransformerFactoryImpl"
+export ANT_OPTS="$ANT_OPTS -Dant.XmlLogger.stylesheet.uri=build_log.xsl"
+export ANT_OPTS="$ANT_OPTS -Ddita.dir=$DITA_DIR"
+export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 
-echo "Running ant... Check 'build_log.xml' for additional output."
+export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
-$ANT_HOME/bin/ant -lib "$DITA_DIR/lib" -lib "$DITA_DIR/lib/commons-codec-1.4.jar" -lib "$DITA_DIR/lib/dost.jar" -lib "$DITA_DIR/lib/icu4j.jar" -lib "$DITA_DIR/lib/resolver.jar" -lib "$DITA_DIR/lib/saxon/saxon9-dom.jar" -lib "$DITA_DIR/lib/saxon/saxon9.jar" -logger org.apache.tools.ant.XmlLogger -Dant.XmlLogger.stylesheet.uri=$WORKING_DIR/logs/build_log.xsl -logfile "$WORKING_DIR/logs/build_log.xml" -Ddita.dir="$DITA_DIR" -Dfop.home="$FOP_HOME" $@
+echo -e "\nPulling DITA files from git."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" gitpull
 
+echo -e "\nBuilding student help."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_webhelp.xml" student_webhelp
 
-# Adding these did not resolve missing DetectLang class
-# -lib "$DITA_DIR/plugins/webhelp/lib/lucene-analyzers-3.0.0.jar" -lib "$DITA_DIR/plugins/webhelp/lib/lucene-core-3.0.0.jar" -lib "$DITA_DIR/plugins/webhelp/lib/nw-cms.jar" -lib "$DITA_DIR/lib/jsearch.jar"  -lib "$DITA_DIR/lib/xercesImpl.jar"
+echo -e "\nBuilding admin help."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/admin_webhelp.xml" admin_webhelp
 
+echo -e "\nBuilding instructor help."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_webhelp.xml" instructor_webhelp
 
-# $ANT_HOME/bin/ant 
-# -lib "$DITA_DIR" 
-# -lib "$DITA_DIR/lib/commons-codec-1.4.jar"  
-# -lib "$DITA_DIR/lib/dost.jar"  
-# -lib "$DITA_DIR/lib/jsearch.jar"  
-# -lib "$DITA_DIR/lib/resolver.jar" 
-# -lib "$DITA_DIR/plugins/webhelp/lib/lucene-analyzers-3.0.0.jar" 
-# -lib "$DITA_DIR/plugins/webhelp/lib/lucene-core-3.0.0.jar" 
-# -lib "$DITA_DIR/plugins/webhelp/lib/nw-cms.jar" 
-# -lib "$FOP_HOME/build/fop.jar"  
-# -lib "$FOP_HOME/lib/avalon-framework-4.2.0.jar" 
-# -lib "$FOP_HOME/lib/batik-all-1.7.jar"  
-# -lib "$FOP_HOME/lib/commons-io-1.3.1.jar" 
-# -lib "$FOP_HOME/lib/commons-logging-1.0.4.jar"  
-# -lib "$FOP_HOME/lib/xercesImpl-2.7.1.jar" 
-# -lib "$FOP_HOME/lib/xml-apis-1.3.04.jar"  
-# -lib "$FOP_HOME/lib/xml-apis-ext-1.3.04.jar"  
-# -lib "$FOP_HOME/lib/xmlgraphics-commons-1.4.jar"  
-# -quiet $@
+echo -e "\nBuilding Student Guide PDF."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_guide.xml" student_guide
 
+echo -e "\nBuilding Instructor Guide PDF."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_guide.xml" instructor_guide
 
+echo -e "\nBuilding Creating Questions Guide PDF."
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/creating_questions.xml" creating_questions
 
-
-# OLD COMMENTS - REMOVE
-
-# NEW_CLASSPATH="$DITA_DIR/demo/fo/lib/fo.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/avalon-framework-4.2.0.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/commons-io-1.3.1.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/commons-logging-1.0.4.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/serializer-2.7.0.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/xalan-2.7.0.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/xercesImpl-2.7.1.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/xml-apis-1.3.04.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/xml-apis-ext-1.3.04.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/xmlgraphics-commons-1.4.jar:$NEW_CLASSPATH"
-# NEW_CLASSPATH="$FOP_HOME/lib/batik-all-1.7.jar:$NEW_CLASSPATH"
-
-#java" -Xmx256m -classpath "/Applications/oxygen/tools/ant/lib/ant-launcher.jar" "-Dant.home=/Applications/oxygen/tools/ant" org.apache.tools.ant.launch.Launcher
-
-#-lib "$DITA_DIR/lib/resolver.jar" -lib "$DITA_DIR" -lib "$FOP_HOME/lib/commons-io-1.3.1.jar" -lib "$FOP_HOME/lib/commons-logging-1.0.4.jar"  -lib "$DITA_DIR/lib/dost.jar"  -lib "$DITA_DIR/lib/commons-codec-1.4.jar"  -lib "$FOP_HOME/lib/xercesImpl-2.7.1.jar" -lib "$FOP_HOME/lib/xmlgraphics-commons-1.4.jar"  -lib "$FOP_HOME/build/fop.jar"  -lib "$FOP_HOME/lib/batik-all-1.7.jar"  -lib "$FOP_HOME/lib/xml-apis-1.3.04.jar"  -lib "$FOP_HOME/lib/xml-apis-ext-1.3.04.jar"  -lib "$FOP_HOME/lib/avalon-framework-4.2.0.jar" $@
 

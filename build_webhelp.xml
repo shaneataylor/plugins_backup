@@ -29,37 +29,76 @@
         <antcall target="admin" />
     </target>
     
+    <!-- 
+    
+    NEED TO CLEAN UP OUTPUT DIRECTORY AT THE START OF EACH OF THESE TARGETS
+    
+    -->
+    
+    
     <target name="instructor">
+        <antcall target="clean_output_path" >
+            <param name="output.dir" location="../out/instructor_guide"/>
+        </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/instructor_guide" />
             <param name="custom.webhelp.search" value="google_instructor" />
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_i_help.ditaval" />
+            <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.input.valfile" value="${source.dir}/d_i_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_i_help" />
             <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_instructor.html" />
+        </antcall>
+        <antcall target="copy_extra_files">
+            <param name="output.dir" value="../out/instructor_guide"/>
         </antcall>
     </target>
     
     <target name="student">
+        <antcall target="clean_output_path" >
+            <param name="output.dir" location="../out/student_guide"/>
+        </antcall>
         <antcall target="init">
-            <param name="output.dir" location="../out/student_guide" />
+            <param name="output.dir" location="../out/student_guide"/>
             <param name="custom.webhelp.search" value="google_student" />
             <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_s_help.ditaval" />
+            <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.input.valfile" value="${source.dir}/d_s_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_s_help" />
             <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_student.html" />
+        </antcall>
+        <antcall target="copy_extra_files" >
+            <param name="output.dir" location="../out/student_guide"/>
         </antcall>
     </target>
     
     <target name="admin">
+        <antcall target="clean_output_path" >
+            <param name="output.dir" location="../out/admin"/>
+        </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/admin" />
             <param name="custom.webhelp.search" value="google_admin" />
             <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" />
+            <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.input.valfile" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
             <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_instructor.html" />
         </antcall>
+        <antcall target="copy_extra_files">
+            <param name="output.dir" value="../out/admin"/>
+        </antcall>
+    </target>
+    
+    <target name="clean_output_path">
+        <delete dir="${output.dir}"/>
+    </target>
+    
+    <target name="copy_extra_files">
+        <copy file="${source.dir}/csh.json" todir="${output.dir}" verbose="true"/>
+        <copy file="${dita.dir}/plugins/net.webassign.webhelp/googlea98ae97064cf3d0e.html" todir="${output.dir}" verbose="true"/>
+        <copy file="${dita.dir}/plugins/net.webassign.webhelp/quickstart.css" todir="${output.dir}" verbose="true"/>
+        
     </target>
 
 

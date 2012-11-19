@@ -20,7 +20,7 @@
     <property name="dita.temp.dir" location="../temp" />
     
     <property name="clean.temp" value="no"/>
-    <property name="dita.dir" location="../deps/DITA-OT1.6.1"/><!-- If possible, set from environment -->
+    <!--<property name="dita.dir" location="../deps/DITA-OT1.5.4"/>-->
     
     <!-- Probably not needed -->
     <!--
@@ -40,23 +40,29 @@
     </target>
 
     <target name="student">
-        <property name="args.filter" value="${source.dir}/d_s_student_guide.ditaval" /><!-- WAS dita.input.valfile -->
+        <property name="args.filter" value="${source.dir}/d_s_student_guide.ditaval" /><!-- 1.6.x -->
+        <property name="dita.input.valfile" value="${source.dir}/d_s_student_guide.ditaval" /><!-- 1.5.4 -->
         <property name="args.input" value="${source.dir}/m_s_student_guide.ditamap"/>
 
         <antcall target="init" />
+        <move file="../out/m_s_student_guide.pdf" tofile="../out/WebAssign_Student_Guide.pdf" verbose="true"/>
     </target>
 
     <target name="instructor">
-        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- WAS dita.input.valfile -->
+        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.6.x -->
+        <property name="dita.input.valfile" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.5.4 -->
         <property name="args.input" value="${source.dir}/m_i_instructor_guide.ditamap"/>
 
         <antcall target="init" />
+        <move file="../out/m_i_instructor_guide.pdf" tofile="../out/WebAssign_Essentials.pdf" verbose="true"/>
     </target>
     
     <target name="creating_questions">
         <property name="args.input" value="${source.dir}/m_i_creating_questions_guide.ditamap"/>
-        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- WAS dita.input.valfile -->
+        <property name="args.filter" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.6.x -->
+        <property name="dita.input.valfile" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.5.4 -->
         
         <antcall target="init" />
+        <!-- no need to rename creating questions guide pdf -->
     </target>
 </project>

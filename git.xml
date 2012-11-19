@@ -1,0 +1,59 @@
+<project name="techcomm" default="all" basedir=".">
+    <description>Provide git functionality to the ant tasks</description>
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+  <classpath>
+    <pathelement location="../deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
+  </classpath>
+  </taskdef>
+  <property name="source.repo" value="git:comm/dita_source_files.git"/>
+  <property name="source.branch" value="master"/>
+  <property name="source.dir" location="dita_source_files" />
+  
+  <property name="args.logdir" location="logs" />
+  <property name="local.build.log" location="logs/build.log" />
+  
+  <!-- TEST, ADD LOGGING -->
+  
+  <macrodef name = "git">
+    <!-- from http://tlrobinson.net/blog/2008/11/ant-tasks-for-git/ -->
+    <attribute name = "command" />
+    <attribute name = "dir" default = "" />
+    <element name = "args" optional = "true" />
+    <sequential>
+      <echo message = "git @{command}" />
+      <exec executable = "git" dir = "@{dir}">
+        <arg value = "@{command}" />
+        <args/>
+      </exec>
+    </sequential>
+  </macrodef>
+  
+  <target name="gitpull">
+    <antcall target="pull.if.repo.exists"/>
+    <antcall target="clone.unless.repo.exists"/>
+  </target>
+  
+  <target name="clone.unless.repo.exists" depends="repo.check" unless="repo.exists">
+    <echo level="info">Checking out DITA source files</echo>
+    <git command="clone">
+      <args>
+        <arg value="${source.repo}"/>
+        <arg value="${source.branch}"/>
+      </args>
+    </git>
+  </target>
+  
+  <target name="pull.if.repo.exists" depends="repo.check" if="repo.exists">
+    <echo level="info">Updating DITA source files</echo>
+    <git command="pull" dir="${source.dir}"/>
+    <!-- TEST GIT RETURN VALUE. IF "Already up-to-date." SIGNAL THAT A BUILD IS NOT NEEDED. -->
+  </target>
+  
+  <target name="repo.check">
+    <condition property="repo.exists">
+      <available file="${source.dir}" type="dir"/>
+    </condition>
+  </target>
+  
+  
+</project>
