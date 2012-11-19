@@ -241,18 +241,18 @@ hideDiv('displayContentDiv','searchDiv');
           <!-- OXYGEN PATCH END EXM-18402 -->
           <link rel="stylesheet" type="text/css" href="commonltr.css" />
           <link rel="stylesheet" type="text/css" href="assets/webhelp_frameset.css" />
+          <script type="text/javascript" src="csh.json" ><xsl:comment> </xsl:comment></script>
           <script type="text/javascript">
-            <xsl:comment xml:space="preserve">            
+            <xsl:comment xml:space="preserve">
             function getHTMLPage(){
-               var currentPage = "<xsl:value-of select="($toc/ul[1]//li/a[@href])[1]/@href"/>";
-               var page = window.location.search.substr(1);
-      
-               if (page != ""){
+              var currentPage = "<xsl:value-of select="($toc/ul[1]//li/a[@href])[1]/@href"/>";
+              var page = window.location.search.substr(1);
+              if (page != ""){
                 page = page.split("=");
                 if (page[0] == 'q') currentPage = page[1];
-               }
-               
-               return currentPage;
+                if (page[0] == 't' &amp;&amp; csh_array[page[1]]) currentPage = csh_array[page[1]];
+              }
+              return currentPage;
             }
             //</xsl:comment>
           </script>

@@ -1,6 +1,7 @@
 
 /* ====================================== INCLUDE GOOGLE SEARCH CSS ====================================== */
 @import url("https://www.google.com/cse/style/look/default.css");
+@import url("quickstart.css");
 
 /* ====================================== CONTENT ====================================== */
 
@@ -376,6 +377,15 @@ table.nav td {
 div.navfooter {
 /* hide this */
     display: none;
+}
+
+object {
+    /* for videos */
+    border: 1px solid #C0C0C0;
+    /* drop shadow (don't worry about IE) */
+    -moz-box-shadow: 5px 5px 13px #808080;
+    -webkit-box-shadow: 5px 5px 13px #808080;
+    box-shadow: 5px 5px 13px #808080;
 }
 
 

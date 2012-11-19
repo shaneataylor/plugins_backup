@@ -97,14 +97,14 @@ function WA_csform_student(){
     WA_hidefeedback();
     var thistopic=location.pathname.split("/");
     thistopic=thistopic[thistopic.length-1];
-    var newWindow = window.open('//www.webassign.net/user_support/student/', '_blank');
+    var newWindow = window.open('http://webassign.force.com/wakb2/?cu=1&fs=ContactUs&l=en_US', '_blank');
     newWindow.focus();
 }
 function WA_csform_instructor(){
     WA_hidefeedback();
     var thistopic=location.pathname.split("/");
     thistopic=thistopic[thistopic.length-1];
-    var newWindow = window.open('//www.webassign.net/user_support/faculty/', '_blank');
+    var newWindow = window.open('http://webassign.force.com/wakb2/?cu=1&fs=ContactUs&l=en_US', '_blank');
     newWindow.focus();
 }
 
