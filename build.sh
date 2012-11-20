@@ -7,7 +7,9 @@
 # TODO: Usage help
 #
 # Get the absolute path of our current directory
-WORKING_DIR=$PWD
+WORKING_DIR=$( cd "$( dirname "$0" )" && pwd )
+cd ${WORKING_DIR}
+echo -e "\nCurrent path is ${WORKING_DIR}"
 DITA_OT_VERSION='1.5.4'
 
 export DITA_DIR="$WORKING_DIR/deps/DITA-OT${DITA_OT_VERSION}"

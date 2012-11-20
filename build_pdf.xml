@@ -8,7 +8,8 @@
     <property name="args.logdir" location="../logs"/>
     <property name="output.dir" location="../out" />
     <property name="transtype" value="pdf" /><!-- WAS pdf2 -->
-    <property name="args.rellinks" value="nofamily" /><!-- WAS args.fo.include.rellinks -->
+    <property name="args.fo.include.rellinks" value="nofamily" /><!-- 1.5.4 -->
+    <property name="args.rellinks" value="nofamily" /><!-- 1.6.x -->
     <property name="args.debug" value="yes" />
     
     <!--<property name="args.fo.userconfig" location="../fop.xconf" />-->
@@ -46,6 +47,7 @@
 
         <antcall target="init" />
         <move file="../out/m_s_student_guide.pdf" tofile="../out/WebAssign_Student_Guide.pdf" verbose="true"/>
+        <move file="../temp/topic.fo" tofile="../temp/WebAssign_Student_Guide.fo" verbose="true"/>
     </target>
 
     <target name="instructor">
@@ -55,6 +57,7 @@
 
         <antcall target="init" />
         <move file="../out/m_i_instructor_guide.pdf" tofile="../out/WebAssign_Essentials.pdf" verbose="true"/>
+        <move file="../temp/topic.fo" tofile="../temp/WebAssign_Essentials.fo" verbose="true"/>
     </target>
     
     <target name="creating_questions">
@@ -64,5 +67,6 @@
         
         <antcall target="init" />
         <move file="../out/m_i_creating_questions_guide.pdf" tofile="../out/Question_Coding_Reference.pdf" verbose="true"/>
+        <move file="../temp/topic.fo" tofile="../temp/Question_Coding_Reference.fo" verbose="true"/>
     </target>
 </project>

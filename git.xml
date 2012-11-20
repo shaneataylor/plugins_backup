@@ -28,7 +28,14 @@
     </sequential>
   </macrodef>
   
-  <target name="gitpull">
+  <target name="init">
+    <tstamp>
+      <format property="build.start" pattern="MM/dd/yyyy hh:mm"/>
+    </tstamp>
+  </target>
+  
+  <target name="gitpull" depends="init">
+    <echo message="Starting at ${build.start}" level="info"></echo>
     <antcall target="pull.if.repo.exists"/>
     <antcall target="clone.unless.repo.exists"/>
   </target>

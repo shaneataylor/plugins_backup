@@ -9,13 +9,16 @@
   </taskdef>
   <property name="source.dir" location="." />
   <property name="args.logdir" location="../logs" />
-  <property name="clean.temp" value="yes" />
+  <property name="clean.temp" value="no" />
   <property name="clean.output" value="yes" />
   <property name="generate.copy.outer" value="1" />
   <!--<property name="oxygen.dir" location="../oxygen"/>-->
   <!--<property name="local.build.log" location="../logs/build.log" />-->
   
   <target name="init">
+    <tstamp>
+      <format property="build.start" pattern="MM/dd/yyyy hh:mm"/>
+    </tstamp>
     <!--<echo level="info">Logging to ${local.build.log}</echo>
     <record name="${local.build.log}" loglevel="verbose" append="false"/>-->
   </target>

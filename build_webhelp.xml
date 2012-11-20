@@ -11,8 +11,6 @@
     <property name="args.outext" value=".htm" />
     <property name="args.css" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help.css" />
     <property name="args.ftr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_footer.html" />
-    <property name="args.hdr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_header.html" />
-    
     <property name="args.xhtml.toc" value="toc" />
     <property name="args.hide.parent.link" value="yes" />
     <property name="args.breadcrumbs" value="yes" />
