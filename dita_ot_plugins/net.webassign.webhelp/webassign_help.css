@@ -217,8 +217,9 @@ table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable
 th, td[id] {
     background: #EAF7FF  no-repeat scroll;
 }
-td[headers] {
+td[headers],th[headers] {
     background: none white;
+    text-align:left;
 }
 /*
 tr.sthead,
