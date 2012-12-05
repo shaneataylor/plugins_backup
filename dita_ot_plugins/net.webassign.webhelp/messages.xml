@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<messages>
+    <message id="DOTX099W" type="WARN">
+        <reason>Image is missing alternative text.</reason>
+        <response>Specify alternative text for the image with the &lt;alt&gt; element. </response>
+    </message>
+</messages>    
