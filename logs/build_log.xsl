@@ -96,7 +96,7 @@ span.errors {
             <p>Warnings: <xsl:value-of select="count(//message[@priority='warn'])"/></p>
             <p class="sub">Flagging attribute: <xsl:value-of select="count(//message[contains(node(),'[DOTX042I]')])"/></p>
             <p class="sub">Missing short description: <xsl:value-of select="count(//message[contains(node(),'No short description found')])"/></p>
-            <p class="sub">Missing alt text (PDF only): <xsl:value-of select="count(//message[contains(node(),'Alternate text is missing on external-graphic.')])"/></p>
+            <p class="sub">Missing alt text: <xsl:value-of select="count(//message[contains(node(),'Alternate text is missing on external-graphic.')] | //message[contains(node(),'Image is missing alternative text.')])"/></p>
             <p class="sub">FOP event listener: <xsl:value-of select="count(//message[contains(node(),'org.apache.fop.events.LoggingEventListener')])"/></p>
         </div>
         <xsl:apply-templates/>
