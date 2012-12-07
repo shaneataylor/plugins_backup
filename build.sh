@@ -47,25 +47,39 @@ export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 
 export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
-echo -e "\nPulling DITA files from git."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" -buildfile git.xml gitpull
+if [ `echo "$@" | grep -c "gitpull" -` -gt 0 ]; then
+    echo -e "\nPulling DITA files from git."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" -buildfile git.xml gitpull
+fi
 
-echo -e "\nBuilding student help."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_webhelp.xml" student_webhelp
+if [ `echo "$@" | grep -c "student_webhelp" -` -gt 0 ]; then
+    echo -e "\nBuilding student help."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_webhelp.xml" student_webhelp
+fi
 
-echo -e "\nBuilding admin help."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/admin_webhelp.xml" admin_webhelp
+if [ `echo "$@" | grep -c "admin_webhelp" -` -gt 0 ]; then
+    echo -e "\nBuilding admin help."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/admin_webhelp.xml" admin_webhelp
+fi
 
-echo -e "\nBuilding instructor help."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_webhelp.xml" instructor_webhelp
+if [ `echo "$@" | grep -c "instructor_webhelp" -` -gt 0 ]; then
+    echo -e "\nBuilding instructor help."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_webhelp.xml" instructor_webhelp
+fi
 
-echo -e "\nBuilding Student Guide PDF."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_guide.xml" student_guide
+if [ `echo "$@" | grep -c "student_guide" -` -gt 0 ]; then
+    echo -e "\nBuilding Student Guide PDF."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_guide.xml" student_guide
+fi
 
-echo -e "\nBuilding Instructor Guide PDF."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_guide.xml" instructor_guide
+if [ `echo "$@" | grep -c "instructor_guide" -` -gt 0 ]; then
+    echo -e "\nBuilding Instructor Guide PDF."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_guide.xml" instructor_guide
+fi
 
-echo -e "\nBuilding Creating Questions Guide PDF."
-$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/creating_questions.xml" creating_questions
+if [ `echo "$@" | grep -c "creating_questions" -` -gt 0 ]; then
+    echo -e "\nBuilding Creating Questions Guide PDF."
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/creating_questions.xml" creating_questions
+fi
 
 
