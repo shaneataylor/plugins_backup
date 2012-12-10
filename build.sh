@@ -47,39 +47,46 @@ export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 
 export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
-if [ `echo "$@" | grep -c "gitpull" -` -gt 0 ]; then
-    echo -e "\nPulling DITA files from git."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/gitpull.xml" -buildfile git.xml gitpull
-fi
+STEPS=(\
+"gitpull" \
+student_webhelp \
+admin_webhelp \
+instructor_webhelp \
+student_guide \
+instructor_guide \
+creating_questions)
 
-if [ `echo "$@" | grep -c "student_webhelp" -` -gt 0 ]; then
-    echo -e "\nBuilding student help."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_webhelp.xml" student_webhelp
-fi
+MESSAGES=(\
+"\nPulling DITA files from git." \
+"\nBuilding student help." \
+"\nBuilding admin help." \
+"\nBuilding instructor help." \
+"\nBuilding Student Guide PDF." \
+"\nBuilding Instructor Guide PDF." \
+"\nBuilding Creating Questions Guide PDF." )
 
-if [ `echo "$@" | grep -c "admin_webhelp" -` -gt 0 ]; then
-    echo -e "\nBuilding admin help."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/admin_webhelp.xml" admin_webhelp
-fi
+function buildstep()
+{
+    STEP=$1
+    MESSAGE=$2
+    BUILDFILE=build.xml
+    if [ "${STEP}" = "gitpull" ]; then
+        BUILDFILE=git.xml
+    fi
+    
+    echo -e "${MESSAGE}"
+    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/${STEP}.xml" -buildfile ${BUILDFILE} ${STEP}
+}
 
-if [ `echo "$@" | grep -c "instructor_webhelp" -` -gt 0 ]; then
-    echo -e "\nBuilding instructor help."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_webhelp.xml" instructor_webhelp
-fi
-
-if [ `echo "$@" | grep -c "student_guide" -` -gt 0 ]; then
-    echo -e "\nBuilding Student Guide PDF."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/student_guide.xml" student_guide
-fi
-
-if [ `echo "$@" | grep -c "instructor_guide" -` -gt 0 ]; then
-    echo -e "\nBuilding Instructor Guide PDF."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/instructor_guide.xml" instructor_guide
-fi
-
-if [ `echo "$@" | grep -c "creating_questions" -` -gt 0 ]; then
-    echo -e "\nBuilding Creating Questions Guide PDF."
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/creating_questions.xml" creating_questions
+if [ "$#" == "0" ]; then
+    for (( i = 0 ; i < ${#STEPS[@]} ; i++ )) do
+        buildstep ${STEPS[$i]} "${MESSAGES[$i]}" 
+    done
+else
+    while (( "$#" )); do
+        buildstep $1 $1
+        shift
+    done
 fi
 
 
