@@ -202,6 +202,9 @@ a.xref {
 .Math {
     font-family: STIXGeneral, Times, serif;
 }
+.overline {
+    text-decoration: overline;
+}
 
 
 
