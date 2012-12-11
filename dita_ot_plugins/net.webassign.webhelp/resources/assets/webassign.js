@@ -132,26 +132,6 @@ function WA_togglefeedback(){
         { WA_hidefeedback() }
 }
 
-function WA_togglestatusdetail(statusflag) {
-    if (statusflag == 'select_other' ) {
-        document.getElementById("feedback_status_other").checked = true;
-        document.getElementById("feedback_status_instructor").checked = false;
-        document.getElementById("feedback_status_student").checked = false;
-    }
-    if ( document.getElementById("feedback_status_other").checked ) {
-        document.getElementById("feedback_status_detail").removeAttribute("readonly");
-        if (document.getElementById("feedback_status_detail").value == 'Other') {
-            document.getElementById("feedback_status_detail").value = '';
-        }
-        document.getElementById("feedback_status_detail").focus();
-    }
-    else {
-        document.getElementById("feedback_status_detail").setAttribute("readonly","readonly");
-        if (document.getElementById("feedback_status_detail").value == '') {
-            document.getElementById("feedback_status_detail").value = 'Other';
-        }
-    }
-}
 
 function WA_validatefeedback(){
     // validate the docs feedback form
@@ -174,21 +154,6 @@ function WA_validatefeedback(){
         document.getElementById("feedback_err_email").innerHTML=" ";
     }
     
-    // test the status:other field
-    var fieldvalue = document.getElementById("feedback_status_detail").value;
-    // trim leading/trailing spaces, write trimmed value back to field
-    fieldvalue = fieldvalue.replace(/^\s+/gi,"");
-    fieldvalue = fieldvalue.replace(/\s+$/gi,"");
-    document.getElementById("feedback_status_detail").setAttribute("value",fieldvalue);
-    // compare to regex and set error
-    var pattern = /^(?!Other$)\S+/i; 
-    if ( ( document.getElementById("feedback_status_other").checked ) && !(pattern.test(fieldvalue)) ) {
-        errormessages = true;
-        document.getElementById("feedback_err_status_other").innerHTML="Specify a role for Other.";
-    }
-    else {
-        document.getElementById("feedback_err_status_other").innerHTML=" ";
-    }
     
     // enable submit if everything is valid
     if (! errormessages) {
@@ -211,16 +176,9 @@ function WA_feedbackclearhelp(){
 }
 
 function WA_submitfeedback(){
-    // set values for hidden "feedback_status_text" and "feedback_rating_text" fields
+    // set values for hidden "feedback_rating_text" field
    var ratingvalue = getCheckedValue(document.getElementsByName("feedback_rating"));
    document.getElementById("feedback_rating_text").setAttribute("value",ratingvalue);
-    
-   var statusvalue = getCheckedValue(document.getElementsByName("feedback_status"));
-   if (statusvalue == 'Other') {
-       statusvalue = document.getElementById("feedback_status_detail").value;
-   }
-   document.getElementById("feedback_status_text").setAttribute("value",statusvalue);
-
     
     WA_hidefeedback(); // close feedback div
     return true; // so normal form submission occurs

@@ -153,25 +153,10 @@
             <span id="feedback_err_email" class="feedback_err"> </span>
           </div>
           
-          <fieldset>
-            <legend>Role (required)</legend>
-            <input value="Instructor" type="radio" name="feedback_status"
-              id="feedback_status_instructor" tabindex="0"
-              onchange="WA_togglestatusdetail(); WA_validatefeedback();"/><xsl:text> </xsl:text>
-            <label for="feedback_status_instructor">Instructor</label>
-            <!--<input value="Student" type="radio" name="feedback_status"
-              id="feedback_status_student" tabindex="0"
-              onchange="WA_togglestatusdetail(); WA_validatefeedback();"/>
-            <label for="feedback_status_student">Student</label>-->
-            <input value="Other" type="radio" name="feedback_status" id="feedback_status_other"
-              tabindex="0" onchange="WA_togglestatusdetail(); WA_validatefeedback();"
-              onblur="WA_validatefeedback()"/><xsl:text> </xsl:text>
-            <input type="text" id="feedback_status_detail" name="feedback_status_detail" tabindex="0" readonly="readonly"
-              value="Other" onchange="WA_validatefeedback()" onclick="WA_togglestatusdetail('select_other')"
-              onblur="WA_validatefeedback()"/>
-            <span id="feedback_err_status_other" class="feedback_err"> </span>
-            <input type="hidden" id="feedback_status_text" name="entry.3.single"></input>
-          </fieldset>
+          <div class="formField">
+            <label for="feedback_status_text">Role</label>
+            <input type="text" id="feedback_status_text" name="entry.3.single" tabindex="0" onchange="WA_validatefeedback()" onblur="WA_validatefeedback()" value="Instructor"/>
+          </div>
           
           <div class="formField">
             <label for="feedback_comment">Comment</label>
