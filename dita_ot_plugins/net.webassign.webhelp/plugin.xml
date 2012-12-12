@@ -9,7 +9,7 @@
   
   <feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>
   <feature extension="dita.xsl.xhtml" value="xsl/custom_flag.xsl" type="file"/>
-  <feature extension="dita.xsl.xhtml" value="xsl/dita2htmlImpl.xsl" type="file"/>
+  <feature extension="dita.xsl.xhtml" value="xsl/altTextWarnings.xsl" type="file"/>
   <feature extension="dita.xsl.messages" file="messages.xml"/>
   <require plugin="com.oxygenxml.dita-ot.plugin.webhelp"/>
 </plugin>
