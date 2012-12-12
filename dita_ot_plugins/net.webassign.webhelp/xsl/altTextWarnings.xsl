@@ -9,8 +9,7 @@
   xmlns:url="org.dita.dost.util.URLUtils"
   exclude-result-prefixes="dita-ot dita2html ditamsg exsl java url">
 
-  <!--<xsl:import href="../../../xsl/xslhtml/dita2htmlImpl.xsl"/>-->
-  <xsl:import href="../../../xsl/common/output-message.xsl"/>
+  <xsl:include href="../../../xsl/common/output-message.xsl"/>
 
   <xsl:template match="*[contains(@class,' topic/image ')]">
     <xsl:choose>
@@ -20,10 +19,10 @@
         <xsl:call-template name="output-message">
           <xsl:with-param name="msgnum">099</xsl:with-param>
           <xsl:with-param name="msgsev">W</xsl:with-param>
-          <!--<xsl:with-param name="msgparams"></xsl:with-param>-->
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
+    <xsl:call-template name="topic.image"/>
   </xsl:template>
 
 </xsl:stylesheet>
