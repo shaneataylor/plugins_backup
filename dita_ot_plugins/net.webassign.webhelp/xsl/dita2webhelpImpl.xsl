@@ -77,25 +77,25 @@
         style="position: absolute; left: 10px; top: 3px;"/>
       <a class="actionlink framesaction" id="WA_showtoc" onclick="WA_showtoc()" alt="Show contents frame"
         title="Show contents frame">
-        <img src="assets/images/application_side_list.png" /><span> Show Topics</span>
+        <img src="assets/images/application_side_list.png" alt="icon" /><span> Show Topics</span>
       </a>
       <a class="actionlink noframesaction" id="WA_hidetoc" onclick="WA_hidetoc()" alt="Hide contents frame. You can access the contents and search at the bottom of the topic."
         title="Hide contents frame. You can access the contents and search at the bottom of the topic.">
-        <img src="assets/images/application_view_list.png" /><span> Hide Topics</span>
+        <img src="assets/images/application_view_list.png" alt="icon" /><span> Hide Topics</span>
       </a>
       <a class="actionlink printaction" onclick="WA_printtopic()" alt="Print topic" title="Print topic">
-        <img src="assets/images/printer.png" /><span> Print</span>
+        <img src="assets/images/printer.png" alt="icon" /><span> Print</span>
       </a>
       <!-- Direct CS link based on role -->
       <xsl:choose>
         <xsl:when test="$CUSTOM_WEBHELP_SEARCH = 'google_instructor'">
           <a class="actionlink csaction" onclick="WA_csform_instructor()" alt="Contact Customer Support" title="Contact Customer Support" >
-            <img src="assets/images/email.png" /><span> Customer Support</span>
+            <img src="assets/images/email.png" alt="icon" /><span> Customer Support</span>
           </a>
         </xsl:when>
         <xsl:when test="$CUSTOM_WEBHELP_SEARCH = 'google_student'">
           <a class="actionlink csaction" onclick="WA_csform_student()" alt="Contact Customer Support" title="Contact Customer Support" >
-            <img src="assets/images/email.png" /><span> Customer Support</span>
+            <img src="assets/images/email.png" alt="icon" /><span> Customer Support</span>
           </a>
         </xsl:when>
         <xsl:when test="$CUSTOM_WEBHELP_SEARCH = 'google_admin'">
@@ -103,7 +103,7 @@
           <!-- use script & break up link with underscores to resist spambots -->
           <script type="text/javascript" language="JavaScript"><xsl:comment> <![CDATA[ 
           var cslink="'m_a_i_l_t_o_:_integration_req_uests_@_w_ebassign_._n_e_t'";
-          document.write("<a class='actionlink csaction' alt='Contact Customer Support' title='Contact Customer Support' href=" + cslink.replace(/_/g,"") + "><img src='assets/images/email.png' /><span> Customer Support</span></a>");
+          document.write("<a class='actionlink csaction' alt='Contact Customer Support' title='Contact Customer Support' href=" + cslink.replace(/_/g,"") + "><img src='assets/images/email.png' alt='icon' /><span> Customer Support</span></a>");
         // ]]> </xsl:comment></script>
 
           
@@ -114,9 +114,10 @@
 
       <!-- Show feedback link only for instructors -->
       <xsl:if test="$CUSTOM_WEBHELP_SEARCH = 'google_instructor'">
-        <a class="actionlink feedbackaction" onclick="WA_togglefeedback()">
-          <img src="assets/images/page_white_edit.png" alt="Send a comment or correction for this topic"
-            title="Send a comment or correction for this topic" /><span> Topic Feedback</span>
+        <a class="actionlink feedbackaction" onclick="WA_togglefeedback()" 
+          alt="Send a comment or correction for this topic" 
+          title="Send a comment or correction for this topic" >
+          <img src="assets/images/page_white_edit.png" alt="icon" /><span> Topic Feedback</span>
         </a>
       </xsl:if>
 
