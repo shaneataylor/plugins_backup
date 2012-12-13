@@ -163,6 +163,14 @@ span.uicontrol > img {
     padding-right: 0px; /* overrrides default css padding of 5px */
 }
 
+img.image {
+    /* usually looks a bit better for icons in line with text */
+    vertical-align: middle;
+}
+table span.menucascade img.image {
+    /* edge case where text does not get aligned correctly */
+    vertical-align: top;
+}
 
 div.fig {
     margin: 1em 0;
@@ -395,7 +403,6 @@ object {
     -webkit-box-shadow: 5px 5px 13px #808080;
     box-shadow: 5px 5px 13px #808080;
 }
-
 
 /* ====================================== TOC PANE ====================================== */
 div.footer {
@@ -640,7 +647,6 @@ table.nav[class~=no_feedback] {
     margin-top: auto !important;
     vertical-align: top;
     width: 28em;
-    vertical-align: top;
 }
 .feedback_drawer input:focus:after {
     content: attr(alt);
@@ -676,7 +682,6 @@ table.nav[class~=no_feedback] {
     float: left;
 }
 .feedback_drawer fieldset label {
-    /*vertical-align: top;*/
     display: inline-block;
     margin-right: 1em;
 }
