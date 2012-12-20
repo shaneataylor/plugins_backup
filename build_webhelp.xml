@@ -97,6 +97,7 @@
             <param name="output.dir" location="../out/internal_admin" />
             <param name="custom.webhelp.search" value="no" />
             <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
+            <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
             <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.input.valfile" value="${source.dir}/d_w_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
