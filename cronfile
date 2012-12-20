@@ -1,5 +1,7 @@
-MAILTO=shanet@webassign.net
+MAILTO=""
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/home/shanet/bin
-SSH_AUTH_SOCK=/tmp/ssh-qUyDxygOLU/agent.93185
+SHELL=/bin/bash
+#SSH_AUTH_SOCK=/tmp/ssh-IeRauKIoF2/agent.20005
 
 16 8-18/2 * * * /home/shanet/static/build/build.sh
+#0-58/2 * * * * /home/shanet/static/build/gitT.sh
