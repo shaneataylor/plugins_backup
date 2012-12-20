@@ -25,6 +25,7 @@
         <antcall target="student" />
         <antcall target="instructor" />
         <antcall target="admin" />
+        <antcall target="internal_admin" />
     </target>
     
     <!-- 
@@ -85,6 +86,24 @@
         </antcall>
         <antcall target="copy_extra_files">
             <param name="output.dir" value="../out/admin"/>
+        </antcall>
+    </target>
+    
+    <target name="internal_admin">
+        <antcall target="clean_output_path" >
+            <param name="output.dir" location="../out/internal_admin"/>
+        </antcall>
+        <antcall target="init">
+            <param name="output.dir" location="../out/internal_admin" />
+            <param name="custom.webhelp.search" value="no" />
+            <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
+            <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.input.valfile" value="${source.dir}/d_w_help.ditaval" /><!-- 1.5.4 -->
+            <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
+            
+        </antcall>
+        <antcall target="copy_extra_files">
+            <param name="output.dir" value="../out/internal_admin"/>
         </antcall>
     </target>
     

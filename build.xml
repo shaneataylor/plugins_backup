@@ -24,8 +24,9 @@
   </target>
       
   <target name="all" depends="init">
-    <echo level="info">Building all targets (instructor_guide, student_guide, creating_questions, instructor_webhelp, student_webhelp)</echo>
+    <echo level="info">Building all targets (instructor_guide, student_guide, creating_questions, instructor_webhelp, student_webhelp, internal_admin_webhelp)</echo>
     <antcall target="student_webhelp" />
+    <antcall target="internal_admin_webhelp" />
     <antcall target="admin_webhelp" />
     <antcall target="instructor_webhelp" />
     <antcall target="student_guide" />
@@ -57,5 +58,9 @@
   <target name="admin_webhelp" depends="init">
     <echo level="info">Building Admin HTML WebHelp</echo>
     <ant antfile="../build_webhelp.xml" target="admin" />
+  </target>
+  <target name="internal_admin_webhelp" depends="init">
+    <echo level="info">Building Admin HTML WebHelp</echo>
+    <ant antfile="../build_webhelp.xml" target="internal_admin" />
   </target>
 </project>
