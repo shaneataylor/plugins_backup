@@ -14,7 +14,7 @@
     <property name="args.xhtml.toc" value="toc" />
     <property name="args.hide.parent.link" value="yes" />
     <property name="args.breadcrumbs" value="yes" />
-    <property name="args.debug" value="yes" />
+    <property name="args.debug" value="no" />
     <property name="clean.output" value="yes" />
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="../logs"/>
