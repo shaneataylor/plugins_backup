@@ -4,15 +4,15 @@
       Build the WebAssign Technical Communications Deliverables.
     </description>
     
-    <!--<property name="dita.dir" location="../deps/DITA-OT1.6.1"/>--><!-- If possible, set from environment -->
+    <property name="dita.dir" location="../deps/DITA-OT1.7.2"/><!-- If possible, set from environment -->
 
-    <property name="transtype" value="webassign.webhelp"/>
+    <property name="transtype" value="xhtml"/>
     <property name="args.copycss" value="yes" />
     <property name="args.outext" value=".htm" />
-    <property name="args.css" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help.css" />
-    <property name="args.ftr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_footer.html" />
+    <!--<property name="args.css" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help.css" />
+    <property name="args.ftr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_footer.html" />-->
     <property name="args.xhtml.toc" value="toc" />
-    <property name="args.hide.parent.link" value="yes" />
+    <property name="args.hide.parent.link" value="no" />
     <property name="args.breadcrumbs" value="yes" />
     <property name="args.debug" value="no" />
     <property name="clean.output" value="yes" />
@@ -22,8 +22,8 @@
     <import file="${dita.dir}/build.xml" />
     
     <target name="all">
-        <antcall target="student" />
         <antcall target="instructor" />
+        <antcall target="student" />
         <antcall target="admin" />
         <antcall target="internal_admin" />
     </target>
@@ -44,9 +44,8 @@
             <param name="custom.webhelp.search" value="google_instructor" />
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.input.valfile" value="${source.dir}/d_i_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_i_help" />
-            <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_instructor.html" />
+            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
         </antcall>
         <antcall target="copy_extra_files">
             <param name="output.dir" value="../out/instructor_guide"/>
@@ -62,9 +61,8 @@
             <param name="custom.webhelp.search" value="google_student" />
             <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.input.valfile" value="${source.dir}/d_s_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_s_help" />
-            <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_student.html" />
+            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
         </antcall>
         <antcall target="copy_extra_files" >
             <param name="output.dir" location="../out/student_guide"/>
@@ -80,9 +78,8 @@
             <param name="custom.webhelp.search" value="google_admin" />
             <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.input.valfile" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
-            <param name="args.hdf" value="${dita.dir}/plugins/net.webassign.webhelp/google_analytics_instructor.html" />
+            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
         </antcall>
         <antcall target="copy_extra_files">
             <param name="output.dir" value="../out/admin"/>
@@ -99,7 +96,6 @@
             <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
             <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
             <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.input.valfile" value="${source.dir}/d_w_help.ditaval" /><!-- 1.5.4 -->
             <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
             
         </antcall>
@@ -114,8 +110,8 @@
     
     <target name="copy_extra_files">
         <copy file="${source.dir}/csh.json" todir="${output.dir}" verbose="true"/>
-        <copy file="${dita.dir}/plugins/net.webassign.webhelp/googlea98ae97064cf3d0e.html" todir="${output.dir}" verbose="true"/>
-        <copy file="${dita.dir}/plugins/net.webassign.webhelp/quickstart.css" todir="${output.dir}" verbose="true"/>
+        <!--<copy file="${dita.dir}/plugins/net.webassign.webhelp/googlea98ae97064cf3d0e.html" todir="${output.dir}" verbose="true"/>
+        <copy file="${dita.dir}/plugins/net.webassign.webhelp/quickstart.css" todir="${output.dir}" verbose="true"/>-->
         
     </target>
 
