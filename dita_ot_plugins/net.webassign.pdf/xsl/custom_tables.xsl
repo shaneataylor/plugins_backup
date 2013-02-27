@@ -279,6 +279,26 @@
         
     </xsl:template>
     
+    <xsl:template match="*[contains(@class, ' topic/sl ')]">
+        <xsl:choose>
+            
+            <xsl:when test="ancestor::*[contains(@class, ' topic/stentry ')] or ancestor::*[contains(@class, ' topic/entry ')]">
+                <!-- topic/stentry also covers choicetable, properties table -->
+                <fo:list-block xsl:use-attribute-sets="sl">
+                    <xsl:attribute name="start-indent">-10pt</xsl:attribute>
+                    <xsl:call-template name="commonattributes"/>
+                    <xsl:apply-templates/>
+                </fo:list-block>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:list-block xsl:use-attribute-sets="sl">
+                    <xsl:call-template name="commonattributes"/>
+                    <xsl:apply-templates/>
+                </fo:list-block>
+            </xsl:otherwise>
+            
+        </xsl:choose>
+    </xsl:template>
 
 
 </xsl:stylesheet>
