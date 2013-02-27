@@ -77,7 +77,7 @@ function buildstep()
     fi
     
     echo -e "${MESSAGE}"
-    $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/${STEP}.xml" -buildfile ${BUILDFILE} ${STEP}
+    nice -n 50 $ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/${STEP}.xml" -buildfile ${BUILDFILE} ${STEP}
 }
 
 if [ "$#" == "0" ]; then
