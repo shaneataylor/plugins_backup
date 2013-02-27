@@ -146,6 +146,9 @@ li.step {
 td > ol.ol, td > ul.ul {
     padding-left: 1em;
 }
+td > ul.sl, td > ul.simple {
+    padding-left: 0em;
+}
 td > ol.ol > li, td > ul.ul > li {
     list-style-position: inside;
     text-indent: -1em;
