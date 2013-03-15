@@ -24,14 +24,7 @@
 #
 # TODO: More inline documentation
 
-DITA_OT_VERSION='1.5.4'
-DITA_OT_URL="http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%20${DITA_OT_VERSION}"
-DITA_OT_FILENAME="DITA-OT${DITA_OT_VERSION}_full_easy_install_bin.tar.gz"
-
-DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
-
 ORIG_CWD=$PWD
-export DITA_DIR="${ORIG_CWD}/deps/DITA-OT${DITA_OT_VERSION}"
 
 # cleanup if the script fails
 function cleanup()
@@ -95,10 +88,38 @@ function unpack()
     fi
 }
 
+# install DITA-OT version
+#
+# Usage: install_dita VERSION
+
+function install_dita()
+{
+    DITA_OT_VERSION=$1
+    DITA_OT_URL="http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%20${DITA_OT_VERSION}"
+    DITA_OT_FILENAME="DITA-OT${DITA_OT_VERSION}_full_easy_install_bin.tar.gz"
+    DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
+    #export DITA_DIR="${ORIG_CWD}/deps/DITA-OT${DITA_OT_VERSION}"
+    
+    echo -e "\nDownloading DITA-OT $DITA_OT_VERSION"
+    fetchcmd "${DITA_OT_URL}/${DITA_OT_FILENAME}" $DITA_OT_FILENAME
+    echo -e "\nUnpacking DITA-OT"
+    unpack $DITA_OT_FILENAME DITA-OT${DITA_OT_VERSION}
+
+    if [ -f "$DITA_DIR"/tools/ant/bin/ant ] && [ ! -x "$DITA_DIR"/tools/ant/bin/ant ]; then
+      echo -e "\nEnable execution for DITA-OT Ant"
+      chmod +x "$DITA_DIR"/tools/ant/bin/ant
+    fi
+    
+    if [ -d dita_ot_patches/"${DITA_OT_VERSION}" ]; then
+        echo -e "\nInstalling DITA-OT patches"
+        cp -Rfpv dita_ot_patches/"${DITA_OT_VERSION}"/ ${DITA_DIR}
+    fi
+}
+
 # install a DITA-OT plugin
 # 
 # Usage:
-#     install_plugin PLUGIN NAME
+#     install_plugin PLUGIN NAME OT-VERSION
 # 
 # Parameters:
 #     PLUGIN - the folder in dita_ot_plugins where the plugin is stored.
@@ -107,6 +128,17 @@ function install_plugin()
 {
     PLUGIN=$1
     NAME=$2
+    DITA_OT_VERSION=$3
+    DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
+    
+    # Mimimum required to ensure integrator.xml works for plugin installation 
+    NEW_CLASSPATH="$DITA_DIR/lib"
+    if [ -n "$CLASSPATH" ]; then
+        export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
+    else
+        export CLASSPATH="$NEW_CLASSPATH"
+    fi
+    
     if [ -d "$DITA_DIR/plugins/$PLUGIN" ]; then
         # Remove old version of plugin & run integrator to get rid of cruft
         echo -e "\nRemoving previous version of the $NAME plugin..."
@@ -118,30 +150,10 @@ function install_plugin()
     $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
 }
 
-echo -e "\nUpdating CLASSPATH"
-# Mimimum required to ensure integrator.xml works for plugin installation 
-NEW_CLASSPATH="$DITA_DIR/lib"
-if [ -n "$CLASSPATH" ]; then
-    export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
-else
-    export CLASSPATH="$NEW_CLASSPATH"
-fi
-
 
 echo -e "\nCreating requisite directories"
 mkdir -p downloads
 mkdir -p deps
-
-echo -e "\nDownloading DITA-OT $DITA_OT_VERSION"
-fetchcmd "${DITA_OT_URL}/${DITA_OT_FILENAME}" $DITA_OT_FILENAME
-
-echo -e "\nUnpacking DITA-OT"
-unpack $DITA_OT_FILENAME DITA-OT${DITA_OT_VERSION}
-
-if [ -f "$DITA_DIR"/tools/ant/bin/ant ] && [ ! -x "$DITA_DIR"/tools/ant/bin/ant ]; then
-  echo -e "\nEnable execution for DITA-OT Ant"
-  chmod +x "$DITA_DIR"/tools/ant/bin/ant
-fi
 
 echo -e "\nDownloading Ant-Contrib Tasks 1.0b3"
 fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip ant-contrib-1.0b3-bin.zip
@@ -149,14 +161,12 @@ fetchcmd http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib/1.
 echo -e "\nUnpacking ANT-Contrib"
 unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 
-echo -e "\nInstalling DITA-OT patches"
-cp -Rfpv dita_ot_patches/ $DITA_DIR
-# future: copy patches in a better way that omits hidden files & directories
+install_dita 1.5.4
+install_dita 1.7.2
 
 echo -e "\nInstalling DITA-OT plugins"
 
-install_plugin webhelp "Oxygen webhelp"
-install_plugin net.webassign.pdf "WebAssign PDF"
-install_plugin net.webassign.webhelp "WebAssign webhelp"
+install_plugin net.webassign.pdf "WebAssign PDF" 1.5.4
+install_plugin net.webassign.webhelp "WebAssign webhelp" 1.7.2
 
 # Moved extraction of DITA source files to build process
