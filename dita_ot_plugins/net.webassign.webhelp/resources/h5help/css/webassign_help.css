@@ -1,0 +1,246 @@
+/* ====================================== CONTENT ====================================== */
+
+
+div.body, div.topic, body > p.shortdesc {
+    /* 
+    added div.topic to fix formatting for nested topics. 
+    added body > p.shortdesc to fix formatting when topic contains only a short description
+    */
+    /*margin: 0.75em 10px 0 10px !important;*/
+}
+.shortdesc {
+    font-style:italic;
+    font-size:large;
+    
+}
+pre.codeblock {
+    /* respect whitespace but wrap to available width */
+    white-space: pre-wrap;
+}
+pre.msgblock, samp.msgph {
+    /* Wrap normally + collapse sequences of whitespace */
+    white-space: normal;
+    font-family: arial, helvetica, sans-serif;
+    background-color: #eee;
+}
+pre.msgblock {
+    border: 1px solid #c0c0c0;
+    padding: 2px 4px;
+}
+span.apiname {
+    font-weight: bold;
+}
+
+dt.dlterm {
+    margin-top: 1em;
+}
+
+p.stepsection {
+    font-weight: bold;
+    }
+
+div.note {
+    margin-left: 20px;
+    padding: 2px 4px;
+    display: block;
+    border: 1px solid #F9D2A8;
+    background: #FFFFCC  no-repeat scroll;
+}
+div.note:before {
+    display: run-in;
+    position: relative;
+    left: -24px;
+    top: -4px;
+    margin-right: -16px;
+    content: url("../img/note_icon.png");
+    z-index: 0;
+    height: 0;
+}
+div.tip {
+    border: 1px solid #A5D8FF;
+    background: #EAF7FF  no-repeat scroll;
+}
+div.tip:before {
+    content: url("../img/tip_icon.png");
+}
+div.important {
+    border: 1px solid #FFC5B4;
+    background: #FFE8E0  no-repeat scroll;
+}
+div.important:before {
+    content: url("../img/important_icon.png")  ;
+}
+div.fastpath {
+    border: 1px solid #7AB362;
+    background: #D8EED0  no-repeat scroll;
+}
+div.fastpath:before {
+    content: url("../img/bestpractice_icon.png")  ;
+}
+ul li, ol li {
+    list-style-image: none;
+    }
+    
+li.li {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+ul[compact] li, ol[compact] li {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
+ol.steps {
+    counter-reset: steps 0;
+}
+
+li.step {
+    counter-increment: steps 1;
+}
+/* ======== lists in table cells — un-indent ======== */
+/* Only for first-level lists, and only for lists specialized from ol or ul
+   Use 1em outdent on first line and 1em left padding to simulate marker block
+   since width of number is unknown. 
+   Formatting will be imperfect for numbers more than one digit (rare),
+   but instead of bleeding left outside the table cell, it will run
+   into the list item text.
+*/
+td > ol.ol, td > ul.ul {
+    padding-left: 1em;
+}
+td > ul.sl, td > ul.simple {
+    padding-left: 0em;
+}
+td > ol.ol > li, td > ul.ul > li {
+    list-style-position: inside;
+    text-indent: -1em;
+}
+td > ol.ol > li > *, td > ul.ul > li > * {
+    text-indent: 0em;
+}
+/* ================================================== */
+
+span.uicontrol[class~="keyboard"] {
+    text-transform: uppercase;
+    font-weight: normal !important;
+}
+span.uicontrol > img {
+    padding-right: 0px; /* overrrides default css padding of 5px */
+}
+
+img.image {
+    /* usually looks a bit better for icons in line with text */
+    vertical-align: middle;
+}
+table span.menucascade img.image {
+    /* edge case where text does not get aligned correctly */
+    vertical-align: top;
+}
+
+div.fig {
+    margin: 1em 0;
+}
+div.fig > img.image {
+    max-width: 100%;
+}
+div.fig > img.image:active {
+    max-width: none;
+}
+div.fig.slide {
+    width: 400px;
+    background-color: #eee !important;
+    border: 2px solid red;
+    color: black !important;
+    font-style: normal !important;
+    padding: 0.25em !important;
+    margin: 0.25em;
+}
+
+span.b {
+    font-weight: bold;
+}
+
+.term {
+    font-weight: bold !important;
+    font-style: normal !important;
+}
+dd.dd {
+    margin-bottom: 0.25em;
+}
+div.prereq {
+    margin-left: 0 !important;
+}
+dt.prereq {
+    margin-left: 0 !important;
+    font-weight: bold;
+}
+a.xref {
+    word-wrap: break-word; /* allow long URLs to break in xrefs */
+}
+
+.ExampleRed {
+    color: red;
+}
+.Math {
+    font-family: STIXGeneral, Times, serif;
+}
+.overline {
+    text-decoration: overline;
+}
+
+
+object {
+    /* for videos */
+    border: 1px solid #C0C0C0;
+    /* drop shadow (don't worry about IE) */
+    -moz-box-shadow: 5px 5px 13px #808080;
+    -webkit-box-shadow: 5px 5px 13px #808080;
+    box-shadow: 5px 5px 13px #808080;
+}
+
+
+/* ====================================== TABLES ====================================== */
+table.table, table.simpletable, table.choicetable  {
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+table.table, table.table tr, table.table td, table.table th,
+table.simpletable, table.simpletable tr, table.simpletable td, table.simpletable th,
+table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable th
+{
+    border: 1px solid #A5D8FF;
+}
+
+th, td[id] {
+    background: #EAF7FF  no-repeat scroll;
+}
+td[headers],th[headers] {
+    background: none white;
+    text-align:left;
+}
+/*
+tr.sthead,
+thead > tr,
+table.exampletable tr>td:first-child {
+    background: #EAF7FF  no-repeat scroll;
+}
+*/
+table.table td>*:first-child, 
+table.table td>strong>*:first-child, 
+table.table td>*>li:first-child, 
+table.table th>*:first-child,  
+table.simpletable td>*:first-child, 
+table.simpletable td>strong>*:first-child, 
+table.simpletable td>*>li:first-child, 
+table.simpletable th>*:first-child,  
+table.choicetable td>*:first-child, 
+table.choicetable td>strong>*:first-child, 
+table.choicetable td>*>li:first-child, 
+table.choicetable th>*:first-child  
+{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+

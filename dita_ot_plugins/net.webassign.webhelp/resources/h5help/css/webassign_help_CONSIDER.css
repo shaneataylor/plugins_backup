@@ -1,0 +1,385 @@
+/* ====================================== CONTENT ====================================== */
+
+body {
+    padding-left: 0px !important;
+    line-height: normal !important;
+}
+
+h1.title {
+	background-color: transparent !important;
+	color: #2A5C7E !important;
+	padding: 0px !important;
+	margin: 0.75em 10px 0.75em 10px !important;
+	font-size: 18pt !important;
+	line-height: normal;
+}
+h2.title {
+	background-color: transparent !important;
+	color: #2A5C7E !important;
+	padding: 0px !important;
+	margin-top: 1.5em !important;
+	margin-bottom: 0.75em !important;
+	line-height: normal;
+}
+h2.sectiontitle, h3.title, h4.title, h5.title {
+	background-color: transparent !important;
+	color: black !important;
+	margin: 1.5em 0 0.75em 0 !important;
+	padding: 0px !important;
+	line-height: normal;
+
+}
+div.body, div.topic, body > p.shortdesc {
+    /* 
+    added div.topic to fix formatting for nested topics. 
+    added body > p.shortdesc to fix formatting when topic contains only a short description
+    */
+    margin: 0.75em 10px 0 10px !important;
+    font-size: 10pt !important;
+}
+div.topic div.body {
+    margin: 0.75em 0 0 0 !important;
+}
+pre.codeblock {
+    /* respect whitespace but wrap to available width */
+    white-space: pre-wrap;
+}
+pre.msgblock, samp.msgph {
+    /* Wrap normally + collapse sequences of whitespace */
+    white-space: normal;
+    font-family: arial, helvetica, sans-serif;
+    background-color: #eee;
+}
+pre.msgblock {
+    border: 1px solid #c0c0c0;
+    padding: 2px 4px;
+}
+span.apiname {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none !important;
+    color: #00C !important;
+}
+
+dt.dlterm {
+    margin-top: 1em;
+}
+
+
+p.stepsection {
+    font-weight: bold;
+    }
+
+div.note {
+    margin-left: 20px;
+    padding: 2px 4px;
+    display: block;
+    border: 1px solid #F9D2A8;
+    background: #FFFFCC  no-repeat scroll;
+}
+div.note:before {
+    display: run-in;
+    position: relative;
+    left: -24px;
+    top: -4px;
+    margin-right: -16px;
+    content: url("assets/images/note_icon.png");
+    z-index: 0;
+    height: 0;
+}
+div.tip {
+    border: 1px solid #A5D8FF;
+    background: #EAF7FF  no-repeat scroll;
+}
+div.tip:before {
+    content: url("assets/images/tip_icon.png");
+}
+div.important {
+    border: 1px solid #FFC5B4;
+    background: #FFE8E0  no-repeat scroll;
+}
+div.important:before {
+    content: url("assets/images/important_icon.png")  ;
+}
+div.fastpath {
+    border: 1px solid #7AB362;
+    background: #D8EED0  no-repeat scroll;
+}
+div.fastpath:before {
+    content: url("assets/images/bestpractice_icon.png")  ;
+}
+ul li, ol li {
+    list-style-image: none;
+    }
+    
+li.li {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+ul[compact] li, ol[compact] li {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
+ol.steps {
+    counter-reset: steps 0;
+}
+
+li.step {
+    counter-increment: steps 1;
+}
+/* ======== lists in table cells — un-indent ======== */
+/* Only for first-level lists, and only for lists specialized from ol or ul
+   Use 1em outdent on first line and 1em left padding to simulate marker block
+   since width of number is unknown. 
+   Formatting will be imperfect for numbers more than one digit (rare),
+   but instead of bleeding left outside the table cell, it will run
+   into the list item text.
+*/
+td > ol.ol, td > ul.ul {
+    padding-left: 1em;
+}
+td > ol.ol > li, td > ul.ul > li {
+    list-style-position: inside;
+    text-indent: -1em;
+}
+td > ol.ol > li > *, td > ul.ul > li > * {
+    text-indent: 0em;
+}
+/* ================================================== */
+
+span.uicontrol[class~="keyboard"] {
+    text-transform: uppercase;
+    font-weight: normal !important;
+}
+span.uicontrol > img {
+    padding-right: 0px; /* overrrides default css padding of 5px */
+}
+
+img.image {
+    /* usually looks a bit better for icons in line with text */
+    vertical-align: middle;
+}
+table span.menucascade img.image {
+    /* edge case where text does not get aligned correctly */
+    vertical-align: top;
+}
+
+div.fig {
+    margin: 1em 0;
+}
+div.fig > img.image {
+    max-width: 100%;
+}
+div.fig > img.image:active {
+    max-width: none;
+}
+
+span.b {
+    font-weight: bold;
+}
+
+.term {
+    font-weight: bold !important;
+    font-style: normal !important;
+}
+dd.dd {
+    margin-bottom: 0.25em;
+}
+div.prereq {
+    margin-left: 0 !important;
+}
+dt.prereq {
+    margin-left: 0 !important;
+    font-weight: bold;
+}
+a.xref {
+    word-wrap: break-word; /* allow long URLs to break in xrefs */
+}
+
+.ExampleRed {
+    color: red;
+}
+.Math {
+    font-family: STIXGeneral, Times, serif;
+}
+.overline {
+    text-decoration: overline;
+}
+
+
+
+
+/* ====================================== TABLES ====================================== */
+table.table, table.simpletable, table.choicetable  {
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+table.table, table.table tr, table.table td, table.table th,
+table.simpletable, table.simpletable tr, table.simpletable td, table.simpletable th,
+table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable th
+{
+    border: 1px solid #A5D8FF;
+}
+
+th, td[id] {
+    background: #EAF7FF  no-repeat scroll;
+}
+td[headers],th[headers] {
+    background: none white;
+    text-align:left;
+}
+/*
+tr.sthead,
+thead > tr,
+table.exampletable tr>td:first-child {
+    background: #EAF7FF  no-repeat scroll;
+}
+*/
+table.table td>*:first-child, 
+table.table td>strong>*:first-child, 
+table.table td>*>li:first-child, 
+table.table th>*:first-child,  
+table.simpletable td>*:first-child, 
+table.simpletable td>strong>*:first-child, 
+table.simpletable td>*>li:first-child, 
+table.simpletable th>*:first-child,  
+table.choicetable td>*:first-child, 
+table.choicetable td>strong>*:first-child, 
+table.choicetable td>*>li:first-child, 
+table.choicetable th>*:first-child  
+{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+
+/* ====================================== HEADER ====================================== */
+
+div.webassign_header {
+	font-size: 10pt;
+	line-height: normal;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0.25em;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 24px;
+	text-align: right;
+	vertical-align: middle;
+    border-bottom: 1px solid #CCCCCC;
+    background: #EEEEEE ;
+    z-index: 3;
+    /*min-width: 680px;*/
+}
+a.logoaction {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    cursor: pointer;
+}
+
+a.actionlink {
+    padding: 4px;
+    margin-right: 12px;
+    cursor: pointer;
+    color: #00C !important;
+    }
+a.actionlink > img, a.actionlink > span {
+    vertical-align: middle;
+}
+a.framesaction {
+    /*background: transparent url("assets/images/application_side_list.png") no-repeat 0% 50%;*/
+    /*margin-right: 0;*/
+    }
+a.noframesaction {
+    /*background: transparent url("assets/images/application_view_list.png") no-repeat 0% 50%;*/
+    }
+span.actionsep {
+    margin-left: -12px; /* Remove the previous action's right margin */
+    color: black !important;
+}
+a.framesCurrentState {
+    display: none; /* don't display icon for current frame state */
+}
+
+a.printaction {
+    /*background: transparent url("assets/images/printer.png") no-repeat 0% 50%;*/
+    }
+a.feedbackaction {
+    /*background: transparent url("assets/images/page_white_edit.png") no-repeat 0% 50%;*/
+    }
+a.csaction {
+    /*background: transparent url("assets/images/email.png") no-repeat 0% 50%;*/
+    }
+@media print {
+    div.webassign_header {
+        display: none;
+    }
+}
+@media screen and (max-width: 625px) {
+    /* Change layout if window width is less than 680px (browsers that support CSS3) */
+    a.actionlink span {
+        display: none; /* don't display text */
+    }
+}
+
+
+
+
+/* ====================================== NAVIGATION ====================================== */
+
+div.related-links {
+    border-top: none;
+    margin: 24px 10px 0px 10px;
+}
+
+div.related-links ul.ullinks, div.related-links ol.olchildlinks {
+    margin-top: 0;
+}
+div.related-links ul.ullinks:before, div.related-links ol.olchildlinks:before {
+    content: "This section contains the following topics:";
+    display: block;
+    font-weight: bold;
+    margin-left: -40px; /* because ul/ol have 40px left padding. Tested in IE/FF/Safari/Chrome */
+} 
+li.olchildlink > a {
+    font-weight: bold; /* Display topic name in bold like unordered lists */
+}
+dl.prereqlinks > dd {
+    margin-left: inherit; /* left align instead of indenting, consistent with other related links */
+}
+
+
+div.relinfo {
+}
+
+table.nav {
+    margin-bottom: 4px;
+    font-size: 8pt;
+    margin-top: 27px;
+}
+table.nav td {
+    text-align: right;
+}
+
+
+div.navfooter {
+/* hide this */
+    display: none;
+}
+
+object {
+    /* for videos */
+    border: 1px solid #C0C0C0;
+    /* drop shadow (don't worry about IE) */
+    -moz-box-shadow: 5px 5px 13px #808080;
+    -webkit-box-shadow: 5px 5px 13px #808080;
+    box-shadow: 5px 5px 13px #808080;
+}
