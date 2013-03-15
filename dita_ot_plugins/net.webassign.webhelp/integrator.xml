@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Extend the toolkit's XHTML processing to generate WebHelp output. -->
-<project name="net.webassign.webhelp.integrator" default="dita2webassign.webhelp" basedir=".">
+<project name="net.webassign.webhelp.integrator" default="dita2h5help" basedir=".">
 	
-  <target name="dita2webassign.webhelp" 
-    depends="build-init, preprocess, copy-webhelp-resources, copy-webassign-resources, dita.out.map.webassign.webhelp.toc, copy-revflag,
-    copy-css , dita.topics.xhtml, dita.inner.topics.webassign.webhelp,
-    dita.outer.topics.xhtml, webhelp-index" />
- 
-  
+  <target name="dita2h5help" 
+    depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
+    copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml" />
   
   <!-- Customize header and footer of each topic. -->
-  <target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
+  <!--<target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
     <property name="out.ext" value=".html"/>
     <property name="transtype.ext" value=".xsl"/>
     <property name="args.xsl"
@@ -48,43 +45,15 @@
       <param name="BASEDIR" expression="${basedir}"></param>
       <param name="OUTPUTDIR" expression="${output.dir}"></param>
       <param name="DBG" expression="${args.debug}" if="args.debug"></param>
-      <!--<param name="CUSTOM_RATE_PAGE_URL" expression="${custom.rate.page.url}" if="custom.rate.page.url"/>-->
       <param name="CUSTOM_WEBHELP_SEARCH" expression="${custom.webhelp.search}"/>
       <param name="CUSTOM_BASEDIR" expression="${dita.temp.dir}"/>
       <mapper type="regexp" from="^(${tempdirToinputmapdir.relative.value})(.*?)(\.(xml|dita))$$" to="\2${out.ext}"></mapper>
     </xslt>
-  </target>
+  </target>-->
   
-  <!-- The Oxygen webhelp task does not work as written with OT1.5.4 -->
-  <target name="webassign.detectIndexerLang">
-    <property name="indexer.lang" value="en"/>
-    <property name="inputMap" value="${dita.temp.dir}${file.separator}${user.input.file}"/>
-    
-    <taskdef name="detect-lang" classname="com.suite.sol.ditaot.DetectLang">
-      <classpath path="${dita.dir}/demo/fo/lib/fo.jar"/>
-    </taskdef>
-    
-    <!-- Set document.locale from xml:lang -->
-    <!-- The map takes precedence, followed by the first topic -->
-    <detect-lang documentPath="${inputMap}"/>
-    
-    <!-- Set indexer.lang property -->
-    <!-- commented out because this fails in OT1.5.4 -->
-    <!--<if>
-      <isset property="document.locale"/>
-      <then>
-        <propertyregex property="indexer.lang" input="${document.locale}" 
-          regexp="(..)" 
-          select="\1"
-          defaultvalue="en"
-          override="true"/>
-      </then>
-    </if>-->
-    
-  </target>
   
   <!-- Customize table of contents. -->
-  <target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
+  <!--<target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
     <xslt processor="trax"
       basedir="${dita.temp.dir}"
       destdir="${output.dir}"
@@ -104,15 +73,14 @@
       <param name="INDEXER_LANGUAGE" expression="${indexer.lang}" if="indexer.lang"/>
       <mapper type="glob" from="${user.input.file}" to="${args.xhtml.toc}${out.ext}" />
     </xslt>
-  </target>
+  </target>-->
   
-  <!-- New target to copy WebAssign resource files -->
-  <target name="copy-webassign-resources">
+  <!-- New target to copy h5help resource files -->
+  <target name="copy-h5help-resources">
     <copy todir="${output.dir}">
       <fileset
         dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
-        includes="**${file.separator}*"
-        excludes=".svn"/>
+        includes="**${file.separator}*" />
     </copy>
   </target>
 </project>

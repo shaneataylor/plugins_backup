@@ -2,14 +2,14 @@
 <plugin id="net.webassign.webhelp">
   <feature extension="package.support.name" value="WebAssign Communications Team"/>
   <feature extension="package.support.email" value="docs@webassign.net"/>
-  <feature extension="package.version" value="1.1.1"/>
+  <feature extension="package.version" value="1.2"/>
   
   <feature extension="dita.conductor.transtype.check" value="webassign.webhelp" type="txt"/>
   <feature extension="dita.conductor.target.relative" value="integrator.xml" type="file"/>
   
-  <feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>
+  <!--<feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>
   <feature extension="dita.xsl.xhtml" value="xsl/custom_flag.xsl" type="file"/>
   <feature extension="dita.xsl.xhtml" value="xsl/altTextWarnings.xsl" type="file"/>
-  <feature extension="dita.xsl.messages" file="messages.xml"/>
-  <require plugin="com.oxygenxml.dita-ot.plugin.webhelp"/>
+  <feature extension="dita.xsl.messages" file="messages.xml"/>-->
+  
 </plugin>
