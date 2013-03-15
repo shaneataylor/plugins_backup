@@ -16,10 +16,6 @@ export DITA_DIR="$WORKING_DIR/deps/DITA-OT${DITA_OT_VERSION}"
 export ANT_HOME="$DITA_DIR/tools/ant"
 export FOP_HOME="$DITA_DIR/plugins/org.dita.pdf2/fop"
 
-# Ensure the ant file is executable (sometimes OT installs without this)
-if [ -f "$ANT_HOME/bin/ant ] && [ ! -x "$ANT_HOME/bin/ant ]; then
-    chmod +x "$ANT_HOME/bin/ant"
-fi
 export PATH="$PATH:$ANT_HOME/bin"
 
 

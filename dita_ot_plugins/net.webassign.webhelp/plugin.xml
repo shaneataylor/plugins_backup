@@ -4,7 +4,7 @@
   <feature extension="package.support.email" value="docs@webassign.net"/>
   <feature extension="package.version" value="1.2"/>
   
-  <feature extension="dita.conductor.transtype.check" value="webassign.webhelp" type="txt"/>
+  <feature extension="dita.conductor.transtype.check" value="h5help" type="txt"/>
   <feature extension="dita.conductor.target.relative" value="integrator.xml" type="file"/>
   
   <!--<feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>

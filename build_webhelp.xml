@@ -6,7 +6,7 @@
     
     <property name="dita.dir" location="../deps/DITA-OT1.7.2"/><!-- If possible, set from environment -->
 
-    <property name="transtype" value="xhtml"/>
+    <property name="transtype" value="h5help"/>
     <property name="args.copycss" value="yes" />
     <property name="args.outext" value=".htm" />
     <!--<property name="args.css" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help.css" />
