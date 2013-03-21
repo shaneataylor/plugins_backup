@@ -242,38 +242,25 @@ table.choicetable th>*:first-child
     margin-bottom: 0 !important;
 }
 
-/* Flagging */
+/* ====================================== Flagging ====================================== */
 
 .audience-internal {
     background-color: #dd9999;
 }
-.audience-internal:before {
-    content:'WebAssign Internal: ';
-    font-weight: bold;
-}
 .audience-admin {
     background-color: #dac0da;
-}
-.audience-admin:before {
-    content:'Technical Admin: ';
-    font-weight: bold;
 }
 .audience-instructor {
     background-color: #d0eed0;
 }
-.audience-instructor:before {
-    content:'Instructor: ';
-    font-weight: bold;
-}
 .audience-student {
     background-color: #f0e580;
 }
-.audience-student:before {
-    content:'Student: ';
-    font-weight: bold;
+.audience-student.audience-instructor {
+    background-color:transparent; 
+    /* don't need to flag if both */
 }
 .platform-ipad:before {
     content:'iPad only: ';
     font-weight: bold;
 }
-
