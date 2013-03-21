@@ -28,13 +28,6 @@
         <antcall target="internal_admin" />
     </target>
     
-    <!-- 
-    
-    NEED TO CLEAN UP OUTPUT DIRECTORY AT THE START OF EACH OF THESE TARGETS
-    
-    -->
-    
-    
     <target name="instructor">
         <antcall target="clean_output_path" >
             <param name="output.dir" location="../out/instructor_guide"/>
