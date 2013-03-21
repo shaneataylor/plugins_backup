@@ -53,6 +53,7 @@ function fetchcmd()
     
     if [ ! -f "downloads/$OUTFILE" ]; then
         curl -L --output downloads/$OUTFILE $URL
+        
     else
         echo "File $OUTFILE already downloaded. Skipping"
     fi
@@ -95,12 +96,18 @@ function unpack()
 function install_dita()
 {
     DITA_OT_VERSION=$1
-    DITA_OT_URL="http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%20${DITA_OT_VERSION}"
+    DITA_OT_VR=`expr $DITA_OT_VERSION : "\([0-9][0-9]*\.[0-9][0-9]*\)\."`
+    if [ "$DITA_OT_VERSION" = "1.5.4" ]; then
+        DITA_OT_URL="http://downloads.sourceforge.net/project/dita-ot/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.5.4"
+    else
+        DITA_OT_URL="http://downloads.sourceforge.net/project/dita-ot/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%20${DITA_OT_VR}"
+    fi
     DITA_OT_FILENAME="DITA-OT${DITA_OT_VERSION}_full_easy_install_bin.tar.gz"
     DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
     #export DITA_DIR="${ORIG_CWD}/deps/DITA-OT${DITA_OT_VERSION}"
     
     echo -e "\nDownloading DITA-OT $DITA_OT_VERSION"
+    echo -e "\n  (source: ${DITA_OT_URL}/${DITA_OT_FILENAME})"
     fetchcmd "${DITA_OT_URL}/${DITA_OT_FILENAME}" $DITA_OT_FILENAME
     echo -e "\nUnpacking DITA-OT"
     unpack $DITA_OT_FILENAME DITA-OT${DITA_OT_VERSION}
