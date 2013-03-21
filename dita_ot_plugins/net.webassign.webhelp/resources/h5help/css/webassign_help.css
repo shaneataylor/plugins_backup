@@ -45,6 +45,9 @@ div.note {
     display: block;
     border: 1px solid #F9D2A8;
     background: #FFFFCC  no-repeat scroll;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 div.note:before {
     display: run-in;
@@ -203,6 +206,7 @@ object {
 table.table, table.simpletable, table.choicetable  {
     border-collapse: collapse;
     margin: 1em 0;
+    font-size: small;
 }
 table.table, table.table tr, table.table td, table.table th,
 table.simpletable, table.simpletable tr, table.simpletable td, table.simpletable th,
@@ -215,7 +219,7 @@ th, td[id] {
     background: #EAF7FF  no-repeat scroll;
 }
 td[headers],th[headers] {
-    background: none white;
+    background: none transparent;
     text-align:left;
 }
 /*
