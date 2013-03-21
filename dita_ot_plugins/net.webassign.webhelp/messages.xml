@@ -5,4 +5,8 @@
         <reason>Image is missing alternative text.</reason>
         <response>Specify alternative text for the image with the &lt;alt&gt; element. </response>
     </message>
+    <!--<message id="DOTX098I" type="INFO">
+        <reason>Adding @outputclass for @audience.</reason>
+        <response>No action needed.</response>
+    </message>-->
 </messages>    
