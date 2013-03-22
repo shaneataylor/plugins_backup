@@ -30,15 +30,32 @@ pre.msgblock {
 span.apiname {
     font-weight: bold;
 }
-
-dt.dlterm {
-    margin-top: 1em;
-}
-
 p.stepsection {
     font-weight: bold;
     }
 
+/* =================================== Definition Lists =================================== */
+dt.dlterm {
+    margin-top: 1em;
+}
+dd.dd {
+    margin-bottom: 0.25em;
+}
+dl[compact] > dt.dlterm {
+    display: inline-block;
+    width: 20%;
+    text-align:right;
+    vertical-align: top;
+    margin-top:auto;
+}
+dl[compact] > dd.dd {
+    display: inline-block;
+    width: 70%;
+    margin-left: 10px;
+    vertical-align:top;
+    color: #444;
+}
+/* =================================== Notes =================================== */
 div.note {
     margin-left: 20px;
     padding: 2px 4px;
@@ -166,9 +183,6 @@ span.b {
 .term {
     font-weight: bold !important;
     font-style: normal !important;
-}
-dd.dd {
-    margin-bottom: 0.25em;
 }
 div.prereq {
     margin-left: 0 !important;
