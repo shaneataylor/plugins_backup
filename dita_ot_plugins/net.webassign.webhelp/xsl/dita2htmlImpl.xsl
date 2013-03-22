@@ -20,5 +20,13 @@ if (typeof h5Url == 'undefined') { // won't run if help system loaded topic
 ]]></xsl:comment></script>
     </xsl:template>
     
+    <!-- Add empty breadcrumbs div to top of topic if flag is set  -->
+    <!-- Help system will generate breadcrumb content from currently loaded TOC. -->
+    <xsl:template name="generateBreadcrumbs">
+        <xsl:if test="$BREADCRUMBS='yes'">
+            <div class="topic-breadcrumbs"></div>
+        </xsl:if>
+    </xsl:template>
+    
     
 </xsl:stylesheet>
