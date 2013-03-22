@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin id="net.webassign.webhelp">
-  <feature extension="package.support.name" value="WebAssign Communications Team"/>
-  <feature extension="package.support.email" value="docs@webassign.net"/>
-  <feature extension="package.version" value="1.2"/>
-  
-  <feature extension="dita.conductor.transtype.check" value="h5help" type="txt"/>
-  <feature extension="dita.conductor.target.relative" value="integrator.xml" type="file"/>
-  
-  <feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>
-  <feature extension="dita.xsl.flag-module" value="xsl/flag.xsl" type="file"/>
-  <feature extension="dita.xsl.messages" file="messages.xml"/>
-  <!--<feature extension="dita.xsl.xhtml" value="xsl/custom_flag.xsl" type="file"/>
+    <feature extension="package.support.name" value="WebAssign Communications Team"/>
+    <feature extension="package.support.email" value="docs@webassign.net"/>
+    <feature extension="package.version" value="1.2"/>
+
+    <feature extension="dita.conductor.transtype.check" value="h5help" type="txt"/>
+    <feature extension="dita.conductor.target.relative" value="integrator.xml" type="file"/>
+
+    <feature extension="dita.xsl.strings" value="strings/strings.xml" type="file"/>
+    <feature extension="dita.xsl.flag-module" value="xsl/flag.xsl" type="file"/>
+    <feature extension="dita.xsl.messages" file="messages.xml"/>
+    <feature extension="dita.xsl.xhtml" value="xsl/dita2htmlImpl.xsl" type="file"/>
+    <!--<feature extension="dita.xsl.xhtml" value="xsl/custom_flag.xsl" type="file"/>
     
   <feature extension="dita.xsl.xhtml" value="xsl/altTextWarnings.xsl" type="file"/>
   -->
-  
+
 </plugin>
