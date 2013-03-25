@@ -882,6 +882,9 @@ img#menu_button {
     right: 0px;
     padding: 10px;
 }
+img#menu_button:focus {
+    outline:none; /* Chrome (others?) puts a focus glow border we don't want */
+}
 ul#menu {
     z-index:100;
     padding: 5px 0px;
