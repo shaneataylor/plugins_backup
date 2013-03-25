@@ -206,7 +206,7 @@ function defineHandlers(){
     $("div#searchbox").one("focus click", "input", showSearchResults); 
     
     $("div#toc").on("click", "a", handleLink); 
-    $("div#toc").on("click", "a", slideTOC); 
+    $("div#toc").on("click", "a", slideTOC);
     $("div#topic").on("click", "a", handleLink); 
     $("div#searchresults").on("click", "a", handleLink); 
     
@@ -392,9 +392,10 @@ function mobilize() {
     }
 }
 function slideTOC(hideTOC) {
-    hideTOC = (typeof hideTOC == 'boolean') ? hideTOC : $("div#sizer").hasClass("slideright");
-    closeMenu();
     var width = $(window).width(); // see also: $(document).width()
+    var smallwin = (width <= 800);
+    hideTOC = (typeof hideTOC == 'boolean') ? smallwin && hideTOC : smallwin && $("div#sizer").hasClass("slideright");
+    closeMenu();
     var tocleft = "0px";
     var sizerleft = (width-20) + "px";
     if (hideTOC) {
