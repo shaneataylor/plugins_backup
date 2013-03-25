@@ -142,23 +142,34 @@ function loadDiv(targetDiv, linkHref, addHistory){
         if (targetDiv == "div#toc") {
             initTOC();
         }
-        else {
-            if (Modernizr.history && addHistory) {
-                /*window.alert("Adding the following topic to history: " + newHref);*/
-                window.history.pushState(null,null, newHref); // add page to history for modern browsers
-                var title = $("div#topic h1").text();
-                $("title").html("WebAssign Help :: " + title);
-            }
-           // highlight & if needed, expand parents of matching TOC entries
-           $("div#toc a.current").removeClass("current");
-           $('div#toc a[href="' + newHref + '"]').addClass("current");
-           $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
-           // var tocEntryPosition = $('div#toc a.current').position().top;
-           // $("div#toc").scrollTop(tocEntryPosition);
+        else if (targetDiv == "div#topic") {
+            initTopic(addHistory,newHref);
         }
         $(targetDiv).trigger('divloaded'); // use this to let other processes know this is done
     });
     
+}
+function initTopic(addHistory,newHref){
+    if (Modernizr.history && addHistory) {
+        window.history.pushState(null,null, newHref); // add page to history for modern browsers
+        var title = $("div#topic h1").text();
+        $("title").html("WebAssign Help :: " + title); // FUTURE: base prefix on map data 
+    }
+    // highlight & if needed, expand parents of matching TOC entries
+    $("div#toc a.current").removeClass("current");
+    $('div#toc a[href="' + newHref + '"]').addClass("current");
+    $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
+    
+    // var breadcrumbs;
+    $("div#toc a.current").parent("li").parents("li").each(function(index){
+        // breadcrumbs += " (" + index + ") > " + $(this).children("a");
+        $("div#topic-breadcrumbs").prepend(" > ");
+        $(this).children("a").clone().prependTo("div#topic-breadcrumbs");
+    });
+    // $("div#topic-breadcrumbs").html(breadcrumbs);
+    // var tocEntryPosition = $('div#toc a.current').position().top;
+    // $("div#toc").scrollTop(tocEntryPosition);
+
 }
 
 function googleAnalytics(){

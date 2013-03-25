@@ -1047,6 +1047,11 @@ div#toc, div#sizer {
     -moz-transition: left .5s;
     transition: left .5s;
 }
+div#topic-breadcrumbs {
+    font-size: small;
+    color: #666;
+}
+
 div#topic, div#searchresults {
     position: absolute;
     top: 40px;
