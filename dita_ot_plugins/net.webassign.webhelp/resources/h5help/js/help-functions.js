@@ -95,13 +95,7 @@ function handleLink(event){
         // cannot use browser default handling for anchor links within topic
         // this method does not handle anchor links in TOC frame, but none should exist
         
-        var nameOrID = "id"; // FUTURE: Define this in config file. Earlier OT versions (c. 1.5.4) use a[name]
-        if (nameOrID == "name") {
-            var hashTarget = 'div#topic a[name="' + linkHref.substring(1) + '"]';
-        }
-        else {
-            var hashTarget = 'div#topic #' + linkHref.substring(1);
-        }
+        var hashTarget = 'div#topic #' + linkHref.substring(1) + ',div#topic a[name="' + linkHref.substring(1) + '"]';
         var linkPosition = $(hashTarget).position().top;
         $("div#topic").scrollTop(linkPosition);
         return false;
