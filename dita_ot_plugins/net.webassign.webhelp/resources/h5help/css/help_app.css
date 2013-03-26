@@ -739,7 +739,7 @@ textarea {
 
 @media print {
     /* only print the current topic */
-    body > div, div.related-links, div.related-links+div {
+    body > div, div.related-links, div.related-links+div, div#topic-breadcrumbs {
         display:none;
     }
     div#topic {

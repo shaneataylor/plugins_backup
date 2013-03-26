@@ -20,7 +20,7 @@ pre.codeblock {
 pre.msgblock, samp.msgph {
     /* Wrap normally + collapse sequences of whitespace */
     white-space: normal;
-    font-family: arial, helvetica, sans-serif;
+    font-family: Arimo, sans-serif;
     background-color: #eee;
 }
 pre.msgblock {
@@ -55,6 +55,13 @@ dl[compact] > dd.dd {
     vertical-align:top;
     color: #444;
 }
+td > dl:first-child > dt:first-child {
+    margin-top: 0px;
+}
+td > dl > dd {
+    margin-left: 0px;
+}
+
 /* =================================== Notes =================================== */
 div.note {
     margin-left: 20px;
@@ -285,148 +292,136 @@ table.choicetable th>*:first-child
 
 /* ====================================== QUICKSTART ====================================== */
 
-body.quickstart {
+
+div.body.quickstart {
     width: 7.5in;
-    height: 10.5in;
-    /*border: 1px dashed gray;*/
-    padding: 0pt !important;
-}
-body.quickstart div.body {
-    margin: 0pt !important;
-
 }
 
-body.quickstart > div.body > div {
+div.body.quickstart > div.bodydiv.right {
     /* right column */
     width: 2in;
     float: right;
-    /*border: 1px solid green;*/
 }
 
-body.quickstart > div.body > div:first-child {
+div.body.quickstart > div.bodydiv.left {
     /* left column */
     width: 5.35in;
     float: left;
 }
-body.quickstart > div.body > div:first-child > div.section {
+div.body.quickstart > div.bodydiv.left > div.section {
     padding-left: 18pt;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 
-body.quickstart > div.webassign_header {
-    display: none;
-}
-body.quickstart > div.webassign_footer, 
-body.quickstart > table.nav {
-    display: none;
-}
-body.quickstart > div.body, 
-body.quickstart > p.shortdesc,
-body.quickstart div {
+div.body.quickstart, 
+div.body.quickstart > p.shortdesc,
+div.body.quickstart div {
     font-size: 8.5pt !important;
-    font-family:arial, helvetica, sans-serif;
     line-height: 10.5pt;
 }
-
-/*
- * style from FM QSG:
- * 
- * Title: 24.5pt Arial Regular #004FB3
- * Task Title: 16pt Arial Bold White
- * Body: 8.5pt Arial Regular
- * Subtitles/RefTitles: 10pt Arial Bold #004FB3
- * Links: #004FB3
- * Other colors: #C60C30, #DBEBF0, #3D8CF0
- * 
- */
-
-
+div.body.quickstart > p.shortdesc {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+}
 
 
 /* TITLES */
-body.quickstart .title {
+div.body.quickstart .title, h1.title.quickstart {
     text-transform: uppercase;
-    font-family:arial, helvetica, sans-serif;
     color: #004FB3 !important;
 }
-body.quickstart > h1.title {
+h1.title.quickstart {
+    width: 7.5in;
     font-size: 24.5pt !important;
     font-weight:normal;
     text-align:right;
     letter-spacing: -1pt;
     margin: 0pt  !important;
-    background-image:url("assets/images/webassign_logo.png");
+    background-image:url("../img/webassign_logo.png");
     background-repeat: no-repeat;
-    background-position: 2pt 2pt;
+    background-position: 2pt 6pt;
+    -webkit-print-color-adjust:exact; /* print in chrome */
 
 }
-body.quickstart div.section > h2.title.sectiontitle.bar1,
-body.quickstart div.section > h2.title.sectiontitle.bar2,
-body.quickstart div.section > h2.title.sectiontitle.bar3,
-body.quickstart div.section > h2.title.sectiontitle.bar4,
-body.quickstart div.section > h2.title.sectiontitle.bar5 {
-    font-family:arial, helvetica, sans-serif;
+div.body.quickstart div.section > h2.title.sectiontitle.bar1,
+div.body.quickstart div.section > h2.title.sectiontitle.bar2,
+div.body.quickstart div.section > h2.title.sectiontitle.bar3,
+div.body.quickstart div.section > h2.title.sectiontitle.bar4,
+div.body.quickstart div.section > h2.title.sectiontitle.bar5 {
     font-size: 16pt;
     font-weight: bold;
     color: white !important;
     height: 30pt;
-    padding: 9pt 0pt 0pt 40pt !important;
+    padding: 11pt 0pt 0pt 40pt !important;
     margin-top: 0pt !important;
-    margin-bottom: -10pt !important;
+    margin-bottom: -13pt !important;
     margin-left: -18pt !important;
     background-repeat: no-repeat;
     background-size: 6in 43px;/* original: 787x57 */ 
-    
+    -webkit-print-color-adjust:exact; /* print in chrome */
 }
 
-body.quickstart h2.bar1 { background-image:url("assets/images/qsg_bar_1.png"); }
-body.quickstart h2.bar2 { background-image:url("assets/images/qsg_bar_2.png"); }
-body.quickstart h2.bar3 { background-image:url("assets/images/qsg_bar_3.png"); }
-body.quickstart h2.bar4 { background-image:url("assets/images/qsg_bar_4.png"); }
-body.quickstart h2.bar5 { background-image:url("assets/images/qsg_bar_5.png"); }
+div.body.quickstart h2.bar1 { background-image:url("../img/qsg_bar_1.png"); }
+div.body.quickstart h2.bar2 { background-image:url("../img/qsg_bar_2.png"); }
+div.body.quickstart h2.bar3 { background-image:url("../img/qsg_bar_3.png"); }
+div.body.quickstart h2.bar4 { background-image:url("../img/qsg_bar_4.png"); }
+div.body.quickstart h2.bar5 { background-image:url("../img/qsg_bar_5.png"); }
 
-body.quickstart dd.dd {
+
+div.body.quickstart dd.dd {
     margin-left: 0pt;
 }
-body.quickstart ul[compact] {
+div.body.quickstart ul[compact] {
     padding-left: 12pt;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-body.quickstart ul[compact] > li {
+div.body.quickstart ul[compact] > li {
     margin-top: 0em;
     margin-bottom: 0em;
 }
-body.quickstart ol[compact] > li {
+div.body.quickstart ol[compact] > li {
     margin-top: 0.1em;
     margin-bottom: 0.1em;
 }
-body.quickstart div.section p {
+div.body.quickstart div.section p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-body.quickstart ol.ol {
+div.body.quickstart ol.ol {
     margin-top: 0.25em;
     margin-bottom: 0.25em;
 }
-body.quickstart ol[type="a"] {
+div.body.quickstart ol[type="a"] {
     padding-left: 18pt;
     margin-top: 0;
     margin-bottom: 0;
 }
-body.quickstart strong.big_qsg {
+div.body.quickstart strong.big_qsg {
+    display: block;
+    text-align: center;
+    margin-top: 3em;
+}
+
+
+div.body.quickstart strong.big_qsg > a.xref {
     display: inline-block;
     padding-top: 1em;
     line-height: 1.5;
     font-size: 12pt;
+    width: 1in;
+    height: 1.29in;
+    border: 1px solid #369;
+
 }
-body.quickstart dl[compact] {
+div.body.quickstart dl[compact] {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-body.quickstart dl[compact] > * {
-    margin-top: 0.5em;
+div.body.quickstart dl[compact] > dd.dd {
+    color: black;
+    width: 78%;
 }
 
 /*@media print {
@@ -438,6 +433,11 @@ body.quickstart dl[compact] > * {
 }*/
 
 
+@media print {
+    div.body.quickstart strong.big_qsg > a.xref {
+        display: none;
+    }
+}
 
 
 
