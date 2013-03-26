@@ -160,15 +160,19 @@ function initTopic(addHistory,newHref){
     $('div#toc a[href="' + newHref + '"]').addClass("current");
     $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
     
-    // var breadcrumbs;
-    $("div#toc a.current").parent("li").parents("li").each(function(index){
-        // breadcrumbs += " (" + index + ") > " + $(this).children("a");
+    // add breadcrumbs
+/*    $("div#toc a.current").parent("li").parents("li").each(function(){
         $("div#topic-breadcrumbs").prepend(" > ");
         $(this).children("a").clone().prependTo("div#topic-breadcrumbs");
     });
-    // $("div#topic-breadcrumbs").html(breadcrumbs);
-    // var tocEntryPosition = $('div#toc a.current').position().top;
-    // $("div#toc").scrollTop(tocEntryPosition);
+*/
+    $("div#toc a.current").parent("li").each(function(){
+        $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
+        $(this).parents("li").each(function(){
+            $("div#topic-breadcrumbs > div.breadcrumb:first-child").prepend(" > ");
+            $(this).children("a").clone().prependTo("div#topic-breadcrumbs > div.breadcrumb:first-child");
+        });
+    });
 
 }
 

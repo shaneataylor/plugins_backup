@@ -1048,8 +1048,15 @@ div#toc, div#sizer {
     transition: left .5s;
 }
 div#topic-breadcrumbs {
+}
+div.breadcrumb {
     font-size: small;
     color: #666;
+    margin-bottom: 0.25em;
+}
+div.parentlink {
+    /* FUTURE: this should be conditional on display of breadcrumbs */
+    display: none;
 }
 
 div#topic, div#searchresults {
