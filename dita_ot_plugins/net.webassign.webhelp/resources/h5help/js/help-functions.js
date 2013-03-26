@@ -169,7 +169,7 @@ function initTopic(addHistory,newHref){
     $("div#toc a.current").parent("li").each(function(){
         $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
         $(this).parents("li").each(function(){
-            $("div#topic-breadcrumbs > div.breadcrumb:first-child").prepend(" > ");
+            $("div#topic-breadcrumbs > div.breadcrumb:first-child").prepend("&#160;> ");
             $(this).children("a").clone().prependTo("div#topic-breadcrumbs > div.breadcrumb:first-child");
         });
     });
