@@ -38,7 +38,7 @@
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_i_help" />
-            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
+            
         </antcall>
         <antcall target="copy_extra_files">
             <param name="output.dir" value="../out/instructor_guide"/>
@@ -55,7 +55,7 @@
             <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_s_help" />
-            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
+            
         </antcall>
         <antcall target="copy_extra_files" >
             <param name="output.dir" location="../out/student_guide"/>
@@ -72,7 +72,7 @@
             <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
-            <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
+            
         </antcall>
         <antcall target="copy_extra_files">
             <param name="output.dir" value="../out/admin"/>
