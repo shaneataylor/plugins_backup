@@ -1052,7 +1052,10 @@ div#topic-breadcrumbs {
 div.breadcrumb {
     font-size: small;
     color: #666;
-    margin-bottom: 0.25em;
+    margin: 0px 0px 4px -4px;
+    background: #ddd;
+    border-radius: 10px;
+    padding: 0px 4px;
 }
 div.parentlink {
     /* FUTURE: this should be conditional on display of breadcrumbs */
