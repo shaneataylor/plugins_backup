@@ -269,7 +269,7 @@ table.choicetable th>*:first-child
 
 /* ====================================== Flagging ====================================== */
 
-.audience-internal {
+/*.audience-internal {
     background-color: #dd9999;
 }
 .audience-admin {
@@ -283,8 +283,8 @@ table.choicetable th>*:first-child
 }
 .audience-student.audience-instructor {
     background-color:transparent; 
-    /* don't need to flag if both */
-}
+    /\* don't need to flag if both *\/
+}*/
 .platform-ipad:before {
     content:'iPad only: ';
     font-weight: bold;
