@@ -77,10 +77,10 @@
     
     <target name="internal_admin">
         <antcall target="clean_output_path" >
-            <param name="output.dir" location="../out/internal_admin"/>
+            <param name="output.dir" location="../out/wa-admin"/>
         </antcall>
         <antcall target="init">
-            <param name="output.dir" location="../out/internal_admin" />
+            <param name="output.dir" location="../out/wa-admin" />
             <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
             <param name="h5help.feedback" value="yes" />
             <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
