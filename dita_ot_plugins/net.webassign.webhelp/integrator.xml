@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Extend the toolkit's XHTML processing to generate WebHelp output. -->
 <project name="net.webassign.webhelp.integrator" default="dita2h5help" basedir=".">
-	
-  <target name="dita2h5help" 
-    depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
-    copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml" />
-  
-  <!-- Customize header and footer of each topic. -->
-  <!--<target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
+    
+    <!-- set default values for plugin build params -->
+    <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
+    <property name="h5help.google.cse.refinement" value=""/>
+    <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
+    
+    <target name="dita2h5help"
+        depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
+        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml"/>
+
+    <target name="copy-h5help-resources">
+        <copy todir="${output.dir}">
+            <fileset
+                dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
+                includes="**${file.separator}*"/>
+        </copy>
+        <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true"/>
+        <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
+        
+        <!-- make h5params.json -->
+        <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
+"google_cse_id"             : "${h5help.google.cse.id}",
+"google_cse_refinement"     : "${h5help.google.cse.refinement}",
+"feedback"                  : "${h5help.feedback}"
+        }</echo>
+    </target>
+
+
+    <!-- Customize header and footer of each topic. -->
+    <!--<target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
     <property name="out.ext" value=".html"/>
     <property name="transtype.ext" value=".xsl"/>
     <property name="args.xsl"
@@ -50,10 +73,10 @@
       <mapper type="regexp" from="^(${tempdirToinputmapdir.relative.value})(.*?)(\.(xml|dita))$$" to="\2${out.ext}"></mapper>
     </xslt>
   </target>-->
-  
-  
-  <!-- Customize table of contents. -->
-  <!--<target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
+
+
+    <!-- Customize table of contents. -->
+    <!--<target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
     <xslt processor="trax"
       basedir="${dita.temp.dir}"
       destdir="${output.dir}"
@@ -74,13 +97,6 @@
       <mapper type="glob" from="${user.input.file}" to="${args.xhtml.toc}${out.ext}" />
     </xslt>
   </target>-->
-  
-  <!-- New target to copy h5help resource files -->
-  <target name="copy-h5help-resources">
-    <copy todir="${output.dir}">
-      <fileset
-        dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
-        includes="**${file.separator}*" />
-    </copy>
-  </target>
+
+
 </project>

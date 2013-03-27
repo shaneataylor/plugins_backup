@@ -34,14 +34,13 @@
         </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/instructor_guide" />
-            <param name="custom.webhelp.search" value="google_instructor" />
+            <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
+            <param name="h5help.google.cse.refinement" value="Instructors" />
+            <param name="h5help.feedback" value="yes" />
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_i_help" />
             
-        </antcall>
-        <antcall target="copy_extra_files">
-            <param name="output.dir" value="../out/instructor_guide"/>
         </antcall>
     </target>
     
@@ -51,14 +50,12 @@
         </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/student_guide"/>
-            <param name="custom.webhelp.search" value="google_student" />
+            <param name="h5help.google.cse.id" value="016381970951151729769:_vlyaxcspak" />
+            <param name="h5help.feedback" value="no" />
             <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_s_help" />
             
-        </antcall>
-        <antcall target="copy_extra_files" >
-            <param name="output.dir" location="../out/student_guide"/>
         </antcall>
     </target>
     
@@ -68,14 +65,13 @@
         </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/admin" />
-            <param name="custom.webhelp.search" value="google_admin" />
+            <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
+            <param name="h5help.google.cse.refinement" value="Admins" />
+            <param name="h5help.feedback" value="yes" />
             <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
             
-        </antcall>
-        <antcall target="copy_extra_files">
-            <param name="output.dir" value="../out/admin"/>
         </antcall>
     </target>
     
@@ -85,15 +81,12 @@
         </antcall>
         <antcall target="init">
             <param name="output.dir" location="../out/internal_admin" />
-            <param name="custom.webhelp.search" value="no" />
             <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
+            <param name="h5help.feedback" value="yes" />
             <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
             <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
             
-        </antcall>
-        <antcall target="copy_extra_files">
-            <param name="output.dir" value="../out/internal_admin"/>
         </antcall>
     </target>
     
@@ -101,12 +94,6 @@
         <delete dir="${output.dir}"/>
     </target>
     
-    <target name="copy_extra_files">
-        <copy file="${source.dir}/csh.json" todir="${output.dir}" verbose="true"/>
-        <!--<copy file="${dita.dir}/plugins/net.webassign.webhelp/googlea98ae97064cf3d0e.html" todir="${output.dir}" verbose="true"/>
-        <copy file="${dita.dir}/plugins/net.webassign.webhelp/quickstart.css" todir="${output.dir}" verbose="true"/>-->
-        
-    </target>
 
 
 </project>

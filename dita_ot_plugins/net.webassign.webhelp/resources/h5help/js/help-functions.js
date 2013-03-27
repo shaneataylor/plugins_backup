@@ -1,14 +1,20 @@
 // Init globals
 var h5Url=window.location.href; 
 var h5Path=window.location.pathname;
-//h5Url = h5Url.replace(/\/index\.html$/,"");// before any topics are loaded. do not change.
 var h5timer;
+h5params = {
+"google_cse_id"                    : "",
+"google_cse_refinement"            : "",
+"feedback"                         : "no"
+};
 
 function initAll() {
-    defineHandlers();
-    loadInitialContent();
-    initSearch(); // do this last so nothing else is waiting on google
-
+    $.getJSON('h5help/h5params.json',function(data, status, xhr){
+        if (status !== 'error') { h5params = data }
+        defineHandlers();
+        loadInitialContent();
+        initSearch(); // do this last so nothing else is waiting on google
+    }); 
 }
 function toggleMenu(){
 	$("ul#menu").addClass("unchanged");
@@ -252,22 +258,23 @@ function collapseTOCItem(){
     return false; // don't bubble event up to parents
 }
 function initSearch(){
-    // FUTURE: Use config file to load parameters such as search engine ID, default refinement...
-    $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="Instructors" data-webSearchResultSetSize="20"></div>');
-    $("div#searchresults").html('<h1>Search Results</h1><div class="gcse-searchresults" data-gname="wasearch"></div>');
-    (function() {
-        var cx = '007971622242349957768:bdcsvwjjwci'; // instructor
-        // var cx = '007971622242349957768:_vlyaxcspak'; // student
-        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-    })();
-    h5timer = window.setInterval(function() { // test for search box periodically until found
-        if ($("div#searchbox input").length != 0) {
-            $("div#searchbox input").attr("placeholder","Search the help");
-            window.clearInterval(h5timer);
-        }
-    },100);
+    if ( h5params.google_cse_id !== '' ) {
+        // h5params.google_cse_refinement = (typeof h5params.google_cse_refinement !== 'undefined') ? h5params.google_cse_refinement : "";
+        $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
+        $("div#searchresults").html('<h1>Search Results</h1><div class="gcse-searchresults" data-gname="wasearch"></div>');
+        (function() {
+            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + h5params.google_cse_id;
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+        })();
+        h5timer = window.setInterval(function() { // test for search box periodically until found
+            if ($("div#searchbox input").length != 0) {
+                $("div#searchbox input").attr("placeholder","Search the help");
+                window.clearInterval(h5timer);
+            }
+        },100);
+    }
+
 }
 function showSearchResults(){
     $("div#searchresults").removeClass("hidden");
@@ -289,8 +296,13 @@ function showFeedbackForm() {
     $("div#feedback").on("divloaded",init_feedback);
 }
 function init_feedback(){
-    init_form();
-    initFeedbackHandlers();
+    if ( h5params.feedback == 'yes') {
+        init_form();
+        initFeedbackHandlers();
+    }
+    else {
+        $("#topic_feedback").addClass("hidden");
+    }
 }
 function init_form() {
     if (Modernizr.inputtypes.range) {
