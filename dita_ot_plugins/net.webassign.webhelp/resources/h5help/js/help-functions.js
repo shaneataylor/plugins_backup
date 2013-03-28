@@ -241,8 +241,7 @@ function initTOC(){
     $("div#toc li").prepend('<span class="control">&nbsp;</span>');
     $("div#toc li:has(ul)").addClass("expandable");
     $("div#toc li.expandable>span.control").attr("title","Click to expand");
-    $("div#toc a:not([title])").attr("title","Topic does not have a short description");
-    /*$("div#toc").not(":has(span#sizer)").append('<div id="sizer" class="slideleft" alt="Show or hide the contents" title="Show or hide the contents"></div>');*/
+    /*$("div#toc a:not([title])").attr("title","Topic does not have a short description");*/
     slideTOC();
     mobilize();
 }
