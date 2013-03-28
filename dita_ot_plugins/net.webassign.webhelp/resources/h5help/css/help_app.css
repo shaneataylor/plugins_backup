@@ -1,5 +1,6 @@
 
 @import url(http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
 
 /*! BASED ON normalize.css v1.0.2 | MIT License | git.io/normalize */
 
@@ -85,6 +86,7 @@ input,
 select,
 textarea {
     font-family: sans-serif;
+    font-family: Arimo, sans-serif;
 }
 
 /*
@@ -213,7 +215,12 @@ pre,
 samp {
     font-family: monospace, serif;
     _font-family: 'courier new', monospace;
+    font-family: "Ubuntu Mono", monospace;
     font-size: 1em;
+}
+/* override default open toolkit font */
+span.filepath, samp.codeph, pre.codeblock {
+    font-family: "Ubuntu Mono", monospace !important;
 }
 
 /*

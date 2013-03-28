@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=GFS+Didot&subset=greek);
+
+
 /* ====================================== CONTENT ====================================== */
 
 
@@ -206,7 +210,7 @@ a.xref {
     color: red;
 }
 .Math {
-    font-family: STIXGeneral, Times, serif;
+    font-family: 'Droid Serif', 'GFS Didot', STIXGeneral, serif;
 }
 .overline {
     text-decoration: overline;
