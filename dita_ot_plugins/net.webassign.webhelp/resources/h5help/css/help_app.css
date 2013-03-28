@@ -1003,6 +1003,8 @@ div#toc a {
     display: inline-block;
     width: 100%;
     padding: 4px 0px 4px 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
     border-radius: 4px;
 }
 div#toc a:hover {
@@ -1037,6 +1039,8 @@ div#sizer {
     background-color: #aaa;
     background-repeat: no-repeat;
     background-position:50% 50%;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
     border-radius: 0px;
     border-right: 2px solid #999;
     border-left: 2px solid #999;
@@ -1060,12 +1064,16 @@ div.breadcrumb {
     font-size: small;
     color: #666;
     margin: 0px 0px 4px -4px;
-    background: #ddd;
+    background-color: #eee;
+    background: -webkit-linear-gradient(left,#eeeeee,#cccccc);
+    background: -moz-linear-gradient(left,#eeeeee,#cccccc);
+    background: linear-gradient(left,#eeeeee,#cccccc);
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
     padding: 0px 4px;
 }
+
 div.parentlink {
     /* FUTURE: this should be conditional on display of breadcrumbs */
     display: none;
