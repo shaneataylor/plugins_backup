@@ -167,11 +167,6 @@ function initTopic(addHistory,newHref){
     $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
     
     // add breadcrumbs
-/*    $("div#toc a.current").parent("li").parents("li").each(function(){
-        $("div#topic-breadcrumbs").prepend(" > ");
-        $(this).children("a").clone().prependTo("div#topic-breadcrumbs");
-    });
-*/
     $("div#toc a.current").parent("li").each(function(){
         $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
         $(this).parents("li").each(function(){
@@ -179,7 +174,23 @@ function initTopic(addHistory,newHref){
             $(this).children("a").clone().prependTo("div#topic-breadcrumbs > div.breadcrumb:first-child");
         });
     });
-
+    // add copyright footer
+    // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
+    var copyrightMeta = "&#xa9; ";
+    var modifiedMeta = $('meta[name="DC.Date.Modified"]').attr('content');
+    var modifiedText = "";
+    if (modifiedMeta.length = 10) {
+        var months = new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+        var mod_date = modifiedMeta.split("-");
+        modifiedText += "(rev. " + months[mod_date[1]-1] + " " + mod_date[0] + ')';
+        copyrightMeta += mod_date[0] + ' ';
+    }
+    
+    var ownerMeta = $('meta[name="DC.Rights.Owner"],meta[name="DC.Creator"]').attr('content');
+    ownerMeta = ownerMeta.replace(/\s+\d\d\d\d$/,''); // strip trailing year if any
+    copyrightMeta += ownerMeta;
+    
+    $('div#topic').append('<div class="copyright">'+copyrightMeta+' '+modifiedText+'</div>');
 }
 
 function googleAnalytics(){

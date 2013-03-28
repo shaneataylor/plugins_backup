@@ -749,6 +749,10 @@ textarea {
     body > div, div.related-links, div.related-links+div, div#topic-breadcrumbs {
         display:none;
     }
+    div#topic > div.copyright {
+        display: block;
+        color: black;
+    }
     div#topic {
         display:block;
         position:inherit !important;
@@ -1314,4 +1318,10 @@ div#feedback a#cancel {
 div#feedback input.warn {
     border: 2px solid #b94a48;
 }
-
+div#topic > div.copyright {
+    font-size: small;
+    color: #999;
+    border-top: 1px solid #eee;
+    text-align: center;
+    margin-top: 2em;
+}print
