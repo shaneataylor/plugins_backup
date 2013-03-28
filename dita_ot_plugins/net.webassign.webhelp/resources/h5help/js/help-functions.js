@@ -206,7 +206,13 @@ function defineHandlers(){
     $("#view_max").on("click", toggleMenu);
     $("#print_topic").on("click", printTopic);
     $("#customer_support").on("click", closeMenu);
-    $("#topic_feedback").on("click", showFeedbackForm);
+    if ( h5params.feedback == 'yes') {
+        $("#topic_feedback").on("click", showFeedbackForm);
+    }
+    else {
+        $("#topic_feedback").addClass("hidden");
+    }
+
     $("#about_help").on("click", showAbout);
     $("#modal_back").on("click", hideModal);
     
@@ -259,7 +265,6 @@ function collapseTOCItem(){
 }
 function initSearch(){
     if ( h5params.google_cse_id !== '' ) {
-        // h5params.google_cse_refinement = (typeof h5params.google_cse_refinement !== 'undefined') ? h5params.google_cse_refinement : "";
         $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
         $("div#searchresults").html('<h1>Search Results</h1><div class="gcse-searchresults" data-gname="wasearch"></div>');
         (function() {
@@ -296,13 +301,8 @@ function showFeedbackForm() {
     $("div#feedback").on("divloaded",init_feedback);
 }
 function init_feedback(){
-    if ( h5params.feedback == 'yes') {
-        init_form();
-        initFeedbackHandlers();
-    }
-    else {
-        $("#topic_feedback").addClass("hidden");
-    }
+    init_form();
+    initFeedbackHandlers();
 }
 function init_form() {
     if (Modernizr.inputtypes.range) {
