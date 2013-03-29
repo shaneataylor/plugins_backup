@@ -133,8 +133,8 @@ function loadDiv(targetDiv, linkHref, addHistory){
         return;
     }
     // TEMP CODE TO TEST SEARCH RESULTS
-    var oldBase = "http://www.webassign.net/manual/instructor_guide/"; 
-    newHref = newHref.replace(oldBase,"");
+    // var oldBase = "http://www.webassign.net/manual/instructor_guide/"; 
+    // newHref = newHref.replace(oldBase,"");
     
     if (targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
