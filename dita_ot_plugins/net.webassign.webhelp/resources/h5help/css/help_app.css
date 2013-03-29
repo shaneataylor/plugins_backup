@@ -844,6 +844,7 @@ div#toolbar {
     /*background-color: #eaeaea;*/
     color: white;
     vertical-align: middle;
+    z-index: 90;
 }
 div#toolbar > h1 {
     margin: 0px;
@@ -892,6 +893,7 @@ img#menu_button {
     top: 0px;
     right: 0px;
     padding: 10px;
+    z-index: 95;
 }
 img#menu_button:focus {
     outline:none; /* Chrome (others?) puts a focus glow border we don't want */
@@ -1206,7 +1208,7 @@ div#feedback {
 }
 iframe#h5ftgt { /* hide without hiding */
     /*display: none;*/ /*Causes form submission to open a new window*/
-    visibility:hidden; /* works in latest FF + Chrome, need to test other browsers */
+    visibility:hidden; 
     border: 0px none;
     width: 100px;
     height: 100px;

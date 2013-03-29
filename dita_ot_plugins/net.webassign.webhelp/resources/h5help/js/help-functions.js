@@ -12,9 +12,18 @@ function initAll() {
     $.getJSON('h5help/h5params.json',function(data, status, xhr){
         if (status !== 'error') { h5params = data }
         defineHandlers();
+        improveCompatibility();
         loadInitialContent();
         initSearch(); // do this last so nothing else is waiting on google
     }); 
+}
+function improveCompatibility(){
+    // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
+    if (navigator.userAgent.match(/Android [12]\./gi)) {
+        $("div#toolbar,img#menu_button").css({'position':'fixed'});
+        $("div#toc,div#topic,div#searchresults").css({'overflow':'visible','bottom':'auto','padding-bottom':'4in'});
+        $("div#sizer").css({'overflow':'visible','bottom':'0px'});
+    }
 }
 function toggleMenu(){
 	$("ul#menu").addClass("unchanged");
