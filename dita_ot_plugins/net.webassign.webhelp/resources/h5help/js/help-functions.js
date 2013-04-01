@@ -2,6 +2,7 @@
 var h5Url=window.location.href; 
 var h5Path=window.location.pathname;
 var h5timer;
+var thisHref;
 h5params = {
 "google_cse_id"                    : "",
 "google_cse_refinement"            : "",
@@ -128,22 +129,22 @@ function loadDiv(targetDiv, linkHref, addHistory){
     // + Do not load the help system itself into a frame
     // + If redirected from a topic, do not store two entries in history
     
-    var newHref = linkHref.replace(/index\.html$/,""); // normalize link
-    if ( (newHref==h5Url) || (newHref==h5Path) || (newHref=="") ) {
+    thisHref = linkHref.replace(/index\.html$/,""); // normalize link
+    if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
         return;
     }
     // TEMP CODE TO TEST SEARCH RESULTS
     // var oldBase = "http://www.webassign.net/manual/instructor_guide/"; 
-    // newHref = newHref.replace(oldBase,"");
+    // thisHref = thisHref.replace(oldBase,"");
     
     if (targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
     // FUTURE: allow base to change when switching help system contexts (instructor/admin)
     //         --Treat as external link--
-    $(targetDiv).load(newHref, function(response, status, xhr){
+    $(targetDiv).load(thisHref, function(response, status, xhr){
         if (status == "error") {
             var modalContent = "<h1>" + xhr.status + "</h1>";
-            modalContent += "<p>Could not open " + newHref + ".</p>";
+            modalContent += "<p>Could not open " + thisHref + ".</p>";
             modalContent += "<p>" + xhr.statusText + "</p>";
             showModal(modalContent);
             if (Modernizr.history) {
@@ -158,31 +159,18 @@ function loadDiv(targetDiv, linkHref, addHistory){
             initTOC();
         }
         else if (targetDiv == "div#topic") {
-            initTopic(addHistory,newHref);
+            initTopic(addHistory,thisHref);
         }
         $(targetDiv).trigger('divloaded'); // use this to let other processes know this is done
     });
     
 }
-function initTopic(addHistory,newHref){
+function initTopic(addHistory,thisHref){
     if (Modernizr.history && addHistory) {
-        window.history.pushState(null,null, newHref); // add page to history for modern browsers
+        window.history.pushState(null,null, thisHref); // add page to history for modern browsers
         var title = $("div#topic h1").text();
         $("title").html("WebAssign Help :: " + title); // FUTURE: base prefix on map data 
     }
-    // highlight & if needed, expand parents of matching TOC entries
-    $("div#toc a.current").removeClass("current");
-    $('div#toc a[href="' + newHref + '"]').addClass("current");
-    $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
-    
-    // add breadcrumbs
-    $("div#toc a.current").parent("li").each(function(){
-        $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
-        $(this).parents("li").each(function(){
-            $("div#topic-breadcrumbs > div.breadcrumb:first-child").prepend("&#160;> ");
-            $(this).children("a").clone().prependTo("div#topic-breadcrumbs > div.breadcrumb:first-child");
-        });
-    });
     // add copyright footer
     // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
     var copyrightMeta = "&#xa9; ";
@@ -200,6 +188,24 @@ function initTopic(addHistory,newHref){
     copyrightMeta += ownerMeta;
     
     $('div#topic').append('<div class="copyright">'+copyrightMeta+' '+modifiedText+'</div>');
+    
+    syncTOCandBreadcrumbs();
+}
+function syncTOCandBreadcrumbs() {
+    // highlight & if needed, expand parents of matching TOC entries
+    $("div#toc a.current").removeClass("current");
+    $('div#toc a[href="' + thisHref + '"]').addClass("current");
+    $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
+    
+    // add breadcrumbs
+    $("div#toc a.current").parent("li").each(function(){
+        $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
+        $(this).parents("li").each(function(){
+            $("div#topic-breadcrumbs > div.breadcrumb:first-child").prepend("&#160;> ");
+            $(this).children("a").clone().prependTo("div#topic-breadcrumbs > div.breadcrumb:first-child");
+        });
+    });
+
 }
 
 function googleAnalytics(){
@@ -264,6 +270,7 @@ function initTOC(){
     /*$("div#toc a:not([title])").attr("title","Topic does not have a short description");*/
     slideTOC();
     mobilize();
+    syncTOCandBreadcrumbs();
 }
 function expandTOCItem(){
     // handle differently if clicked item was li vs. span
