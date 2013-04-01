@@ -23,7 +23,7 @@
         
         <!-- make h5params.json -->
         <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
-"toc_file"                  : "${args.xhtml.toc}.${args.outext}",
+"toc_file"                  : "${args.xhtml.toc}${args.outext}",
 "help_name"                 : "${h5help.name}",
 "google_cse_id"             : "${h5help.google.cse.id}",
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
