@@ -3,6 +3,7 @@
 <project name="net.webassign.webhelp.integrator" default="dita2h5help" basedir=".">
     
     <!-- set default values for plugin build params -->
+    <property name="h5help.name" value=""/>
     <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
     <property name="h5help.google.cse.refinement" value=""/>
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
@@ -22,6 +23,8 @@
         
         <!-- make h5params.json -->
         <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
+"toc_file"                  : "${args.xhtml.toc}.${args.outext}",
+"help_name"                 : "${h5help.name}",
 "google_cse_id"             : "${h5help.google.cse.id}",
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
 "feedback"                  : "${h5help.feedback}"

@@ -4,6 +4,8 @@ var h5Path=window.location.pathname;
 var h5timer;
 var thisHref;
 h5params = {
+"help_name"                        : "WebAssign Help",
+"toc_file"                         : "toc.htm",
 "google_cse_id"                    : "",
 "google_cse_refinement"            : "",
 "feedback"                         : "no"
@@ -54,7 +56,7 @@ function hideModal(){
 	$("div.modal").addClass("hidden");
 }
 function loadInitialContent(){
-    loadDiv("div#toc", 'toc.htm'); // open TOC (later get url from config)
+    loadDiv("div#toc", h5params.toc_file); // open TOC 
     var query = getQuery();
     switch (query[0]) {
     case "t":
@@ -169,7 +171,7 @@ function initTopic(addHistory,thisHref){
     if (Modernizr.history && addHistory) {
         window.history.pushState(null,null, thisHref); // add page to history for modern browsers
         var title = $("div#topic h1").text();
-        $("title").html("WebAssign Help :: " + title); // FUTURE: base prefix on map data 
+        $("title").html(h5params.help_name + " :: " + title);  
     }
     // add copyright footer
     // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
