@@ -10,7 +10,7 @@
     
     <target name="dita2h5help"
         depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
-        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml"/>
+        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml, gen-sitemap"/>
 
     <target name="copy-h5help-resources">
         <copy todir="${output.dir}">
@@ -29,6 +29,45 @@
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
 "feedback"                  : "${h5help.feedback}"
         }</echo>
+    </target>
+    
+    <target name="gen-sitemap">
+        <!-- note: assumes a flat output file structure -->
+        <fileset id="output.files" dir="${output.dir}" includes="*${args.outext}">
+            <exclude name="${args.xhtml.toc}${args.outext}"/>
+        </fileset>
+        <property name="output.files.list" refid="output.files"/>
+        <echo file="${output.dir}${file.separator}sitemap.temp">${output.dir}</echo>
+        <replaceregexp byline="true" flags="g" file="${output.dir}${file.separator}sitemap.temp">
+            <regexp pattern="^.*[\/]([^\/]+)$"/>
+            <substitution expression="\1" />
+        </replaceregexp>
+        <loadfile property="urlpath" srcfile="${output.dir}${file.separator}sitemap.temp"/>
+        <property name="baseurl">http://www.webassign.net/manual/${urlpath}/</property>
+        <tstamp>
+            <format property="lastmod" pattern="yyyy-MM-dd"/>
+        </tstamp>
+        <property name="replaceexpr"><![CDATA[
+<url><loc>${baseurl}\1<\/loc><lastmod>${lastmod}<\/lastmod><changefreq>monthly<\/changefreq><\/url>]]></property>
+        
+        <echo file="${output.dir}${file.separator}sitemap.temp">${output.files.list}</echo>
+        <replaceregexp byline="true" flags="g" file="${output.dir}${file.separator}sitemap.temp">
+            <regexp pattern="([^;]*);?"/>
+            <substitution expression="${replaceexpr}" />
+        </replaceregexp>
+        <concat destfile="${output.dir}${file.separator}sitemap.xml" >
+            <header><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    ]]></header>
+            <fileset file="${output.dir}${file.separator}sitemap.temp"/>
+            <footer><![CDATA[
+                </urlset>]]></footer>
+        </concat>
+        <delete file="${output.dir}${file.separator}sitemap.temp"/>
     </target>
 
 
