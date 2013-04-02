@@ -175,14 +175,14 @@ function initTopic(addHistory,thisHref){
     }
     // add copyright footer
     // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
-    var copyrightMeta = "&#xa9; ";
+    var copyrightMeta = "&#xa9;&#xa0;";
     var modifiedMeta = $('meta[name="DC.Date.Modified"]').attr('content');
     var modifiedText = "";
     if (modifiedMeta.length = 10) {
         var months = new Array("January","February","March","April","May","June","July","August","September","October","November","December");
         var mod_date = modifiedMeta.split("-");
         modifiedText += "(rev. " + months[mod_date[1]-1] + " " + mod_date[0] + ')';
-        copyrightMeta += mod_date[0] + ' ';
+        copyrightMeta += mod_date[0] + '&#xa0;';
     }
     
     var ownerMeta = $('meta[name="DC.Rights.Owner"],meta[name="DC.Creator"]').attr('content');

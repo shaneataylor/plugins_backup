@@ -427,6 +427,11 @@ div.body.quickstart dl[compact] > dd.dd {
     color: black;
     width: 78%;
 }
+div.body.quickstart + div.copyright {
+    float: left;
+    width: 7.5in;
+    margin-top: 0;
+}
 
 /*@media print {
     body.quickstart {
