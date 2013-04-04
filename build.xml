@@ -25,13 +25,13 @@
       
   <target name="all" depends="init">
     <echo level="info">Building all targets (instructor_guide, student_guide, creating_questions, instructor_webhelp, student_webhelp, internal_admin_webhelp)</echo>
+    <antcall target="instructor_webhelp" />
     <antcall target="student_webhelp" />
     <antcall target="internal_admin_webhelp" />
     <antcall target="admin_webhelp" />
-    <antcall target="instructor_webhelp" />
-    <antcall target="student_guide" />
+<!--    <antcall target="student_guide" />
     <antcall target="instructor_guide" />
-    <antcall target="creating_questions" />
+    <antcall target="creating_questions" />-->
   </target>
   
   

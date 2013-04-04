@@ -1,0 +1,452 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=GFS+Didot&subset=greek);
+
+
+/* ====================================== CONTENT ====================================== */
+
+
+div.body, div.topic, body > p.shortdesc {
+    /* 
+    added div.topic to fix formatting for nested topics. 
+    added body > p.shortdesc to fix formatting when topic contains only a short description
+    */
+    /*margin: 0.75em 10px 0 10px !important;*/
+}
+.shortdesc {
+    font-style:italic;
+    font-size:large;
+    
+}
+pre.codeblock {
+    /* respect whitespace but wrap to available width */
+    white-space: pre-wrap;
+}
+pre.msgblock, samp.msgph {
+    /* Wrap normally + collapse sequences of whitespace */
+    white-space: normal;
+    font-family: Arimo, sans-serif;
+    background-color: #eee;
+}
+pre.msgblock {
+    border: 1px solid #c0c0c0;
+    padding: 2px 4px;
+}
+span.apiname {
+    font-weight: bold;
+}
+p.stepsection {
+    font-weight: bold;
+    }
+
+/* =================================== Definition Lists =================================== */
+dt.dlterm {
+    margin-top: 1em;
+}
+dd.dd {
+    margin-bottom: 0.25em;
+}
+dl[compact] > dt.dlterm {
+    display: inline-block;
+    width: 20%;
+    text-align:right;
+    vertical-align: top;
+    margin-top:auto;
+}
+dl[compact] > dd.dd {
+    display: inline-block;
+    width: 70%;
+    margin-left: 10px;
+    vertical-align:top;
+    color: #444;
+}
+td > dl:first-child > dt:first-child {
+    margin-top: 0px;
+}
+td > dl > dd {
+    margin-left: 0px;
+}
+
+/* =================================== Notes =================================== */
+div.note {
+    margin-left: 20px;
+    padding: 2px 4px;
+    display: block;
+    border: 1px solid #F9D2A8;
+    background: #FFFFCC  no-repeat scroll;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+div.note:before {
+    display: run-in;
+    position: relative;
+    left: -24px;
+    top: -4px;
+    margin-right: -16px;
+    content: url("../img/note_icon.png");
+    z-index: 0;
+    height: 0;
+}
+div.tip {
+    border: 1px solid #A5D8FF;
+    background: #EAF7FF  no-repeat scroll;
+}
+div.tip:before {
+    content: url("../img/tip_icon.png");
+}
+div.important {
+    border: 1px solid #FFC5B4;
+    background: #FFE8E0  no-repeat scroll;
+}
+div.important:before {
+    content: url("../img/important_icon.png")  ;
+}
+div.fastpath {
+    border: 1px solid #7AB362;
+    background: #D8EED0  no-repeat scroll;
+}
+div.fastpath:before {
+    content: url("../img/bestpractice_icon.png")  ;
+}
+ul li, ol li {
+    list-style-image: none;
+    }
+    
+li.li {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+ul[compact] li, ol[compact] li {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
+ol.steps {
+    counter-reset: steps 0;
+}
+
+li.step {
+    counter-increment: steps 1;
+}
+/* ======== lists in table cells — un-indent ======== */
+/* Only for first-level lists, and only for lists specialized from ol or ul
+   Use 1em outdent on first line and 1em left padding to simulate marker block
+   since width of number is unknown. 
+   Formatting will be imperfect for numbers more than one digit (rare),
+   but instead of bleeding left outside the table cell, it will run
+   into the list item text.
+*/
+td > ol.ol, td > ul.ul {
+    padding-left: 1em;
+}
+td > ul.sl, td > ul.simple {
+    padding-left: 0em;
+}
+td > ol.ol > li, td > ul.ul > li {
+    list-style-position: inside;
+    text-indent: -1em;
+}
+td > ol.ol > li > *, td > ul.ul > li > * {
+    text-indent: 0em;
+}
+/* ================================================== */
+
+span.uicontrol[class~="keyboard"] {
+    text-transform: uppercase;
+    font-weight: normal !important;
+}
+span.uicontrol > img {
+    padding-right: 0px; /* overrrides default css padding of 5px */
+}
+
+img.image {
+    /* usually looks a bit better for icons in line with text */
+    vertical-align: middle;
+}
+table span.menucascade img.image {
+    /* edge case where text does not get aligned correctly */
+    vertical-align: top;
+}
+
+div.fig {
+    margin: 1em 0;
+}
+div.fig > img.image {
+    max-width: 100%;
+}
+div.fig > img.image:active {
+    max-width: none;
+}
+div.fig.slide {
+    width: 400px;
+    background-color: #eee !important;
+    border: 2px solid red;
+    color: black !important;
+    font-style: normal !important;
+    padding: 0.25em !important;
+    margin: 0.25em;
+}
+
+span.b {
+    font-weight: bold;
+}
+
+.term {
+    font-weight: bold !important;
+    font-style: normal !important;
+}
+div.prereq {
+    margin-left: 0 !important;
+}
+dt.prereq {
+    margin-left: 0 !important;
+    font-weight: bold;
+}
+a.xref {
+    word-wrap: break-word; /* allow long URLs to break in xrefs */
+}
+
+.ExampleRed {
+    color: red;
+}
+.Math {
+    font-family: 'Droid Serif', 'GFS Didot', STIXGeneral, serif;
+}
+.overline {
+    text-decoration: overline;
+}
+
+
+object {
+    /* for videos */
+    border: 1px solid #C0C0C0;
+    /* drop shadow (don't worry about IE) */
+    -moz-box-shadow: 5px 5px 13px #808080;
+    -webkit-box-shadow: 5px 5px 13px #808080;
+    box-shadow: 5px 5px 13px #808080;
+}
+
+
+/* ====================================== TABLES ====================================== */
+table.table, table.simpletable, table.choicetable  {
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: small;
+}
+table.table, table.table tr, table.table td, table.table th,
+table.simpletable, table.simpletable tr, table.simpletable td, table.simpletable th,
+table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable th
+{
+    border: 1px solid #A5D8FF;
+}
+
+th, td[id] {
+    background: #EAF7FF  no-repeat scroll;
+}
+td[headers],th[headers] {
+    background: none transparent;
+    text-align:left;
+}
+/*
+tr.sthead,
+thead > tr,
+table.exampletable tr>td:first-child {
+    background: #EAF7FF  no-repeat scroll;
+}
+*/
+table.table td>*:first-child, 
+table.table td>strong>*:first-child, 
+table.table td>*>li:first-child, 
+table.table th>*:first-child,  
+table.simpletable td>*:first-child, 
+table.simpletable td>strong>*:first-child, 
+table.simpletable td>*>li:first-child, 
+table.simpletable th>*:first-child,  
+table.choicetable td>*:first-child, 
+table.choicetable td>strong>*:first-child, 
+table.choicetable td>*>li:first-child, 
+table.choicetable th>*:first-child  
+{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ====================================== Flagging ====================================== */
+
+/*.audience-internal {
+    background-color: #dd9999;
+}
+.audience-admin {
+    background-color: #dac0da;
+}
+.audience-instructor {
+    background-color: #d0eed0;
+}
+.audience-student {
+    background-color: #f0e580;
+}
+.audience-student.audience-instructor {
+    background-color:transparent; 
+    /\* don't need to flag if both *\/
+}*/
+.platform-ipad:before {
+    content:'iPad only: ';
+    font-weight: bold;
+}
+
+/* ====================================== QUICKSTART ====================================== */
+
+
+div.body.quickstart {
+    width: 7.5in;
+}
+
+div.body.quickstart > div.bodydiv.right {
+    /* right column */
+    width: 2in;
+    float: right;
+}
+
+div.body.quickstart > div.bodydiv.left {
+    /* left column */
+    width: 5.35in;
+    float: left;
+}
+div.body.quickstart > div.bodydiv.left > div.section {
+    padding-left: 18pt;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+div.body.quickstart, 
+div.body.quickstart > p.shortdesc,
+div.body.quickstart div {
+    font-size: 8.5pt !important;
+    line-height: 10.5pt;
+}
+div.body.quickstart > p.shortdesc {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+}
+
+
+/* TITLES */
+div.body.quickstart .title, h1.title.quickstart {
+    text-transform: uppercase;
+    color: #004FB3 !important;
+}
+h1.title.quickstart {
+    width: 7.5in;
+    font-size: 24.5pt !important;
+    font-weight:normal;
+    text-align:right;
+    letter-spacing: -1pt;
+    margin: 0pt  !important;
+    background-image:url("../img/webassign_logo.png");
+    background-repeat: no-repeat;
+    background-position: 2pt 6pt;
+    -webkit-print-color-adjust:exact; /* print in chrome */
+
+}
+div.body.quickstart div.section > h2.title.sectiontitle.bar1,
+div.body.quickstart div.section > h2.title.sectiontitle.bar2,
+div.body.quickstart div.section > h2.title.sectiontitle.bar3,
+div.body.quickstart div.section > h2.title.sectiontitle.bar4,
+div.body.quickstart div.section > h2.title.sectiontitle.bar5 {
+    font-size: 16pt;
+    font-weight: bold;
+    color: white !important;
+    height: 30pt;
+    padding: 11pt 0pt 0pt 40pt !important;
+    margin-top: 0pt !important;
+    margin-bottom: -13pt !important;
+    margin-left: -18pt !important;
+    background-repeat: no-repeat;
+    background-size: 6in 43px;/* original: 787x57 */ 
+    -webkit-print-color-adjust:exact; /* print in chrome */
+}
+
+div.body.quickstart h2.bar1 { background-image:url("../img/qsg_bar_1.png"); }
+div.body.quickstart h2.bar2 { background-image:url("../img/qsg_bar_2.png"); }
+div.body.quickstart h2.bar3 { background-image:url("../img/qsg_bar_3.png"); }
+div.body.quickstart h2.bar4 { background-image:url("../img/qsg_bar_4.png"); }
+div.body.quickstart h2.bar5 { background-image:url("../img/qsg_bar_5.png"); }
+
+
+div.body.quickstart dd.dd {
+    margin-left: 0pt;
+}
+div.body.quickstart ul[compact] {
+    padding-left: 12pt;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+div.body.quickstart ul[compact] > li {
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+div.body.quickstart ol[compact] > li {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+div.body.quickstart div.section p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+div.body.quickstart ol.ol {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+div.body.quickstart ol[type="a"] {
+    padding-left: 18pt;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+div.body.quickstart strong.big_qsg {
+    display: block;
+    text-align: center;
+    margin-top: 3em;
+}
+
+
+div.body.quickstart strong.big_qsg > a.xref {
+    display: inline-block;
+    padding-top: 1em;
+    line-height: 1.5;
+    font-size: 12pt;
+    width: 1in;
+    height: 1.29in;
+    border: 1px solid #369;
+
+}
+div.body.quickstart dl[compact] {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+div.body.quickstart dl[compact] > dd.dd {
+    color: black;
+    width: 78%;
+}
+div.body.quickstart + div.copyright {
+    float: left;
+    width: 7.5in;
+    margin-top: 0 !important;
+}
+
+/*@media print {
+    body.quickstart {
+        width: 7.5in;
+        height: 10in;
+        padding: 0in !important;
+    }
+}*/
+
+
+@media print {
+    div.body.quickstart strong.big_qsg > a.xref {
+        display: none;
+    }
+}
+
+
+

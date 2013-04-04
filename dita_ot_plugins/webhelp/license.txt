@@ -1,5 +1,0 @@
-Copyright (c) 2010, Syncro Soft Ltd. All rights reserved.
-
-This software is a DITA Open Toolkit plugin for Oxygen XML Editor licensed under Oxygen XML Editor EULA (http://www.oxygenxml.com/eula.html). 
-This plugin converts from DITA format to WebHelp format.
-Redistribution and use outside Oxygen XML Editor is forbidden without express written permission (contact e-mail address support@oxygenxml.com).

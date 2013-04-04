@@ -18,6 +18,7 @@ Thumbs.db
 # Expaned directories
 ######################
 dita_source_files/*
+dita_source_files
 downloads/*
 deps/*
 out/*
@@ -26,3 +27,5 @@ logs/*.xml
 logs/*.log
 logs/*.list
 logs/*.properties
+styleguide/*
+styleguide

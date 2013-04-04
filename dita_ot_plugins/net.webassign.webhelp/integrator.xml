@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Extend the toolkit's XHTML processing to generate WebHelp output. -->
-<project name="net.webassign.webhelp.integrator" default="dita2webassign.webhelp" basedir=".">
-	
-  <target name="dita2webassign.webhelp" 
-    depends="build-init, preprocess, copy-webhelp-resources, copy-webassign-resources, dita.out.map.webassign.webhelp.toc, copy-revflag,
-    copy-css , dita.topics.xhtml, dita.inner.topics.webassign.webhelp,
-    dita.outer.topics.xhtml, webhelp-index" />
- 
-  
-  
-  <!-- Customize header and footer of each topic. -->
-  <target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
+<project name="net.webassign.webhelp.integrator" default="dita2h5help" basedir=".">
+    
+    <!-- set default values for plugin build params -->
+    <property name="h5help.name" value=""/>
+    <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
+    <property name="h5help.google.cse.refinement" value=""/>
+    <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
+    
+    <target name="dita2h5help"
+        depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
+        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml, gen-sitemap"/>
+
+    <target name="copy-h5help-resources">
+        <copy todir="${output.dir}">
+            <fileset
+                dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
+                includes="**${file.separator}*"/>
+        </copy>
+        <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true"/>
+        <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
+        
+        <!-- make h5params.json -->
+        <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
+"toc_file"                  : "${args.xhtml.toc}${args.outext}",
+"help_name"                 : "${h5help.name}",
+"google_cse_id"             : "${h5help.google.cse.id}",
+"google_cse_refinement"     : "${h5help.google.cse.refinement}",
+"feedback"                  : "${h5help.feedback}"
+        }</echo>
+    </target>
+    
+    <target name="gen-sitemap">
+        <!-- note: assumes a flat output file structure -->
+        <fileset id="output.files" dir="${output.dir}" includes="*${args.outext}">
+            <exclude name="${args.xhtml.toc}${args.outext}"/>
+        </fileset>
+        <property name="output.files.list" refid="output.files"/>
+        <echo file="${output.dir}${file.separator}sitemap.temp">${output.dir}</echo>
+        <replaceregexp byline="true" flags="g" file="${output.dir}${file.separator}sitemap.temp">
+            <regexp pattern="^.*[\/]([^\/]+)$"/>
+            <substitution expression="\1" />
+        </replaceregexp>
+        <loadfile property="urlpath" srcfile="${output.dir}${file.separator}sitemap.temp"/>
+        <property name="baseurl">http://www.webassign.net/manual/${urlpath}/</property>
+        <tstamp>
+            <format property="lastmod" pattern="yyyy-MM-dd"/>
+        </tstamp>
+        <property name="replaceexpr"><![CDATA[
+<url><loc>${baseurl}\1<\/loc><lastmod>${lastmod}<\/lastmod><changefreq>monthly<\/changefreq><\/url>]]></property>
+        
+        <echo file="${output.dir}${file.separator}sitemap.temp">${output.files.list}</echo>
+        <replaceregexp byline="true" flags="g" file="${output.dir}${file.separator}sitemap.temp">
+            <regexp pattern="([^;]*);?"/>
+            <substitution expression="${replaceexpr}" />
+        </replaceregexp>
+        <concat destfile="${output.dir}${file.separator}sitemap.xml" >
+            <header><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    ]]></header>
+            <fileset file="${output.dir}${file.separator}sitemap.temp"/>
+            <footer><![CDATA[
+                </urlset>]]></footer>
+        </concat>
+        <delete file="${output.dir}${file.separator}sitemap.temp"/>
+    </target>
+
+
+    <!-- Customize header and footer of each topic. -->
+    <!--<target name="dita.inner.topics.webassign.webhelp" description="Build WebHelp output from dita topics">
     <property name="out.ext" value=".html"/>
     <property name="transtype.ext" value=".xsl"/>
     <property name="args.xsl"
@@ -48,43 +110,15 @@
       <param name="BASEDIR" expression="${basedir}"></param>
       <param name="OUTPUTDIR" expression="${output.dir}"></param>
       <param name="DBG" expression="${args.debug}" if="args.debug"></param>
-      <!--<param name="CUSTOM_RATE_PAGE_URL" expression="${custom.rate.page.url}" if="custom.rate.page.url"/>-->
       <param name="CUSTOM_WEBHELP_SEARCH" expression="${custom.webhelp.search}"/>
       <param name="CUSTOM_BASEDIR" expression="${dita.temp.dir}"/>
       <mapper type="regexp" from="^(${tempdirToinputmapdir.relative.value})(.*?)(\.(xml|dita))$$" to="\2${out.ext}"></mapper>
     </xslt>
-  </target>
-  
-  <!-- The Oxygen webhelp task does not work as written with OT1.5.4 -->
-  <target name="webassign.detectIndexerLang">
-    <property name="indexer.lang" value="en"/>
-    <property name="inputMap" value="${dita.temp.dir}${file.separator}${user.input.file}"/>
-    
-    <taskdef name="detect-lang" classname="com.suite.sol.ditaot.DetectLang">
-      <classpath path="${dita.dir}/demo/fo/lib/fo.jar"/>
-    </taskdef>
-    
-    <!-- Set document.locale from xml:lang -->
-    <!-- The map takes precedence, followed by the first topic -->
-    <detect-lang documentPath="${inputMap}"/>
-    
-    <!-- Set indexer.lang property -->
-    <!-- commented out because this fails in OT1.5.4 -->
-    <!--<if>
-      <isset property="document.locale"/>
-      <then>
-        <propertyregex property="indexer.lang" input="${document.locale}" 
-          regexp="(..)" 
-          select="\1"
-          defaultvalue="en"
-          override="true"/>
-      </then>
-    </if>-->
-    
-  </target>
-  
-  <!-- Customize table of contents. -->
-  <target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
+  </target>-->
+
+
+    <!-- Customize table of contents. -->
+    <!--<target name="dita.out.map.webassign.webhelp.toc" depends="webassign.detectIndexerLang" description="Build WebHelp TOC file">
     <xslt processor="trax"
       basedir="${dita.temp.dir}"
       destdir="${output.dir}"
@@ -104,15 +138,7 @@
       <param name="INDEXER_LANGUAGE" expression="${indexer.lang}" if="indexer.lang"/>
       <mapper type="glob" from="${user.input.file}" to="${args.xhtml.toc}${out.ext}" />
     </xslt>
-  </target>
-  
-  <!-- New target to copy WebAssign resource files -->
-  <target name="copy-webassign-resources">
-    <copy todir="${output.dir}">
-      <fileset
-        dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
-        includes="**${file.separator}*"
-        excludes=".svn"/>
-    </copy>
-  </target>
+  </target>-->
+
+
 </project>

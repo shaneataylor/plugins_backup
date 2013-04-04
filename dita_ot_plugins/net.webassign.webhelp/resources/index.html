@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>WebAssign Help</title>
+        <meta name="description" content="Online help for the WebAssign application."/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" href="h5help/css/help_app.css"/>
+        <link rel="stylesheet" href="h5help/css/webassign_help.css"/>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+            <![endif]-->
+        <!--googleoff: all--><!-- don't index until we get to the topic itself -->
+        <div id="toolbar">
+            <img src="h5help/img/logo.png" alt="WebAssign Help"/>
+            <div id="searchbox"></div>
+        </div>
+        <div>
+            <!-- menu stuff needs to be outside of toolbar div 
+                 so clicks on toolbar close the menu -->
+            <img src="h5help/img/utility_icon.png" alt="Menu" title="Menu" id="menu_button" tabindex="1"/>
+            <ul class="menu hidden" role="menu" id="menu">
+                <li id="view_contents" class="hidden"><a>View Contents</a></li>
+                <li id="view_topic" class="hidden"><a>View Topic</a></li>
+                <li id="view_min" class="hidden"><a>Minimal View</a></li>
+                <li id="view_max" class="hidden"><a>Expanded View</a></li>
+                <li id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>
+                <li id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>
+                <li id="topic_feedback"><a>Topic Feedback</a></li>
+                <li id="about_help" class="hidden"><a>About Help</a></li>
+            </ul>        
+        </div>
+        <div id="modal_back" class="hidden"></div>
+        <div id="modal" class="modal hidden"></div>
+        <div id="toc" title="Table of contents"></div>
+        <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"></div>
+        <!--googleon: all-->
+        <div id="topic" title="Help topic"></div>
+        <div id="searchresults" title="Search results"></div>
+        
+        <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"></script>
+    </body>
+</html>
