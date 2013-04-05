@@ -3,21 +3,26 @@ var h5Url=window.location.href;
 var h5Path=window.location.pathname;
 var h5timer;
 var thisHref;
+var disqus_shortname; 
 h5params = {
 "help_name"                        : "WebAssign Help",
 "toc_file"                         : "toc.htm",
 "google_cse_id"                    : "",
 "google_cse_refinement"            : "",
+"disqus_shortname"                 : "",
 "feedback"                         : "no"
 };
+
 
 function initAll() {
     $.getJSON('h5help/h5params.json',function(data, status, xhr){
         if (status !== 'error') { h5params = data }
+        disqus_shortname = h5params.disqus_shortname;
         defineHandlers();
         improveCompatibility();
         loadInitialContent();
         initSearch(); // do this last so nothing else is waiting on google
+        // loadCommentScript();
     }); 
 }
 function improveCompatibility(){
@@ -29,12 +34,10 @@ function improveCompatibility(){
     }
 }
 function toggleMenu(){
-	$("ul#menu").addClass("unchanged");
-	$("ul#menu.hidden.unchanged").addClass("visible").removeClass("hidden unchanged");
-	$("ul#menu.unchanged").addClass("hidden").removeClass("visible unchanged");
+	$("ul#menu").toggleClass("hidden");
 }
 function closeMenu(){
-	$("ul#menu").addClass("hidden").removeClass("visible unchanged");
+	$("ul#menu").addClass("hidden");
 }
 function printTopic(){
     closeMenu();
@@ -47,13 +50,11 @@ function showAbout(){
 function showModal(modalContent){
     closeMenu();
     $("div#modal").html(modalContent);
-	$("div#modal_back").removeClass("hidden");
-	$("div#modal").removeClass("hidden");
+	$("div#modal_back,div#modal").removeClass("hidden");
 	$("div#modal").focus();
 }
 function hideModal(){
-	$("div#modal_back").addClass("hidden");
-	$("div.modal").addClass("hidden");
+	$("div#modal_back,div.modal").addClass("hidden");
 }
 function loadInitialContent(){
     loadDiv("div#toc", h5params.toc_file); // open TOC 
@@ -173,7 +174,11 @@ function initTopic(addHistory,thisHref){
         var title = $("div#topic h1").text();
         $("title").html(h5params.help_name + " :: " + title);  
     }
-    // add copyright footer
+    addCommentSection();
+    addCopyrightFooter();
+    syncTOCandBreadcrumbs();
+}
+function addCopyrightFooter() {
     // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
     var copyrightMeta = "&#xa9;&#xa0;";
     var modifiedMeta = $('meta[name="DC.Date.Modified"]').attr('content');
@@ -190,8 +195,6 @@ function initTopic(addHistory,thisHref){
     copyrightMeta += ownerMeta;
     
     $('div#topic').append('<div class="copyright">'+copyrightMeta+' '+modifiedText+'</div>');
-    
-    syncTOCandBreadcrumbs();
 }
 function syncTOCandBreadcrumbs() {
     // highlight & if needed, expand parents of matching TOC entries
@@ -209,6 +212,16 @@ function syncTOCandBreadcrumbs() {
     });
 
 }
+function addCommentSection() {
+    if (disqus_shortname.length > 0) {
+        $('div#topic').append('<div id="disqus_thread"></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>');
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            $('div#topic').append(dsq);
+        })();
+    }
+}
 
 function googleAnalytics(){
     // storing generic GA code in a function for now. 
@@ -222,10 +235,7 @@ function googleAnalytics(){
 function defineHandlers(){
     // Future: create keyboard shortcuts for visually impaired users
     $("img#menu_button").on("click", toggleMenu); // click required for FF ("focus" did not work)
-    $("div#topic").on("click", closeMenu);
-    $("div#searchresults").on("click", closeMenu);
-    $("div#toc").on("click", closeMenu);
-    $("div#toolbar").on("click", closeMenu);
+    $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
     // need to enable menu items via keyboard
     $("#view_contents").on("click", function(){slideTOC(false)});
@@ -254,10 +264,8 @@ function defineHandlers(){
     
     $("div#searchbox").one("focus click", "input", showSearchResults); 
     
-    $("div#toc").on("click", "a", handleLink); 
+    $("div#toc,div#topic,div#searchresults").on("click", "a", handleLink); 
     $("div#toc").on("click", "a", slideTOC);
-    $("div#topic").on("click", "a", handleLink); 
-    $("div#searchresults").on("click", "a", handleLink); 
     
     $("div#toc").on("click", "li.expandable", expandTOCItem); 
     $("div#toc").on("click", "li.collapsible>span.control", collapseTOCItem); 

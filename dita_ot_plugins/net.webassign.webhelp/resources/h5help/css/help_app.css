@@ -1321,9 +1321,18 @@ div#feedback input.warn {
     border: 2px solid #b94a48;
 }
 div#topic > div.copyright {
+    clear:both;
     font-size: small;
     color: #999;
     border-top: 1px solid #eee;
     text-align: center;
     margin-top: 2em;
-}print
+}
+div#topic > div#disqus_thread {
+    clear:both;
+    background-color: #eee;
+    padding: 0.5em;
+    border: 1px solid #69C;
+    border-left: 10px solid #69C;
+    margin-top: 1em;
+}

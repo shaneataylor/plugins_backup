@@ -427,9 +427,8 @@ div.body.quickstart dl[compact] > dd.dd {
     color: black;
     width: 78%;
 }
-div.body.quickstart + div.copyright {
-    float: left;
-    width: 7.5in;
+div#topic > div.body.quickstart + * {
+    clear: both;
     margin-top: 0 !important;
 }
 
@@ -443,7 +442,8 @@ div.body.quickstart + div.copyright {
 
 
 @media print {
-    div.body.quickstart strong.big_qsg > a.xref {
+    div.body.quickstart strong.big_qsg > a.xref,
+    div#topic > div.body.quickstart + div#disqus_thread {
         display: none;
     }
 }
