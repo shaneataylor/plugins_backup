@@ -149,6 +149,14 @@ td > ol.ol > li, td > ul.ul > li {
 td > ol.ol > li > *, td > ul.ul > li > * {
     text-indent: 0em;
 }
+/* First-level lists in tables in steps should be numeric, not alpha */
+li.step table td > ol.ol[type="a"] {
+    list-style-type: decimal;
+}
+
+
+
+
 /* ================================================== */
 
 span.uicontrol[class~="keyboard"] {
