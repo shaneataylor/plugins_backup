@@ -1,5 +1,6 @@
 // Init globals
 var h5Url=window.location.href; 
+var h5baseUrl=h5Url.replace(/\/[^\/]*$/gi,'/'); 
 var h5Path=window.location.pathname;
 var h5timer;
 var thisHref;
@@ -136,9 +137,7 @@ function loadDiv(targetDiv, linkHref, addHistory){
     if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
         return;
     }
-    // TEMP CODE TO TEST SEARCH RESULTS
-    // var oldBase = "http://www.webassign.net/manual/instructor_guide/"; 
-    // thisHref = thisHref.replace(oldBase,"");
+    thisHref = thisHref.replace(h5baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
     if (targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
@@ -199,10 +198,13 @@ function addCopyrightFooter() {
 function syncTOCandBreadcrumbs() {
     // highlight & if needed, expand parents of matching TOC entries
     $("div#toc a.current").removeClass("current");
-    $('div#toc a[href="' + thisHref + '"]').addClass("current");
+    $('div#toc a.clicked').addClass("current").removeClass("clicked");
+    if ($('div#toc a.current').length == 0) {
+        $('div#toc a[href="' + thisHref + '"]:eq(0)').addClass("current"); // pick the first matching href
+    }
     $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
     
-    // add breadcrumbs
+    // add breadcrumbs based on the "current" TOC entry
     $("div#toc a.current").parent("li").each(function(){
         $("div#topic-breadcrumbs").prepend('<div class="breadcrumb"></div>');
         $(this).parents("li").each(function(){
@@ -266,6 +268,9 @@ function defineHandlers(){
     
     $("div#toc,div#topic,div#searchresults").on("click", "a", handleLink); 
     $("div#toc").on("click", "a", slideTOC);
+    $("div#toc").on("click", "a", function(){
+        $(this).addClass("clicked");
+    });
     
     $("div#toc").on("click", "li.expandable", expandTOCItem); 
     $("div#toc").on("click", "li.collapsible>span.control", collapseTOCItem); 
