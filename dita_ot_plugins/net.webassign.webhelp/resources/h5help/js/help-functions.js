@@ -1,6 +1,7 @@
 // Init globals
 var h5Url=window.location.href; 
 var h5baseUrl=h5Url.replace(/\/[^\/]*$/gi,'/'); 
+    h5baseUrl=h5baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
 var h5Path=window.location.pathname;
 var h5timer;
 var thisHref;
@@ -137,6 +138,12 @@ function loadDiv(targetDiv, linkHref, addHistory){
     if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
         return;
     }
+    
+    
+    // add code to be agnostic to www prefix, or change search results to exclude without www prefix?
+    
+    thisHref = thisHref.replace(/^https?:/gi,""); // agnostic to http or https (use current)
+    thisHref = thisHref.replace(/^\/\/webassign.net/gi,"//www.webassign.net"); // adds "www" if omitted
     thisHref = thisHref.replace(h5baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
     if (targetDiv == "div#topic") { hideSearchResults() }
