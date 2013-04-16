@@ -9,8 +9,8 @@
 # Get the absolute path of our current directory
 if [ "$1" == "-workspace" ]; then
     WORKING_DIR=$2
-    push
-    push
+    shift
+    shift
 else
     WORKING_DIR=$PWD
 fi

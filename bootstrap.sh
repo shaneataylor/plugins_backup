@@ -26,8 +26,8 @@
 
 if [ "$1" == "-workspace" ]; then
     ORIG_CWD=$2
-    push
-    push
+    shift
+    shift
 else
     ORIG_CWD=$PWD
 fi
