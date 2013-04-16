@@ -24,7 +24,13 @@
 #
 # TODO: More inline documentation
 
-ORIG_CWD=$PWD
+if [ "$1" == "-workspace" ]; then
+    ORIG_CWD=$2
+    push
+    push
+else
+    ORIG_CWD=$PWD
+fi
 
 # cleanup if the script fails
 function cleanup()
