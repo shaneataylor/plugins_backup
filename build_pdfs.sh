@@ -55,20 +55,12 @@ export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
 STEPS=(\
 "gitpull" \
-"student_webhelp" \
-"admin_webhelp" \
-"internal_admin_webhelp" \
-"instructor_webhelp" \
 "student_guide" \
 "instructor_guide" \
 "creating_questions" )
 
 MESSAGES=(\
 "\nPulling DITA files from git." \
-"\nBuilding student help." \
-"\nBuilding admin help." \
-"\nBuilding internal admin help." \
-"\nBuilding instructor help." \
 "\nBuilding Student Guide PDF." \
 "\nBuilding Instructor Guide PDF." \
 "\nBuilding Creating Questions Guide PDF." )
