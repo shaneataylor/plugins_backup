@@ -148,6 +148,11 @@
                         xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> are
                     registered trademarks of Apple Inc., in the United States, other countries, or
                     both. </fo:block>
+                <fo:block xsl:use-attribute-sets="copyright_p">Google<fo:inline
+                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> is a
+                    registered trademark of Google Inc. in the United States, other countries, or both. 
+                    Chrome<fo:inline xsl:use-attribute-sets="copyright_notice_tm">™</fo:inline> is a
+                    trademark of Google Inc. in the United States, other countries, or both. </fo:block>
                 <fo:block xsl:use-attribute-sets="copyright_p">Internet Explorer<fo:inline
                     xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, Microsoft<fo:inline
                         xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, PowerPoint<fo:inline
