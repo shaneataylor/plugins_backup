@@ -142,7 +142,8 @@
                     registered trademarks of Adobe Systems Incorporated in the United States, other
                     countries, or both. </fo:block>
                 <fo:block xsl:use-attribute-sets="copyright_p">Apple<fo:inline
-                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, Mac<fo:inline
+                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, iPad<fo:inline
+                        xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, Mac<fo:inline
                         xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline>, and
                     Safari<fo:inline
                         xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> are
