@@ -37,6 +37,7 @@
     <target name="all">
         <antcall target="student" />
         <antcall target="instructor" />
+        <antcall target="instructor_training" />
         <antcall target="creating_questions" />
     </target>
 
@@ -58,6 +59,16 @@
         <antcall target="init" />
         <move file="../out/m_i_instructor_guide.pdf" tofile="../out/WebAssign_Essentials.pdf" verbose="true"/>
         <move file="../temp/topic.fo" tofile="../temp/WebAssign_Essentials.fo" verbose="true"/>
+    </target>
+    
+    <target name="instructor_training">
+        <property name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
+        <property name="dita.input.valfile" value="${source.dir}/d_i_guides.ditaval" /><!-- 1.5.4 -->
+        <property name="args.input" value="${source.dir}/m_i_training_guide.ditamap"/>
+        
+        <antcall target="init" />
+        <move file="../out/m_i_instructor_guide.pdf" tofile="../out/Training_Guide.pdf" verbose="true"/>
+        <move file="../temp/topic.fo" tofile="../temp/Training_Guide.fo" verbose="true"/>
     </target>
     
     <target name="creating_questions">

@@ -57,12 +57,14 @@ STEPS=(\
 "gitpull" \
 "student_guide" \
 "instructor_guide" \
+"training_guide" \
 "creating_questions" )
 
 MESSAGES=(\
 "\nPulling DITA files from git." \
 "\nBuilding Student Guide PDF." \
 "\nBuilding Instructor Guide PDF." \
+"\nBuilding Instructor Training Guide." \
 "\nBuilding Creating Questions Guide PDF." )
 
 function buildstep()
