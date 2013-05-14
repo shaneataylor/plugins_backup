@@ -101,15 +101,29 @@ function getQuery() {
     return [null,null];
 }
 
+function getServer(url){
+    var urlObj=$("<a />");
+    urlObj.attr('href',url);
+    var server=urlObj.prop('hostname');
+    server=server.replace(/^https?:/gi,""); // agnostic to http or https
+    return server;
+}
+
 function handleLink(event){
     event.preventDefault(); // part 1 of 2 to prevent default behaviors
     var linkHref = $(this).attr("href");
     var linkTarget = $(this).attr("target");
+    if (typeof linkTarget == 'undefined') {var linkTarget="h5topic";} // ensure defined
     if ( linkHref.indexOf("www.google.com/url?") >= 0 ) { 
         linkHref = $(this).attr("data-ctorig");
-        linkTarget = "topic";
+        linkTarget = "h5topic";
     }
-    if (typeof linkTarget != 'undefined' && linkTarget[0] == "_") {
+    if (linkTarget == "h5topic" && (getServer(linkHref) != getServer(h5baseUrl)) ) {
+        // COMM-587: Compare server of link & help system; set linkTarget="_top" if different
+        linkTarget="_top";
+    }
+    
+    if (linkTarget[0] == "_") {
         window.open(linkHref,linkTarget);
     }
     else if (linkHref[0] == "#") { 
