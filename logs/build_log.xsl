@@ -30,7 +30,7 @@ pre {
 pre.alttxtwarn {color: black; }
 pre.otwarn {color: black; background-color: yellow;}
 pre.debug {color: #9CC}
-pre.info {color: #999;}
+pre.info {color: #999; display: none;}
 pre.warn {color: black;}
 pre.error {font-weight: bold; color: black; background-color: red;}
 p.task {color: black;}
@@ -93,7 +93,7 @@ span.errors {
             <p><xsl:value-of select="//*[contains(node(),'* input =')]"/></p>
             <p>Time: <xsl:value-of select="@time"/></p>
             <p>Errors: <xsl:value-of select="count(//message[@priority='error'] | //stacktrace)"/></p>
-            <p>Warnings: <xsl:value-of select="count(//message[@priority='warn'])"/></p>
+            <p>Warnings: <xsl:value-of select="count(//message[@priority='warn'][contains(.,'WARN')])"/></p>
             <p class="sub">Flagging attribute: <xsl:value-of select="count(//message[contains(node(),'[DOTX042I]')])"/></p>
             <p class="sub">Missing short description: <xsl:value-of select="count(//message[contains(node(),'No short description found')])"/></p>
             <p class="sub">Missing alt text: <xsl:value-of select="count(//message[contains(node(),'Alternate text is missing on external-graphic.')] | //message[contains(node(),'Image is missing alternative text.')])"/></p>
@@ -131,7 +131,7 @@ span.errors {
     
     <xsl:template match="target">
         <xsl:variable name="errcount"><xsl:value-of select="count(descendant::message[@priority='error'] | descendant::stacktrace)"/></xsl:variable>
-        <xsl:variable name="warncount"><xsl:value-of select="count(descendant::message[@priority='warn'])"/></xsl:variable>
+        <xsl:variable name="warncount"><xsl:value-of select="count(descendant::message[@priority='warn'][contains(.,'WARN')])"/></xsl:variable>
         <xsl:variable name="errwarncountclass">
             <xsl:choose>
                 <xsl:when test="$errcount > 0">errors</xsl:when>
