@@ -619,10 +619,6 @@ textarea {
 
 
 
-
-
-
-
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1080,6 +1076,25 @@ div.breadcrumb {
     padding: 0px 4px;
 }
 
+/* Streamlined view of related links */
+div.relinfo, div.nextlink, div.previouslink {
+    font-size: small;
+    color: #666;
+}
+div.relinfo > br {
+    display: none;
+}
+div.relinfo div {
+    display: inline;
+}
+div.relinfo div:before {
+    content:' | ';
+}
+
+
+
+
+
 div.parentlink {
     /* FUTURE: this should be conditional on display of breadcrumbs */
     display: none;
@@ -1336,3 +1351,5 @@ div#topic > div#disqus_thread {
     border-left: 10px solid #69C;
     margin-top: 1em;
 }
+
+
