@@ -354,6 +354,7 @@ h1.title.quickstart {
     background-image:url("../img/webassign_logo.png");
     background-repeat: no-repeat;
     background-position: 2pt 6pt;
+    line-height:1;
     -webkit-print-color-adjust:exact; /* print in chrome */
 
 }
@@ -434,7 +435,8 @@ div.body.quickstart dl[compact] {
 }
 div.body.quickstart dl[compact] > dd.dd {
     color: black;
-    width: 78%;
+    width: 76%;
+    margin-left: 2pt;
 }
 div#topic > div.body.quickstart + * {
     clear: both;
