@@ -355,6 +355,7 @@ h1.title.quickstart {
     background-repeat: no-repeat;
     background-position: 2pt 6pt;
     line-height:1;
+    padding-bottom: 10pt;
     -webkit-print-color-adjust:exact; /* print in chrome */
 
 }
