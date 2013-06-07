@@ -24,6 +24,8 @@
 #
 # TODO: More inline documentation
 
+export ANT_ARGS="-logger org.apache.tools.ant.DefaultLogger" # don't use XML logging if set by build
+
 if [ "$1" == "-workspace" ]; then
     ORIG_CWD=$2
     shift
