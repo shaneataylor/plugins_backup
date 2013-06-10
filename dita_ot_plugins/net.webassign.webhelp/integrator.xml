@@ -8,10 +8,24 @@
     <property name="h5help.google.cse.refinement" value=""/>
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
     <property name="h5help.disqus.shortname" value=""/>
+    <property name="h5help.conreftarget.rule" value=""/>
     
     <target name="dita2h5help"
         depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml, gen-sitemap"/>
+    
+    <target name="h5help.check.conrefs" description="Ensure conref targets adhere to rule specified by h5help.conreftarget.rule">
+        <!--<property name="conref_file_list" value="${dita.temp.dir}${file.separator}conref.list" />
+        <echo message="Conref list = ${conref_file_list}"></echo>-->
+        <xslt basedir="${dita.temp.dir}"
+            includesfile="${dita.temp.dir}${file.separator}conref.list" 
+            destdir="${dita.temp.dir}"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}conref_rule_checking.xsl"
+            filenameparameter="thisconreffer"
+            failOnError="false">
+            <param name="h5help.conreftarget.rule" expression="${h5help.conreftarget.rule}"></param>
+        </xslt>
+    </target>
 
     <target name="copy-h5help-resources">
         <copy todir="${output.dir}">

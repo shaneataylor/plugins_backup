@@ -18,6 +18,7 @@
     <property name="clean.output" value="yes" />
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="../logs"/>
+    <property name="h5help.conreftarget.rule" value="^(#|symbols)"/>
     
     <import file="${dita.dir}/build.xml" />
     
@@ -37,6 +38,7 @@
             <param name="h5help.name" value="WebAssign Instructor Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Instructors" />
+            <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
             <param name="h5help.feedback" value="yes" />
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->

@@ -5,6 +5,10 @@
         <reason>Image is missing alternative text.</reason>
         <response>Specify alternative text for the image with the &lt;alt&gt; element. </response>
     </message>
+    <message id="DOTX098W" type="WARN">
+        <reason>Conref target rule violation.</reason>
+        <response>Conref target %1 does not match the rule %2.</response>
+    </message>
     <!--<message id="DOTX098I" type="INFO">
         <reason>Adding @outputclass for @audience.</reason>
         <response>No action needed.</response>

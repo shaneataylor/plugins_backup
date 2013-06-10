@@ -11,6 +11,7 @@
     <feature extension="dita.xsl.flag-module" value="xsl/flag.xsl" type="file"/>
     <feature extension="dita.xsl.messages" file="messages.xml"/>
     <feature extension="dita.xsl.xhtml" value="xsl/dita2htmlImpl.xsl" type="file"/>
+    <feature extension="depend.preprocess.conref.pre" value="h5help.check.conrefs"/>
     <!--<feature extension="dita.xsl.xhtml" value="xsl/custom_flag.xsl" type="file"/>
     
   <feature extension="dita.xsl.xhtml" value="xsl/altTextWarnings.xsl" type="file"/>
