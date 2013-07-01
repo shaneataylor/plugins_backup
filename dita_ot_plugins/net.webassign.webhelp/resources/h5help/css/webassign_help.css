@@ -337,6 +337,12 @@ div.body.quickstart > p.shortdesc {
     margin-top: 0;
     margin-bottom: 0.25em;
 }
+div.body.quickstart + div.fn {
+    font-size: 8pt !important;
+    line-height: 10.5pt;
+    width: 3in;
+    border-top: 1px solid #ccc;
+}
 
 
 /* TITLES */
@@ -434,11 +440,21 @@ div.body.quickstart dl[compact] {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-div.body.quickstart dl[compact] > dd.dd {
+div.body.quickstart div.left dl[compact] > dd.dd {
     color: black;
     width: 76%;
     margin-left: 2pt;
 }
+div.body.quickstart div.right dl[compact] > dt.dlterm {
+    display: block;
+    width: auto;
+    text-align:left;
+}
+div.body.quickstart div.right dl[compact] > dd.dd {
+    color: #444;
+    width: auto;
+}
+
 div#topic > div.body.quickstart + * {
     clear: both;
     margin-top: 0 !important;
