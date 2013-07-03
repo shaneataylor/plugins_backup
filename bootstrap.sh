@@ -177,11 +177,11 @@ function install_plugin()
         # Remove old version of plugin & run integrator to get rid of cruft
         echo -e "\nRemoving previous version of the $NAME plugin..."
         rm -R $DITA_DIR/plugins/$PLUGIN
-        $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
+        $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml -verbose strict
     fi
     echo -e "\nInstalling $NAME plugin..."
     cp -Rf dita_ot_plugins/$PLUGIN $DITA_DIR/plugins
-    $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml 
+    $DITA_DIR/tools/ant/bin/ant -f $DITA_DIR/integrator.xml -verbose strict
 }
 
 
