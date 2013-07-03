@@ -25,6 +25,7 @@
 # TODO: More inline documentation
 
 export ANT_ARGS="-logger org.apache.tools.ant.DefaultLogger" # don't use XML logging if set by build
+export CLASSPATH="" # clear previous values
 
 if [ "$1" == "-workspace" ]; then
     ORIG_CWD=$2
@@ -61,7 +62,8 @@ function fetchcmd()
     
     if [ ! -f "downloads/$OUTFILE" ]; then
         curl -L --output downloads/$OUTFILE $URL
-        
+        CURL_EXIT=$?
+        echo "Exit code $CURL_EXIT"
     else
         echo "File $OUTFILE already downloaded. Skipping"
     fi
@@ -93,7 +95,7 @@ function unpack()
         mkdir -p deps/$DEST
         unzip -d deps/$DEST downloads/$FILE
     else
-        tar -C deps -zxvf downloads/$FILE
+        tar -C deps -zxf downloads/$FILE 
     fi
 }
 
@@ -104,7 +106,8 @@ function unpack()
 function install_dita()
 {
     DITA_OT_VERSION=$1
-    DITA_OT_VR=`expr $DITA_OT_VERSION : "\([0-9][0-9]*\.[0-9][0-9]*\)\."`
+  # DITA_OT_VR=`expr $DITA_OT_VERSION : "\([0-9][0-9]*\.[0-9][0-9]*\)\."`
+    DITA_OT_VR=`expr $DITA_OT_VERSION : "\([0-9][0-9]*\.[0-9][0-9]*\)"`
     if [ "$DITA_OT_VERSION" = "1.5.4" ]; then
         DITA_OT_URL="http://downloads.sourceforge.net/project/dita-ot/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.5.4"
     else
@@ -144,10 +147,26 @@ function install_plugin()
     PLUGIN=$1
     NAME=$2
     DITA_OT_VERSION=$3
-    DITA_DIR="deps/DITA-OT${DITA_OT_VERSION}"
+    CURRENT_DIR="`pwd`"
+    DITA_DIR="${CURRENT_DIR}/deps/DITA-OT${DITA_OT_VERSION}"
     
     # Mimimum required to ensure integrator.xml works for plugin installation 
+    
+    # ALL DITA VERSIONS (1.5.4-1.8)
     NEW_CLASSPATH="$DITA_DIR/lib"
+    NEW_CLASSPATH="$DITA_DIR/lib/dost.jar:$NEW_CLASSPATH"
+    NEW_CLASSPATH="$DITA_DIR/lib/commons-codec-1.4.jar:$NEW_CLASSPATH"
+    NEW_CLASSPATH="$DITA_DIR/lib/resolver.jar:$NEW_CLASSPATH"
+    NEW_CLASSPATH="$DITA_DIR/lib/icu4j.jar:$NEW_CLASSPATH"
+    NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9.jar:$NEW_CLASSPATH"
+    NEW_CLASSPATH="$DITA_DIR/lib/saxon/saxon9-dom.jar:$NEW_CLASSPATH"
+    
+    if [ "${DITA_OT_VERSION}" \> "1.6" ]; then
+        # Performing string comparison to suss out 1.7 and later
+        NEW_CLASSPATH="$DITA_DIR/lib/xercesImpl.jar:$NEW_CLASSPATH"
+        NEW_CLASSPATH="$DITA_DIR/lib/xml-apis.jar:$NEW_CLASSPATH"
+    fi
+    
     if [ -n "$CLASSPATH" ]; then
         export CLASSPATH="$NEW_CLASSPATH":"$CLASSPATH"
     else
@@ -177,11 +196,11 @@ echo -e "\nUnpacking ANT-Contrib"
 unpack ant-contrib-1.0b3-bin.zip ant-contrib 'ZIP'
 
 install_dita 1.5.4
-install_dita 1.7.2
+install_dita 1.8
 
 echo -e "\nInstalling DITA-OT plugins"
 
 install_plugin net.webassign.pdf "WebAssign PDF" 1.5.4
-install_plugin net.webassign.webhelp "WebAssign webhelp" 1.7.2
+install_plugin net.webassign.webhelp "WebAssign webhelp" 1.8
 
 # Moved extraction of DITA source files to build process

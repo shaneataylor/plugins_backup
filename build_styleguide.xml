@@ -12,7 +12,7 @@
   <property name="clean.temp" value="no" />
   <property name="clean.output" value="yes" />
   <property name="generate.copy.outer" value="1" />
-  <property name="dita.dir" location="../deps/DITA-OT1.7.2"/><!-- If possible, set from environment -->
+  <property name="dita.dir" location="../deps/DITA-OT1.8"/><!-- If possible, set from environment -->
   
   <property name="transtype" value="xhtml"/>
   <property name="args.copycss" value="yes" />

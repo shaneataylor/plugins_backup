@@ -10,7 +10,7 @@
 WORKING_DIR=$( cd "$( dirname "$0" )" && pwd )
 cd ${WORKING_DIR}
 echo -e "\nCurrent path is ${WORKING_DIR}"
-DITA_OT_VERSION='1.7.2'
+DITA_OT_VERSION='1.8'
 
 export DITA_DIR="$WORKING_DIR/deps/DITA-OT${DITA_OT_VERSION}"
 export ANT_HOME="$DITA_DIR/tools/ant"
