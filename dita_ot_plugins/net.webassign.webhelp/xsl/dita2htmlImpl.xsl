@@ -6,7 +6,7 @@
     
     <!-- Add redirect script to every topic -->
     <xsl:template name="gen-user-header">
-        <script type="text/javascript" ><xsl:comment><![CDATA[
+        <xsl:comment>googleoff: all</xsl:comment><script type="text/javascript" ><xsl:comment><![CDATA[
 if (typeof h5Url == 'undefined') { // won't run if help system loaded topic
    var urlparts=window.location.pathname.split("/"); 
    var thistopic=urlparts.pop();
@@ -17,7 +17,7 @@ if (typeof h5Url == 'undefined') { // won't run if help system loaded topic
    }
    window.location=newurl;
 }
-]]></xsl:comment></script>
+]]></xsl:comment></script><xsl:comment>googleon: all</xsl:comment>
     </xsl:template>
     
     <!-- Add empty breadcrumbs div to top of topic if flag is set  -->
