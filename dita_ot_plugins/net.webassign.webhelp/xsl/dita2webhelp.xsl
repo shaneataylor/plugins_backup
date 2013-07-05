@@ -1,6 +1,5 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:import href="../../../xsl/dita2xhtml.xsl"/>
-  <xsl:import href="dita2webhelpImpl.xsl"/>
 
   <xsl:param name="CUSTOM_RATE_PAGE_URL" select="''"/>
   <xsl:param name="CUSTOM_BASEDIR" select="''"/>
