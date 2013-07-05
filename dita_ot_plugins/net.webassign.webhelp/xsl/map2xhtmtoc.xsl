@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:import href="../../../xsl/map2xhtmtoc.xsl"/>
-  <xsl:import href="map2webhelptoc.xsl"/>
+  <!--<xsl:import href="map2webhelptoc.xsl"/>-->
 
   <xsl:param name="CUSTOM_WEBHELP_SEARCH" select="'no'"/>
   <xsl:param name="CUSTOM_PHP_SEARCH_TARGET" select="'SVN'"/>
