@@ -4,21 +4,7 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <!-- Add redirect script to every topic -->
-    <xsl:template name="gen-user-header">
-        <xsl:comment>googleoff: all</xsl:comment><script type="text/javascript" ><xsl:comment><![CDATA[
-if (typeof h5Url == 'undefined') { // won't run if help system loaded topic
-   var urlparts=window.location.pathname.split("/"); 
-   var thistopic=urlparts.pop();
-   var baseurl=urlparts.join("/");
-   var newurl = baseurl + "?q=" + thistopic;
-   if ( !!(window.history && history.pushState) ) {
-      window.history.replaceState(null,null, newurl);
-   }
-   window.location=newurl;
-}
-]]></xsl:comment></script><xsl:comment>googleon: all</xsl:comment>
-    </xsl:template>
+    
     
     <!-- Add empty breadcrumbs div to top of topic if flag is set  -->
     <!-- Help system will generate breadcrumb content from currently loaded TOC. -->
