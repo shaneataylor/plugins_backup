@@ -5,22 +5,13 @@
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="xhtml xsl xs">
     
-    <xsl:output method="xml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-    
-    
-    
-    
+    <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
+
     <xsl:attribute-set name="htmlattrs">
         <xsl:attribute name="lang">en-us</xsl:attribute>
         <xsl:attribute name="xml:lang">en-us</xsl:attribute>
         <xsl:attribute name="class">no-js</xsl:attribute>
     </xsl:attribute-set>
-    
-    
-    
-    <!--<xsl:template match="/">
-        <xsl:apply-templates/>
-    </xsl:template>-->
 
     <xsl:template match="xhtml:html">
         <xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html>
@@ -56,19 +47,17 @@
         </head>
     </xsl:template>
     
-    <xsl:template match="xhtml:body" xml:space="preserve">
-        <xsl:variable name="bodyid"><xsl:value-of select="@id"></xsl:value-of></xsl:variable>
-        
-        <!-- 
+    
+    <!-- 
         
         NEED TO ACCOUNT FOR HELP TOPICS COMPRISING MORE THAN ONE DITA TOPIC
         
-        -->
-        
-        
-        
-        <!-- goes before <body> -->
-        
+    -->
+    
+    
+    
+    <xsl:template match="xhtml:body" xml:space="preserve">
+        <xsl:variable name="bodyid"><xsl:value-of select="@id"></xsl:value-of></xsl:variable>
         <body>
         <xsl:text disable-output-escaping="yes"><![CDATA[
             <!--[if lt IE 7]>
@@ -113,10 +102,11 @@
         <xsl:param name="topicid"/>
         <!-- doesn't change context -->
         <div id="topic" title="Help topic">
-        <div>
-            <xsl:attribute name="id" select="$topicid"></xsl:attribute>
-            <xsl:apply-templates/>
-        </div>
+            <div>
+                <xsl:attribute name="id" select="$topicid"></xsl:attribute>
+                <xsl:apply-templates/>
+            </div>
+            <xsl:call-template name="copyright_footer"/>
         </div>
     </xsl:template>
     
@@ -126,6 +116,17 @@
         <!-- don't copy these -->
     </xsl:template>
     
+    <xsl:template name="copyright_footer">
+        <xsl:variable name="moddate"><xsl:value-of select="//xhtml:meta[@name='DC.Date.Modified']/@content"/></xsl:variable>
+        <xsl:variable name="cyear"><xsl:value-of select="format-date($moddate,'© [Y] ')"></xsl:value-of></xsl:variable>
+        <xsl:variable name="revdate"><xsl:value-of select="format-date($moddate,' (revised [MNn] [Y])')"></xsl:value-of></xsl:variable>
+        <xsl:variable name="ownermeta"><xsl:value-of select="//xhtml:meta[@name='DC.Creator']/@content"/>
+            <!-- if needed, also select value of meta[@name='DC.Rights.Owner'] --></xsl:variable>
+        <!-- There is currently no handling if the expected metadata is not present -->
+        <div class="copyright">
+            <xsl:value-of select="$cyear"/><xsl:value-of select="$ownermeta"/><xsl:value-of select="$revdate"/>
+        </div>
+    </xsl:template>
     
     
     

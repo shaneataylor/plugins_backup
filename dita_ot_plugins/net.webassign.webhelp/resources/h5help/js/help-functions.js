@@ -68,7 +68,7 @@ function loadInitialContent(){
             if (linkHref != null) { loadDiv("div#topic", linkHref) }
             else { 
                 showModal("Could not find topic associated with keyword "+query[1]);
-                loadFirstTopic();
+                // nothing
             }
         });
         break;
@@ -79,14 +79,8 @@ function loadInitialContent(){
         showSearchResults();
         break;
     default:
-        loadFirstTopic();
+        // nothing
     }
-}
-function loadFirstTopic() {
-    $("div#toc").one("divloaded",function() {
-        var firstTopic = $("div#toc a:first").attr("href");
-        loadDiv("div#topic", firstTopic);
-    });
 }
 
 function getQuery() {
@@ -148,6 +142,8 @@ function loadDiv(targetDiv, linkHref, addHistory){
     // + Do not load the help system itself into a frame
     // + If redirected from a topic, do not store two entries in history
     
+    var hrefDiv = "";
+    
     thisHref = linkHref.replace(/index\.html$/,""); // normalize link
     if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
         return;
@@ -160,11 +156,12 @@ function loadDiv(targetDiv, linkHref, addHistory){
     thisHref = thisHref.replace(/^\/\/webassign.net/gi,"//www.webassign.net"); // adds "www" if omitted
     thisHref = thisHref.replace(h5baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
-    if (targetDiv == "div#topic") { hideSearchResults() }
+    if (targetDiv == "div#topic") { hrefDiv = ' div#topic>div' }
+    if (targetDiv == "div#toc" || targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
     // FUTURE: allow base to change when switching help system contexts (instructor/admin)
     //         --Treat as external link--
-    $(targetDiv).load(thisHref, function(response, status, xhr){
+    $(targetDiv).load(thisHref+hrefDiv, function(response, status, xhr){
         if (status == "error") {
             var modalContent = "<h1>" + xhr.status + "</h1>";
             modalContent += "<p>Could not open " + thisHref + ".</p>";
@@ -195,26 +192,7 @@ function initTopic(addHistory,thisHref){
         $("title").html(h5params.help_name + " :: " + title);  
     }
     addCommentSection();
-    addCopyrightFooter();
     syncTOCandBreadcrumbs();
-}
-function addCopyrightFooter() {
-    // metadata for "copyright" is variable and might show default 2005, so ignore that field for now 
-    var copyrightMeta = "&#xa9;&#xa0;";
-    var modifiedMeta = $('meta[name="DC.Date.Modified"]').attr('content');
-    var modifiedText = "";
-    if (modifiedMeta.length = 10) {
-        var months = new Array("January","February","March","April","May","June","July","August","September","October","November","December");
-        var mod_date = modifiedMeta.split("-");
-        modifiedText += "(rev. " + months[mod_date[1]-1] + " " + mod_date[0] + ')';
-        copyrightMeta += mod_date[0] + '&#xa0;';
-    }
-    
-    var ownerMeta = $('meta[name="DC.Rights.Owner"],meta[name="DC.Creator"]').attr('content');
-    ownerMeta = ownerMeta.replace(/\s+\d\d\d\d$/,''); // strip trailing year if any
-    copyrightMeta += ownerMeta;
-    
-    $('div#topic').append('<div class="copyright">'+copyrightMeta+' '+modifiedText+'</div>');
 }
 function syncTOCandBreadcrumbs() {
     // highlight & if needed, expand parents of matching TOC entries
