@@ -5,6 +5,9 @@
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="xhtml xsl xs">
     
+    <xsl:import href="plugin:org.dita.base:xsl/common/output-message.xsl"></xsl:import>
+    <xsl:param name="msgprefix">DOTX</xsl:param>
+    
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
     <xsl:attribute-set name="htmlattrs">
@@ -118,14 +121,25 @@
     
     <xsl:template name="copyright_footer">
         <xsl:variable name="moddate"><xsl:value-of select="//xhtml:meta[@name='DC.Date.Modified']/@content"/></xsl:variable>
-        <xsl:variable name="cyear"><xsl:value-of select="format-date($moddate,'© [Y] ')"></xsl:value-of></xsl:variable>
-        <xsl:variable name="revdate"><xsl:value-of select="format-date($moddate,' (revised [MNn] [Y])')"></xsl:value-of></xsl:variable>
         <xsl:variable name="ownermeta"><xsl:value-of select="//xhtml:meta[@name='DC.Creator']/@content"/>
             <!-- if needed, also select value of meta[@name='DC.Rights.Owner'] --></xsl:variable>
-        <!-- There is currently no handling if the expected metadata is not present -->
-        <div class="copyright">
-            <xsl:value-of select="$cyear"/><xsl:value-of select="$ownermeta"/><xsl:value-of select="$revdate"/>
-        </div>
+        <xsl:choose>
+            <xsl:when test="matches($moddate,'\d\d\d\d-\d\d-\d\d') and $ownermeta != ''">
+                <xsl:variable name="cyear"><xsl:value-of select="format-date($moddate,'© [Y] ')"></xsl:value-of></xsl:variable>
+                <xsl:variable name="revdate"><xsl:value-of select="format-date($moddate,' (revised [MNn] [Y])')"></xsl:value-of></xsl:variable>
+                <div class="copyright">
+                    <xsl:value-of select="$cyear"/><xsl:value-of select="$ownermeta"/><xsl:value-of select="$revdate"/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="output-message">
+                    <xsl:with-param name="msgnum">097</xsl:with-param>
+                    <xsl:with-param name="msgsev">W</xsl:with-param>
+                    <xsl:with-param name="msgparams">%1=<xsl:value-of select="base-uri()"/>;%2=<xsl:value-of select="$ownermeta"/>;%3=<xsl:value-of select="$moddate"/></xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     

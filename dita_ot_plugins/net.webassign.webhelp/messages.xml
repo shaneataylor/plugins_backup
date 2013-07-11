@@ -9,6 +9,11 @@
         <reason>Conref target rule violation.</reason>
         <response>Conref target %1 does not match the rule %2.</response>
     </message>
+    <message id="DOTX097W" type="WARN">
+        <reason>Generated help topic is missing revision date or owner metadata.</reason>
+        <response>Topic: (%1). Owner: (%2). Revision date: (%3). No copyright footer will be generated. </response>
+        <response>Because metadata is inherited from the ditamap, this topic might have been created because of a cross-reference to it from a topic in the map.</response>
+    </message>
     <!--<message id="DOTX098I" type="INFO">
         <reason>Adding @outputclass for @audience.</reason>
         <response>No action needed.</response>
