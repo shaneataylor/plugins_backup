@@ -4,7 +4,7 @@ var h5baseUrl=h5Url.replace(/\/[^\/]*$/gi,'/');
     h5baseUrl=h5baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
 var h5Path=window.location.pathname;
 var h5timer;
-var thisHref;
+var thisHref=h5Url.replace(/^.*\//,""); // just the topic
 var disqus_shortname; 
 h5params = {
 "help_name"                        : "WebAssign Help",
@@ -59,7 +59,9 @@ function hideModal(){
 	$("div#modal_back,div.modal").addClass("hidden");
 }
 function loadInitialContent(){
+    var initialTopic = thisHref; // because thisHref will be reset by toc load
     loadDiv("div#toc", h5params.toc_file); // open TOC 
+    thisHref = initialTopic; // restore to previous value
     var query = getQuery();
     switch (query[0]) {
     case "t":
@@ -80,6 +82,8 @@ function loadInitialContent(){
         break;
     default:
         // nothing
+        addCommentSection();
+
     }
 }
 
@@ -136,6 +140,8 @@ function handleLink(event){
     }
 }
 
+
+
 function loadDiv(targetDiv, linkHref, addHistory){
     addHistory = typeof addHistory !== 'undefined' ? addHistory : true;
     // TO DO:
@@ -148,8 +154,6 @@ function loadDiv(targetDiv, linkHref, addHistory){
     if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
         return;
     }
-    
-    
     // add code to be agnostic to www prefix, or change search results to exclude without www prefix?
     
     thisHref = thisHref.replace(/^https?:/gi,""); // agnostic to http or https (use current)
