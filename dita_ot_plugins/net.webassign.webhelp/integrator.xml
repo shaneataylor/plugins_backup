@@ -12,8 +12,9 @@
     
     
     <target name="dita2h5help"
-        depends="build-init, preprocess, copy-h5help-resources, dita.map.xhtml,
-        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap"/>
+        depends="build-init, preprocess, dita.map.xhtml,
+        copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
+        dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap, copy-h5help-resources"/>
     
     
     <target name="h5help.check.conrefs" description="Ensure conref targets adhere to rule specified by h5help.conreftarget.rule">
@@ -36,6 +37,7 @@
                 includes="**${file.separator}*"/>
         </copy>
         <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true"/>
+        <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true"/>
         <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
         
         <!-- make h5params.json -->
