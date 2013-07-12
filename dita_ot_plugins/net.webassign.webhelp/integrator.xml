@@ -31,13 +31,13 @@
     </target>
 
     <target name="copy-h5help-resources">
-        <copy todir="${output.dir}">
+        <copy todir="${output.dir}" failonerror="false">
             <fileset
                 dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
                 includes="**${file.separator}*"/>
         </copy>
-        <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true"/>
-        <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true"/>
+        <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
+        <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
         <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
         
         <!-- make h5params.json -->
@@ -98,12 +98,14 @@
                 <exclude name="${args.xhtml.toc}${args.outext}"/>
             </fileset>
         </move>
-        
+        <!-- Process files to HTML5 help framework -->
         <xslt basedir="${output.dir}${file.separator}temp_xhtml" includes="*${args.outext}" 
             destdir="${output.dir}" extension="${args.outext}"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}xhtml2h5help.xsl"
             failOnError="true">
         </xslt>
+        <!-- Clean up temp directory -->
+        <delete dir="${output.dir}${file.separator}temp_xhtml"></delete>
     </target>
 
 
