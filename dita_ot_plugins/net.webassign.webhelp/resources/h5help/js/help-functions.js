@@ -193,7 +193,7 @@ function initTopic(addHistory,thisHref){
     if (Modernizr.history && addHistory) {
         window.history.pushState(null,null, thisHref); // add page to history for modern browsers
         var title = $("div#topic h1").text();
-        $("title").html(h5params.help_name + " :: " + title);  
+        $("title").html(title);  
     }
     addCommentSection();
     syncTOCandBreadcrumbs();

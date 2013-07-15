@@ -45,8 +45,6 @@
             <xsl:apply-templates/>
             <link rel="stylesheet" href="h5help/css/help_app.css"/>
             <link rel="stylesheet" href="h5help/css/webassign_help.css"/>
-            <!--<title>WebAssign Help :: <xsl:value-of select="$topictitle"></xsl:value-of></title>-->
-            <title>WebAssign Help :: <xsl:value-of select="xhtml:title"/></title>
         </head>
     </xsl:template>
     
@@ -106,7 +104,7 @@
     <xsl:template name="bodydiv">
         <xsl:param name="topicid"/>
         <!-- doesn't change context -->
-        <div id="topic" title="Help topic" role="main">
+        <div id="topic" role="main">
             <div>
                 <xsl:attribute name="id" select="$topicid"></xsl:attribute>
                 <xsl:apply-templates/>
@@ -117,7 +115,7 @@
     
     
     
-    <xsl:template match="*/@clear|*/@xmlns|xhtml:head/xhtml:title">
+    <xsl:template match="*/@clear|*/@xmlns">
         <!-- don't copy these -->
     </xsl:template>
     
