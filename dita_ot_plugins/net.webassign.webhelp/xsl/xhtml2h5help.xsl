@@ -69,33 +69,35 @@
             ]]></xsl:text>
         <xsl:comment>googleoff: all</xsl:comment><!-- don't index until we get to the topic itself -->
         <div id="toolbar">
+            <!-- Skipahead link. See http://webaim.org/presentations/2012/ariahtml5/hiddenlinks2 -->
+             <a href="#topic" class="hidden508nav">Skip to start of help topic</a>
             <img src="h5help/img/logo.png" alt="WebAssign Help"/>
-            <div id="searchbox"><xsl:comment></xsl:comment></div>
+            <div id="searchbox" role="search" aria-label="search"><xsl:comment></xsl:comment></div>
         </div>
         <div>
             <!-- menu stuff needs to be outside of toolbar div so clicks on toolbar close the menu -->
             <img src="h5help/img/utility_icon.png" alt="Menu" title="Menu" id="menu_button" tabindex="1"/>
             <ul class="menu hidden" role="menu" id="menu">
-                <li id="view_contents" class="hidden"><a>View Contents</a></li>
-                <li id="view_topic" class="hidden"><a>View Topic</a></li>
-                <li id="view_min" class="hidden"><a>Minimal View</a></li>
-                <li id="view_max" class="hidden"><a>Expanded View</a></li>
-                <li id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>
-                <li id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>
-                <li id="topic_feedback"><a>Topic Feedback</a></li>
-                <li id="about_help" class="hidden"><a>About Help</a></li>
+                <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>
+                <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>
+                <li role="menuitem" id="view_min" class="hidden"><a>Minimal View</a></li>
+                <li role="menuitem" id="view_max" class="hidden"><a>Expanded View</a></li>
+                <li role="menuitem" id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>
+                <li role="menuitem" id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>
+                <li role="menuitem" id="topic_feedback"><a>Topic Feedback</a></li>
+                <li role="menuitem" id="about_help" class="hidden"><a>About Help</a></li>
             </ul>        
         </div>
         <div id="modal_back" class="hidden"><xsl:comment></xsl:comment></div>
-        <div id="modal" class="modal hidden"><xsl:comment></xsl:comment></div>
-        <div id="toc" title="Table of contents"><xsl:comment></xsl:comment></div>
+        <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
+        <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
         <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><xsl:comment></xsl:comment></div>
             <xsl:comment>googleon: all</xsl:comment>
             <xsl:call-template name="bodydiv">
                 <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
             </xsl:call-template>
             <xsl:comment>googleoff: all</xsl:comment>
-        <div id="searchresults" title="Search results"><xsl:comment></xsl:comment></div>
+        <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
         <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"><xsl:comment></xsl:comment></script>
         <xsl:comment>googleon: all</xsl:comment>
         </body>
@@ -104,7 +106,7 @@
     <xsl:template name="bodydiv">
         <xsl:param name="topicid"/>
         <!-- doesn't change context -->
-        <div id="topic" title="Help topic">
+        <div id="topic" title="Help topic" role="main">
             <div>
                 <xsl:attribute name="id" select="$topicid"></xsl:attribute>
                 <xsl:apply-templates/>
@@ -127,7 +129,7 @@
             <xsl:when test="matches($moddate,'\d\d\d\d-\d\d-\d\d') and $ownermeta != ''">
                 <xsl:variable name="cyear"><xsl:value-of select="format-date($moddate,'© [Y] ')"></xsl:value-of></xsl:variable>
                 <xsl:variable name="revdate"><xsl:value-of select="format-date($moddate,' (revised [MNn] [Y])')"></xsl:value-of></xsl:variable>
-                <div class="copyright">
+                <div class="copyright" role="contentinfo">
                     <xsl:value-of select="$cyear"/><xsl:value-of select="$ownermeta"/><xsl:value-of select="$revdate"/>
                 </div>
             </xsl:when>
