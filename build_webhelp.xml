@@ -15,7 +15,6 @@
     <property name="args.hide.parent.link" value="no" />
     <property name="args.breadcrumbs" value="yes" />
     <property name="args.debug" value="no" />
-    <property name="clean.output" value="yes" />
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="../logs"/>
     <property name="h5help.conreftarget.rule" value="^(#|symbols)"/>
@@ -30,10 +29,7 @@
     </target>
     
     <target name="instructor">
-        <antcall target="clean_output_path" >
-            <param name="output.dir" location="../out/instructor_guide"/>
-        </antcall>
-        <antcall target="init">
+        <antcall target="buildit">
             <param name="output.dir" location="../out/instructor_guide" />
             <param name="h5help.name" value="WebAssign Instructor Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
@@ -43,15 +39,11 @@
             <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_i_help" />
-            
         </antcall>
     </target>
     
     <target name="student">
-        <antcall target="clean_output_path" >
-            <param name="output.dir" location="../out/student_guide"/>
-        </antcall>
-        <antcall target="init">
+        <antcall target="buildit">
             <param name="output.dir" location="../out/student_guide"/>
             <param name="h5help.name" value="WebAssign Student Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:_vlyaxcspak" />
@@ -59,15 +51,11 @@
             <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_s_help" />
-            
         </antcall>
     </target>
     
     <target name="admin">
-        <antcall target="clean_output_path" >
-            <param name="output.dir" location="../out/admin"/>
-        </antcall>
-        <antcall target="init">
+        <antcall target="buildit">
             <param name="output.dir" location="../out/admin" />
             <param name="h5help.name" value="WebAssign Technical Administrator Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
@@ -76,15 +64,11 @@
             <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
-            
         </antcall>
     </target>
     
     <target name="internal_admin">
-        <antcall target="clean_output_path" >
-            <param name="output.dir" location="../out/wa-admin"/>
-        </antcall>
-        <antcall target="init">
+        <antcall target="buildit">
             <param name="output.dir" location="../out/wa-admin" />
             <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
             <param name="h5help.name" value="WebAssign Administrator Help" />
@@ -92,12 +76,14 @@
             <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
             <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
-            
         </antcall>
     </target>
     
-    <target name="clean_output_path">
+    <target name="buildit">
+        <!-- clean output & temp directories -->
+        <delete dir="${dita.temp.dir}"/>
         <delete dir="${output.dir}"/>
+        <antcall target="init"></antcall>
     </target>
     
 
