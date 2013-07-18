@@ -180,6 +180,39 @@ table span.menucascade img.image {
 div.fig {
     margin: 1em 0;
 }
+div.fig.figborder {
+    display: inline-block;
+    padding: 20px !important;
+    border: 1px solid #C0C0C0 !important;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+div.fig.figsides {
+    display: inline-block;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    border-left: 1px solid #C0C0C0 !important;
+    border-right: 1px solid #C0C0C0 !important;
+}
+div.fig.top {
+    display: inline-block;
+    padding-top: 20px !important;
+    border-top: 1px solid #C0C0C0 !important;
+}
+div.fig.bottom {
+    display: inline-block;
+    padding-bottom: 20px !important;
+    border-bottom: 1px solid #C0C0C0 !important;
+}
+div.fig.topbot {
+    display: inline-block;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    border-top: 1px solid #C0C0C0 !important;
+    border-bottom: 1px solid #C0C0C0 !important;
+}
+
 div.fig > img.image {
     max-width: 100%;
 }
