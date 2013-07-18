@@ -689,6 +689,47 @@
     </xsl:attribute-set>
     
     
+    <xsl:attribute-set name="common.border__top">
+        <xsl:attribute name="border-top-style">solid</xsl:attribute>
+        <xsl:attribute name="border-top-width">0.5pt</xsl:attribute>
+        <xsl:attribute name="border-top-color">#C0C0C0</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="common.border__bottom">
+        <xsl:attribute name="border-bottom-style">solid</xsl:attribute>
+        <xsl:attribute name="border-bottom-width">0.5pt</xsl:attribute>
+        <xsl:attribute name="border-bottom-color">#C0C0C0</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="common.border__right">
+        <xsl:attribute name="border-right-style">solid</xsl:attribute>
+        <xsl:attribute name="border-right-width">0.5pt</xsl:attribute>
+        <xsl:attribute name="border-right-color">#C0C0C0</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="common.border__left">
+        <xsl:attribute name="border-left-style">solid</xsl:attribute>
+        <xsl:attribute name="border-left-width">0.5pt</xsl:attribute>
+        <xsl:attribute name="border-left-color">#C0C0C0</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="common.border" use-attribute-sets="common.border__top common.border__right common.border__bottom common.border__left"/>
+    
+    <xsl:attribute-set name="frame.sides-padding">
+        <xsl:attribute name="padding-left">9.6pt</xsl:attribute>
+        <xsl:attribute name="padding-right">9.6pt</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="frame.topbot-padding">
+        <xsl:attribute name="padding-top">9.6pt</xsl:attribute>
+        <xsl:attribute name="padding-bottom">9.6pt</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="frame.all" use-attribute-sets="common.border__top common.border__right common.border__bottom common.border__left frame.sides-padding frame.topbot-padding"/>
+    <xsl:attribute-set name="frame.top" use-attribute-sets="common.border__top frame.topbot-padding"/>
+    <xsl:attribute-set name="frame.bottom" use-attribute-sets="common.border__bottom frame.topbot-padding"/>
+    <xsl:attribute-set name="frame.topbot" use-attribute-sets="common.border__top common.border__bottom frame.topbot-padding"/>
+    <xsl:attribute-set name="frame.sides" use-attribute-sets="common.border__right common.border__left frame.sides-padding"/>
+    
     <xsl:attribute-set name="fig">
         <xsl:attribute name="space-before">0.8em</xsl:attribute>
 <!-- explicit specification -->
@@ -716,6 +757,14 @@
     <xsl:attribute-set name="image">
     </xsl:attribute-set>
     
+    <xsl:attribute-set name="image__block__baseline">
+        <xsl:attribute name="alignment-baseline">alphabetic</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="image__inline__baseline">
+        <xsl:attribute name="alignment-baseline">text-before-edge</xsl:attribute>
+        <xsl:attribute name="baseline-shift">25%</xsl:attribute>
+    </xsl:attribute-set>
     
     
     

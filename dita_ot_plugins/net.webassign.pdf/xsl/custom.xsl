@@ -626,51 +626,114 @@
             <xsl:with-param name="attrSet" select="concat('__align__', $imageAlign)"/>
             <xsl:with-param name="path" select="'../../cfg/fo/attrs/commons-attr.xsl'"/>
         </xsl:call-template>
-        <fo:external-graphic src="url({$href})" xsl:use-attribute-sets="image">
-
-            <xsl:choose>
-                <xsl:when test="parent::fig or not(@placement = 'inline')">
-                    <xsl:attribute name="alignment-baseline">alphabetic</xsl:attribute>
-
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="alignment-baseline">text-before-edge</xsl:attribute>
-                    <xsl:attribute name="baseline-shift">25%</xsl:attribute>
-
-                </xsl:otherwise>
-            </xsl:choose>
-
-
-            <xsl:if test="$height">
-                <xsl:attribute name="content-height">
-                    <xsl:value-of select="$height"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$width">
-                <xsl:attribute name="content-width">
-                    <xsl:value-of select="$width"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:choose>
-                <xsl:when test="not($width) and not($height) and @scale">
-                    <xsl:attribute name="content-width">
-                        <xsl:value-of select="concat(@scale,'%')"/>
-                    </xsl:attribute>
-                </xsl:when>
-                <xsl:when test="not($width) and not($height) and @scalefit='yes'">
-                    <xsl:attribute name="content-width">scale-down-to-fit</xsl:attribute>
-                    <xsl:attribute name="max-width">95%</xsl:attribute>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="content-width">100%</xsl:attribute>
-                    <xsl:attribute name="max-width">8.5in</xsl:attribute>
-                </xsl:otherwise>
-            </xsl:choose>
-        </fo:external-graphic>
+        <xsl:variable name="figimage"><xsl:value-of select="parent::fig"/></xsl:variable>
+        <xsl:variable name="figframe"><xsl:value-of select="parent::fig/@frame"/></xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$figimage and $figframe='top'">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline frame.top">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:when test="$figimage and $figframe='bottom'">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline frame.bottom">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:when test="$figimage and $figframe='topbot'">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline frame.topbot">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:when test="$figimage and $figframe='sides'">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline frame.sides">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:when test="$figimage and $figframe='all'">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline frame.all">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:when test="$figimage or not(@placement = 'inline')">
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__block__baseline">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:external-graphic src="url({$href})" 
+                    xsl:use-attribute-sets="image image__inline__baseline">
+                    <xsl:call-template name="imageSizeAttrs">
+                        <xsl:with-param name="height" select="$height"/>
+                        <xsl:with-param name="width" select="$width"/>
+                    </xsl:call-template>
+                </fo:external-graphic>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-
+    
+    <xsl:template name="imageSizeAttrs">
+        <xsl:param name="height"/>
+        <xsl:param name="width"/>
+        <xsl:if test="$height">
+            <xsl:attribute name="content-height">
+                <xsl:value-of select="$height"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="$width">
+            <xsl:attribute name="content-width">
+                <xsl:value-of select="$width"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="not($width) and not($height) and @scale">
+                <xsl:attribute name="content-width">
+                    <xsl:value-of select="concat(@scale,'%')"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:when test="not($width) and not($height) and @scalefit='yes'">
+                <xsl:attribute name="content-width">scale-down-to-fit</xsl:attribute>
+                <xsl:attribute name="max-width">95%</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="content-width">100%</xsl:attribute>
+                <xsl:attribute name="max-width">8.5in</xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template match="*[contains(@class,' topic/fig ')]">
         <fo:block xsl:use-attribute-sets="fig" id="{@id}">
+            <xsl:call-template name="commonattributes"/>
+            <xsl:if test="not(@id)">
+                <xsl:attribute name="id">
+                    <xsl:call-template name="get-id"/>
+                </xsl:attribute>
+            </xsl:if>
             <!-- Add expanse processing -->
             <xsl:if test="@expanse='page'">
                 <xsl:attribute name="margin-left">-1.28in</xsl:attribute>
