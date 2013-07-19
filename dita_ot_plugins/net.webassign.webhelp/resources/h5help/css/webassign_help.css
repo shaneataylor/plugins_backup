@@ -370,11 +370,14 @@ div.body.quickstart > p.shortdesc {
     margin-top: 0;
     margin-bottom: 0.25em;
 }
-div.body.quickstart + div.fn {
+div.fn {
     font-size: 8pt !important;
     line-height: 10.5pt;
     width: 3in;
     border-top: 1px solid #ccc;
+    clear:both;
+    margin-top: 0 !important;
+
 }
 
 
