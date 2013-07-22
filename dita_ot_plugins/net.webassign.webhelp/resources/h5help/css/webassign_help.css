@@ -429,7 +429,7 @@ div.body.quickstart h2.bar5 { background-image:url("../img/qsg_bar_5.png"); }
 div.body.quickstart dd.dd {
     margin-left: 0pt;
 }
-div.body.quickstart ul[compact] {
+div.body.quickstart div.right ul[compact] {
     padding-left: 12pt;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
