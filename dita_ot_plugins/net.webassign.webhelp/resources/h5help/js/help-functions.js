@@ -283,6 +283,7 @@ function defineHandlers(){
 }
 function initTOC(){
     $("div#toc li").prepend('<span class="control">&nbsp;</span>');
+    $("div#toc ul:empty").remove(); // remove empty ul so parent not expandable 
     $("div#toc li:has(ul)").addClass("expandable");
     $("div#toc li.expandable>span.control").attr("title","Click to expand");
     /*$("div#toc a:not([title])").attr("title","Topic does not have a short description");*/
