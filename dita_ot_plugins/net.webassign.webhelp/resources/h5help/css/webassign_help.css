@@ -109,6 +109,11 @@ div.fastpath {
 div.fastpath:before {
     content: url("../img/bestpractice_icon.png")  ;
 }
+div.note>span+ul {
+    margin-top:-0.5em;
+}
+
+
 ul li, ol li {
     list-style-image: none;
     }
