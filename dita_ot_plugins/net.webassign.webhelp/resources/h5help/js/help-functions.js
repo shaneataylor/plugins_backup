@@ -151,9 +151,6 @@ function loadDiv(targetDiv, linkHref, addHistory){
     var hrefDiv = "";
     
     thisHref = linkHref.replace(/index\.html$/,""); // normalize link
-    if ( (thisHref==h5Url) || (thisHref==h5Path) || (thisHref=="") ) {
-        return;
-    }
     // add code to be agnostic to www prefix, or change search results to exclude without www prefix?
     
     thisHref = thisHref.replace(/^https?:/gi,""); // agnostic to http or https (use current)
@@ -192,9 +189,10 @@ function loadDiv(targetDiv, linkHref, addHistory){
 function initTopic(addHistory,thisHref){
     if (Modernizr.history && addHistory) {
         window.history.pushState(null,null, thisHref); // add page to history for modern browsers
-        var title = $("div#topic h1").text();
-        $("title").html(title);  
     }
+    var title = $("div#topic h1").text();
+    $("title").html(title);  
+    mobilize();
     addCommentSection();
     syncTOCandBreadcrumbs();
 }
@@ -428,7 +426,7 @@ function closeFeedback() {
     return false; // don't try to process link
 }
 function mobilize() {
-    // do this on window resize and after any load of TOC
+    // do this on window resize and after any load of TOC or topic
     var width = $(window).width();
     if (width > 800) {
         var cssObj = {
