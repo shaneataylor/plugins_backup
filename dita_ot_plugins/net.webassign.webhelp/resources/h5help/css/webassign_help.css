@@ -134,6 +134,11 @@ ol.steps {
 li.step {
     counter-increment: steps 1;
 }
+li.step p.p {
+    margin: 0.5em 0 !important;
+}
+
+
 /* ======== lists in table cells — un-indent ======== */
 /* Only for first-level lists, and only for lists specialized from ol or ul
    Use 1em outdent on first line and 1em left padding to simulate marker block
