@@ -18,6 +18,7 @@
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="../logs"/>
     <property name="h5help.conreftarget.rule" value="^(#|symbols)"/>
+    <property name="onlytopic.in.map" value="true"/>
     
     <import file="${dita.dir}/build.xml" />
     
@@ -76,7 +77,7 @@
             <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
             <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
-        </antcall>
+            </antcall>
     </target>
     
     <target name="buildit">
