@@ -10,6 +10,12 @@ body {
     font-size: small;
     font-family: arial, helvetica, sans-serif;
 }
+div,form, pre { 
+    border-radius: 6px;
+    margin: 4px;
+    
+    }
+
 p {margin: 0px;}
 p.note {
     float: right;
@@ -24,25 +30,51 @@ pre {
     font-family: Consolas, "Courier New", Courier, monospace; 
     margin: 0px;
     white-space: pre-wrap;
-    text-indent: -1in;
-    padding-left: 1in;
+    padding: 4px;
     }
+pre + pre {padding-top: 0px; margin-top: -4px; }
 pre.alttxtwarn {color: black; }
 pre.otwarn {color: black; background-color: yellow;}
 pre.debug {color: #9CC}
-pre.info {color: #999; display: none;}
-pre.warn {color: black;}
+pre.info {color: #333; }
+.showall  pre.info {display: block;}
+.showsome pre.info {display: none;}
+pre.warn {color: black; font-weight: bold;}
 pre.error {font-weight: bold; color: black; background-color: red;}
 p.task {color: black;}
 p.target {color: #369; margin-bottom: 4px; }
 p.stacktrace {color: red;}
 div.task {
+    border-width: 1px;
+    border-color: transparent;
+    border-style: none;
     }
+.showall  div.task { 
+    display: inline-block; 
+    background-color: #eee;
+    border: 1px solid #666;
+    margin: 4px;
+    padding: 4px;
+    }
+.showall  div.task.haschildren { 
+    display: block; 
+    }
+.showsome div.task { 
+    display: block; 
+    background-color: transparent; 
+    }
+.showall  span.tasklabel { 
+    color: #666;
+    font-size: smaller;
+    display: inline;
+    }
+.showsome span.tasklabel { display: none; }
+
+
 div.target {
-    padding: 4px 0px 0px 8px;
+    padding: 4px;
     margin-top: 2px;
-    border: 1px solid #eee;
-    border-width: 1px 0px 1px 1px;
+    border: 1px solid #69C;
     background-color: white;
     }
 div.errors {
@@ -75,10 +107,24 @@ span.errors {
     color: red;
     font-weight: bold;
     }
+form {
+    margin: 4px 0 0 0;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #999;
+}
+div.target:active, div.task:active { background-color: #CDF !important; }
+
                     ]]>
                 </style>
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                <script type="text/javascript">
+                    function toggle_showall() {
+                        $("body").toggleClass("showall showsome");
+                    }
+                </script>
             </head>
-            <body>
+            <body class="showsome">
                 <xsl:apply-templates/>
             </body>
         </html>
@@ -98,6 +144,9 @@ span.errors {
             <p class="sub">Missing short description: <xsl:value-of select="count(//message[contains(node(),'No short description found')])"/></p>
             <p class="sub">Missing alt text: <xsl:value-of select="count(//message[contains(node(),'Alternate text is missing on external-graphic.')] | //message[contains(node(),'Image is missing alternative text.')])"/></p>
             <p class="sub">FOP event listener: <xsl:value-of select="count(//message[contains(node(),'org.apache.fop.events.LoggingEventListener')])"/></p>
+            <form action="#">
+                <input type="checkbox" id="showall" onchange="toggle_showall();"/><label for="showall">Show tasks and info messages</label>
+            </form>
         </div>
         <xsl:apply-templates/>
     </xsl:template>
@@ -123,9 +172,17 @@ span.errors {
     </xsl:template>
     
     <xsl:template match="task">
-        <div class="task">
+        <xsl:variable name="taskclass">
+            <xsl:choose>
+            <xsl:when test="./*"><xsl:text>task haschildren</xsl:text></xsl:when>
+                <xsl:otherwise><xsl:text>task</xsl:text></xsl:otherwise>
+        </xsl:choose>
+        </xsl:variable>
+        <div>
+            <xsl:attribute name="class"><xsl:value-of select="$taskclass"/></xsl:attribute>
             <!-- @location, @name, @time -->
-            <!--<p class="task"><b>TASK <xsl:value-of select="@location"/> :: <xsl:value-of select="@name"/></b> (<xsl:value-of select="@time"/>)</p>-->
+            <xsl:attribute name="title">TASK: <xsl:value-of select="@name"/> (<xsl:value-of select="@location"/>)</xsl:attribute>
+            <span class="tasklabel"><xsl:value-of select="@name"/> (<xsl:value-of select="@time"/>)</span>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -143,6 +200,7 @@ span.errors {
         <div>
             <xsl:attribute name="class">target <xsl:value-of select="$errwarncountclass"/></xsl:attribute>
             <!-- @name, @time -->
+            <xsl:attribute name="title">TARGET: <xsl:value-of select="@name"/></xsl:attribute>
             <p class="target">
                 <b><xsl:value-of select="@name"/></b> (<xsl:value-of select="@time"/>)
                 <span><xsl:attribute name="class">errwarn <xsl:value-of select="$errwarncountclass"/></xsl:attribute>Errors: <xsl:value-of select="$errcount"/> Warnings: <xsl:value-of select="$warncount"/></span>
