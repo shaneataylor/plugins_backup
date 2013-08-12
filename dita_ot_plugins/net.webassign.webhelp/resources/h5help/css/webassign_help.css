@@ -1,6 +1,16 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
 @import url(http://fonts.googleapis.com/css?family=GFS+Didot&subset=greek);
 
+/* =============================== OVERRIDE PLUGIN FONTS =============================== */
+html,
+body,
+div#searchresults *[class^='gs'],
+div#searchresults *[class^='gs'] *,
+button,
+input,
+select,
+textarea {
+    font-family: Arial, sans-serif;
+}
 
 /* ====================================== CONTENT ====================================== */
 
@@ -24,7 +34,7 @@ pre.codeblock {
 pre.msgblock, samp.msgph {
     /* Wrap normally + collapse sequences of whitespace */
     white-space: normal;
-    font-family: Arimo, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #eee;
 }
 pre.msgblock {
@@ -262,7 +272,7 @@ a.xref {
     color: red;
 }
 .Math {
-    font-family: 'Droid Serif', 'GFS Didot', STIXGeneral, serif;
+    font-family: 'Times New Roman', 'GFS Didot', STIXGeneral, serif;
 }
 .overline {
     text-decoration: overline;
