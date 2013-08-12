@@ -1,5 +1,4 @@
-
-@import url(http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic);
+/*@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic);*/
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
 
 /*! BASED ON normalize.css v1.0.2 | MIT License | git.io/normalize */
@@ -86,7 +85,7 @@ input,
 select,
 textarea {
     font-family: sans-serif;
-    font-family: Arimo, sans-serif;
+    font-family: Ubuntu, sans-serif;
 }
 
 /*
@@ -819,7 +818,7 @@ textarea {
 /* ============================== HELP APP SPECIFIC ============================== */
 
 html,body {
-    font-family: Arimo, sans-serif;
+    font-family: Ubuntu, sans-serif;
     font-size: 12pt;
     margin: 0 !important;
 }
@@ -1147,7 +1146,7 @@ div#searchresults > h1 {
 div#searchresults *[class^='gs'],
 div#searchresults *[class^='gs'] * {
     text-decoration:none !important;
-    font-family: Arimo, sans-serif;
+    font-family: Ubuntu, sans-serif;
 }
 div#searchresults div.gs-per-result-labels,
 div#searchresults div[class^='gsc-url-'],
