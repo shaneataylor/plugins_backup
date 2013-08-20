@@ -166,11 +166,11 @@
                     trademark of Sun Microsystems, Inc. in the United States, other countries, or
                     both. </fo:block>
                 <fo:block xsl:use-attribute-sets="copyright_p">Linux<fo:inline
-                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> is the registered trademark of Wolfram
-                    Research, Inc. in the United States, other countries, or both. </fo:block>
-                <fo:block xsl:use-attribute-sets="copyright_p">Mathematica<fo:inline
-                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> is a registered trademark of Linus
+                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> is the registered trademark of Linus
                     Torvalds in the United States, other countries, or both. </fo:block>
+                <fo:block xsl:use-attribute-sets="copyright_p">Mathematica<fo:inline
+                    xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> is a registered trademark of Wolfram
+                    Research, Inc. in the United States, other countries, or both. </fo:block>
                 <fo:block xsl:use-attribute-sets="copyright_p">Mozilla<fo:inline
                     xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> and Firefox<fo:inline
                         xsl:use-attribute-sets="copyright_notice_tm">®</fo:inline> are
