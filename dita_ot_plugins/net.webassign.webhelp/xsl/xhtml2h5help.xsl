@@ -44,18 +44,8 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
             <xsl:apply-templates/>
             <link rel="stylesheet" href="h5help/css/help_app.css"/>
-            <link rel="stylesheet" href="h5help/css/webassign_help.css"/>
         </head>
     </xsl:template>
-    
-    
-    <!-- 
-        
-        NEED TO ACCOUNT FOR HELP TOPICS COMPRISING MORE THAN ONE DITA TOPIC
-        
-    -->
-    
-    
     
     <xsl:template match="xhtml:body" xml:space="preserve">
         <xsl:variable name="bodyid"><xsl:value-of select="@id"></xsl:value-of></xsl:variable>
@@ -69,7 +59,7 @@
         <div id="toolbar">
             <!-- Skipahead link. See http://webaim.org/presentations/2012/ariahtml5/hiddenlinks2 -->
              <a href="#topic" class="hidden508nav">Skip to start of help topic</a>
-            <img src="h5help/img/logo.png" alt="WebAssign Help"/>
+            <div id="brand-logo"></div>
             <div id="searchbox" role="search" aria-label="search"><xsl:comment></xsl:comment></div>
         </div>
         <div>

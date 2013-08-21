@@ -12,6 +12,12 @@ textarea {
     font-family: Arial, sans-serif;
 }
 
+/* ====================================== BRANDING ====================================== */
+div#brand-logo {
+    padding: 10px;
+    content:url('img/logo.png')
+}
+
 /* ====================================== CONTENT ====================================== */
 
 
@@ -94,7 +100,7 @@ div.note:before {
     left: -24px;
     top: -4px;
     margin-right: -16px;
-    content: url("../img/note_icon.png");
+    content: url("img/note_icon.png");
     z-index: 0;
     height: 0;
 }
@@ -103,21 +109,21 @@ div.tip {
     background: #EAF7FF  no-repeat scroll;
 }
 div.tip:before {
-    content: url("../img/tip_icon.png");
+    content: url("img/tip_icon.png");
 }
 div.important {
     border: 1px solid #FFC5B4;
     background: #FFE8E0  no-repeat scroll;
 }
 div.important:before {
-    content: url("../img/important_icon.png")  ;
+    content: url("img/important_icon.png")  ;
 }
 div.fastpath {
     border: 1px solid #7AB362;
     background: #D8EED0  no-repeat scroll;
 }
 div.fastpath:before {
-    content: url("../img/bestpractice_icon.png")  ;
+    content: url("img/bestpractice_icon.png")  ;
 }
 div.note>span:first-child+ul {
     margin-top:-0.5em;
@@ -413,7 +419,7 @@ h1.title.quickstart {
     text-align:right;
     letter-spacing: -1pt;
     margin: 0pt  !important;
-    background-image:url("../img/webassign_logo.png");
+    background-image:url("img/webassign_logo.png");
     background-repeat: no-repeat;
     background-position: 2pt 6pt;
     line-height:1;
@@ -439,11 +445,11 @@ div.body.quickstart div.section.bar5 > h2.title.sectiontitle {
     -webkit-print-color-adjust:exact; /* print in chrome */
 }
 
-div.body.quickstart div.section.bar1 > h2.title.sectiontitle { background-image:url("../img/qsg_bar_1.png"); }
-div.body.quickstart div.section.bar2 > h2.title.sectiontitle { background-image:url("../img/qsg_bar_2.png"); }
-div.body.quickstart div.section.bar3 > h2.title.sectiontitle { background-image:url("../img/qsg_bar_3.png"); }
-div.body.quickstart div.section.bar4 > h2.title.sectiontitle { background-image:url("../img/qsg_bar_4.png"); }
-div.body.quickstart div.section.bar5 > h2.title.sectiontitle { background-image:url("../img/qsg_bar_5.png"); }
+div.body.quickstart div.section.bar1 > h2.title.sectiontitle { background-image:url("img/qsg_bar_1.png"); }
+div.body.quickstart div.section.bar2 > h2.title.sectiontitle { background-image:url("img/qsg_bar_2.png"); }
+div.body.quickstart div.section.bar3 > h2.title.sectiontitle { background-image:url("img/qsg_bar_3.png"); }
+div.body.quickstart div.section.bar4 > h2.title.sectiontitle { background-image:url("img/qsg_bar_4.png"); }
+div.body.quickstart div.section.bar5 > h2.title.sectiontitle { background-image:url("img/qsg_bar_5.png"); }
 
 
 div.body.quickstart dd.dd {

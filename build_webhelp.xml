@@ -7,10 +7,13 @@
     <property name="dita.dir" location="../deps/DITA-OT1.8"/><!-- If possible, set from environment -->
 
     <property name="transtype" value="h5help"/>
-    <property name="args.copycss" value="yes" />
     <property name="args.outext" value=".htm" />
-    <!--<property name="args.css" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help.css" />
-    <property name="args.ftr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_footer.html" />-->
+    <property name="args.cssroot" value="../wa_help_style/"/>
+    <property name="args.css" value="webassign_help.css" />
+    <property name="args.csspath" value="wa_help_style"/>
+    <property name="args.copycss" value="yes" />
+    <property name="h5help.copy.cssroot" value="yes" />
+    <!--<property name="args.ftr" value="${dita.dir}/plugins/net.webassign.webhelp/webassign_help_footer.html" />-->
     <property name="args.xhtml.toc" value="toc" />
     <property name="args.hide.parent.link" value="no" />
     <property name="args.breadcrumbs" value="yes" />

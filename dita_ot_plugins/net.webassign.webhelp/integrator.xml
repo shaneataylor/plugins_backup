@@ -9,6 +9,8 @@
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
     <property name="h5help.disqus.shortname" value=""/>
     <property name="h5help.conreftarget.rule" value=""/>
+    <property name="h5help.copy.cssroot" value="no"/>
+    
     
     
     <target name="dita2h5help"
@@ -49,6 +51,25 @@
 "disqus_shortname"          : "${h5help.disqus.shortname}",
 "feedback"                  : "${h5help.feedback}"
 }</echo>
+        
+        <antcall target="copy-cssroot"/>
+        
+    </target>
+    
+    <target name="copy-cssroot" depends="check-copy-cssroot" if="copy_cssroot">
+        <copy todir="${output.dir}${file.separator}${args.csspath}" failonerror="false">
+            <fileset dir="${args.cssroot}" includes="**${file.separator}*"/>
+        </copy>
+    </target>
+    
+    <target name="check-copy-cssroot">
+        <condition property="copy_cssroot">
+            <and>
+                <istrue value="${h5help.copy.cssroot}"/>
+                <isset property="args.cssroot"/>
+                <isset property="args.csspath"/>
+            </and>
+        </condition>
     </target>
     
     <target name="gen-sitemap">
