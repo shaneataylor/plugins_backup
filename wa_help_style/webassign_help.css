@@ -361,6 +361,20 @@ table.choicetable th>*:first-child
     content:'iPad only: ';
     font-weight: bold;
 }
+.otherprops-draft {
+    color: #933 !important;
+    border: 1px dashed #933;
+}
+.otherprops-draft:before {
+    content:'DRAFT';
+    padding: 2px;
+    margin: 0px;
+    background-color: #933;
+    color: #FFF;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 0px 12px 12px 0px;
+}
 
 /* ====================================== QUICKSTART ====================================== */
 
