@@ -53,7 +53,9 @@
         </xsl:choose>
     </xsl:variable>
     
-    
+    <xsl:variable name="refCountSpecifiers">
+        <xsl:text>\*|\{0,1\}</xsl:text>
+    </xsl:variable>
     
     <xsl:variable name="schemaHierarchyFile">schHierarchy.html</xsl:variable>
 
@@ -482,24 +484,50 @@
         <xsl:choose>
             <xsl:when test="func:string-compare($refID,'noID') or func:string-compare($refType,'Attribute')">
                 <ph>
-                    <xsl:copy-of select="$ref/text()"/>
+                    <xsl:value-of select="func:refTextOnly($ref/text())"/>
+                    <xsl:value-of select="func:refTextQualifier($ref/text())"/>
                 </ph>
             </xsl:when>
             <xsl:when test="func:string-compare($refType,'Element')">
                 <keyword keyref="{concat($ref/@refType,'-',$ref/@refId)}">
-                    <xsl:value-of select="$ref/text()"/>
+                    <xsl:value-of select="func:refTextOnly($ref/text())"/>
                 </keyword>
+                <xsl:value-of select="func:refTextQualifier($ref/text())"/>
             </xsl:when>
             <xsl:otherwise>
                 <ph>
                     <xsl:comment>
                         <xsl:value-of select="concat($ref/@refType,'-',$ref/@refId)"/>
                     </xsl:comment>
-                    <xsl:copy-of select="$ref/text()"/>
+                    <xsl:value-of select="func:refTextOnly($ref/text())"/>
+                    <xsl:value-of select="func:refTextQualifier($ref/text())"/>
                 </ph>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:function name="func:refTextOnly" as="xs:string">
+        <xsl:param name="reftext"/>
+        <xsl:value-of select="replace($reftext,$refCountSpecifiers,'')"></xsl:value-of>
+    </xsl:function>
+    
+    <xsl:function name="func:refTextQualifier" as="xs:string">
+        <xsl:param name="reftext"/>
+        <xsl:variable name="qualifier">
+            <xsl:choose>
+                <xsl:when test="not(matches($reftext,$refCountSpecifiers))">
+                    <xsl:text></xsl:text>
+                </xsl:when>
+                <xsl:when test="matches($reftext,'\*$')">
+                    <xsl:text> (any number)</xsl:text>
+                </xsl:when>
+                <xsl:when test="matches($reftext,'\{0,1\}$')">
+                    <xsl:text> (optional)</xsl:text>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="$qualifier"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:desc>Generates the index part.</xd:desc>
@@ -1548,18 +1576,18 @@
         </xsl:variable>
         <xsl:variable name="separator">
             <xsl:if test="compare($compositor, 'sequence') = 0">
-                <xsl:text> , </xsl:text>
+                <xsl:text> , then </xsl:text>
             </xsl:if>
             <xsl:if test="compare($compositor, 'choice') = 0">
-                <xsl:text> | </xsl:text>
+                <xsl:text> or </xsl:text>
             </xsl:if>
             <xsl:if test="compare($compositor, 'all') = 0">
-                <xsl:text> </xsl:text>
+                <xsl:text> or </xsl:text>
             </xsl:if>
         </xsl:variable>
 
         <xsl:if test="compare($compositor, 'all') = 0">
-            <xsl:text>ALL(</xsl:text>
+            <xsl:text>any of (</xsl:text>
         </xsl:if>
         <xsl:for-each
             select="$group/*[compare(local-name(.), 'group') = 0 or compare(local-name(.), 'ref') = 0]">
