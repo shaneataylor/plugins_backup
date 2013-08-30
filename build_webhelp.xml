@@ -83,6 +83,20 @@
             </antcall>
     </target>
     
+    <target name="wa2_instructor">
+        <antcall target="buildit">
+            <param name="output.dir" location="../out/wa2_instructor_help" />
+            <param name="h5help.name" value="WA2 Instructor Help" />
+            <!--<param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />-->
+            <!--<param name="h5help.google.cse.refinement" value="Instructors" />-->
+            <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
+            <param name="h5help.feedback" value="yes" />
+            <param name="args.input" value="${source.dir}/m_i_wa2.ditamap"/>
+            <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="../temp/m_i_wa2" />
+        </antcall>
+    </target>
+    
     <target name="buildit">
         <!-- clean output & temp directories -->
         <delete dir="${dita.temp.dir}"/>

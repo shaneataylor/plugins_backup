@@ -59,14 +59,16 @@ STEPS=(\
 "student_webhelp" \
 "admin_webhelp" \
 "internal_admin_webhelp" \
-"instructor_webhelp" )
+"instructor_webhelp" \
+"wa2_instructor_help" )
 
 MESSAGES=(\
 "\nPulling DITA files from git." \
 "\nBuilding student help." \
 "\nBuilding admin help." \
 "\nBuilding internal admin help." \
-"\nBuilding instructor help."  )
+"\nBuilding instructor help." \
+"\nBuilding WA2 instructor help." )
 
 function buildstep()
 {
