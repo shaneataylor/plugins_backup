@@ -54,7 +54,7 @@
     </xsl:variable>
     
     <xsl:variable name="refCountSpecifiers">
-        <xsl:text>\*|\{0,1\}</xsl:text>
+        <xsl:text>\*|\{0,1\}|\+</xsl:text>
     </xsl:variable>
     
     <xsl:variable name="schemaHierarchyFile">schHierarchy.html</xsl:variable>
@@ -523,6 +523,9 @@
                 </xsl:when>
                 <xsl:when test="matches($reftext,'\{0,1\}$')">
                     <xsl:text> (optional)</xsl:text>
+                </xsl:when>
+                <xsl:when test="matches($reftext,'\+$')">
+                    <xsl:text> (one or more)</xsl:text>
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
@@ -996,42 +999,13 @@
     </xsl:template>
 
     <xsl:template match="properties">
-        <xsl:variable name="boxID" select="func:getDivId(.)"/>
-        <tr>
-            <td class="firstColumn">
-                <div class="floatLeft">
-                    <b>Properties</b>
-                </div>
-                <div class="floatRight">
-                    <xsl:copy-of select="func:createControl($boxID, func:getButtonId(.))"/>                    
-                </div>
-            </td>
-            <td>
-                <div id="{$boxID}" style="display:block">
-                    <table class="propertiesTable">
-                        <xsl:for-each select="./property">
-                            <tr>
-                                <td class="firstColumn" style="white-space: nowrap;">
-                                    <xsl:value-of select="name"/>
-                                </td>
-                                <td>
-                                    <xsl:choose>
-                                        <xsl:when test="exists(ref)">
-                                            <xsl:call-template name="reference">
-                                                <xsl:with-param name="ref" select="ref"/>
-                                            </xsl:call-template>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <b><xsl:value-of select="value"/></b>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </td>
-                            </tr>
-                        </xsl:for-each>
-                    </table>
-                </div>
-            </td>
-        </tr>
+        <xsl:for-each select="./property">
+            <xsl:comment>
+                <xsl:value-of select="name"/>
+                <xsl:text>:</xsl:text>
+                <xsl:value-of select="value"/>
+            </xsl:comment>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template match="*:namespace">
@@ -1576,7 +1550,7 @@
         </xsl:variable>
         <xsl:variable name="separator">
             <xsl:if test="compare($compositor, 'sequence') = 0">
-                <xsl:text> , then </xsl:text>
+                <xsl:text>, then </xsl:text>
             </xsl:if>
             <xsl:if test="compare($compositor, 'choice') = 0">
                 <xsl:text> or </xsl:text>
@@ -1585,10 +1559,21 @@
                 <xsl:text> or </xsl:text>
             </xsl:if>
         </xsl:variable>
+        <xsl:variable name="isMixed" as="xs:boolean">
+            <xsl:value-of select="boolean(ancestor::element/properties/property[contains(name/text(),'mixed')][contains(value/text(),'true')])"/>
+        </xsl:variable>
+        
+        <xsl:if test="not($group/*) and $isMixed">
+            <xsl:text>text</xsl:text>
+        </xsl:if>
 
         <xsl:if test="compare($compositor, 'all') = 0">
             <xsl:text>any of (</xsl:text>
+            <xsl:if test="$isMixed">
+                <xsl:text>text or </xsl:text>
+            </xsl:if>
         </xsl:if>
+        
         <xsl:for-each
             select="$group/*[compare(local-name(.), 'group') = 0 or compare(local-name(.), 'ref') = 0]">
             <xsl:if test="position() != 1">
@@ -1605,6 +1590,9 @@
 
                     <xsl:if test="compare($compositor, $nextCompositor) != 0">
                         <xsl:text>(</xsl:text>
+                        <xsl:if test="$isMixed">
+                            <xsl:text>text or </xsl:text>
+                        </xsl:if>
                     </xsl:if>
 
                     <xsl:call-template name="groupTemplate"/>
