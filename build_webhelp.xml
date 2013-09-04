@@ -86,6 +86,7 @@
     <target name="wa2_instructor">
         <antcall target="buildit">
             <param name="output.dir" location="../out/wa2_instructor_help" />
+            <param name="args.draft" value="yes"/>
             <param name="h5help.name" value="WA2 Instructor Help" />
             <!--<param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />-->
             <!--<param name="h5help.google.cse.refinement" value="Instructors" />-->
