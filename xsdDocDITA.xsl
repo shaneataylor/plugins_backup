@@ -167,7 +167,8 @@
     </xd:doc>
     <xsl:variable name="documentationPageTitle">Schema documentation for</xsl:variable>
 
-    
+    <xsl:key name="elementQname" match="/schemaDoc/element/qname" use="text()"/>
+    <xsl:key name="elementUsesID" match="/schemaDoc/element" use="model/descendant::*/@refId"/>
     
     <xsl:variable name="propertiesBoxes">        
          
@@ -1088,27 +1089,46 @@
     </xsl:template>
 
     <xsl:template match="usedBy">
-        <section>
-            <title>Allowed In</title>
-
-            <xsl:for-each-group select="ref" group-by="@refType">
-                <p>
-                    <!--<xsl:comment>
-                        <xsl:variable name="currentRef" select="."/>
-                        <xsl:value-of select="func:getComponentTypeLabel($currentRef/@refType)"/>
-                    </xsl:comment>-->
-
-                    <xsl:for-each select="current-group()">
-                        <xsl:sort select="text()"/>
-                        <xsl:call-template name="reference"/>
+        <xsl:for-each-group select="ref" group-by="@refType">
+            <xsl:if test="not(func:string-compare(./@refType,'Complex_Type'))">
+                <section>
+                    <title>Allowed In</title>
+                    <p>
+                        <xsl:for-each select="current-group()">
+                            <xsl:sort select="text()"/>
+                            <xsl:call-template name="reference"/>
+                            <xsl:if test="position() != last()">
+                                <xsl:text>, </xsl:text>
+                            </xsl:if>
+                        </xsl:for-each>
+                    </p>
+                </section>
+            </xsl:if>
+        </xsl:for-each-group>
+    </xsl:template>
+    
+    <xsl:template name="usedByImplied">
+        <xsl:if test="not(exists(usedBy)) or usedBy/ref[func:string-compare(@refType,'Complex_Type')]">
+            <xsl:variable name="thisId">
+                <xsl:value-of select="./@id"/>
+            </xsl:variable>
+            <section>
+                <title>Allowed In</title>
+                <p><xsl:comment>implied by reference to <xsl:value-of select="$thisId"/></xsl:comment>
+                    <xsl:for-each 
+                        select="key('elementUsesID',$thisId)[generate-id(qname)=generate-id(key('elementQname',qname)[1])]">
+                        <!-- selects only the first matching instance for each qname -->
+                        <xsl:sort select="qname/text()"/>
+                        <keyword keyref="{concat('Element-',@id)}">
+                            <xsl:value-of select="qname/text()"/>
+                        </keyword>
                         <xsl:if test="position() != last()">
                             <xsl:text>, </xsl:text>
                         </xsl:if>
                     </xsl:for-each>
                 </p>
-
-            </xsl:for-each-group>
-        </section>
+            </section>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="attributes">
@@ -1388,6 +1408,7 @@
         <xsl:apply-templates select="diagram | type | typeHierarchy | typeAlternatives | properties | defaultOpenContent"/>
         <xsl:apply-templates select="facets"/>
         <xsl:apply-templates select="substitutionGroup | substitutionGroupAffiliation"/>
+        <xsl:call-template name="usedByImplied"/>
         <xsl:apply-templates select="usedBy | model | children | attributes | asserts | contraints | instance | source"/>
         <xsl:apply-templates select="publicid | systemid"/>
         <xsl:apply-templates select="schemaLocation"/>
@@ -1580,6 +1601,19 @@
                 <xsl:value-of select="$separator"/>
             </xsl:if>
             <xsl:choose>
+                <!--<xsl:when test="compare(local-name(.), 'ref') = 0 and compare(./@refType, 'Complex_Type') = 0">
+                    <!-\- ALREADY HANDLED BY DEFAULT PROCESSING? -\->
+                    <!-\- Substitute the content model for the referenced complex type. -\->
+                    <xsl:variable name="complexTypeID">
+                        <xsl:value-of select="./@refId"/>
+                    </xsl:variable>
+                    <xsl:comment>Content model for complex type <xsl:value-of select="$complexTypeID"/></xsl:comment>
+                    <xsl:call-template name="groupTemplate">
+                        <xsl:with-param name="group" 
+                            select="//complexType[@id='$complexTypeID']/model/group[1]"/>
+                        <!-\- there will always be 0 or 1 top-level group element -\->
+                    </xsl:call-template>
+                </xsl:when>-->
                 <xsl:when test="compare(local-name(.), 'ref') = 0">
                     <xsl:call-template name="reference"/>
                 </xsl:when>
