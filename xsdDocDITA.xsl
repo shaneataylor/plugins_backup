@@ -794,59 +794,7 @@
         </xsl:call-template>    
     </xsl:template>-->
 
-	<!--<xd:doc>
-	    <xd:desc>Generate index grouped by component type.</xd:desc>
-	</xd:doc>-->
-    <!--<xsl:template name="generateComponentsIndex">
-        <xsl:param name="refSeq" required="yes"/>
-        <xsl:param name="prefix"/>
-                <!-\- Use the horizontal layout. -\->
-                <xsl:for-each-group select="$refSeq" group-by="@refType">
-                    <xsl:variable name="refType" select="@refType"/>
-                    <!-\- Can put this function of the isChunk -\->
-                    <div class="horizontalLayout">
-                        <xsl:call-template name="makeRoundedTable">
-                            <xsl:with-param name="content">
-                                <xsl:variable name="compBoxID" select="concat($prefix, $refType)"/>
-                                <table class="componentGroup">
-                                    <tbody>
-                                        <tr>
-                                            <td class="componentGroup">
-                                                <input id="button_{$compBoxID}" type="image" value="-"
-                                                    src="img/btM.gif"
-                                                    onclick="switchState('{$compBoxID}');" class="control"/>
-                                            </td>
-                                            <td class="componentGroup">
-                                                <div class="componentGroupTitle">
-                                                     <xsl:variable name="currentComponent" select="."/>
-                                                    <xsl:value-of select="concat(func:getComponentTypeLabel($currentComponent/@refType), 's')"/>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <!-\- Empty Cell -\->
-                                            <td class="componentGroup"/>
-                                            <td class="componentGroup">
-                                                <!-\- Do not remove style="display:block" because expand/collapse will not work otherwise -\->
-                                                <div id="{$compBoxID}" class="componentGroup" style="display:block">
-                                                   <xsl:for-each select="current-group()">
-                                                       <xsl:sort select="text()"/>
-                                                       <div>
-                                                           <xsl:call-template name="reference"/>
-                                                       </div>                                            
-                                                   </xsl:for-each>
-                                               </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </xsl:with-param>
-                        </xsl:call-template>
-                    </div>
-                </xsl:for-each-group>
-                <!-\- Back to the vertical layout for the divs. -\->
-                <div style="clear:left"/>        
-    </xsl:template>-->
+	
 
 
     <xsl:template match="schema">
@@ -1116,11 +1064,15 @@
                 <title>Allowed In</title>
                 <p><xsl:comment>implied by reference to <xsl:value-of select="$thisId"/></xsl:comment>
                     <xsl:for-each 
-                        select="key('elementUsesID',$thisId)[generate-id(qname)=generate-id(key('elementQname',qname)[1])]">
-                        <!-- selects only the first matching instance for each qname -->
+                        select="key('elementUsesID',$thisId)">
+                        <!-- selects only the first matching instance for each qname: -->
+                        <!-- [generate-id(qname)=generate-id(key('elementQname',qname)[1])] -->
+                        <!-- but this has a problem in that it selects ONLY the first instance,
+                             which might not include the current element -->
                         <xsl:sort select="qname/text()"/>
                         <keyword keyref="{concat('Element-',@id)}">
-                            <xsl:value-of select="qname/text()"/>
+                            <!-- Let keyref resolution provide text -->
+                            <!--<xsl:value-of select="qname/text()"/>-->
                         </keyword>
                         <xsl:if test="position() != last()">
                             <xsl:text>, </xsl:text>
@@ -1180,7 +1132,7 @@
                             </stentry>
                             <stentry>
                                 <xsl:attribute name="conkeyref">
-                                    <xsl:value-of select="concat('Attribute-',ref/text(),'/description')"/>
+                                    <xsl:value-of select="concat('Attribute-',ref/@refId,'/description')"/>
                                 </xsl:attribute>
                                 <xsl:attribute name="conref">
                                     <xsl:value-of select="concat('#',$rootID,'/undefined_description')"/>
@@ -1869,26 +1821,6 @@
         </table>
     </xsl:template>
 
-    <xsl:template name="makeRoundedTable">
-        <xsl:param name="content" required="yes"/>
-        <table class="rt">
-            <tr>
-                <td class="rt_cornerTopLeft"/>
-                <td class="rt_lineTop"/>
-                <td class="rt_cornerTopRight"/>
-            </tr>
-            <tr>
-                <td class="rt_lineLeft"></td>
-                <td class="rt_content"><xsl:copy-of select="$content"/></td>
-                <td class="rt_lineRight"></td> 
-            </tr>
-            <tr>
-                <td class="rt_cornerBottomLeft"/>
-                <td class="rt_lineBottom"/>
-                <td class="rt_cornerBottomRight"/>
-            </tr>
-        </table>
-    </xsl:template>
     
     <xd:doc>
         <xd:desc>The name of the option used to show/hide the annotations from the documentation</xd:desc>
