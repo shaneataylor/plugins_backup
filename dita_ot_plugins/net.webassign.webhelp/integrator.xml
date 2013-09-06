@@ -7,6 +7,7 @@
     <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
     <property name="h5help.google.cse.refinement" value=""/>
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
+    <property name="h5help.prettify.code" value="no"/><!-- prettify code examples (yes or no) -->
     <property name="h5help.disqus.shortname" value=""/>
     <property name="h5help.conreftarget.rule" value=""/>
     <property name="h5help.copy.cssroot" value="no"/>
@@ -49,7 +50,8 @@
 "google_cse_id"             : "${h5help.google.cse.id}",
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
 "disqus_shortname"          : "${h5help.disqus.shortname}",
-"feedback"                  : "${h5help.feedback}"
+"feedback"                  : "${h5help.feedback}",
+"prettify_code"             : "${h5help.prettify.code}"
 }</echo>
         
         <antcall target="copy-cssroot"/>

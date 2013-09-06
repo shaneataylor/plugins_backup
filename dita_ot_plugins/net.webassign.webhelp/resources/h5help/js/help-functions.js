@@ -5,27 +5,14 @@ var h5baseUrl=h5Url.replace(/\/[^\/]*$/gi,'/');
 var h5Path=window.location.pathname;
 var h5timer;
 var thisHref=h5Url.replace(/^.*\//,""); // just the topic
-var disqus_shortname; 
-h5params = {
-"help_name"                        : "WebAssign Help",
-"toc_file"                         : "toc.htm",
-"google_cse_id"                    : "",
-"google_cse_refinement"            : "",
-"disqus_shortname"                 : "",
-"feedback"                         : "no"
-};
-
+var disqus_shortname = h5params.disqus_shortname; 
 
 function initAll() {
-    $.getJSON('h5help/h5params.json',function(data, status, xhr){
-        if (status !== 'error') { h5params = data }
-        disqus_shortname = h5params.disqus_shortname;
-        defineHandlers();
-        improveCompatibility();
-        loadInitialContent();
-        initSearch(); // do this last so nothing else is waiting on google
-        // loadCommentScript();
-    }); 
+    defineHandlers();
+    improveCompatibility();
+    loadInitialContent();
+    initSearch(); // do this last so nothing else is waiting on google
+    // loadCommentScript();
 }
 function improveCompatibility(){
     // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
