@@ -92,7 +92,7 @@
             <!--<param name="h5help.google.cse.refinement" value="Instructors" />-->
             <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
             <param name="h5help.feedback" value="yes" />
-            <param name="h5help.prettify.code" value="yes" />
+            <param name="h5help.prettify.code" value="no" />
             <param name="args.input" value="${source.dir}/m_i_wa2.ditamap"/>
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="../temp/m_i_wa2" />
