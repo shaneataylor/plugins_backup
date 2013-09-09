@@ -15,7 +15,7 @@ requirejs.config({
     "paths": {
       "jquery"         : "vendor/jquery-1.8.3.min",
       "modernizr"      : "vendor/modernizr-2.6.2.min",
-      "prettify"       : "vendor/google-code-prettify/prettify",
+      "prettify"       : "google-code-prettify/prettify",
       "help-functions" : "help-functions"
     }});
 
