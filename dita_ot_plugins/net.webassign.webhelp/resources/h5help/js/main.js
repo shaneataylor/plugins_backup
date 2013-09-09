@@ -24,8 +24,6 @@ require(["modernizr","jquery","prettify","help-functions"],function(){
         if (status !== 'error') { 
             h5params = data;
             initAll();
-            /*window.alert("2. Prettify code: "+h5params.prettify_code);*/
-            if ( h5params.prettify_code == 'yes') { PR.prettyPrint() }
         }
         else {
             window.alert("Missing configuration file. Using default values.");

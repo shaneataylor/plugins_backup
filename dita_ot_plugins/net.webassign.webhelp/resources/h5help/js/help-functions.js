@@ -178,7 +178,8 @@ function initTopic(addHistory,thisHref){
         window.history.pushState(null,null, thisHref); // add page to history for modern browsers
     }
     var title = $("div#topic h1").text();
-    $("title").html(title);  
+    $("title").html(title);
+    if ( h5params.prettify_code == 'yes') { PR.prettyPrint() }
     mobilize();
     addCommentSection();
     syncTOCandBreadcrumbs();
