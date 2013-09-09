@@ -1,76 +1,76 @@
-.pln{
+pre.codeblock.prettyprinted .pln{
     color:#000
 }
 @media screen{
-    .str{
+    pre.codeblock.prettyprinted .str{
         color:#080
     }
-    .kwd{
+    pre.codeblock.prettyprinted .kwd{
         color:#008
     }
-    .com{
+    pre.codeblock.prettyprinted .com{
         color:#800
     }
-    .typ{
+    pre.codeblock.prettyprinted .typ{
         color:#606
     }
-    .lit{
+    pre.codeblock.prettyprinted .lit{
         color:#066
     }
-    .pun,
-    .opn,
-    .clo{
+    pre.codeblock.prettyprinted .pun,
+    pre.codeblock.prettyprinted .opn,
+    pre.codeblock.prettyprinted .clo{
         color:#660
     }
-    .tag{
+    pre.codeblock.prettyprinted .tag{
         color:#063
     }
-    .atn{
+    pre.codeblock.prettyprinted .atn{
         color:#606;
     }
-    .atv{
+    pre.codeblock.prettyprinted .atv{
         color:#933
     }
-    .dec,
-    .var{
+    pre.codeblock.prettyprinted .dec,
+    pre.codeblock.prettyprinted .var{
         color:#606
     }
-    .fun{
+    pre.codeblock.prettyprinted .fun{
         color:red
     }
 }
 @media print, projection{
-    .str{
+    pre.codeblock.prettyprinted .str{
         color:#060
     }
-    .kwd{
+    pre.codeblock.prettyprinted .kwd{
         color:#006;
         font-weight:bold
     }
-    .com{
+    pre.codeblock.prettyprinted .com{
         color:#600;
         font-style:italic
     }
-    .typ{
+    pre.codeblock.prettyprinted .typ{
         color:#404;
         font-weight:bold
     }
-    .lit{
+    pre.codeblock.prettyprinted .lit{
         color:#044
     }
-    .pun,
-    .opn,
-    .clo{
+    pre.codeblock.prettyprinted .pun,
+    pre.codeblock.prettyprinted .opn,
+    pre.codeblock.prettyprinted .clo{
         color:#440
     }
-    .tag{
+    pre.codeblock.prettyprinted .tag{
         color:#006;
         font-weight:bold
     }
-    .atn{
+    pre.codeblock.prettyprinted .atn{
         color:#404
     }
-    .atv{
+    pre.codeblock.prettyprinted .atv{
         color:#060
     }
 }
@@ -84,17 +84,17 @@ pre.codeblock.prettyprinted {
     background: #eee;
     overflow:hidden;
 }
-ol.linenums{
+pre.codeblock.prettyprinted ol.linenums{
     margin-top:0;
     margin-bottom:0;
     list-style-type: none;
     padding-left: 40px;
 }
-ol.linenums > li {
+pre.codeblock.prettyprinted ol.linenums > li {
     counter-increment: linenumber;
     text-indent: -40px;
 }
-ol.linenums > li:before {
+pre.codeblock.prettyprinted ol.linenums > li:before {
     content: counter(linenumber);
     display: inline-block;
     width: 30px;
@@ -103,10 +103,10 @@ ol.linenums > li:before {
     color: #999;
 }
 
-li.L0,
-li.L2,
-li.L4,
-li.L6,
-li.L8{
+pre.codeblock.prettyprinted li.L0,
+pre.codeblock.prettyprinted li.L2,
+pre.codeblock.prettyprinted li.L4,
+pre.codeblock.prettyprinted li.L6,
+pre.codeblock.prettyprinted li.L8{
     background:#fff;
 }
