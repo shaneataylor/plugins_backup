@@ -19,16 +19,17 @@ requirejs.config({
       "help-functions" : "help-functions"
     }});
 
-require(["modernizr","jquery","prettify","help-functions"],function(){
+require(["jquery"],function(){
     $.getJSON('h5help/h5params.json',function(data, status, xhr){
-        if (status !== 'error') { 
-            h5params = data;
-            initAll();
+        if (status !== 'error') { h5params = data; }
+        if (h5params.prettify_code == "yes") {
+            otherrequires = ["modernizr","prettify","help-functions"];
         }
         else {
-            window.alert("Missing configuration file. Using default values.");
-            initAll();
+            otherrequires = ["modernizr","help-functions"];
         }
+        require(otherrequires,function(){
+            initAll();
+        });
     });
-    
 });
