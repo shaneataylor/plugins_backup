@@ -88,19 +88,23 @@ pre.codeblock.prettyprinted ol.linenums{
     margin-top:0;
     margin-bottom:0;
     list-style-type: none;
-    padding-left: 40px;
+    padding-left: 30px;
 }
 pre.codeblock.prettyprinted ol.linenums > li {
     counter-increment: linenumber;
-    text-indent: -40px;
+    text-indent: -30px;
+    padding-left: 6px;
 }
 pre.codeblock.prettyprinted ol.linenums > li:before {
     content: counter(linenumber);
     display: inline-block;
-    width: 30px;
-    padding-right: 10px;
+    width: 18px;
+    padding-right: 12px;
     text-align: right;
     color: #999;
+}
+pre.codeblock.prettyprinted ol.linenums > li:only-child:before {
+    content:"";
 }
 
 pre.codeblock.prettyprinted li.L0,
