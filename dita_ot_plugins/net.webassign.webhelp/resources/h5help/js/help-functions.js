@@ -69,6 +69,7 @@ function loadInitialContent(){
         break;
     default:
         // nothing
+        prettifyIfEnabled();
         addCommentSection();
 
     }
@@ -179,11 +180,16 @@ function initTopic(addHistory,thisHref){
     }
     var title = $("div#topic h1").text();
     $("title").html(title);
-    if ( h5params.prettify_code == 'yes') { PR.prettyPrint() }
+    prettifyIfEnabled();
     mobilize();
     addCommentSection();
     syncTOCandBreadcrumbs();
 }
+
+function prettifyIfEnabled(){
+    if ( h5params.prettify_code == 'yes') { PR.prettyPrint() }
+}
+
 function syncTOCandBreadcrumbs() {
     // highlight & if needed, expand parents of matching TOC entries
     $("div#toc a.current").removeClass("current");
