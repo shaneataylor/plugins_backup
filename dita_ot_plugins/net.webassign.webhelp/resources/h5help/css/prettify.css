@@ -1,79 +1,45 @@
 pre.codeblock.prettyprinted .pln{
     color:#000
 }
-@media screen{
+@media screen, print, projection {
     pre.codeblock.prettyprinted .str{
-        color:#080
+        color:#961313;
     }
     pre.codeblock.prettyprinted .kwd{
-        color:#008
+        color:#3447b7;
     }
     pre.codeblock.prettyprinted .com{
-        color:#800
+        color:#401954;
     }
     pre.codeblock.prettyprinted .typ{
-        color:#606
+        color:#401954;
     }
     pre.codeblock.prettyprinted .lit{
-        color:#066
+        color:#961313;
     }
     pre.codeblock.prettyprinted .pun,
     pre.codeblock.prettyprinted .opn,
     pre.codeblock.prettyprinted .clo{
-        color:#660
+        color:#401954;
     }
     pre.codeblock.prettyprinted .tag{
-        color:#063
+        color:#3447b7;
     }
     pre.codeblock.prettyprinted .atn{
-        color:#606;
+        color:#401954;
     }
     pre.codeblock.prettyprinted .atv{
-        color:#933
+        color:#961313;
     }
     pre.codeblock.prettyprinted .dec,
     pre.codeblock.prettyprinted .var{
-        color:#606
+        color:#401954;
     }
     pre.codeblock.prettyprinted .fun{
-        color:red
+        color:#401954;
     }
 }
-@media print, projection{
-    pre.codeblock.prettyprinted .str{
-        color:#060
-    }
-    pre.codeblock.prettyprinted .kwd{
-        color:#006;
-        font-weight:bold
-    }
-    pre.codeblock.prettyprinted .com{
-        color:#600;
-        font-style:italic
-    }
-    pre.codeblock.prettyprinted .typ{
-        color:#404;
-        font-weight:bold
-    }
-    pre.codeblock.prettyprinted .lit{
-        color:#044
-    }
-    pre.codeblock.prettyprinted .pun,
-    pre.codeblock.prettyprinted .opn,
-    pre.codeblock.prettyprinted .clo{
-        color:#440
-    }
-    pre.codeblock.prettyprinted .tag{
-        color:#006;
-        font-weight:bold
-    }
-    pre.codeblock.prettyprinted .atn{
-        color:#404
-    }
-    pre.codeblock.prettyprinted .atv{
-        color:#060
-    }
-}
+
 pre.codeblock.prettyprinted {
     /*padding:2px 4px;*/
     padding: 0px;
