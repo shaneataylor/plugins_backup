@@ -398,7 +398,18 @@
     <xsl:function name="func:string-compare" as="xs:boolean">
         <xsl:param name="stringA"/>
         <xsl:param name="stringB"/>
-        <xsl:value-of select="compare($stringA,$stringB)=0"/>
+        <xsl:variable name="compResult">
+            <xsl:value-of select="compare(string($stringA),string($stringB))=0"/>
+            <!--<xsl:choose>
+                <xsl:when test="">
+                    
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="compare(string($stringA),string($stringB))=0"/>
+                </xsl:otherwise>
+            </xsl:choose>-->
+        </xsl:variable>
+        <xsl:value-of select="$compResult"/>
     </xsl:function>
     
     <xd:doc>
@@ -1037,50 +1048,52 @@
     </xsl:template>
 
     <xsl:template match="usedBy">
-        <xsl:for-each-group select="ref" group-by="@refType">
-            <xsl:if test="not(func:string-compare(./@refType,'Complex_Type'))">
-                <section>
-                    <title>Allowed In</title>
-                    <p>
-                        <xsl:for-each select="current-group()">
-                            <xsl:sort select="text()"/>
-                            <xsl:call-template name="reference"/>
-                            <xsl:if test="position() != last()">
-                                <xsl:text>, </xsl:text>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </p>
-                </section>
-            </xsl:if>
-        </xsl:for-each-group>
+        <xsl:variable name="allRefsAreComplex" as="xs:boolean">
+            <xsl:value-of select="(count(ref) = count(ref[@refType='Complex_Type']))"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="not($allRefsAreComplex)">
+                <xsl:for-each-group select="ref" group-by="@refType">
+                    <xsl:if test="not(func:string-compare(./@refType,'Complex_Type'))">
+                        <section>
+                            <title>Allowed In</title>
+                            <p>
+                                <xsl:for-each select="current-group()">
+                                    <xsl:sort select="text()"/>
+                                    <xsl:call-template name="reference"/>
+                                    <xsl:if test="position() != last()">
+                                        <xsl:text>, </xsl:text>
+                                    </xsl:if>
+                                </xsl:for-each>
+                            </p>
+                        </section>
+                    </xsl:if>
+                </xsl:for-each-group>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="usedByImplied">
+                    <xsl:with-param name="thisId" select="parent::node()/@id"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template name="usedByImplied">
-        <xsl:if test="not(exists(usedBy)) or usedBy/ref[func:string-compare(@refType,'Complex_Type')]">
-            <xsl:variable name="thisId">
-                <xsl:value-of select="./@id"/>
-            </xsl:variable>
-            <section>
-                <title>Allowed In</title>
-                <p><xsl:comment>implied by reference to <xsl:value-of select="$thisId"/></xsl:comment>
-                    <xsl:for-each 
-                        select="key('elementUsesID',$thisId)">
-                        <!-- selects only the first matching instance for each qname: -->
-                        <!-- [generate-id(qname)=generate-id(key('elementQname',qname)[1])] -->
-                        <!-- but this has a problem in that it selects ONLY the first instance,
-                             which might not include the current element -->
-                        <xsl:sort select="qname/text()"/>
-                        <keyword keyref="{concat('Element-',@id)}">
-                            <!-- Let keyref resolution provide text -->
-                            <!--<xsl:value-of select="qname/text()"/>-->
-                        </keyword>
-                        <xsl:if test="position() != last()">
-                            <xsl:text>, </xsl:text>
-                        </xsl:if>
-                    </xsl:for-each>
-                </p>
-            </section>
-        </xsl:if>
+        <xsl:param name="thisId"/>
+        <section>
+            <title>Allowed In</title>
+            <p><xsl:comment>implied by reference to <xsl:value-of select="$thisId"/></xsl:comment>
+                <xsl:for-each select="key('elementUsesID',$thisId)">
+                    <xsl:sort select="qname/text()"/>
+                    <keyword keyref="{concat('Element-',@id)}">
+                        <!-- Let keyref resolution provide text -->
+                    </keyword>
+                    <xsl:if test="position() != last()">
+                        <xsl:text>, </xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+            </p>
+        </section>
     </xsl:template>
 
     <xsl:template match="attributes">
@@ -1360,7 +1373,11 @@
         <xsl:apply-templates select="diagram | type | typeHierarchy | typeAlternatives | properties | defaultOpenContent"/>
         <xsl:apply-templates select="facets"/>
         <xsl:apply-templates select="substitutionGroup | substitutionGroupAffiliation"/>
-        <xsl:call-template name="usedByImplied"/>
+        <xsl:if test="not(exists(usedBy))">
+            <xsl:call-template name="usedByImplied">
+                <xsl:with-param name="thisId" select="./@id"/>
+            </xsl:call-template>
+        </xsl:if>
         <xsl:apply-templates select="usedBy | model | children | attributes | asserts | contraints | instance | source"/>
         <xsl:apply-templates select="publicid | systemid"/>
         <xsl:apply-templates select="schemaLocation"/>
