@@ -494,17 +494,23 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="func:string-compare($refID,'noID') or func:string-compare($refType,'Attribute')">
-                <ph>
+            <xsl:when test="func:string-compare($refType,'Attribute')">
+                <option>
                     <xsl:value-of select="func:refTextOnly($ref/text())"/>
                     <xsl:value-of select="func:refTextQualifier($ref/text())"/>
-                </ph>
+                </option>
             </xsl:when>
             <xsl:when test="func:string-compare($refType,'Element')">
                 <keyword keyref="{concat($ref/@refType,'-',$ref/@refId)}">
                     <xsl:value-of select="func:refTextOnly($ref/text())"/>
                 </keyword>
                 <xsl:value-of select="func:refTextQualifier($ref/text())"/>
+            </xsl:when>
+            <xsl:when test="func:string-compare($refID,'noID')">
+                <ph>
+                    <xsl:value-of select="func:refTextOnly($ref/text())"/>
+                    <xsl:value-of select="func:refTextQualifier($ref/text())"/>
+                </ph>
             </xsl:when>
             <xsl:otherwise>
                 <ph>
