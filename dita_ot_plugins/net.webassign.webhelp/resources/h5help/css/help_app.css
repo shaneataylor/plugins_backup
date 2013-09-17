@@ -1144,6 +1144,14 @@ div#searchresults > h1 {
     font-size: 1.34em;
     margin: 10px 0px 0px 10px;
 }
+div#searchresults img#closesearch {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    
+}
+
 div#searchresults *[class^='gs'],
 div#searchresults *[class^='gs'] * {
     text-decoration:none !important;

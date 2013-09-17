@@ -260,6 +260,7 @@ function defineHandlers(){
     // delegation binds handler to current and future a descendants of selector
     
     $("div#searchbox").one("focus click", "input", showSearchResults); 
+    $("div#searchresults").on("click", "img#closesearch", hideSearchResults);
     
     $("div#toc,div#topic,div#searchresults").on("click", "a", handleLink); 
     $("div#toc").on("click", "a", slideTOC);
@@ -303,7 +304,9 @@ function collapseTOCItem(){
 function initSearch(){
     if ( h5params.google_cse_id !== '' ) {
         $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
-        $("div#searchresults").html('<h1>Search Results</h1><div class="gcse-searchresults" data-gname="wasearch"></div>');
+        $("div#searchresults").html('<h1>Search Results</h1>'+
+        '<img id="closesearch" src="h5help/img/cross.png" alt="Close" title="Close"/>'+
+        '<div class="gcse-searchresults" data-gname="wasearch"></div>');
         (function() {
             var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
             gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + h5params.google_cse_id;
