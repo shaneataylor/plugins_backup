@@ -1216,18 +1216,19 @@ div.spinner {
     background-repeat:no-repeat;
 }
 div#feedback {
+    margin-top: 1em;
     padding: 10px;
-    background: #0c0c0c;
-    background: -webkit-linear-gradient(top,#45494d,#0c0c0c);
-    background: -moz-linear-gradient(top,#45494d,#0c0c0c);
-    background: linear-gradient(top,#45494d,#0c0c0c);
+    background: #eeeeee;
+    background: -webkit-linear-gradient(top,#eeeeee,#dddddd);
+    background: -moz-linear-gradient(top,#eeeeee,#dddddd);
+    background: linear-gradient(top,#eeeeee,#dddddd);
     border: 1px solid #ccc;
     border: 1px solid rgba(192,192,192,0.2);
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
-    color: white;
-    vertical-align: middle;
+    color: #444444;
+    font-size: smaller;
 }
 iframe#h5ftgt { /* hide without hiding */
     /*display: none;*/ /*Causes form submission to open a new window*/
@@ -1240,6 +1241,9 @@ iframe#h5ftgt { /* hide without hiding */
     top: 20px;
     right: 20px;
 }
+div#feedback div#feedback_p1, div#feedback div#feedback_p2 {
+    min-height: 80px;
+}
 div#feedback label {
     display: inline-block;
     width: 8em;
@@ -1249,12 +1253,16 @@ div#feedback h1 {
     margin: 0em;
 }
 div#feedback p {
-    font-size: smaller;
+    margin-top: 0px;
+    margin-bottom: 0.5em;
+}
+div#feedback div#feedback_instructions {
+    float: right;
+    width: 220px;
 }
 div#feedback input, div#feedback textarea {
     width: 15em;
     border: 1px solid #ccc;
-    border: 1px solid rgba(192,192,192,0.2);
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
@@ -1275,7 +1283,9 @@ div#feedback textarea {
 div#feedback fieldset {
     margin-top: 0.25em;
 }
-
+div#feedback div.formcontrols {
+    margin-top: 0.5em;
+}
 div#feedback input[type='range'] {  
     -webkit-appearance: none; /* Enable styling */
     height: 3px;
@@ -1326,7 +1336,9 @@ div#feedback div.rangecontrol > input[type='range'] {
 
 div#feedback input[type='submit'], div#feedback input[type='button'] {
     width: auto;
+    min-width: 6em;
     padding: 4px 14px;
+    margin-right: 6px;
     color: #000;
     font-weight: bold;
     text-shadow: 1px 1px #FFF;

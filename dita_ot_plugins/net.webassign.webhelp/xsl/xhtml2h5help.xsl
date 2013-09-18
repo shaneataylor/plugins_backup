@@ -72,7 +72,6 @@
                 <li role="menuitem" id="view_max" class="hidden"><a>Expanded View</a></li>
                 <li role="menuitem" id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>
                 <li role="menuitem" id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>
-                <li role="menuitem" id="topic_feedback"><a>Topic Feedback</a></li>
                 <li role="menuitem" id="about_help" class="hidden"><a>About Help</a></li>
             </ul>        
         </div>

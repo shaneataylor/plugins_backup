@@ -218,6 +218,9 @@ function addCommentSection() {
             $('div#topic').append(dsq);
         })();
     }
+    if ( h5params.feedback == 'yes') {
+        showFeedbackForm();
+    }
 }
 
 function googleAnalytics(){
@@ -241,12 +244,9 @@ function defineHandlers(){
     $("#view_max").on("click", toggleMenu);
     $("#print_topic").on("click", printTopic);
     $("#customer_support").on("click", closeMenu);
-    if ( h5params.feedback == 'yes') {
-        $("#topic_feedback").on("click", showFeedbackForm);
-    }
-    else {
-        $("#topic_feedback").addClass("hidden");
-    }
+    
+    // temp step
+    $("#topic_feedback").addClass("hidden");
 
     $("#about_help").on("click", showAbout);
     $("#modal_back").on("click", hideModal);
@@ -333,10 +333,9 @@ function hideSearchResults(){
 }
 function showFeedbackForm() {
     closeMenu();
-    $("div#feedback").remove(); // in case it exists from before
-    $("iframe#h5ftgt").remove(); // in case it exists from before
-    $("div#topic").prepend('<iframe id="h5ftgt" name="h5ftgt" seamless></iframe>');
-    $("div#topic").prepend('<div id="feedback"></div>');
+    $("div#feedback, iframe#h5ftgt").remove(); // in case it exists from before
+    $("div#topic").append('<div id="feedback"></div>');
+    $("div#topic").append('<iframe id="h5ftgt" name="h5ftgt" seamless></iframe>');
     loadDiv("div#feedback","h5help/feedback.html",false);
     $("div#feedback").on("divloaded",init_feedback);
 }
@@ -356,12 +355,22 @@ function init_form() {
         rating_fs += '</div>';
         $("fieldset#rating_fs").html(rating_fs);
     }
+    // get user data in localStorage if available
+    if(typeof(Storage)!=="undefined") {
+        $("div#feedback input#name").val(localStorage.name);
+        $("div#feedback input#email").val(localStorage.email);
+        $("div#feedback input#role").val(localStorage.role);
+    }
+
 }
 // <form id="ss-form" name="ss-form" action="https://docs.google.com/a/webassign.net/spreadsheet/formResponse?formkey=dFNOTVNGVXNTTTRaOF9zd3gybmNlQ2c6MQ&amp;ifq" method="post" target="_new"> </form>
 function initFeedbackHandlers() {
     $("div#feedback").on("blur", "input[required='required']", validateFeedback);
     $("div#feedback").on("submit", "form", submitFeedback);
     $("div#feedback").on("click", "a#cancel", closeFeedback);
+    $("div#feedback").on("click", "input#feedback_next, input#feedback_previous", function(){
+        $("div#feedback_p1, div#feedback_p2, div.formcontrols > input").toggleClass("hidden");
+    });
 }
 function validateFeedback() {
     var isValid = true;
@@ -389,6 +398,12 @@ function submitFeedback() {
         showModal("<p>Some required information was not completed.</p>");
         return false; // part 2 of 2 to prevent default behaviors
     }
+    // store user data in localStorage if available
+    if(typeof(Storage)!=="undefined") {
+        localStorage.name = $("div#feedback input#name").val();
+        localStorage.email = $("div#feedback input#email").val();
+        localStorage.role = $("div#feedback input#role").val();
+    }
     // change names of form fields to match Google form
     feedbackNames = {
     'name'    : 'entry.1.single',
@@ -406,12 +421,10 @@ function submitFeedback() {
     $("div#feedback form#feedback_form input#topic").val(window.location);
     $("div#feedback form#feedback_form input#formkey").val(formKey);
     // Display success message
-    // FUTURE: Use localstorage to save feedback field data
     showModal("<p>Thank you for your feedback.  The Communications team will review your comments and take action as needed.</p>");
     $("#modal_back").one("click", closeFeedback);
 }
 function closeFeedback() {
-        // FUTURE: Use localstorage to save feedback field data
     $("div#feedback").addClass('hidden');
     $("iframe#h5ftgt").addClass('hidden');
     // give it 2 seconds in case user clicked through before form fully submitted,
