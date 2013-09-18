@@ -1,17 +1,17 @@
-<project name="techcomm" default="all" basedir="dita_source_files">
+<project name="techcomm" default="all" basedir=".">
     <description> Build the WebAssign Technical Communications Deliverables. </description>
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
         <classpath>
-            <pathelement location="../deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
+            <pathelement location="deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
         </classpath>
     </taskdef>
-    <property name="source.dir" location="."/>
-    <property name="args.logdir" location="../logs"/>
+    <!--<property name="source.dir" location="dita_source_files"/>-->
+    <property name="args.logdir" location="logs"/>
     <property name="clean.temp" value="no"/>
     <property name="clean.output" value="yes"/>
     <property name="generate.copy.outer" value="1"/>
-    <!--<property name="oxygen.dir" location="../oxygen"/>-->
-    <!--<property name="local.build.log" location="../logs/build.log" />-->
+    <!--<property name="oxygen.dir" location="oxygen"/>-->
+    <!--<property name="local.build.log" location="logs/build.log" />-->
 
     <target name="init">
         <tstamp>
@@ -22,52 +22,74 @@
     </target>
 
     <target name="all" depends="init">
-        <echo level="info">Building all targets (instructor_guide, student_guide,
-            creating_questions, instructor_webhelp, student_webhelp, internal_admin_webhelp)</echo>
+        <antcall target="helps"/>
+        <antcall target="pdfs"/>
+    </target>
+    
+    <target name="helps" depends="init">
+        <echo level="info">Building all helps</echo>
         <antcall target="instructor_webhelp"/>
         <antcall target="student_webhelp"/>
         <antcall target="internal_admin_webhelp"/>
         <antcall target="admin_webhelp"/>
-        <!--    <antcall target="student_guide" />
-    <antcall target="instructor_guide" />
-    <antcall target="creating_questions" />-->
+        <antcall target="wa2_instructor_help"/>
+        <antcall target="styleguide"/>
+        <antcall target="comm_processes"/>
+    </target>
+    
+    <target name="pdfs" depends="init">
+        <echo level="info">Building all PDFs</echo>
+        <antcall target="student_guide" />
+        <antcall target="instructor_guide" />
+        <antcall target="creating_questions" />
     </target>
 
 
     <target name="instructor_guide" depends="init">
         <echo level="info">Building Instructor Guide PDF</echo>
-        <ant antfile="../build_pdf.xml" target="instructor"/>
+        <ant antfile="build_pdf.xml" target="instructor"/>
     </target>
     <target name="training_guide" depends="init">
         <echo level="info">Building Instructor Training Guide</echo>
-        <ant antfile="../build_pdf.xml" target="instructor_training"/>
+        <ant antfile="build_pdf.xml" target="instructor_training"/>
     </target>
     <target name="creating_questions" depends="init">
         <echo level="info">Building Creating Questions PDF</echo>
-        <ant antfile="../build_pdf.xml" target="creating_questions"/>
+        <ant antfile="build_pdf.xml" target="creating_questions"/>
     </target>
     <target name="instructor_webhelp" depends="init">
         <echo level="info">Building Instructor HTML WebHelp</echo>
-        <ant antfile="../build_webhelp.xml" target="instructor"/>
+        <ant antfile="build_webhelp.xml" target="instructor"/>
     </target>
     <target name="wa2_instructor_help" depends="init">
         <echo level="info">Building WA2 Instructor Help</echo>
-        <ant antfile="../build_webhelp.xml" target="wa2_instructor"/>
+        <ant antfile="build_webhelp.xml" target="wa2_instructor"/>
     </target>
+    <target name="styleguide" depends="init">
+        <echo level="info">Building Styleguide</echo>
+        <ant antfile="build_webhelp.xml" target="styleguide"/>
+    </target>
+    <target name="comm_processes" depends="init">
+        <echo level="info">Building Comm. Team Processes</echo>
+        <ant antfile="build_webhelp.xml" target="comm_processes"/>
+    </target>
+    
+    
+    
     <target name="student_guide" depends="init">
         <echo level="info">Building Student Guide PDF</echo>
-        <ant antfile="../build_pdf.xml" target="student"/>
+        <ant antfile="build_pdf.xml" target="student"/>
     </target>
     <target name="student_webhelp" depends="init">
         <echo level="info">Building Student HTML WebHelp</echo>
-        <ant antfile="../build_webhelp.xml" target="student"/>
+        <ant antfile="build_webhelp.xml" target="student"/>
     </target>
     <target name="admin_webhelp" depends="init">
         <echo level="info">Building Admin HTML WebHelp</echo>
-        <ant antfile="../build_webhelp.xml" target="admin"/>
+        <ant antfile="build_webhelp.xml" target="admin"/>
     </target>
     <target name="internal_admin_webhelp" depends="init">
         <echo level="info">Building Admin HTML WebHelp</echo>
-        <ant antfile="../build_webhelp.xml" target="internal_admin"/>
+        <ant antfile="build_webhelp.xml" target="internal_admin"/>
     </target>
 </project>

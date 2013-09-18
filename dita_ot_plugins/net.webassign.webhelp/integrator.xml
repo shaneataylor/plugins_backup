@@ -39,7 +39,7 @@
                 dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
                 includes="**${file.separator}*"/>
         </copy>
-        <copy file="${source.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
+        <copy file="${args.input.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
         <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
         <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
         

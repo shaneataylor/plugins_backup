@@ -5,6 +5,7 @@
     </description>
     <!-- Common build properties for all PDF builds -->
     
+    <property name="source.dir" location="dita_source_files"/>
     <property name="args.logdir" location="../logs"/>
     <property name="output.dir" location="../out" />
     <property name="transtype" value="pdf" /><!-- WAS pdf2 -->

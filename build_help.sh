@@ -54,21 +54,37 @@ export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 
 export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
+
+
+
+
+
+# ADD STEPS FOR STYLEGUIDE AND INTERNAL COMM PROCESSES
+
+
+
+
+
+
+
+
 STEPS=(\
-"gitpull" \
 "student_webhelp" \
 "admin_webhelp" \
 "internal_admin_webhelp" \
 "instructor_webhelp" \
-"wa2_instructor_help" )
+"wa2_instructor_help" \
+"styleguide" \
+"comm_processes" )
 
 MESSAGES=(\
-"\nPulling DITA files from git." \
 "\nBuilding student help." \
 "\nBuilding admin help." \
 "\nBuilding internal admin help." \
 "\nBuilding instructor help." \
-"\nBuilding WA2 instructor help." )
+"\nBuilding WA2 instructor help." \
+"\nBuilding styleguide." \
+"\nBuilding comm. team processes." )
 
 function buildstep()
 {

@@ -1,14 +1,13 @@
-
-<project name="techcomm" default="all" basedir="dita_source_files">
+<project name="techcomm" default="all">
     <description>
       Build the WebAssign Technical Communications Deliverables.
     </description>
     
-    <property name="dita.dir" location="../deps/DITA-OT1.8"/><!-- If possible, set from environment -->
+    <property name="dita.dir" location="deps/DITA-OT1.8"/><!-- If possible, set from environment -->
 
     <property name="transtype" value="h5help"/>
     <property name="args.outext" value=".htm" />
-    <property name="args.cssroot" value="../wa_help_style/"/>
+    <property name="args.cssroot" value="wa_help_style/"/>
     <property name="args.css" value="webassign_help.css" />
     <property name="args.csspath" value="wa_help_style"/>
     <property name="args.copycss" value="yes" />
@@ -19,7 +18,7 @@
     <property name="args.breadcrumbs" value="yes" />
     <property name="args.debug" value="no" />
     <property name="dita.ext" value=".xml" />
-    <property name="args.logdir" location="../logs"/>
+    <property name="args.logdir" location="logs"/>
     <property name="h5help.conreftarget.rule" value="^(#|symbols)"/>
     <property name="onlytopic.in.map" value="true"/>
     
@@ -30,72 +29,105 @@
         <antcall target="student" />
         <antcall target="admin" />
         <antcall target="internal_admin" />
+        <antcall target="wa2_instructor" />
+        <antcall target="comm_processes" />
+        <antcall target="styleguide" />
     </target>
     
     <target name="instructor">
         <antcall target="buildit">
-            <param name="output.dir" location="../out/instructor_guide" />
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/instructor_guide" />
             <param name="h5help.name" value="WebAssign Instructor Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Instructors" />
             <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
             <param name="h5help.feedback" value="yes" />
-            <param name="args.input" value="${source.dir}/m_i_help.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="../temp/m_i_help" />
+            <param name="args.input" value="m_i_help.ditamap"/>
+            <param name="args.filter" value="dita_source_files/d_i_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_i_help" />
         </antcall>
     </target>
     
     <target name="student">
         <antcall target="buildit">
-            <param name="output.dir" location="../out/student_guide"/>
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/student_guide"/>
             <param name="h5help.name" value="WebAssign Student Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:_vlyaxcspak" />
             <param name="h5help.feedback" value="no" />
-            <param name="args.input" value="${source.dir}/m_s_help.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_s_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="../temp/m_s_help" />
+            <param name="args.input" value="m_s_help.ditamap"/>
+            <param name="args.filter" value="dita_source_files/d_s_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_s_help" />
         </antcall>
     </target>
     
     <target name="admin">
         <antcall target="buildit">
-            <param name="output.dir" location="../out/admin" />
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/admin" />
             <param name="h5help.name" value="WebAssign Technical Administrator Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Admins" />
             <param name="h5help.feedback" value="yes" />
-            <param name="args.input" value="${source.dir}/m_d_sysadmin.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="../temp/m_d_sysadmin" />
+            <param name="args.input" value="m_d_sysadmin.ditamap"/>
+            <param name="args.filter" value="dita_source_files/d_d_admin_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_d_sysadmin" />
         </antcall>
     </target>
     
     <target name="internal_admin">
         <antcall target="buildit">
-            <param name="output.dir" location="../out/wa-admin" />
-            <param name="args.input" value="${source.dir}/m_w_internal_admin.ditamap"/>
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/wa-admin" />
+            <param name="args.input" value="m_w_internal_admin.ditamap"/>
             <param name="h5help.name" value="WebAssign Administrator Help" />
             <param name="h5help.feedback" value="yes" />
-            <param name="args.ftr" value="${source.dir}/internal_admin_footer.html"/>
-            <param name="args.filter" value="${source.dir}/d_w_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="../temp/m_w_internal_admin" />
+            <param name="args.ftr" value="dita_source_files/internal_admin_footer.html"/>
+            <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_w_internal_admin" />
             </antcall>
     </target>
     
     <target name="wa2_instructor">
         <antcall target="buildit">
-            <param name="output.dir" location="../out/wa2_instructor_help" />
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/wa2_instructor_help" />
             <param name="args.draft" value="yes"/>
             <param name="h5help.name" value="WA2 Instructor Help" />
-            <!--<param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />-->
-            <!--<param name="h5help.google.cse.refinement" value="Instructors" />-->
-            <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
             <param name="h5help.feedback" value="yes" />
             <param name="h5help.prettify.code" value="yes" />
-            <param name="args.input" value="${source.dir}/m_i_wa2.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="../temp/m_i_wa2" />
+            <param name="args.input" value="m_i_wa2.ditamap"/>
+            <param name="args.filter" value="dita_source_files/d_i_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_i_wa2" />
+        </antcall>
+    </target>
+    
+    <target name="comm_processes">
+        <antcall target="buildit">
+            <param name="args.input.dir" location="processes" />
+            <param name="output.dir" location="out/comm" />
+            <param name="args.draft" value="yes"/>
+            <param name="h5help.name" value="Communications Team Processes" />
+            <param name="h5help.feedback" value="yes" />
+            <param name="h5help.prettify.code" value="yes" />
+            <param name="args.input" value="m_wa_comm_team_info.ditamap"/>
+            <!--<param name="args.filter" value="d_i_help.ditaval" />-->
+            <param name="dita.temp.dir" location="temp/m_wa_comm_team_info" />
+        </antcall>
+    </target>
+    
+    <target name="styleguide">
+        <antcall target="buildit">
+            <param name="args.input.dir" location="styleguide" />
+            <param name="output.dir" location="out/styleguide" />
+            <param name="args.draft" value="yes"/>
+            <param name="h5help.name" value="Global Experience Standards" />
+            <param name="h5help.feedback" value="yes" />
+            <param name="h5help.prettify.code" value="yes" />
+            <param name="args.input" value="m_d_styleguide.ditamap"/>
+            <param name="args.filter" value="styleguide/flagstatus.ditaval" />
+            <param name="dita.temp.dir" location="temp/m_d_styleguide" />
         </antcall>
     </target>
     
