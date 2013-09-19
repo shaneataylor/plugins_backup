@@ -742,7 +742,8 @@ textarea {
 
 @media print {
     /* only print the current topic */
-    body > div, div.related-links, div.related-links+div, div#topic-breadcrumbs {
+    body > div, div.related-links, div.related-links+div, 
+    div#topic-breadcrumbs, div#feedback {
         display:none;
     }
     div#topic > div.copyright {
