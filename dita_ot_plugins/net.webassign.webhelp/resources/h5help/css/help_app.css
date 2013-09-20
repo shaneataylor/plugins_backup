@@ -1092,8 +1092,13 @@ div.relinfo div:before {
     content:' | ';
 }
 
-
-
+/* Address child link visual confusion for users */
+/* Child links are separate from the topic. Repeatedly, we have had users comment
+   that the links don't "go" with the preceding section of the parent topic. */
+ul.ullinks {
+    padding-left: 0px;
+    border-top: 1px solid #eee;
+}
 
 
 div.parentlink {
