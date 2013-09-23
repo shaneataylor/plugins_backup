@@ -837,7 +837,7 @@
         <!-- Fix formatting (1/19/2012): OT specified 6pt for these -->
         <xsl:attribute name="padding">0pt</xsl:attribute>
         <xsl:attribute name="start-indent">0pt + from-parent(start-indent)</xsl:attribute>
-        <xsl:attribute name="end-indent">0pt + from-parent(start-indent)</xsl:attribute>
+        <xsl:attribute name="end-indent">0pt</xsl:attribute>
         
         <xsl:attribute name="space-before">0.4em</xsl:attribute>
 <!-- explicit specification -->
