@@ -182,8 +182,8 @@ function initTopic(addHistory,thisHref){
     $("title").html(title);
     prettifyIfEnabled();
     mobilize();
-    addCommentSection();
     syncTOCandBreadcrumbs();
+    addCommentSection();
 }
 
 function prettifyIfEnabled(){
