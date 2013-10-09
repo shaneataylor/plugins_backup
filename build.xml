@@ -33,6 +33,7 @@
         <antcall target="internal_admin_webhelp"/>
         <antcall target="admin_webhelp"/>
         <antcall target="wa2_instructor_help"/>
+        <antcall target="apis"/>
         <antcall target="styleguide"/>
         <antcall target="comm_processes"/>
     </target>
@@ -64,6 +65,10 @@
     <target name="wa2_instructor_help" depends="init">
         <echo level="info">Building WA2 Instructor Help</echo>
         <ant antfile="build_webhelp.xml" target="wa2_instructor"/>
+    </target>
+    <target name="apis" depends="init">
+        <echo level="info">Building API help</echo>
+        <ant antfile="build_webhelp.xml" target="apis"/>
     </target>
     <target name="styleguide" depends="init">
         <echo level="info">Building Styleguide</echo>

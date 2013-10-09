@@ -30,6 +30,7 @@
         <antcall target="admin" />
         <antcall target="internal_admin" />
         <antcall target="wa2_instructor" />
+        <antcall target="apis" />
         <antcall target="comm_processes" />
         <antcall target="styleguide" />
     </target>
@@ -100,6 +101,20 @@
             <param name="args.input" value="m_i_wa2.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_i_wa2" />
+        </antcall>
+    </target>
+    
+    <target name="apis">
+        <antcall target="buildit">
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/api" />
+            <param name="args.draft" value="yes"/>
+            <param name="h5help.name" value="API Help" />
+            <param name="h5help.feedback" value="yes" />
+            <param name="h5help.prettify.code" value="yes" />
+            <param name="args.input" value="m_d_api_reference.ditamap"/>
+            <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/api" />
         </antcall>
     </target>
     
