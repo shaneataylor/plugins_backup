@@ -145,7 +145,7 @@ function loadDiv(targetDiv, linkHref, addHistory){
     thisHref = thisHref.replace(/^\/\/webassign.net/gi,"//www.webassign.net"); // adds "www" if omitted
     thisHref = thisHref.replace(h5baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
-    if (targetDiv == "div#topic") { hrefDiv = ' div#topic>div' }
+    if (targetDiv == "div#topic") { hrefDiv = ' div#topic>*' }
     if (targetDiv == "div#toc" || targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
     // FUTURE: allow base to change when switching help system contexts (instructor/admin)
