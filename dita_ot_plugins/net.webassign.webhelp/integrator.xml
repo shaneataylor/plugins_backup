@@ -126,6 +126,7 @@
             destdir="${output.dir}" extension="${args.outext}"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}xhtml2h5help.xsl"
             failOnError="true">
+            <param name="h5help.feedback" expression="${h5help.feedback}"/>
         </xslt>
         <!-- Clean up temp directory -->
         <delete dir="${output.dir}${file.separator}temp_xhtml"></delete>

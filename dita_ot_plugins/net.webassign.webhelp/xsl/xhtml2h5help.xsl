@@ -7,6 +7,7 @@
     
     <xsl:import href="plugin:org.dita.base:xsl/common/output-message.xsl"></xsl:import>
     <xsl:param name="msgprefix">DOTX</xsl:param>
+    <xsl:param name="h5help.feedback">no</xsl:param>
     
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
@@ -79,14 +80,11 @@
         <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
         <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
         <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><xsl:comment></xsl:comment></div>
-            <xsl:comment>googleon: all</xsl:comment>
             <xsl:call-template name="bodydiv">
                 <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
             </xsl:call-template>
-            <xsl:comment>googleoff: all</xsl:comment>
         <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
         <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"><xsl:comment></xsl:comment></script>
-        <xsl:comment>googleon: all</xsl:comment>
         </body>
     </xsl:template>
     
@@ -94,11 +92,16 @@
         <xsl:param name="topicid"/>
         <!-- doesn't change context -->
         <div id="topic" role="main">
+            <xsl:comment>googleon: all</xsl:comment>
             <div>
                 <xsl:attribute name="id" select="$topicid"></xsl:attribute>
                 <xsl:apply-templates/>
             </div>
+            <xsl:comment>googleoff: all</xsl:comment>
             <xsl:call-template name="copyright_footer"/>
+            <xsl:if test="contains($h5help.feedback,'yes')">
+                <xsl:call-template name="feedback_form"/>
+            </xsl:if>
         </div>
     </xsl:template>
     
@@ -129,6 +132,72 @@
             </xsl:otherwise>
         </xsl:choose>
         
+    </xsl:template>
+    
+    <xsl:template name="feedback_form" xml:space="preserve">
+        <xsl:variable name="emailpattern"><xsl:text disable-output-escaping="yes">^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</xsl:text></xsl:variable>
+        <div id="feedback">
+            <form action="#" id="feedback_form" title="Feedback form" novalidate="novalidate" target="h5ftgt" method="POST">
+                <div id="feedback_instructions">
+                    <p><b>Send a comment or correction</b></p>
+                    <p><a href="//webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" target="_blank">Contact
+                        Customer Support</a></p>
+                    <p><a href="//www.webassign.net/user_support/faculty/report.html" target="_blank">Report a question
+                        error</a></p>
+                    
+                </div>
+                <div id="feedback_p1">
+                    <fieldset id="rating_fs">
+                        <!-- js updates this for browsers that support input[type='range'] -->
+                        <label for="rating">Rate this topic</label>
+                        <select id="rating" name="rating" tabindex="0">'; <option value="1">Very Poor</option>
+                            <option value="2">Poor</option>
+                            <option value="3" selected="selected">OK</option>
+                            <option value="4">Good</option>
+                            <option value="5">Very Good</option>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="comment">Comment</label>
+                        <textarea id="comment" name="comment" tabindex="0" autocomplete="off"
+                            title="Type a comment"></textarea>
+                    </fieldset>
+                </div>
+                <div id="feedback_p2" class="hidden">
+                    <fieldset>
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" name="name" tabindex="0" autofocus="autofocus"
+                            autocomplete="on" placeholder="Sharon Martin" title="Type your full name"/>
+                    </fieldset>
+                    <fieldset>
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" tabindex="0" autocomplete="on"
+                            required="required" pattern="{$emailpattern}"
+                            placeholder="sdmartin@example.org" title="Type a valid email address">
+                        </input>
+                        <!-- 
+            ^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$
+            [A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}
+        -->
+                    </fieldset>
+                    <fieldset>
+                        <label for="role">Role</label>
+                        <input type="text" id="role" name="role" tabindex="0" value="Instructor"
+                            autocomplete="on" required="required" pattern="\s*\S+\s*" placeholder="Instructor"
+                            title="Type your role, for example, instructor"/>
+                    </fieldset>
+                </div>
+                <input type="hidden" name="emailReceipt" value="true" id="emailReceipt"/>
+                <input type="hidden" id="helptopic" name="helptopic" value=""/>
+                <input type="hidden" name="formkey" id="formkey" value=""/>
+                <div class="formcontrols">
+                    <input id="feedback_next" name="feedback_next" type="button" value="Next"/>
+                    <input type="submit" name="submit" value="Submit" id="feedback_submit" class="hidden"/>
+                    <input id="feedback_previous" name="feedback_previous" type="button" value="Previous" class="hidden"/>
+                </div>
+            </form>
+        </div>
+        <iframe id="h5ftgt" name="h5ftgt" seamless="seamless" src="#"><!-- invisible target for form result --></iframe>
     </xsl:template>
     
     

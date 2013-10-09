@@ -219,7 +219,7 @@ function addCommentSection() {
         })();
     }
     if ( h5params.feedback == 'yes') {
-        showFeedbackForm();
+        initFeedbackForm();
     }
 }
 
@@ -245,9 +245,6 @@ function defineHandlers(){
     $("#print_topic").on("click", printTopic);
     $("#customer_support").on("click", closeMenu);
     
-    // temp step
-    $("#topic_feedback").addClass("hidden");
-
     $("#about_help").on("click", showAbout);
     $("#modal_back").on("click", hideModal);
     
@@ -331,19 +328,7 @@ function hideSearchResults(){
     $("div#searchresults").addClass("hidden");
     $("div#topic").removeClass("hidden");
 }
-function showFeedbackForm() {
-    closeMenu();
-    $("div#feedback, iframe#h5ftgt").remove(); // in case it exists from before
-    $("div#topic").append('<div id="feedback"></div>');
-    $("div#topic").append('<iframe id="h5ftgt" name="h5ftgt" seamless></iframe>');
-    loadDiv("div#feedback","h5help/feedback.html",false);
-    $("div#feedback").on("divloaded",init_feedback);
-}
-function init_feedback(){
-    init_form();
-    initFeedbackHandlers();
-}
-function init_form() {
+function initFeedbackForm() {
     if (Modernizr.inputtypes.range) {
         // substitute slider control
         var rating_fs = '<label for="rating">Rate this topic</label>';
@@ -362,9 +347,6 @@ function init_form() {
         $("div#feedback input#role").val(localStorage.role);
     }
 
-}
-// <form id="ss-form" name="ss-form" action="https://docs.google.com/a/webassign.net/spreadsheet/formResponse?formkey=dFNOTVNGVXNTTTRaOF9zd3gybmNlQ2c6MQ&amp;ifq" method="post" target="_new"> </form>
-function initFeedbackHandlers() {
     $("div#feedback").on("blur", "input[required='required']", validateFeedback);
     $("div#feedback").on("submit", "form", submitFeedback);
     $("div#feedback").on("click", "a#cancel", closeFeedback);
@@ -372,6 +354,7 @@ function initFeedbackHandlers() {
         $("div#feedback_p1, div#feedback_p2, div.formcontrols > input").toggleClass("hidden");
     });
 }
+
 function validateFeedback() {
     var isValid = true;
     var pattern = new RegExp($(this).attr('pattern'));
@@ -411,14 +394,14 @@ function submitFeedback() {
     'role'    : 'entry.3.single',
     'rating'  : 'entry.5.single',
     'comment' : 'entry.4.single',
-    'topic'   : 'entry.0.single'};
+    'helptopic'   : 'entry.0.single'};
     var formURL = 'https://docs.google.com/a/webassign.net/spreadsheet/formResponse';
     var formKey = 'dFNOTVNGVXNTTTRaOF9zd3gybmNlQ2c6MQ';
     for (var name in feedbackNames) {
         $("div#feedback #"+name).attr("name",feedbackNames[name]);
     }
     $("div#feedback form#feedback_form").attr("action",formURL);
-    $("div#feedback form#feedback_form input#topic").val(window.location);
+    $("div#feedback form#feedback_form input#helptopic").val(window.location);
     $("div#feedback form#feedback_form input#formkey").val(formKey);
     // Display success message
     showModal("<p>Thank you for your feedback.  The Communications team will review your comments and take action as needed.</p>");
