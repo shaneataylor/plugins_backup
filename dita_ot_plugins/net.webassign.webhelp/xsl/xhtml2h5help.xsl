@@ -197,7 +197,7 @@
                 </div>
             </form>
         </div>
-        <iframe id="h5ftgt" name="h5ftgt" seamless="seamless" src="#"><!-- invisible target for form result --></iframe>
+        <iframe id="h5ftgt" name="h5ftgt" seamless="seamless" ><!-- invisible target for form result --></iframe>
     </xsl:template>
     
     
