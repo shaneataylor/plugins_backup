@@ -113,7 +113,7 @@
     
     <xsl:template name="copyright_footer">
         <xsl:variable name="moddate"><xsl:value-of select="//xhtml:meta[@name='DC.Date.Modified']/@content"/></xsl:variable>
-        <xsl:variable name="ownermeta"><xsl:value-of select="//xhtml:meta[@name='DC.Creator']/@content"/>
+        <xsl:variable name="ownermeta"><xsl:value-of select="//xhtml:meta[@name='DC.Creator'][1]/@content"/>
             <!-- if needed, also select value of meta[@name='DC.Rights.Owner'] --></xsl:variable>
         <xsl:choose>
             <xsl:when test="matches($moddate,'\d\d\d\d-\d\d-\d\d') and $ownermeta != ''">
