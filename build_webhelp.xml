@@ -84,7 +84,7 @@
             <param name="args.input" value="m_w_internal_admin.ditamap"/>
             <param name="h5help.name" value="WebAssign Administrator Help" />
             <param name="h5help.feedback" value="yes" />
-            <param name="args.ftr" value="dita_source_files/internal_admin_footer.html"/>
+            <!--<param name="args.ftr" value="dita_source_files/internal_admin_footer.html"/>-->
             <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_w_internal_admin" />
             </antcall>
