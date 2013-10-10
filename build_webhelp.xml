@@ -115,6 +115,7 @@
             <param name="args.input" value="m_d_api_reference.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/api" />
+            <param name="h5help.conreftarget.rule" value=".*"/>
         </antcall>
     </target>
     
