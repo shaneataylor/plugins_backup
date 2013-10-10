@@ -138,7 +138,7 @@ div.target:active, div.task:active { background-color: #CDF !important; }
             <p class="note">Error and warning counts are based on the priority attribute of the message element, which is not always useful. Some <q>warnings</q> are strictly informational, and highlighting in this log has been adjusted to reflect that.</p>
             <p><xsl:value-of select="//*[contains(node(),'* input =')]"/></p>
             <p>Time: <xsl:value-of select="@time"/></p>
-            <p>Errors: <xsl:value-of select="count(//message[@priority='error'] | //stacktrace | //message[contains(.,'[ERROR]')])"/></p>
+            <p>Errors: <xsl:value-of select="count(//message[@priority='error'] | //stacktrace | //message[contains(.,'[ERROR]')] | //message[contains(.,'Error!')])"/></p>
             <p>Warnings: <xsl:value-of select="count(//message[@priority='warn'][contains(.,'WARN')])"/></p>
             <p class="sub">Flagging attribute: <xsl:value-of select="count(//message[contains(node(),'[DOTX042I]')])"/></p>
             <p class="sub">Missing short description: <xsl:value-of select="count(//message[contains(node(),'No short description found')])"/></p>
@@ -155,7 +155,7 @@ div.target:active, div.task:active { background-color: #CDF !important; }
         <xsl:variable name="msgbody"><xsl:value-of select="." disable-output-escaping="yes"/></xsl:variable>
         <xsl:variable name="msgclass">
             <xsl:choose>
-                <xsl:when test="contains($msgbody,'[ERROR]')">error</xsl:when>
+                <xsl:when test="@priority='error' or contains($msgbody,'[ERROR]') or contains($msgbody,'Error!')">error</xsl:when>
                 <xsl:when test="contains($msgbody,'Alternate text is missing on external-graphic')">alttxtwarn</xsl:when>
                 <xsl:when test="contains($msgbody,'[WARN]') or starts-with($msgbody,'WARNING')">otwarn</xsl:when>
                 <xsl:when test="contains($msgbody,'org.apache.fop.events.LoggingEventListener processEvent')">info</xsl:when>
