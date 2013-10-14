@@ -15,6 +15,8 @@ textarea {
 /* ====================================== BRANDING ====================================== */
 div#brand-logo {
     padding: 10px;
+}
+div#brand-logo:before {
     content:url('img/logo.png')
 }
 
