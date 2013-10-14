@@ -188,7 +188,7 @@ div.target:active, div.task:active { background-color: #CDF !important; }
     </xsl:template>
     
     <xsl:template match="target">
-        <xsl:variable name="errcount"><xsl:value-of select="count(descendant::message[@priority='error'] | descendant::stacktrace | descendant::message[contains(.,'[ERROR]')])"/></xsl:variable>
+        <xsl:variable name="errcount"><xsl:value-of select="count(descendant::message[@priority='error'] | descendant::stacktrace | descendant::message[contains(.,'[ERROR]')] | descendant::message[contains(.,'Error!')])"/></xsl:variable>
         <xsl:variable name="warncount"><xsl:value-of select="count(descendant::message[@priority='warn'][contains(.,'WARN')])"/></xsl:variable>
         <xsl:variable name="errwarncountclass">
             <xsl:choose>
