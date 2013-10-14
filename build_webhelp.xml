@@ -19,7 +19,7 @@
     <property name="args.debug" value="no" />
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="logs"/>
-    <property name="h5help.conreftarget.rule" value="^(#|symbols)"/>
+    <property name="h5help.conreftarget.rule" value="^(#|symbols|m_a_common_)"/>
     <property name="onlytopic.in.map" value="true"/>
     
     <import file="${dita.dir}/build.xml" />
