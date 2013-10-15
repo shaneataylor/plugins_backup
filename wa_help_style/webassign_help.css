@@ -540,6 +540,8 @@ div#topic > div.body.quickstart + * {
     margin-top: 0 !important;
 }
 
+
+
 /*@media print {
     body.quickstart {
         width: 7.5in;
@@ -556,5 +558,34 @@ div#topic > div.body.quickstart + * {
     }
 }
 
+/* ==================== API ==================== */
 
+div.body.api div.example {
+    margin: 0px 0px 4px -4px;
+    background-color: #D8EED0;
+    background: -webkit-linear-gradient(top,#D8EED0,#b6ccae);
+    background: -moz-linear-gradient(left,#D8EED0,#b6ccae);
+    background: linear-gradient(left,#D8EED0,#b6ccae);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    padding: 0px 4px;
+    border: 1px solid #7AB362;
+}
 
+div.body.api div.example dd.dd {
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 1199px) {
+    div.body.api > div.bodydiv, div.body.api > div.example {
+        width: 48%;
+        vertical-align: top;
+    }
+    div.body.api > div.bodydiv {
+        float: left;
+    }
+    div.body.api > div.example {
+        float: right;
+    }
+}
