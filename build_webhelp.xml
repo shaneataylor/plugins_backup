@@ -16,7 +16,7 @@
     <property name="args.xhtml.toc" value="toc" />
     <property name="args.hide.parent.link" value="no" />
     <property name="args.breadcrumbs" value="yes" />
-    <property name="args.debug" value="no" />
+    <property name="args.debug" value="yes" />
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="logs"/>
     <property name="h5help.conreftarget.rule" value="^(#|symbols|m_a_common_)"/>
