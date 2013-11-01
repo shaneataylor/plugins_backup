@@ -577,6 +577,10 @@ div.body.api div.example dd.dd {
     margin-left: 0px;
 }
 
+div.related-links {
+    clear: both;
+}
+
 @media screen and (min-width: 1199px) {
     div.body.api > div.bodydiv, div.body.api > div.example {
         width: 48%;
