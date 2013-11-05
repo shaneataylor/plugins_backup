@@ -36,7 +36,8 @@ pre + pre {padding-top: 0px; margin-top: -4px; }
 pre.alttxtwarn {color: black; }
 pre.otwarn {color: black; background-color: yellow;}
 pre.debug {color: #9CC}
-pre.info {color: #333; }
+pre.info {color: #444}
+pre.infomsg {color: #000; font-weight: bold;}
 .showall  pre.info {display: block;}
 .showsome pre.info {display: none;}
 pre.warn {color: black; font-weight: bold;}
@@ -145,7 +146,7 @@ div.target:active, div.task:active { background-color: #CDF !important; }
             <p class="sub">Missing alt text: <xsl:value-of select="count(//message[contains(node(),'Alternate text is missing on external-graphic.')] | //message[contains(node(),'Image is missing alternative text.')])"/></p>
             <p class="sub">FOP event listener: <xsl:value-of select="count(//message[contains(node(),'org.apache.fop.events.LoggingEventListener')])"/></p>
             <form action="#">
-                <input type="checkbox" id="showall" onchange="toggle_showall();"/><label for="showall">Show tasks and info messages</label>
+                <input type="checkbox" id="showall" onchange="toggle_showall();"/><label for="showall">Show tasks and all messages</label>
             </form>
         </div>
         <xsl:apply-templates/>
@@ -155,12 +156,20 @@ div.target:active, div.task:active { background-color: #CDF !important; }
         <xsl:variable name="msgbody"><xsl:value-of select="." disable-output-escaping="yes"/></xsl:variable>
         <xsl:variable name="msgclass">
             <xsl:choose>
-                <xsl:when test="@priority='error' or contains($msgbody,'[ERROR]') or contains($msgbody,'Error!')">error</xsl:when>
+                <xsl:when test="@priority='error'">error</xsl:when>
+                <xsl:when test="contains($msgbody,'[ERROR]')">error</xsl:when>
+                <xsl:when test="contains($msgbody,'Error!')">error</xsl:when>
+                
                 <xsl:when test="contains($msgbody,'Alternate text is missing on external-graphic')">alttxtwarn</xsl:when>
-                <xsl:when test="contains($msgbody,'[WARN]') or starts-with($msgbody,'WARNING')">otwarn</xsl:when>
+                
+                <xsl:when test="contains($msgbody,'[WARN]')">otwarn</xsl:when>
+                <xsl:when test="starts-with($msgbody,'WARNING')">otwarn</xsl:when>
+                
+                <xsl:when test="contains($msgbody,'INFO:')">infomsg</xsl:when>
+                <xsl:when test="contains($msgbody,'[INFO]')">infomsg</xsl:when>
+                
                 <xsl:when test="contains($msgbody,'org.apache.fop.events.LoggingEventListener processEvent')">info</xsl:when>
                 <xsl:when test="contains($msgbody,'org.apache.fop.apps.FopFactoryConfigurator configure')">info</xsl:when>
-                <xsl:when test="starts-with($msgbody,'INFO:')">info</xsl:when>
                 <xsl:otherwise><xsl:value-of select="@priority"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
