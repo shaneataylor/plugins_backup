@@ -14,10 +14,10 @@ textarea {
 
 /* ====================================== BRANDING ====================================== */
 div.brand_header {
-    padding: 10px;
+    padding: 24px 0px;
 }
 div.brand_header > img.logo {
-    max-height: 30px;
+    max-width: 256px;
 }
 
 /* ====================================== CONTENT ====================================== */
