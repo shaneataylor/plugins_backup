@@ -39,7 +39,7 @@
         <antcall target="buildit">
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/instructor_guide" />
-            <param name="h5help.name" value="WebAssign Instructor Help" />
+            <param name="h5help.name" value="Instructor Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Instructors" />
             <!--<param name="h5help.disqus.shortname" value="webassigntesting" />-->
@@ -47,6 +47,7 @@
             <param name="args.input" value="m_i_help.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_i_help" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -54,12 +55,13 @@
         <antcall target="buildit">
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/student_guide"/>
-            <param name="h5help.name" value="WebAssign Student Help" />
+            <param name="h5help.name" value="Student Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:_vlyaxcspak" />
             <param name="h5help.feedback" value="no" />
             <param name="args.input" value="m_s_help.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_s_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_s_help" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -67,13 +69,14 @@
         <antcall target="buildit">
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/admin" />
-            <param name="h5help.name" value="WebAssign Technical Administrator Help" />
+            <param name="h5help.name" value="Technical Admin Help" />
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Admins" />
             <param name="h5help.feedback" value="yes" />
             <param name="args.input" value="m_d_sysadmin.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_d_admin_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_d_sysadmin" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -82,12 +85,13 @@
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/wa-admin" />
             <param name="args.input" value="m_w_internal_admin.ditamap"/>
-            <param name="h5help.name" value="WebAssign Administrator Help" />
+            <param name="h5help.name" value="WebAssign Admin Help" />
             <param name="h5help.feedback" value="yes" />
             <!--<param name="args.ftr" value="dita_source_files/internal_admin_footer.html"/>-->
             <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_w_internal_admin" />
-            </antcall>
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
+        </antcall>
     </target>
     
     <target name="wa2_instructor">
@@ -101,6 +105,7 @@
             <param name="args.input" value="m_i_wa2.ditamap"/>
             <param name="args.filter" value="dita_source_files/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_i_wa2" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -116,6 +121,7 @@
             <param name="args.filter" value="dita_source_files/d_w_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/api" />
             <param name="h5help.conreftarget.rule" value=".*"/>
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -130,6 +136,7 @@
             <param name="args.input" value="m_wa_comm_team_info.ditamap"/>
             <!--<param name="args.filter" value="d_i_help.ditaval" />-->
             <param name="dita.temp.dir" location="temp/m_wa_comm_team_info" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
@@ -144,6 +151,7 @@
             <param name="args.input" value="m_d_styleguide.ditamap"/>
             <param name="args.filter" value="styleguide/flagstatus.ditaval" />
             <param name="dita.temp.dir" location="temp/m_d_styleguide" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
     
