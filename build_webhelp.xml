@@ -113,7 +113,7 @@
         <antcall target="buildit">
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/api" />
-            <param name="args.draft" value="yes"/>
+            <param name="args.draft" value="no"/>
             <param name="h5help.name" value="API Help" />
             <param name="h5help.feedback" value="yes" />
             <param name="h5help.prettify.code" value="yes" />
