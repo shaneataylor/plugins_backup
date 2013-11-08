@@ -11,14 +11,12 @@
     <property name="h5help.disqus.shortname" value=""/>
     <property name="h5help.conreftarget.rule" value=""/>
     <property name="h5help.copy.cssroot" value="no"/>
-    
-    
+    <property name="h5help.args.hdr" value="${args.hdr}"/>
     
     <target name="dita2h5help"
         depends="build-init, preprocess, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
         dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap, copy-h5help-resources"/>
-    
     
     <target name="h5help.check.conrefs" description="Ensure conref targets adhere to rule specified by h5help.conreftarget.rule">
         <!--<property name="conref_file_list" value="${dita.temp.dir}${file.separator}conref.list" />
@@ -127,6 +125,8 @@
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}xhtml2h5help.xsl"
             failOnError="true">
             <param name="h5help.feedback" expression="${h5help.feedback}"/>
+            <param name="h5help.name" expression="${h5help.name}"/>
+            <param name="h5help.args.hdr" expression="${h5help.args.hdr}"/>
         </xslt>
         <!-- Clean up temp directory -->
         <delete dir="${output.dir}${file.separator}temp_xhtml"></delete>

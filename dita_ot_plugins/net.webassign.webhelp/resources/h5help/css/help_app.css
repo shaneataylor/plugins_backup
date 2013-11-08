@@ -830,7 +830,6 @@ html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
 
 div#toolbar {
     position: absolute;
-    top: 0px;
     left: 0px;
     right: 0px;
     height: 40px;
@@ -850,6 +849,7 @@ div#toolbar > h1 {
     width: 300px;
     font-size: 18pt;
     font-weight: normal;
+    text-transform:uppercase;
 }
 div#toolbar > img {
     margin: 10px;
@@ -887,7 +887,6 @@ div#searchbox td.gsc-search-button, div#searchbox td.gsc-clear-button {
 img#menu_button {
     cursor: pointer;
     position: absolute;
-    top: 0px;
     right: 0px;
     padding: 10px;
     z-index: 95;
@@ -900,7 +899,7 @@ ul#menu {
     padding: 5px 0px;
     display: block;
     position: absolute;
-    top: 15px;
+    margin-top: 32px;
     right: 10px;
     text-align: left;
     background-color: white;
@@ -949,7 +948,7 @@ a:hover {
 
 div#toc {
     position: absolute;
-    top: 40px;
+    top: 0px;
     bottom: 0px;
     left: 0px;
     width: 280px;
@@ -1034,7 +1033,7 @@ div#toc a.current:hover {
 div#sizer {
     display: none;
     position: fixed;
-    top: 40px;
+    top: 0px;
     bottom: 0px;
     left: 0px;
     width: 16px;
@@ -1108,7 +1107,7 @@ div.parentlink {
 
 div#topic, div#searchresults {
     position: absolute;
-    top: 40px;
+    top: 0px;
     bottom: 0px;
     left: 312px;
     right: 0px;
@@ -1390,4 +1389,11 @@ a.hidden508nav:focus {
     position:static;
     width:auto;
     height:auto;
+}
+div#content_container {
+    position: absolute; /* so its children are positioned in relation to it */
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 40px; /* script will override based on height of brand header */
 }

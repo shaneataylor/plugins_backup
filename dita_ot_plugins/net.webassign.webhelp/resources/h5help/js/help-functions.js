@@ -447,6 +447,7 @@ function mobilize() {
         }
         $("body").scrollLeft(0); // fix for iPhone
     }
+    adjustForBanner();
 }
 function slideTOC(hideTOC) {
     var width = $(window).width(); // see also: $(document).width()
@@ -469,3 +470,13 @@ function slideTOC(hideTOC) {
     $("div#toc").css("left",tocleft);
     $("div#sizer").css("left",sizerleft);
 }
+function adjustForBanner() {
+    var bannerheight = $("div.brand_header").outerHeight(true);
+    if (bannerheight != null) {
+        var adjustTop = (40 + bannerheight) + "px";
+        $("div#content_container").css("top",adjustTop);
+        $("div#sizer").css("top",adjustTop);
+    }
+    
+}
+

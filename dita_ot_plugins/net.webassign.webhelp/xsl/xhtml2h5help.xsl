@@ -8,6 +8,8 @@
     <xsl:import href="plugin:org.dita.base:xsl/common/output-message.xsl"></xsl:import>
     <xsl:param name="msgprefix">DOTX</xsl:param>
     <xsl:param name="h5help.feedback">no</xsl:param>
+    <xsl:param name="h5help.name"></xsl:param>
+    <xsl:param name="h5help.args.hdr"></xsl:param>
     
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
@@ -16,6 +18,31 @@
         <xsl:attribute name="xml:lang">en-us</xsl:attribute>
         <xsl:attribute name="class">no-js</xsl:attribute>
     </xsl:attribute-set>
+    
+    <xsl:variable name="HDRFILE">
+        <xsl:choose>
+            <xsl:when test="not($h5help.args.hdr)"/> <!-- If no header file leave empty -->
+            <xsl:when test="starts-with($h5help.args.hdr, 'file:')">
+                <xsl:value-of select="$h5help.args.hdr"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="starts-with($h5help.args.hdr, '/')">
+                        <xsl:text>file://</xsl:text><xsl:value-of select="$h5help.args.hdr"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>file:/</xsl:text><xsl:value-of select="$h5help.args.hdr"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="newline"><xsl:text>
+</xsl:text></xsl:variable>
+    
+    
+    
 
     <xsl:template match="xhtml:html">
         <xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html>
@@ -57,10 +84,17 @@
             <![endif]-->
             ]]></xsl:text>
         <xsl:comment>googleoff: all</xsl:comment><!-- don't index until we get to the topic itself -->
+        
+        <!-- Add running heading XHTML code snippet if requested to -->
+        <xsl:if test="string-length($HDRFILE) > 0">
+            <xsl:copy-of select="document($HDRFILE,/)"/>      
+        </xsl:if>
+        <xsl:value-of select="$newline"/>
+        
         <div id="toolbar">
+            <h1 class="help_name"><xsl:value-of select="$h5help.name"/></h1>
             <!-- Skipahead link. See http://webaim.org/presentations/2012/ariahtml5/hiddenlinks2 -->
              <a href="#topic" class="hidden508nav">Skip to start of help topic</a>
-            <div id="brand-logo"></div>
             <div id="searchbox" role="search" aria-label="search"><xsl:comment></xsl:comment></div>
         </div>
         <div>
@@ -78,12 +112,14 @@
         </div>
         <div id="modal_back" class="hidden"><xsl:comment></xsl:comment></div>
         <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
-        <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
-        <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><xsl:comment></xsl:comment></div>
-            <xsl:call-template name="bodydiv">
-                <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
-            </xsl:call-template>
-        <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
+        <div id="content_container">
+            <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
+            <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><xsl:comment></xsl:comment></div>
+                <xsl:call-template name="bodydiv">
+                    <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
+                </xsl:call-template>
+            <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
+        </div>
         <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"><xsl:comment></xsl:comment></script>
         </body>
     </xsl:template>
