@@ -13,11 +13,11 @@ textarea {
 }
 
 /* ====================================== BRANDING ====================================== */
-div#brand-logo {
+div.brand_header {
     padding: 10px;
 }
-div#brand-logo:before {
-    content:url('img/logo.png')
+div.brand_header > img.logo {
+    max-height: 30px;
 }
 
 /* ====================================== CONTENT ====================================== */
@@ -435,7 +435,8 @@ h1.title.quickstart {
     text-align:right;
     letter-spacing: -1pt;
     margin: 0pt  !important;
-    background-image:url("img/webassign_logo.png");
+    background-image:url("img/WA_logo_MASTER_WEB.png");
+    background-size: 20%;
     background-repeat: no-repeat;
     background-position: 2pt 6pt;
     line-height:1;
