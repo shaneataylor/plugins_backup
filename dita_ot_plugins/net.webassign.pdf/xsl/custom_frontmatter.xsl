@@ -64,16 +64,16 @@
                     <!-- Don't add if it's just a topic -->
                     
                     <!-- Create 1/2 Title Page -->
-                    <fo:block xsl:use-attribute-sets="__frontmatter__titlepage">
+                    <!--<fo:block xsl:use-attribute-sets="__frontmatter__titlepage">
                         <xsl:apply-templates select="$map/*[contains(@class,' topic/title ')][1]"/>
-                    </fo:block>
+                    </fo:block>-->
                     <!-- Create Title Page -->
-                    <fo:block xsl:use-attribute-sets="__frontmatter__titlepage">
+                    <!--<fo:block xsl:use-attribute-sets="__frontmatter__titlepage">
                         <xsl:apply-templates select="$map/*[contains(@class,' topic/title ')][1]"/>
                         <fo:block xsl:use-attribute-sets="__frontmatter__titlepage__revdate">
                             <xsl:value-of select="$revisiondate"/>
                         </fo:block>
-                    </fo:block>
+                    </fo:block>-->
                 </xsl:if>
                 
                 <xsl:call-template name="create_copyright_notice"></xsl:call-template>
