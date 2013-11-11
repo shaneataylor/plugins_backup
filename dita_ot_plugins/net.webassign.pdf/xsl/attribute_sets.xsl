@@ -41,10 +41,21 @@
     </xsl:attribute-set>
     
     
+    <xsl:attribute-set name="__cover__page__logo__block">
+        <xsl:attribute name="text-align">left</xsl:attribute>
+        <xsl:attribute name="margin-top">0.75in</xsl:attribute>
+        <xsl:attribute name="margin-left">0.75in</xsl:attribute>
+        <xsl:attribute name="margin-right">0.75in</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="__cover__page__logo">
+        <xsl:attribute name="content-height">1in</xsl:attribute>
+    </xsl:attribute-set>
+    
     
     <xsl:attribute-set name="__frontmatter">
         <xsl:attribute name="text-align">right</xsl:attribute>
-        <xsl:attribute name="margin-top">8.25in</xsl:attribute>
+        <xsl:attribute name="margin-top">6.5in</xsl:attribute>
         <xsl:attribute name="margin-left">4.6in</xsl:attribute>
         <xsl:attribute name="margin-right">0.3in</xsl:attribute>
         <xsl:attribute name="font-family">Arial</xsl:attribute>

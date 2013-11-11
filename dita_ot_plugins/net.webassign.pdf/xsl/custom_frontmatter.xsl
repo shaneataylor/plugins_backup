@@ -16,6 +16,13 @@
         <fo:page-sequence master-reference="front-matter" xsl:use-attribute-sets="__force__page__count">
             <!--<xsl:call-template name="insertFrontMatterStaticContents"/>-->
             <fo:flow flow-name="xsl-region-body">
+                <fo:block xsl:use-attribute-sets="__cover__page__logo__block">
+                    <fo:external-graphic xsl:use-attribute-sets="__cover__page__logo">
+                        <xsl:attribute name="src">
+                            <xsl:value-of select="concat('url(',$artworkPrefix, 'Customization/OpenTopic/common/artwork/WA_logo_MASTER_RGB.svg)')"/>
+                        </xsl:attribute>
+                    </fo:external-graphic>
+                </fo:block>
                 <fo:block xsl:use-attribute-sets="__frontmatter">
                     <!-- set the title -->
                     <fo:block xsl:use-attribute-sets="__frontmatter__title">
@@ -42,6 +49,8 @@
                     <fo:block xsl:use-attribute-sets="__frontmatter__revdate">
                         <xsl:value-of select="$revisiondate"/>
                     </fo:block>
+                    
+                    
                     
                     <!-- DO NOT SHOW OWNER ON COVER -->
                     <!-- 
