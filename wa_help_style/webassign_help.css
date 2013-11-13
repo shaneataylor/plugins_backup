@@ -19,6 +19,13 @@ div.brand_header {
 div.brand_header > img.logo {
     max-width: 256px;
 }
+@media screen and (max-height: 599px) {
+    div.brand_header {
+        display: none;
+        height: 0px;
+        padding: 0px;
+    }
+}
 
 /* ====================================== CONTENT ====================================== */
 
