@@ -15,6 +15,7 @@ requirejs.config({
     "paths": {
       "jquery"         : "vendor/jquery-1.8.3.min",
       "modernizr"      : "vendor/modernizr-2.6.2.min",
+      "mathjax"        : "/manual/vendor/mathjax/MathJax",
       "prettify"       : "prettify-code-google/prettify",
       "help-functions" : "help-functions"
     }});
@@ -23,10 +24,10 @@ require(["jquery"],function(){
     $.getJSON('h5help/h5params.json',function(data, status, xhr){
         if (status !== 'error') { h5params = data; }
         if (h5params.prettify_code == "yes") {
-            otherrequires = ["modernizr","prettify","help-functions"];
+            otherrequires = ["modernizr","prettify","help-functions","mathjax"];
         }
         else {
-            otherrequires = ["modernizr","help-functions"];
+            otherrequires = ["modernizr","help-functions","mathjax"];
         }
         require(otherrequires,function(){
             initAll();
