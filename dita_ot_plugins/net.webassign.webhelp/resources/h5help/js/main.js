@@ -15,7 +15,7 @@ requirejs.config({
     "paths": {
       "jquery"         : "vendor/jquery-1.8.3.min",
       "modernizr"      : "vendor/modernizr-2.6.2.min",
-      "mathjax"        : "/manual/vendor/mathjax/MathJax",
+      "mathjax"        : "../../../vendor/mathjax/MathJax",
       "prettify"       : "prettify-code-google/prettify",
       "help-functions" : "help-functions"
     }});
