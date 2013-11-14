@@ -72,6 +72,14 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
             <xsl:apply-templates/>
             <link rel="stylesheet" href="h5help/css/help_app.css"/>
+            <!-- MathJax Init/Config -->
+            <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({
+                    config: ["MMLorHTML.js"],
+                    jax: ["input/MathML","output/HTML-CSS","output/NativeMML"],
+                    extensions: ["mml2jax.js","MathMenu.js","MathZoom.js"]
+                    });
+                </script>
         </head>
     </xsl:template>
     
