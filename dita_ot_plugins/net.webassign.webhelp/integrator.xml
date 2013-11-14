@@ -14,9 +14,18 @@
     <property name="h5help.args.hdr" value="${args.hdr}"/>
     
     <target name="dita2h5help"
-        depends="build-init, preprocess, dita.map.xhtml,
+        depends="build-init, preprocess, copy-mathML, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
         dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap, copy-h5help-resources"/>
+    
+    
+    <target name="copy-mathML">
+        <copy todir="${dita.temp.dir}${file.separator}mathml" failonerror="false">
+            <fileset
+                dir="${args.input.dir}${file.separator}mathml"
+                includes="**${file.separator}*"/>
+        </copy>
+    </target>
     
     <target name="h5help.check.conrefs" description="Ensure conref targets adhere to rule specified by h5help.conreftarget.rule">
         <!--<property name="conref_file_list" value="${dita.temp.dir}${file.separator}conref.list" />
