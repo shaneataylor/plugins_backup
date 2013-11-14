@@ -184,6 +184,7 @@ function initTopic(addHistory,thisHref){
     mobilize();
     syncTOCandBreadcrumbs();
     addCommentSection();
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
 }
 
 function prettifyIfEnabled(){
@@ -479,4 +480,3 @@ function adjustForBanner() {
     }
     
 }
-
