@@ -601,3 +601,9 @@ div.related-links {
         float: right;
     }
 }
+
+/* ==================== MathJax ==================== */
+div.MathJax_Display {
+    text-align: left !important;
+    margin: 0 !important;
+}
