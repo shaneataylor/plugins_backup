@@ -35,62 +35,7 @@
                 <value>flate</value>
             </filterList>
             <fonts>
-                <font metrics-url="Arial.xml" kerning="yes" embed-url="Arial.ttf">
-                    <font-triplet name="Arial" style="normal" weight="normal"/>
-                </font>
-                <font metrics-url="Arial Bold.xml" kerning="yes" embed-url="Arial Bold.ttf">
-                    <font-triplet name="Arial" style="normal" weight="bold"/>
-                </font>
-                <font metrics-url="Arial Italic.xml" kerning="yes" embed-url="Arial Italic.ttf">
-                    <font-triplet name="Arial" style="italic" weight="normal"/>
-                </font>
-                <font metrics-url="Arial Bold Italic.xml" kerning="yes"
-                    embed-url="Arial Bold Italic.ttf">
-                    <font-triplet name="Arial" style="italic" weight="bold"/>
-                </font>
-                <font metrics-url="Consolas.xml" kerning="yes" embed-url="Consolas.ttf">
-                    <font-triplet name="Consolas" style="normal" weight="normal"/>
-                </font>
-                <font metrics-url="Consolas Bold.xml" kerning="yes" embed-url="Consolas Bold.ttf">
-                    <font-triplet name="Consolas" style="normal" weight="bold"/>
-                </font>
-                <font metrics-url="Consolas Italic.xml" kerning="yes"
-                    embed-url="Consolas Italic.ttf">
-                    <font-triplet name="Consolas" style="italic" weight="normal"/>
-                </font>
-                <font metrics-url="Consolas Bold Italic.xml" kerning="yes"
-                    embed-url="Consolas Bold Italic.ttf">
-                    <font-triplet name="Consolas" style="italic" weight="bold"/>
-                </font>
-                <font metrics-url="Verdana.xml" kerning="yes" embed-url="Verdana.ttf">
-                    <font-triplet name="Verdana" style="normal" weight="normal"/>
-                </font>
-                <font metrics-url="Verdana Bold.xml" kerning="yes" embed-url="Verdana Bold.ttf">
-                    <font-triplet name="Verdana" style="normal" weight="bold"/>
-                </font>
-                <font metrics-url="Verdana Italic.xml" kerning="yes" embed-url="Verdana Italic.ttf">
-                    <font-triplet name="Verdana" style="italic" weight="normal"/>
-                </font>
-                <font metrics-url="Verdana Bold Italic.xml" kerning="yes"
-                    embed-url="Verdana Bold Italic.ttf">
-                    <font-triplet name="Verdana" style="italic" weight="bold"/>
-                </font>
-                <font metrics-url="stixgeneral-webfont.xml" kerning="yes"
-                    embed-url="stixgeneral-webfont.ttf">
-                    <font-triplet name="STIXGeneral" style="normal" weight="normal"/>
-                </font>
-                <font metrics-url="stixgeneralbol-webfont.xml" kerning="yes"
-                    embed-url="stixgeneralbol-webfont.ttf">
-                    <font-triplet name="STIXGeneral" style="normal" weight="bold"/>
-                </font>
-                <font metrics-url="stixgeneralitalic-webfont.xml" kerning="yes"
-                    embed-url="stixgeneralitalic-webfont.ttf">
-                    <font-triplet name="STIXGeneral" style="italic" weight="normal"/>
-                </font>
-                <font metrics-url="stixgeneralbolita-webfont.xml" kerning="yes"
-                    embed-url="stixgeneralbolita-webfont.ttf">
-                    <font-triplet name="STIXGeneral" style="italic" weight="bold"/>
-                </font>
+                <directory>]]>${dita.dir}<![CDATA[/plugins/net.webassign.pdf/Customization/fop/fonts</directory>
             </fonts>
         </renderer>
         <renderer mime="application/postscript"> </renderer>
