@@ -14,7 +14,7 @@ textarea {
 
 /* ====================================== BRANDING ====================================== */
 div.brand_header {
-    padding: 24px 0px;
+    padding: 24px 0px 24px 24px;
 }
 div.brand_header > img.logo {
     max-width: 256px;
