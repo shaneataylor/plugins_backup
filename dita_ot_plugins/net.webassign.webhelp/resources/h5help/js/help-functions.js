@@ -421,56 +421,66 @@ function closeFeedback() {
 }
 function mobilize() {
     // do this on window resize and after any load of TOC or topic
-    var width = $(window).width();
-    if (width > 800) {
-        var cssObj = {
-            'left'   : '',
-            'width'  : ''
-        };
-        $("div#toc").css(cssObj); // revert to stylesheet declaration
-        $("#view_topic").addClass("hidden");
-        $("#view_contents").addClass("hidden");
-    }
-    else {
-        var isright = $("div#sizer").hasClass("slideright");
-        var tocleft = isright ? "0px" : (20-width) + "px";
-        width = (width-20) + "px";
-        $("div#toc").css("width",width);
-        $("div#toc").css("left",tocleft);
-        if (isright) {
-            $("div#sizer").css("left",width);
+    var myWin = windowWidth();
+    if (myWin.isSmall) {
+        $("div#toc").css("width",myWin.toc.width);
+        
+        if (myWin.toc.isOpen) {
+            $("div#toc").css("left",myWin.toc.openLeft);
+            $("div#sizer").css("left",myWin.sizer.openLeft);
             $("#view_topic").removeClass("hidden");
             $("#view_contents").addClass("hidden");
         }
         else {
+            $("div#toc").css("left",myWin.toc.closedLeft);
+            $("div#sizer").css("left",myWin.sizer.closedLeft);
             $("#view_topic").addClass("hidden");
             $("#view_contents").removeClass("hidden");
         }
         $("body").scrollLeft(0); // fix for iPhone
     }
+    else {
+        var cssObj = {
+            'left'   : '',
+            'width'  : ''
+        };
+        $("div#toc").css(cssObj); // revert to stylesheet declaration
+        $("#view_topic,#view_contents").addClass("hidden"); // hide menu items
+    }
     adjustForBanner();
 }
 function slideTOC(hideTOC) {
-    var width = $(window).width(); // see also: $(document).width()
-    var smallwin = (width <= 800);
-    hideTOC = (typeof hideTOC == 'boolean') ? smallwin && hideTOC : smallwin && $("div#sizer").hasClass("slideright");
+    var myWin = windowWidth();
+    hideTOC = (typeof hideTOC == 'boolean') ? myWin.isSmall && hideTOC : myWin.isSmall && myWin.toc.isOpen;
     closeMenu();
-    var tocleft = "0px";
-    var sizerleft = (width-20) + "px";
     if (hideTOC) {
-        tocleft = (20 - width) + "px";
-        sizerleft = "0px";
-        $("#view_topic").addClass("hidden");
-        $("#view_contents").removeClass("hidden");
+        $("div#toc").css("left",myWin.toc.closedLeft);
+        $("div#sizer").css("left",myWin.sizer.closedLeft);
     }
     else {
-        $("#view_topic").removeClass("hidden");
-        $("#view_contents").addClass("hidden");
+        $("div#toc").css("left",myWin.toc.openLeft);
+        $("div#sizer").css("left",myWin.sizer.openLeft);
     }
+    $("#view_topic,#view_contents").toggleClass("hidden");
     $("div#sizer").toggleClass("slideright slideleft");
-    $("div#toc").css("left",tocleft);
-    $("div#sizer").css("left",sizerleft);
 }
+function windowWidth() {
+    var tocLRpaddingSum = 48; // Add left & right padding for TOC div in px
+    var width = $(window).width(); // see also: $(document).width()
+    var isSmall = (width <= 800);
+    var toc = { 
+        isOpen     : $("div#sizer").hasClass("slideright") , 
+        width      : (width-20-tocLRpaddingSum) + "px" ,
+        openLeft   : "0px" ,
+        closedLeft : (tocLRpaddingSum - width - 20) + "px"
+        };
+    var sizer = {
+        openLeft   : (width-20) + "px" ,
+        closedLeft : "0px"
+        }
+    return { width:width, isSmall:isSmall, toc:toc, sizer:sizer };
+}
+
 function adjustForBanner() {
     var bannerheight = $("div.brand_header").outerHeight(true);
     if (bannerheight != null) {

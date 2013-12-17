@@ -743,16 +743,9 @@ textarea {
 @media print {
     /* only print the current topic */
     body > div, div.related-links, div.related-links+div, 
-    div#topic-breadcrumbs, div#feedback, div#toc {
+    div#topic-breadcrumbs, div#feedback {
         display:none;
     }
-    
-    div#content_container {
-        display: block;
-        position: relative !important;
-        top: 0in !important;
-    }
-    
     div#topic > div.copyright {
         display: block;
         color: black;
@@ -760,8 +753,8 @@ textarea {
     div#topic {
         display:block;
         position:inherit !important;
-        top:0in !important;
-        left:0in !important;
+        top:auto;
+        left:auto;
         right:auto;
         bottom:auto;
     }
@@ -845,17 +838,14 @@ div#toolbar {
     vertical-align: middle;
     z-index: 90;
 }
-div#toolbar > h1 {
+h1.help_name {
     margin: 0px;
-    padding: 6px 10px;
+    padding: 6px 24px;
     display: inline-block;
     width: 300px;
     font-family: arial, helvetica, clean, sans-serif;
     font-size: 18px;
     font-weight: bold;
-}
-div#toolbar > img {
-    margin: 10px;
 }
 div#searchbox {
     position: absolute;
@@ -954,10 +944,10 @@ div#toc {
     top: 0px;
     bottom: 0px;
     left: 0px;
-    width: 280px;
+    width: 252px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 10px;
+    padding: 24px;
     background-color: #eee;
     background: -webkit-linear-gradient(left,#eeeeee,#cccccc);
     background: -moz-linear-gradient(left,#eeeeee,#cccccc);
@@ -1400,3 +1390,14 @@ div#content_container {
     right: 0px;
     top: 40px; /* script will override based on height of brand header */
 }
+div.brand_header {
+    padding: 24px;
+}
+@media screen and (max-height: 599px) {
+    div.brand_header {
+        display: none;
+        height: 0px;
+        padding: 0px;
+    }
+}
+
