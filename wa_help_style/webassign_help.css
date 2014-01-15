@@ -610,3 +610,6 @@ div.MathJax_Display {
     -moz-border-radius: 6px;
     border-radius: 6px;
 }
+.vtscript .audience-internal a, .vtscript .audience-internal a:link, .vtscript .audience-internal a:visited {
+    color: #A5D8FF;
+}
