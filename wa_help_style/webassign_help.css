@@ -613,3 +613,6 @@ div.MathJax_Display {
 .vtscript .audience-internal a, .vtscript .audience-internal a:link, .vtscript .audience-internal a:visited {
     color: #A5D8FF;
 }
+.vtscript th, .vtscript td[id] {
+    background: none;
+}
