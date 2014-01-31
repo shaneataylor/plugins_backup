@@ -884,14 +884,27 @@ div#searchbox td.gsc-search-button, div#searchbox td.gsc-clear-button {
     display: none;
 }
 
-img#menu_button {
+a#menu_button {
     cursor: pointer;
     position: absolute;
-    right: 0px;
-    padding: 10px;
+    right: 8px;
+    margin-top: 8px;
+    padding: 0px;
     z-index: 95;
+    display: block;
+    height: 25px;
+    width: 25px;
+    overflow:hidden;
 }
-img#menu_button:focus {
+a#menu_button > span.ua_control {
+    background-position: 0px -75px;
+    cursor: pointer;
+} 
+
+.no-svg img[src="h5help/img/ua_sprite.svg"], .no-svg span.ua_control {
+    background-image: url(../img/ua_sprite.png);
+}
+a#menu_button:focus {
     outline:none; /* Chrome (others?) puts a focus glow border we don't want */
 }
 ul#menu {
@@ -974,26 +987,30 @@ div#toc ul>li {
     margin: 2px 0px;
     line-height: 1;
 } 
-div#toc ul>li>span.control {
+span.ua_control {
     background-repeat: no-repeat;
-    background-position: 0px 1px;
+    background-position: 0px 25px;
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-left: -24px;
-    vertical-align:top;
+    width: 25px;
+    height: 25px;
     cursor:default;
+    overflow:hidden;
+    background-image:url('../img/ua_sprite.svg');
 }
-div#toc li.expandable > span.control {
-    background-image:url('../img/expand.png');
+div#toc ul>li>span.ua_control {
+    margin-left: -29px;
+    vertical-align:top;
+}
+div#toc li.expandable > span.ua_control {
+    background-position: 0px -25px;
     cursor: pointer;
 } 
 div#toc li.expandable > ul {
     display: none;
     /*cursor:auto;*/
 } 
-div#toc li.collapsible > span.control {
-    background-image:url('../img/collapse.png');
+div#toc li.collapsible > span.ua_control {
+    background-position: 0px 0px;
     cursor: pointer;
 } 
 div#toc li.collapsible > ul {
@@ -1049,11 +1066,18 @@ div#sizer {
     cursor:pointer;
     z-index: 80;
 }
-div#sizer.slideleft {
-    background-image:url('../img/rightarrow.png');
+div#sizer > span.ua_control {
+    cursor:pointer;
+    margin-left: -5px;
+    position:absolute;
+    top:50%;
+    margin-top: -12.5px;
 }
-div#sizer.slideright {
-    background-image:url('../img/leftarrow.png');
+div#sizer.slideleft > span.ua_control{
+    background-position: 0px -125px;
+}
+div#sizer.slideright > span.ua_control{
+    background-position: 0px -100px;
 }
 div#toc, div#sizer {
     -webkit-transition: left .5s;
@@ -1149,13 +1173,21 @@ div#searchresults > h1 {
     font-size: 1.34em;
     margin: 10px 0px 0px 10px;
 }
-div#searchresults img#closesearch {
+div#searchresults a#closesearch {
+    cursor: pointer;
+    display: block;
+    width: 25px;
+    height: 25px;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 10px;
-    
+    top: 10px;
+    right: 10px;
+    padding: 0px;
+    overflow:hidden;
 }
+a#closesearch > span.ua_control {
+    background-position: 0px -50px;
+    cursor: pointer;
+} 
 
 div#searchresults *[class^='gs'],
 div#searchresults *[class^='gs'] * {

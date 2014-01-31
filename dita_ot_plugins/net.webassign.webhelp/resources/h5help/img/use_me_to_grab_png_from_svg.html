@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Use Me to Grab PNG from SVG</title>
+        <style type="text/css">
+            body{
+                background-color:#9cf;
+            }
+            img{
+                margin: 20px;
+            }</style>
+    </head>
+    <body>
+        <p>After changes to ua_sprite.svg, capture a new ua_sprite.png from this page.</p>
+        <ol>
+            <li>Make sure the page is viewed at 100%.</li>
+            <li>Capture the left image.</li>
+            <li>Trim the captured image to include only the white part of the background.</li>
+            <li>Make the white background transparent.</li>
+            <li>Save the captured image as ua_sprite.png.</li>
+        </ol>
+        <img src="ua_sprite.svg" alt="" style="background-color:white;"/>
+        <img src="ua_sprite.svg" alt="" style="background-color:#808080;"/>
+        <img src="ua_sprite.svg" alt="" style="background-color:black;"/>
+    </body>
+</html>

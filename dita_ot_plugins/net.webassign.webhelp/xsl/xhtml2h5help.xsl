@@ -107,7 +107,7 @@
         </div>
         <div>
             <!-- menu stuff needs to be outside of toolbar div so clicks on toolbar close the menu -->
-            <img src="h5help/img/utility_icon.png" alt="Menu" title="Menu" id="menu_button" tabindex="1"/>
+            <a id="menu_button" tabindex="1" alt="Menu" title="Menu"><span class="ua_control"> </span></a>
             <ul class="menu hidden" role="menu" id="menu">
                 <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>
                 <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>
@@ -122,7 +122,7 @@
         <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
         <div id="content_container">
             <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
-            <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><xsl:comment></xsl:comment></div>
+            <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><span class="ua_control"> </span></div>
                 <xsl:call-template name="bodydiv">
                     <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
                 </xsl:call-template>

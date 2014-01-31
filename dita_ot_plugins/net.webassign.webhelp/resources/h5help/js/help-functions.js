@@ -17,7 +17,7 @@ function initAll() {
 function improveCompatibility(){
     // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
     if (navigator.userAgent.match(/Android [12]\./gi)) {
-        $("div#toolbar,img#menu_button").css({'position':'fixed'});
+        $("div#toolbar,a#menu_button").css({'position':'fixed'});
         $("div#toc,div#topic,div#searchresults").css({'overflow':'visible','bottom':'auto','padding-bottom':'4in'});
         $("div#sizer").css({'overflow':'visible','bottom':'0px'});
     }
@@ -235,7 +235,7 @@ function googleAnalytics(){
 
 function defineHandlers(){
     // Future: create keyboard shortcuts for visually impaired users
-    $("img#menu_button").on("click", toggleMenu); // click required for FF ("focus" did not work)
+    $("a#menu_button").on("click", toggleMenu); // click required for FF ("focus" did not work)
     $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
     // need to enable menu items via keyboard
@@ -258,25 +258,25 @@ function defineHandlers(){
     // delegation binds handler to current and future a descendants of selector
     
     $("div#searchbox").one("focus click", "input", showSearchResults); 
-    $("div#searchresults").on("click", "img#closesearch", hideSearchResults);
+    $("div#searchresults").on("click", "a#closesearch", hideSearchResults);
     
-    $("div#toc,div#topic,div#searchresults").on("click", "a", handleLink); 
+    $("div#toc,div#topic,div#searchresults").on("click", "a:not(#closesearch)", handleLink); 
     $("div#toc").on("click", "a", slideTOC);
     $("div#toc").on("click", "a", function(){
         $(this).addClass("clicked");
     });
     
     $("div#toc").on("click", "li.expandable", expandTOCItem); 
-    $("div#toc").on("click", "li.collapsible>span.control", collapseTOCItem); 
+    $("div#toc").on("click", "li.collapsible>span.ua_control", collapseTOCItem); 
     
     $("div#sizer").on("click", slideTOC);
     $(window).resize(mobilize);
 }
 function initTOC(){
-    $("div#toc li").prepend('<span class="control">&nbsp;</span>');
+    $("div#toc li").prepend('<span class="ua_control">&nbsp;</span>');
     $("div#toc ul:empty").remove(); // remove empty ul so parent not expandable 
     $("div#toc li:has(ul)").addClass("expandable");
-    $("div#toc li.expandable>span.control").attr("title","Click to expand");
+    $("div#toc li.expandable>span.ua_control").attr("title","Click to expand");
     /*$("div#toc a:not([title])").attr("title","Topic does not have a short description");*/
     slideTOC();
     mobilize();
@@ -290,7 +290,7 @@ function expandTOCItem(){
     }
     else { // must be li
        $(this).addClass("collapsible").removeClass("expandable");
-       $(this).children("span.control").attr("title","Click to collapse");
+       $(this).children("span.ua_control").attr("title","Click to collapse");
     }
     return false; // don't bubble event up to parents
 }
@@ -303,7 +303,7 @@ function initSearch(){
     if ( h5params.google_cse_id !== '' ) {
         $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
         $("div#searchresults").html('<h1>Search Results</h1>'+
-        '<img id="closesearch" src="h5help/img/cross.png" alt="Close" title="Close"/>'+
+        '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a>'+
         '<div class="gcse-searchresults" data-gname="wasearch"></div>');
         (function() {
             var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
