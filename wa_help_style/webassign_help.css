@@ -24,7 +24,7 @@ div.brand_header > h1.logo {
     background-size: 290px;
     text-indent: -9999px;
 }
-@media screen and (max-height: 599px) {
+@media screen and (max-height: 750px) {
     div.brand_header > h1.logo {
         height: 41px;
         
