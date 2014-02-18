@@ -13,9 +13,26 @@ textarea {
 }
 
 /* ====================================== BRANDING ====================================== */
-div.brand_header > img.logo {
-    max-width: 256px;
+div.brand_header > h1.logo {
+    width: 300px;
+    height: 92px;
+    
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: transparent url(img/WA_logo_MASTER_WEB.svg) no-repeat 16px 25px;
+    background-size: 290px;
+    text-indent: -9999px;
 }
+@media screen and (max-height: 599px) {
+    div.brand_header > h1.logo {
+        height: 41px;
+        
+        background-position: 23px 13px;
+        background-size: auto;
+    }
+}
+
 
 /* ====================================== CONTENT ====================================== */
 
@@ -432,10 +449,10 @@ h1.title.quickstart {
     text-align:right;
     letter-spacing: -1pt;
     margin: 0pt  !important;
-    background-image:url("img/WA_logo_MASTER_WEB.png");
-    background-size: 20%;
+    background-image:url("img/WA_logo_MASTER_WEB.svg");
+    background-size: 175px;
     background-repeat: no-repeat;
-    background-position: 2pt 6pt;
+    background-position: -3pt 5pt;
     line-height:1;
     padding-bottom: 10pt;
     -webkit-print-color-adjust:exact; /* print in chrome */

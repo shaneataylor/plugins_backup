@@ -1430,13 +1430,12 @@ div#content_container {
     top: 40px; /* script will override based on height of brand header */
 }
 div.brand_header {
-    padding: 24px;
+    padding: 0px;
 }
-@media screen and (max-height: 599px) {
+@media screen and (max-height: 399px) {
     div.brand_header {
         display: none;
         height: 0px;
-        padding: 0px;
     }
 }
 
