@@ -154,6 +154,15 @@ li.li {
     margin-top: 0.75em;
     margin-bottom: 0.75em;
 }
+ul.ul > li.li > p, 
+ul.ul > li.li > div, 
+ul.ul > li.li > pre, 
+ul.ul > li.li > blockquote, 
+ul.ul > li.li > dl, 
+ul.ul > li.li > table {
+    font-size: 90%;
+} 
+
 ul[compact] li, ol[compact] li {
     margin-top: .25em;
     margin-bottom: .25em;
