@@ -186,7 +186,7 @@
                     <p><b>Send a comment or correction</b></p>
                     <p><a href="//webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" target="_blank">Contact
                         Customer Support</a></p>
-                    <p><a href="//www.webassign.net/user_support/faculty/report.html" target="_blank">Report a question
+                    <p><a href="//feedback.webassign.net/go?iv=3lb0eqnz314k3" target="_blank">Report a question
                         error</a></p>
                     
                 </div>
