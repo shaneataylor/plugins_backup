@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    version="2.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="xs"
-    version="2.0">
+    xmlns:ditamsg="http://dita-ot.sourceforge.net/ns/200704/ditamsg"
+    exclude-result-prefixes="xs ditamsg">
     
     
     
@@ -176,5 +177,50 @@
         <xsl:apply-templates select="*[contains(@class, ' ditaot-d/ditaval-endprop ')]" mode="out-of-line"/>
     </xsl:template>
     
+    
+    <!-- object, desc, & param -->
+    <xsl:template match="*[contains(@class, ' topic/object ')]" name="topic.object">
+        <xsl:choose>
+            <xsl:when test="@type='iframe'">
+                <iframe class="object"
+                    frameborder="0" allowfullscreen="allowfullscreen" seamless="seamless">
+                    <xsl:attribute name="src" select="@data"/>
+                    <xsl:for-each select="*[contains(@class, ' topic/param ')]">
+                        <xsl:attribute name="{@name}">
+                            <xsl:value-of select="@value"/>
+                        </xsl:attribute>
+                    </xsl:for-each>
+                    <xsl:copy-of select="@id | @height | @tabindex | @width | @name"/>
+                </iframe>
+            </xsl:when>
+            <xsl:otherwise>
+                <object>
+                    <xsl:copy-of select="@id | @declare | @codebase | @type | @archive | @height | @usemap | @tabindex | @classid | @data | @codetype | @standby | @width | @name"/>
+                    <xsl:if test="@longdescref or *[contains(@class, ' topic/longdescref ')]">
+                        <xsl:apply-templates select="." mode="ditamsg:longdescref-on-object"/>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                    <!-- Test for Flash movie; include EMBED statement for non-IE browsers -->
+                    <xsl:if test="contains(@codebase, 'swflash.cab')">
+                        <embed>
+                            <xsl:if test="@id"><xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+                            <xsl:copy-of select="@height | @width"/>
+                            <xsl:attribute name="type"><xsl:text>application/x-shockwave-flash</xsl:text></xsl:attribute>
+                            <xsl:attribute name="pluginspage"><xsl:text>http://www.macromedia.com/go/getflashplayer</xsl:text></xsl:attribute>
+                            <xsl:if test="*[contains(@class, ' topic/param ')]/@name = 'movie'">
+                                <xsl:attribute name="src"><xsl:value-of select="*[contains(@class, ' topic/param ')][@name = 'movie']/@value"/></xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="*[contains(@class, ' topic/param ')]/@name = 'quality'">
+                                <xsl:attribute name="quality"><xsl:value-of select="*[contains(@class, ' topic/param ')][@name = 'quality']/@value"/></xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="*[contains(@class, ' topic/param ')]/@name = 'bgcolor'">
+                                <xsl:attribute name="bgcolor"><xsl:value-of select="*[contains(@class, ' topic/param ')][@name = 'bgcolor']/@value"/></xsl:attribute>
+                            </xsl:if>
+                        </embed>
+                    </xsl:if>
+                </object>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
 </xsl:stylesheet>
