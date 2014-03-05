@@ -231,7 +231,7 @@ table span.menucascade img.image {
 div.fig {
     margin: 1em 0;
 }
-div.fig.figborder {
+div.fig.figborder, iframe.object, object {
     display: inline-block;
     padding: 20px !important;
     border: 1px solid #C0C0C0 !important;
@@ -310,14 +310,6 @@ a.xref {
 }
 
 
-object {
-    /* for videos */
-    border: 1px solid #C0C0C0;
-    /* drop shadow (don't worry about IE) */
-    -moz-box-shadow: 5px 5px 13px #808080;
-    -webkit-box-shadow: 5px 5px 13px #808080;
-    box-shadow: 5px 5px 13px #808080;
-}
 
 
 /* ====================================== TABLES ====================================== */
