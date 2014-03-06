@@ -235,7 +235,7 @@ function googleAnalytics(){
 
 function defineHandlers(){
     // Future: create keyboard shortcuts for visually impaired users
-    $("a#menu_button").on("click", toggleMenu); // click required for FF ("focus" did not work)
+    $("a#menu_button").on("focusin focusout", toggleMenu); 
     $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
     // need to enable menu items via keyboard
@@ -312,7 +312,10 @@ function initSearch(){
         })();
         h5timer = window.setInterval(function() { // test for search box periodically until found
             if ($("div#searchbox input").length != 0) {
-                $("div#searchbox input").attr("placeholder","Search the help");
+                $("div#searchbox input").attr({
+                    placeholder:"Search the help",
+                    tabindex:2
+                    });
                 window.clearInterval(h5timer);
             }
         },100);
