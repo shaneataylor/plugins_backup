@@ -102,12 +102,12 @@
         <div id="toolbar">
             <h1 class="help_name"><xsl:value-of select="$h5help.name"/></h1>
             <!-- Skipahead link. See http://webaim.org/presentations/2012/ariahtml5/hiddenlinks2 -->
-             <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>
+            <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>
             <div id="searchbox" role="search" aria-label="search"><xsl:comment></xsl:comment></div>
         </div>
         <div>
             <!-- menu stuff needs to be outside of toolbar div so clicks on toolbar close the menu -->
-            <a id="menu_button" tabindex="4" alt="Menu" title="Menu"><span class="ua_control"> </span></a>
+            <a id="menu_button" alt="Menu" title="Menu"><span class="ua_control"> </span></a>
             <ul class="menu hidden" role="menu" id="menu">
                 <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>
                 <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>
@@ -121,12 +121,12 @@
         <div id="modal_back" class="hidden"><xsl:comment></xsl:comment></div>
         <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
         <div id="content_container">
-            <div id="toc" title="Table of contents" role="navigation" tabindex="5"><xsl:comment></xsl:comment></div>
+            <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
+            <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
             <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><span class="ua_control"> </span></div>
                 <xsl:call-template name="bodydiv">
                     <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
                 </xsl:call-template>
-            <div id="searchresults" title="Search results" role="search" tabindex="3"><xsl:comment></xsl:comment></div>
         </div>
         <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"><xsl:comment></xsl:comment></script>
         </body>

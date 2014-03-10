@@ -302,7 +302,7 @@ function collapseTOCItem(){
 function initSearch(){
     if ( h5params.google_cse_id !== '' ) {
         $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
-        $("div#searchresults").html('<h1>Search Results</h1>'+
+        $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
         '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a>'+
         '<div class="gcse-searchresults" data-gname="wasearch"></div>');
         (function() {
@@ -314,7 +314,7 @@ function initSearch(){
             if ($("div#searchbox input").length != 0) {
                 $("div#searchbox input").attr({
                     placeholder:"Search the help",
-                    tabindex:2
+                    tabindex:3
                     });
                 window.clearInterval(h5timer);
             }
