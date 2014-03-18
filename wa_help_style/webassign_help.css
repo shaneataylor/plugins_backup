@@ -162,6 +162,9 @@ ul.ul > li.li > dl,
 ul.ul > li.li > table {
     font-size: 90%;
 } 
+ul.ul > li.li > p:only-child {
+    font-size: 100%;
+}
 
 ul[compact] li, ol[compact] li {
     margin-top: .25em;
@@ -339,7 +342,7 @@ table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable
     border: 1px solid #A5D8FF;
 }
 
-th, td[id] {
+th, td[id], td.shaded {
     background: #EAF7FF  no-repeat scroll;
 }
 td[headers],th[headers] {
