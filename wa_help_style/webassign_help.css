@@ -328,7 +328,7 @@ table.choicetable, table.choicetable tr, table.choicetable td, table.choicetable
     border: 1px solid #A5D8FF;
 }
 
-th, td[id] {
+th, td[id], td.shaded {
     background: #EAF7FF  no-repeat scroll;
 }
 td[headers],th[headers] {
