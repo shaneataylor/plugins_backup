@@ -173,11 +173,24 @@ ul[compact] li, ol[compact] li {
 
 ol.steps {
     counter-reset: steps 0;
+    list-style-type: none;
 }
 
-li.step {
+ol.steps > li.step {
     counter-increment: steps 1;
 }
+ol.steps > li.step:before {
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    width: 42px;
+    text-align: right;
+    content: counter(steps) " ";
+    font-weight: bold;
+    color: black;
+    /* colors: green=7ab362 orange=ffa500 red=cc0000 gray=646669 */
+}
+
 li.step p.p {
     margin: 0.5em 0 !important;
 }
