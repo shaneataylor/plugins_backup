@@ -57,13 +57,15 @@
     
     <xsl:template name="loop_through_classmaps">
         <xsl:param name="classmapcounter" select="$classmapcount"/>
+        <xsl:param name="thiskey" select="$classmaps/classmap[position()=$classmapcounter]/@jsonkey"/>
+        <xsl:param name="thisclass" select="$classmaps/classmap[position()=$classmapcounter]/@ditaclass"/>
         <xsl:if test="not($classmapcounter = 0)">
-            <xsl:text>"</xsl:text>
-            <xsl:value-of select="$classmaps/classmap[position()=$classmapcounter]/@jsonkey"/><xsl:text>" : "</xsl:text>
-            <xsl:for-each select="//*[contains(@class,$classmaps/classmap[position()=$classmapcounter]/@ditaclass)]">
+            <xsl:text>"</xsl:text><xsl:value-of select="$thiskey"/><xsl:text>" : "</xsl:text>
+            <xsl:apply-templates mode="getText" select="//*[contains(@class,$thisclass)]"/>
+            <!--<xsl:for-each select="//*[contains(@class,$classmaps/classmap[position()=$classmapcounter]/@ditaclass)]">
                 <xsl:value-of select="fn:jsonstring(string-join(.,' '))"/>
                 <xsl:text> </xsl:text>
-            </xsl:for-each>
+            </xsl:for-each>-->
             <xsl:choose>
                 <!-- add comma and indent after all but the last -->
                 <xsl:when test="$classmapcounter = 1">
@@ -87,6 +89,8 @@
     
     <xsl:template mode="getText" match=".">
         <!-- return parsed text value using functions above -->
+        <xsl:value-of select="fn:jsonstring(string-join(.,' '))"/>
+        <xsl:text> </xsl:text>
     </xsl:template>
     
     <xsl:template mode="getText" match=".//*[contains(@class,' topic/draft-comment ') or contains(@class,' topic/required-cleanup ')]">
