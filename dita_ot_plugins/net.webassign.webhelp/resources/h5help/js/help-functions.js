@@ -235,7 +235,7 @@ function googleAnalytics(){
 
 function defineHandlers(){
     // Future: create keyboard shortcuts for visually impaired users
-    $("a#menu_button").on("focusin focusout", toggleMenu); 
+    $("a#menu_button").on("click focusin focusout", toggleMenu); 
     $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
     // need to enable menu items via keyboard
