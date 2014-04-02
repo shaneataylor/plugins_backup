@@ -67,6 +67,7 @@
     
     <target name="wa2_angular_test">
         <antcall target="buildit">
+            <param name="args.outext" value=".html" />
             <param name="args.input.dir" location="dita_source_files" />
             <param name="output.dir" location="out/wa2_angular_test"/>
             <param name="h5help.name" value="Angular Test" />
