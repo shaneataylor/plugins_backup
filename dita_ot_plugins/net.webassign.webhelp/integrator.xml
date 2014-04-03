@@ -16,7 +16,7 @@
     <target name="dita2h5help"
         depends="build-init, preprocess, copy-mathML, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
-        dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap, copy-h5help-resources"/>
+        dita.outer.topics.xhtml, xhtml2h5help, h5help.gen.index, gen-sitemap, copy-h5help-resources"/>
     
     
     <target name="copy-mathML">
@@ -38,6 +38,31 @@
             failOnError="false">
             <param name="h5help.conreftarget.rule" expression="${h5help.conreftarget.rule}"></param>
         </xslt>
+    </target>
+    
+    <target name="h5help.gen.index" description="Generate a JSON index of the help content.">
+        <!-- Future: generate & use searchtargets list of topics for which @search != no -->
+        <xslt basedir="${dita.temp.dir}"
+            includesfile="${dita.temp.dir}${file.separator}fullditatopic.list" 
+            destdir="${dita.temp.dir}"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}gen_index.xsl"
+            filenameparameter="thisindextarget"
+            failOnError="false" extension=".idx">
+            <param name="outext" expression="${args.outext}"/>
+            <!--<param name="h5help.conreftarget.rule" expression="${h5help.conreftarget.rule}"></param>-->
+        </xslt>
+        <!-- Combine all output files into a single index. -->
+        <concat destfile="${output.dir}${file.separator}index.json">
+            <fileset dir="${dita.temp.dir}" includes="*.idx"/>
+            <header>[</header>
+            <footer>]</footer>
+            <filterchain>
+                <tokenfilter>
+                    <replaceregex pattern="\}[\s\n]*\{" replace="},{" flags="gi"/>
+                    <replaceregex pattern="\s{2,}" replace=" " flags="gi"/>
+                </tokenfilter>
+            </filterchain>
+        </concat>
     </target>
 
     <target name="copy-h5help-resources">
