@@ -42,6 +42,7 @@
     
     <target name="h5help.gen.index" description="Generate a JSON index of the help content.">
         <!-- Future: generate & use searchtargets list of topics for which @search != no -->
+        <!-- Index each topic individually first -->
         <xslt basedir="${dita.temp.dir}"
             includesfile="${dita.temp.dir}${file.separator}fullditatopic.list" 
             destdir="${dita.temp.dir}"
@@ -49,20 +50,18 @@
             filenameparameter="thisindextarget"
             failOnError="false" extension=".idx">
             <param name="outext" expression="${args.outext}"/>
-            <!--<param name="h5help.conreftarget.rule" expression="${h5help.conreftarget.rule}"></param>-->
         </xslt>
-        <!-- Combine all output files into a single index. -->
-        <concat destfile="${output.dir}${file.separator}index.json">
-            <fileset dir="${dita.temp.dir}" includes="*.idx"/>
-            <header>[</header>
-            <footer>]</footer>
-            <filterchain>
-                <tokenfilter>
-                    <replaceregex pattern="\}[\s\n]*\{" replace="},{" flags="gi"/>
-                    <replaceregex pattern="\s{2,}" replace=" " flags="gi"/>
-                </tokenfilter>
-            </filterchain>
+        <!-- Combine all topic indexes into a single file for further processing -->
+        <concat destfile="${dita.temp.dir}${file.separator}alltopics.idx">
+            <fileset dir="${dita.temp.dir}" includes="*.idx" excludes="alltopics.idx"/>
+            <header filtering="no"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<indextopics>]]></header>
+            <footer filtering="no"><![CDATA[</indextopics>]]></footer>
+            
         </concat>
+        
+        <!-- ADD NEXT XSL STEP HERE -->
+
     </target>
 
     <target name="copy-h5help-resources">

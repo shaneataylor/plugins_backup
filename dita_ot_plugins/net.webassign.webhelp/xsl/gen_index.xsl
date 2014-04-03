@@ -23,7 +23,46 @@
     </xsl:param>
     <xsl:param name="classmapcount" select="count($classmaps/classmap)"/>
     
-    <xsl:output method="text" encoding="UTF-8" indent="no"/>
+    <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes"/>
+    
+    <!-- 
+        DESIRED XML STRUCTURE OF OUTPUT
+        
+        <topicindex>
+            <stem value="assign" score="35" href="t_s_open_assignment.htm"/>
+            <stem value="open" score="22" href="t_s_open_assignment.htm"/>
+            ...
+        </topicindex>
+    
+    The repetitive hrefs will ease combining stem instances in the combined index
+    
+    -->
+    
+    
+    <xsl:variable name="nodraft">
+        <xsl:apply-templates select="/*" mode="nodraft"/>
+    </xsl:variable>
+    
+    <!-- === NODRAFT === -->
+    
+    <xsl:template match="*" mode="nodraft">
+        <xsl:copy>
+            <xsl:apply-templates select="node()" mode="nodraft"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="text()" mode="nodraft">
+        <xsl:value-of select="normalize-space(.)"/>
+    </xsl:template>
+
+    <!-- remove stuff -->
+    <xsl:template match="*[contains(@class,' topic/related-links ')]" mode="nodraft"></xsl:template>
+    <xsl:template match="*[contains(@class,' topic/draft-comment ')]" mode="nodraft"></xsl:template>
+    <xsl:template match="*[contains(@class,' topic/required-cleanup ')]" mode="nodraft"></xsl:template>
+    <xsl:template match="processing-instruction()" mode="nodraft"></xsl:template>
+    <xsl:template match="comment()" mode="nodraft"></xsl:template>
+    
+    <!-- === OUTPUT === -->
     
     <xsl:template match="/*"><!-- if nested topics, treat as one unit -->
         <!-- problems to figure out (maybe all handled with preprocessing?):
@@ -31,15 +70,14 @@
             * copy-to 
              -->
         <!-- outer structure -->
-        <xsl:text>{
-"id": "</xsl:text>
-        <xsl:value-of select="replace($thisindextarget,'\.xml',$outext)"/>
-        <xsl:text>",</xsl:text>
-        <xsl:call-template name="loop_through_classmaps"/>
-        <xsl:text>
-}</xsl:text>
-        <!-- add comma and linebreak after all but the last -->
+        <topicindex>
+            <xsl:copy-of select="$nodraft"/>
+            <!--<xsl:apply-templates select="$nodraft"/>-->
+        </topicindex>
     </xsl:template>
+    
+    
+    <!-- === UNUSED === -->
     
     <xsl:template name="loop_through_classmaps">
         <xsl:param name="classmapcounter" select="$classmapcount"/>
