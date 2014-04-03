@@ -62,6 +62,7 @@ STEPS=(\
 "wa2_instructor_help" \
 "apis" \
 "styleguide" \
+"wa2_angular_test" \
 "comm_processes" )
 
 MESSAGES=(\
@@ -72,6 +73,7 @@ MESSAGES=(\
 "\nBuilding WA2 instructor help." \
 "\nBuilding API help." \
 "\nBuilding styleguide." \
+"\nBuilding WA2 Angular Help Test." \
 "\nBuilding comm. team processes." )
 
 function buildstep()

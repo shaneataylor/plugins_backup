@@ -65,6 +65,20 @@
         </antcall>
     </target>
     
+    <target name="wa2_angular_test">
+        <antcall target="buildit">
+            <param name="args.outext" value=".html" />
+            <param name="args.input.dir" location="dita_source_files" />
+            <param name="output.dir" location="out/wa2_angular_test"/>
+            <param name="h5help.name" value="Angular Test" />
+            <param name="h5help.feedback" value="no" />
+            <param name="args.input" value="m_a_angular_ua_test.ditamap"/>
+            <!--<param name="args.filter" value="dita_source_files/d_s_help.ditaval" />-->
+            <param name="dita.temp.dir" location="temp/m_a_angular_ua_test" />
+            <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
+        </antcall>
+    </target>
+    
     <target name="admin">
         <antcall target="buildit">
             <param name="args.input.dir" location="dita_source_files" />

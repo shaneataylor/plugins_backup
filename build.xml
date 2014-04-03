@@ -89,6 +89,10 @@
         <echo level="info">Building Student HTML WebHelp</echo>
         <ant antfile="build_webhelp.xml" target="student"/>
     </target>
+    <target name="wa2_angular_test" depends="init">
+        <echo level="info">Building Angular Help Test</echo>
+        <ant antfile="build_webhelp.xml" target="wa2_angular_test"/>
+    </target>
     <target name="admin_webhelp" depends="init">
         <echo level="info">Building Admin HTML WebHelp</echo>
         <ant antfile="build_webhelp.xml" target="admin"/>
