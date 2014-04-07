@@ -12,19 +12,18 @@
     <xsl:param name="outext" />
     
     <xsl:param name="classmaps">
-        <classmap ditaclass=" topic/body " element="body"/>
-        <classmap ditaclass=" topic/abstract " element="abstracts"/>
-        <!--<classmap ditaclass=" topic/related-links " element="links"/>-->
-        <classmap ditaclass=" topic/shortdesc " element="shortdesc" first="true"/>
-        <classmap ditaclass=" topic/keyword " element="keywords"/>
-        <classmap ditaclass=" topic/indexterm " element="indexterms"/>
-        <classmap ditaclass=" topic/title " element="titles"/>
-        <classmap ditaclass=" topic/title " element="firsttitle" first="true" />
+        <classmap ditaclass=" topic/body " element="body" weight="1" />
+        <classmap ditaclass=" topic/abstract " element="abstracts" weight="3"/>
+        <classmap ditaclass=" topic/shortdesc " element="shortdesc" first="true" weight="5"/>
+        <classmap ditaclass=" topic/keyword " element="keywords" weight="5"/>
+        <classmap ditaclass=" topic/indexterm " element="indexterms" weight="5"/>
+        <classmap ditaclass=" topic/title " element="titles" weight="7"/>
+        <classmap ditaclass=" topic/title " element="firsttitle" first="true" weight="10" />
     </xsl:param>
     <xsl:param name="classmapcount" select="count($classmaps/classmap)"/>
     <xsl:param name="stopwords">
         <!-- other potential stopwords at http://snowball.tartarus.org/algorithms/english/stop.txt -->
-        <xsl:text>i|me|my|myself|we|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|would|should|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|webassign</xsl:text>
+        <xsl:text>i|me|my|myself|we|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|would|should|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|webassign|'\w+</xsl:text>
     </xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes"/>
@@ -66,10 +65,10 @@
     <xsl:template match="text()" mode="nodraft">
         <xsl:param name="lowerwords">
             <!-- lowercase & strip out nonword characters -->
-            <xsl:value-of select='concat(" ",replace(lower-case(.),"[^a-z&apos;]"," ")," ")'/>
+            <xsl:value-of select='concat("  ",replace(lower-case(.),"[^a-z&apos;]","  ")," ")'/>
         </xsl:param>
         <!-- strip stop words -->
-        <xsl:value-of select="replace($lowerwords,concat('\s+(',$stopwords,')\s+'),' ')"/>
+        <xsl:value-of select="normalize-space(replace($lowerwords,concat('\s(',$stopwords,')\s'),' '))"/>
     </xsl:template>
     
     <xsl:template match="@class" mode="nodraft">
@@ -93,19 +92,19 @@
     
     <xsl:template name="loop_through_classmaps">
         <xsl:param name="classmapcounter" select="$classmapcount"/>
-        <xsl:param name="thiselement" select="$classmaps/classmap[position()=$classmapcounter]/@element"/>
+        <xsl:param name="thisweight" select="$classmaps/classmap[position()=$classmapcounter]/@weight"/>
         <xsl:param name="thisclass" select="$classmaps/classmap[position()=$classmapcounter]/@ditaclass"/>
         <xsl:param name="thisfirst" select="$classmaps/classmap[position()=$classmapcounter]/@first or false()"/>
         <xsl:if test="not($classmapcounter = 0)">
             <xsl:choose>
                 <xsl:when test="$thisfirst">
                     <xsl:apply-templates mode="getText" select="($nodraft//*[contains(@class,$thisclass)])[1]">
-                        <xsl:with-param name="thiselement" select="$thiselement"/>
+                        <xsl:with-param name="thisweight" select="$thisweight"/>
                     </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates mode="getText" select="$nodraft//*[contains(@class,$thisclass)]">
-                        <xsl:with-param name="thiselement" select="$thiselement"/>
+                        <xsl:with-param name="thisweight" select="$thisweight"/>
                     </xsl:apply-templates>
                 </xsl:otherwise>
             </xsl:choose>
@@ -119,27 +118,102 @@
     </xsl:template>
     
     <xsl:template mode="getText" match="*">
-        <xsl:param name="thiselement"/>
-        <xsl:element name="{$thiselement}">
-            <xsl:apply-templates mode="getTextChildren" select="*|text()"/>
-        </xsl:element>
+        <xsl:param name="thisweight"/>
+        <xsl:apply-templates mode="getTextChildren" select="*|text()">
+            <xsl:with-param name="thisweight" select="$thisweight"/>
+        </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template mode="getTextChildren" match="*">
-        <xsl:if test="count(ancestor-or-self::*[contains(@class,' topic/draft-comment ')]) + count(ancestor-or-self::*[contains(@class,' topic/required-cleanup ')]) = 0">
-            <xsl:apply-templates mode="getTextChildren" select="*|text()"/>
-        </xsl:if>
+        <xsl:param name="thisweight"/>
+        <xsl:apply-templates mode="getTextChildren" select="*|text()">
+            <xsl:with-param name="thisweight" select="$thisweight"/>
+        </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template mode="getTextChildren" match="text()">
+        <xsl:param name="thisweight"/>
+        <xsl:param name="textwordlist" select="tokenize(.,'\s+')"/>
+        <xsl:for-each select="$textwordlist">
+            <word>
+                <xsl:attribute name="weight" select="$thisweight"/>
+                <xsl:value-of select="."/>
+            </word>
+        </xsl:for-each>
         <!-- escape JSON characters (won't be needed after stripping out all but [az']) -->
-        <xsl:value-of select="replace(concat(replace(., '([&quot;\\])', '\\$1'),' '),'\s+',' ')"/>
+        <!--<xsl:value-of select="replace(concat(replace(., '([&quot;\\])', '\\$1'),' '),'\s+',' ')"/>-->
     </xsl:template>
     
+    <!-- === STEMMER === -->
     
+    <xsl:variable name="stems">
+        <xsl:apply-templates select="$parseclassmaps//word" mode="getStems"/>
+    </xsl:variable>
     
-    
-    
+    <xsl:template match="*" mode="getStems">
+        <xsl:param name="word" select="replace(replace(./text(),'^y','Y'),'([aeiouy])y','$1Y')"/>
+        <!--<xsl:param name="vowel"><xsl:text>[aeiouy]</xsl:text></xsl:param>
+        <xsl:param name="consonant"><xsl:text>[bcdfghjklmnpqrstvwxYz']</xsl:text></xsl:param>-->
+        <xsl:param name="R1">
+            <xsl:choose>
+                <xsl:when test="matches($word,'^.*?[aeiouy][^aeiouy]')">
+                    <xsl:value-of  select="replace($word,'^.*?[aeiouy][^aeiouy]','')"/>
+                </xsl:when>
+                <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="R2">
+            <xsl:choose>
+                <xsl:when test="matches($R1,'^.*?[aeiouy][^aeiouy]')">
+                    <xsl:value-of  select="replace($R1,'^.*?[aeiouy][^aeiouy]','')"/>
+                </xsl:when>
+                <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="s0">
+            <xsl:value-of select='replace($word,"&apos;s?&apos;?$","")'/>
+        </xsl:param>
+        <xsl:param name="s1a">
+            <xsl:choose>
+                <xsl:when test="matches($s0,'sses$')">
+                    <xsl:value-of select="replace($s0,'sses$','')"/>
+                </xsl:when>
+                <xsl:when test="matches($s0,'(..)(ied|ies)$')">
+                    <xsl:value-of select="replace($s0,'(..)(ied|ies)$','$1i')"/>
+                </xsl:when>
+                <xsl:when test="matches($s0,'(.)(ied|ies)$')">
+                    <xsl:value-of select="replace($s0,'(.)(ied|ies)$','$1ie')"/>
+                </xsl:when>
+                <xsl:when test="matches($s0,'([aeiouy][^aeiouy].*)s$')">
+                    <xsl:value-of select="replace($s0,'([aeiouy][^aeiouy].*)s$','$1')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s0"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="s2" select="$word"/>
+        <xsl:param name="s3" select="$word"/>
+        <xsl:param name="s4" select="$word"/>
+        <xsl:param name="s5" select="$word"/>
+        <xsl:param name="finalstem">
+            <xsl:choose>
+                <xsl:when test="string-length($word)>2">
+                    <xsl:value-of select="$s1a"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$word"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <stem>
+            <xsl:attribute name="weight" select="./@weight"/>
+            <xsl:attribute name="word" select="lower-case($word)"></xsl:attribute>
+            <!--<xsl:attribute name="r1" select="$R1"></xsl:attribute>
+            <xsl:attribute name="r2" select="$R2"></xsl:attribute>-->
+            <xsl:value-of select="$finalstem"/>
+        </stem>
+    </xsl:template>
     
     
     
@@ -152,7 +226,7 @@
              -->
         <!-- outer structure -->
         <topicindex>
-            <xsl:copy-of select="$parseclassmaps"/>
+            <xsl:copy-of select="$stems"/>
         </topicindex>
     </xsl:template>
     
