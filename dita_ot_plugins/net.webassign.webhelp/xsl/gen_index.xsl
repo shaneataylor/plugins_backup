@@ -26,7 +26,7 @@
         <xsl:text>i|me|my|myself|we|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|would|should|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|webassign|'\w+</xsl:text>
     </xsl:param>
     
-    <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes"/>
+    <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes" indent="yes"/>
     
     <!-- 
         DESIRED XML STRUCTURE OF OUTPUT
@@ -144,32 +144,51 @@
         <!--<xsl:value-of select="replace(concat(replace(., '([&quot;\\])', '\\$1'),' '),'\s+',' ')"/>-->
     </xsl:template>
     
+    
     <!-- === STEMMER === -->
     
     <xsl:variable name="stems">
         <xsl:apply-templates select="$parseclassmaps//word" mode="getStems"/>
     </xsl:variable>
     
+    <xsl:function name="fn:getR1">
+        <xsl:param name="thisword"/>
+        <xsl:choose>
+            <xsl:when test="matches($thisword,'^.*?[aeiouy][^aeiouy]')">
+                <xsl:value-of  select="replace($thisword,'^.*?[aeiouy][^aeiouy]','')"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    
+    <xsl:function name="fn:getShort">
+        <xsl:param name="thisword"/>
+        <xsl:value-of 
+            select="fn:getR1($thisword)='' and (matches($thisword,'[^aeiouy][aeiouy][^aeiouywxY]$') or matches($thisword,'^[aeiouy][^aeiouy]$'))"/>
+    </xsl:function>
+    
     <xsl:template match="*" mode="getStems">
         <xsl:param name="word" select="replace(replace(./text(),'^y','Y'),'([aeiouy])y','$1Y')"/>
         <!--<xsl:param name="vowel"><xsl:text>[aeiouy]</xsl:text></xsl:param>
         <xsl:param name="consonant"><xsl:text>[bcdfghjklmnpqrstvwxYz']</xsl:text></xsl:param>-->
-        <xsl:param name="R1">
-            <xsl:choose>
+        <xsl:param name="R1" select="fn:getR1($word)">
+            <!--<xsl:choose>
                 <xsl:when test="matches($word,'^.*?[aeiouy][^aeiouy]')">
                     <xsl:value-of  select="replace($word,'^.*?[aeiouy][^aeiouy]','')"/>
                 </xsl:when>
                 <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
-            </xsl:choose>
+            </xsl:choose>-->
         </xsl:param>
-        <xsl:param name="R2">
-            <xsl:choose>
+        <xsl:param name="R2" select="fn:getR1($R1)">
+            <!--<xsl:choose>
                 <xsl:when test="matches($R1,'^.*?[aeiouy][^aeiouy]')">
                     <xsl:value-of  select="replace($R1,'^.*?[aeiouy][^aeiouy]','')"/>
                 </xsl:when>
                 <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
-            </xsl:choose>
+            </xsl:choose>-->
         </xsl:param>
+        <xsl:param name="isShort" select="fn:getShort($word)"/>
+        
         <xsl:param name="s0">
             <xsl:value-of select='replace($word,"&apos;s?&apos;?$","")'/>
         </xsl:param>
@@ -192,6 +211,35 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:param>
+        <xsl:param name="s1b">
+            <xsl:choose>
+                <xsl:when test="matches($R1,'eed(ly)?$')">
+                    <xsl:value-of select="replace($s1a,'eed(ly)?$','')"/>
+                </xsl:when>
+                <xsl:when test="matches($s1a,'([aeiouy].*(at|bl|iz))(ed|edly|ing|ingly)$')">
+                    <xsl:value-of select="replace($s1a,'([aeiouy].*(at|bl|iz))(ed|edly|ing|ingly)$','$1e')"/>
+                </xsl:when>
+                <xsl:when test="matches($s1a,'([aeiouy].*(bb|dd|ff|gg|mm|nn|pp|rr|tt))(ed|edly|ing|ingly)$')">
+                    <xsl:value-of select="replace($s1a,'([aeiouy].*).(ed|edly|ing|ingly)$','$1')"/>
+                </xsl:when>
+                <xsl:when test="matches($s1a,'([aeiouy].*)(ed|edly|ing|ingly)$')">
+                    <xsl:choose>
+                        <xsl:when test="fn:getShort(replace($s1a,'(ed|edly|ing|ingly)$',''))">
+                            <xsl:value-of select="replace($s1a,'(ed|edly|ing|ingly)$','e')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="replace($s1a,'(ed|edly|ing|ingly)$','')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s1a"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="s1c">
+            <xsl:value-of select="replace($s1b,'(.[^aeiouy])[yY]$','$1i')"/>
+        </xsl:param>
         <xsl:param name="s2" select="$word"/>
         <xsl:param name="s3" select="$word"/>
         <xsl:param name="s4" select="$word"/>
@@ -199,7 +247,7 @@
         <xsl:param name="finalstem">
             <xsl:choose>
                 <xsl:when test="string-length($word)>2">
-                    <xsl:value-of select="$s1a"/>
+                    <xsl:value-of select="$s1c"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$word"/>
@@ -209,7 +257,8 @@
         <stem>
             <xsl:attribute name="weight" select="./@weight"/>
             <xsl:attribute name="word" select="lower-case($word)"></xsl:attribute>
-            <!--<xsl:attribute name="r1" select="$R1"></xsl:attribute>
+            <!--<xsl:attribute name="short" select="$isShort"></xsl:attribute>
+            <xsl:attribute name="r1" select="$R1"></xsl:attribute>
             <xsl:attribute name="r2" select="$R2"></xsl:attribute>-->
             <xsl:value-of select="$finalstem"/>
         </stem>
