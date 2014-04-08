@@ -167,31 +167,37 @@
             select="fn:getR1($thisword)='' and (matches($thisword,'[^aeiouy][aeiouy][^aeiouywxY]$') or matches($thisword,'^[aeiouy][^aeiouy]$'))"/>
     </xsl:function>
     
+    <!--<xsl:function name="fn:replaceMatchingSuffixes">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="matchstrings" as="xs:string"/>
+        <xsl:param name="replacestrings" as="xs:string"/>
+        <xsl:param name="alsofoundin" as="xs:string"/>
+        <xsl:for-each select="tokenize($matchstrings,'\s+')">
+            <xsl:if test="ends-with($string,.) and contains($alsofoundin,.)">
+                <!-\-<xsl:value-of select="replace($string,concat(.,'$'),tokenize($replacestrings,'\s+')[position()])"/>-\->
+                <xsl:analyze-string select="$string" regex="{.}$">
+                    <xsl:matching-substring>
+                        <xsl:value-of select="tokenize($replacestrings,'\s+')[position()]"/>
+                    </xsl:matching-substring>
+                    <xsl:non-matching-substring>
+                        <xsl:value-of select="."/>
+                    </xsl:non-matching-substring>
+                </xsl:analyze-string>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:function>-->
+    
     <xsl:template match="*" mode="getStems">
         <xsl:param name="word" select="replace(replace(./text(),'^y','Y'),'([aeiouy])y','$1Y')"/>
-        <!--<xsl:param name="vowel"><xsl:text>[aeiouy]</xsl:text></xsl:param>
-        <xsl:param name="consonant"><xsl:text>[bcdfghjklmnpqrstvwxYz']</xsl:text></xsl:param>-->
-        <xsl:param name="R1" select="fn:getR1($word)">
-            <!--<xsl:choose>
-                <xsl:when test="matches($word,'^.*?[aeiouy][^aeiouy]')">
-                    <xsl:value-of  select="replace($word,'^.*?[aeiouy][^aeiouy]','')"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
-            </xsl:choose>-->
-        </xsl:param>
-        <xsl:param name="R2" select="fn:getR1($R1)">
-            <!--<xsl:choose>
-                <xsl:when test="matches($R1,'^.*?[aeiouy][^aeiouy]')">
-                    <xsl:value-of  select="replace($R1,'^.*?[aeiouy][^aeiouy]','')"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
-            </xsl:choose>-->
-        </xsl:param>
+        
+        <xsl:param name="R1" select="fn:getR1($word)"/>
+        
+        <xsl:param name="R2" select="fn:getR1($R1)"/>
+        
         <xsl:param name="isShort" select="fn:getShort($word)"/>
         
-        <xsl:param name="s0">
-            <xsl:value-of select='replace($word,"&apos;s?&apos;?$","")'/>
-        </xsl:param>
+        <xsl:param name="s0" select='replace($word,"&apos;s?&apos;?$","")'/>
+        
         <xsl:param name="s1a">
             <xsl:choose>
                 <xsl:when test="matches($s0,'sses$')">
@@ -237,17 +243,130 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:param>
+        
         <xsl:param name="s1c">
             <xsl:value-of select="replace($s1b,'(.[^aeiouy])[yY]$','$1i')"/>
         </xsl:param>
-        <xsl:param name="s2" select="$word"/>
-        <xsl:param name="s3" select="$word"/>
-        <xsl:param name="s4" select="$word"/>
+        
+        <xsl:param name="s2replacements">
+            <replace suffix="ational" with="ate"/>
+            <replace suffix="ization" with="ize" />
+            <replace suffix="fulness" with="ful" />
+            <replace suffix="ousness" with="ous" />
+            <replace suffix="iveness" with="ive" />
+            <replace suffix="tional" with="tion"/>
+            <replace suffix="biliti" with="ble" />
+            <replace suffix="lessli" with="less" />
+            <replace suffix="entli" with="ent" />
+            <replace suffix="ation" with="ate" />
+            <replace suffix="alism" with="al" />
+            <replace suffix="aliti" with="al" />
+            <replace suffix="ousli" with="ous" />
+            <replace suffix="iviti" with="ive" />
+            <replace suffix="fulli" with="ful" />
+            <replace suffix="enci" with="ence"/>
+            <replace suffix="anci" with="ance"/>
+            <replace suffix="abli" with="able"/>
+            <replace suffix="izer" with="ize" />
+            <replace suffix="ator" with="ate" />
+            <replace suffix="alli" with="al" />
+            <replace suffix="bli" with="ble" />
+        </xsl:param>
+        
+        <xsl:param name="s2match" select="$s2replacements/replace[ends-with($s1c,@suffix)][1]/@suffix"/>
+        
+        <xsl:param name="s2replace" select="$s2replacements/replace[ends-with($s1c,@suffix)][1]/@with"/>
+        
+        <xsl:param name="s2">
+            <xsl:choose>
+                <xsl:when test="string-length($s2match)!=0 and contains($R1,$s2match)">
+                    <xsl:value-of select="replace($s1c,concat($s2match,'$'),$s2replace)"/>
+                </xsl:when>
+                <xsl:when test="ends-with($s1c,'logi') and contains($R1,'ogi')">
+                    <xsl:value-of select="replace($s1c,'ogi$','og')"/>
+                </xsl:when>
+                <xsl:when test="matches($s1c,'[cdeghkmnrt]li$') and contains($R1,'ogi')">
+                    <xsl:value-of select="replace($s1c,'li$','')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s1c"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        
+        <xsl:param name="s3replacements">
+            <replace suffix="ational" with="ate"/>
+            <replace suffix="tional" with="tion"/>
+            <replace suffix="alize" with="al"/>
+            <replace suffix="icate" with="ic"/>
+            <replace suffix="iciti" with="ic"/>
+            <replace suffix="ical" with="ic"/>
+            <replace suffix="ness" with=""/>
+            <replace suffix="ful" with=""/>
+        </xsl:param>
+        
+        <xsl:param name="s3match" select="$s3replacements/replace[ends-with($s2,@suffix)][1]/@suffix"/>
+        
+        <xsl:param name="s3replace" select="$s3replacements/replace[ends-with($s2,@suffix)][1]/@with"/>
+        
+        <xsl:param name="s3">
+            <xsl:choose>
+                <xsl:when test="string-length($s3match)!=0 and contains($R1,$s3match)">
+                    <xsl:value-of select="replace($s2,concat($s3match,'$'),$s3replace)"/>
+                </xsl:when>
+                <xsl:when test="ends-with($s2,'ative') and contains($R1,'ative') and contains($R2,'ative')">
+                    <xsl:value-of select="replace($s2,'ative$','')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s2"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        
+        <xsl:param name="s4replacements">
+            <replace suffix="ement" with=""/>
+            <replace suffix="ance" with=""/>
+            <replace suffix="ence" with=""/>
+            <replace suffix="able" with=""/>
+            <replace suffix="ible" with=""/>
+            <replace suffix="ment" with=""/>
+            <replace suffix="ant" with=""/>
+            <replace suffix="ent" with=""/>
+            <replace suffix="ism" with=""/>
+            <replace suffix="ate" with=""/>
+            <replace suffix="iti" with=""/>
+            <replace suffix="ous" with=""/>
+            <replace suffix="ive" with=""/>
+            <replace suffix="ize" with=""/>
+            <replace suffix="ic" with=""/>
+            <replace suffix="er" with=""/>
+            <replace suffix="al" with=""/>
+        </xsl:param>
+        
+        <xsl:param name="s4match" select="$s4replacements/replace[ends-with($s3,@suffix)][1]/@suffix"/>
+        
+        <xsl:param name="s4replace" select="$s4replacements/replace[ends-with($s3,@suffix)][1]/@with"/>
+        
+        <xsl:param name="s4">
+            <xsl:choose>
+                <xsl:when test="string-length($s4match)!=0 and contains($R2,$s4match)">
+                    <xsl:value-of select="replace($s3,concat($s4match,'$'),$s4replace)"/>
+                </xsl:when>
+                <xsl:when test="matches($s3,'[st]ion$') and contains($R2,'ion')">
+                    <xsl:value-of select="replace($s3,'ion$','')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s3"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        
         <xsl:param name="s5" select="$word"/>
+        <xsl:param name="exceptions"></xsl:param>
         <xsl:param name="finalstem">
             <xsl:choose>
                 <xsl:when test="string-length($word)>2">
-                    <xsl:value-of select="$s1c"/>
+                    <xsl:value-of select="$s3"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$word"/>
