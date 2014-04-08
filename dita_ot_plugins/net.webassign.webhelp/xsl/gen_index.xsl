@@ -167,30 +167,19 @@
             select="fn:getR1($thisword)='' and (matches($thisword,'[^aeiouy][aeiouy][^aeiouywxY]$') or matches($thisword,'^[aeiouy][^aeiouy]$'))"/>
     </xsl:function>
     
-    <!--<xsl:function name="fn:replaceMatchingSuffixes">
-        <xsl:param name="string" as="xs:string"/>
-        <xsl:param name="matchstrings" as="xs:string"/>
-        <xsl:param name="replacestrings" as="xs:string"/>
-        <xsl:param name="alsofoundin" as="xs:string"/>
-        <xsl:for-each select="tokenize($matchstrings,'\s+')">
-            <xsl:if test="ends-with($string,.) and contains($alsofoundin,.)">
-                <!-\-<xsl:value-of select="replace($string,concat(.,'$'),tokenize($replacestrings,'\s+')[position()])"/>-\->
-                <xsl:analyze-string select="$string" regex="{.}$">
-                    <xsl:matching-substring>
-                        <xsl:value-of select="tokenize($replacestrings,'\s+')[position()]"/>
-                    </xsl:matching-substring>
-                    <xsl:non-matching-substring>
-                        <xsl:value-of select="."/>
-                    </xsl:non-matching-substring>
-                </xsl:analyze-string>
-            </xsl:if>
-        </xsl:for-each>
-    </xsl:function>-->
-    
     <xsl:template match="*" mode="getStems">
         <xsl:param name="word" select="replace(replace(./text(),'^y','Y'),'([aeiouy])y','$1Y')"/>
         
-        <xsl:param name="R1" select="fn:getR1($word)"/>
+        <xsl:param name="R1">
+            <xsl:choose>
+                <xsl:when test="matches($word,'^(gener|commun|arsen)')">
+                    <xsl:value-of select="replace($word,'^(gener|commun|arsen)','')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="fn:getR1($word)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
         
         <xsl:param name="R2" select="fn:getR1($R1)"/>
         
@@ -361,15 +350,45 @@
             </xsl:choose>
         </xsl:param>
         
-        <xsl:param name="s5" select="$word"/>
+        <xsl:param name="beforeR1">
+            <xsl:choose>
+                <xsl:when test="string-length($R1)=0">
+                    <xsl:value-of select="$word"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="replace($word,concat($R1,'$'),'')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        
+        <xsl:param name="R1precededByShort">
+            <xsl:value-of select="matches($beforeR1,'([^aeiouy][aeiouy][^aeiouywxY]|^[aeiouy][^aeiouy])')"/>
+            
+        </xsl:param>
+        
+        <xsl:param name="s5">
+            <xsl:choose>
+                <xsl:when 
+                    test="ends-with($s4,'e') and (ends-with($R2,'e') or (ends-with($R1,'e') and not($R1precededByShort)))">
+                    <xsl:value-of select="replace($s4,'e$','')"/>
+                </xsl:when>
+                <xsl:when test="ends-with($s4,'l') and ends-with($R2,'ll')">
+                    <xsl:value-of select="replace($s4,'l$','')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$s4"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            
+        </xsl:param>
         <xsl:param name="exceptions"></xsl:param>
         <xsl:param name="finalstem">
             <xsl:choose>
                 <xsl:when test="string-length($word)>2">
-                    <xsl:value-of select="$s3"/>
+                    <xsl:value-of select="lower-case($s5)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="$word"/>
+                    <xsl:value-of select="lower-case($word)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:param>
