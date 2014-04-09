@@ -10,6 +10,7 @@
     
     <xsl:param name="thisindextarget" />
     <xsl:param name="outext" />
+    <xsl:param name="thishref" select="replace($thisindextarget,'\.xml$',$outext)"/>
     
     <xsl:param name="classmaps">
         <classmap ditaclass=" topic/body " element="body" weight="1" />
@@ -148,7 +149,9 @@
     <!-- === STEMMER === -->
     
     <xsl:variable name="stems">
-        <xsl:apply-templates select="$parseclassmaps//word" mode="getStems"/>
+        <stems>
+            <xsl:apply-templates select="$parseclassmaps//word" mode="getStems"/>
+        </stems>
     </xsl:variable>
     
     <xsl:function name="fn:getR1">
@@ -368,11 +371,13 @@
         
         <xsl:param name="s5">
             <xsl:choose>
+                <!-- The following two tests might select too liberally 
+                     since they don't specify WHICH e or ll is found in R1 or R2  -->
                 <xsl:when 
-                    test="ends-with($s4,'e') and (ends-with($R2,'e') or (ends-with($R1,'e') and not($R1precededByShort)))">
+                    test="ends-with($s4,'e') and (contains($R2,'e') or (contains($R1,'e') and not($R1precededByShort)))">
                     <xsl:value-of select="replace($s4,'e$','')"/>
                 </xsl:when>
-                <xsl:when test="ends-with($s4,'l') and ends-with($R2,'ll')">
+                <xsl:when test="ends-with($s4,'l') and contains($R2,'ll')">
                     <xsl:value-of select="replace($s4,'l$','')"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -381,27 +386,75 @@
             </xsl:choose>
             
         </xsl:param>
-        <xsl:param name="exceptions"></xsl:param>
+        
+        <xsl:param name="exceptionlist">
+            <exception word="skis" stem="ski" />
+            <exception word="skies" stem="sky" />
+            <exception word="dying" stem="die" />
+            <exception word="lying" stem="lie" />
+            <exception word="tying" stem="tie" />
+            <exception word="idly" stem="idl" />
+            <exception word="gently" stem="gentl" />
+            <exception word="ugly" stem="ugli" />
+            <exception word="early" stem="earli" />
+            <exception word="only" stem="onli" />
+            <exception word="singly" stem="singl" />
+            <!-- don't change -->
+            <exception word="sky" stem="sky" />
+            <exception word="news" stem="news" />
+            <exception word="howe" stem="howe" />
+            <exception word="atlas" stem="atlas" />
+            <exception word="cosmos" stem="cosmos" />
+            <exception word="bias" stem="bias" />
+            <exception word="andes" stem="andes" />
+        </xsl:param>
+        
+        <xsl:param name="exceptionstem" select="$exceptionlist/exception[@word=$word][1]/@stem"/>
+        
         <xsl:param name="finalstem">
             <xsl:choose>
-                <xsl:when test="string-length($word)>2">
-                    <xsl:value-of select="lower-case($s5)"/>
+                <xsl:when test="string-length($word) &lt;= 2">
+                    <xsl:value-of select="lower-case($word)"/>
+                </xsl:when>
+                <xsl:when test="string-length($exceptionstem)!=0">
+                    <xsl:value-of select="$exceptionstem"/>
+                </xsl:when>
+                <xsl:when test="matches($s1a,'^(inning|outing|canning|herring|earring|proceed|exceed|succeed)$')">
+                    <xsl:value-of select="$s1a"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="lower-case($word)"/>
+                    <xsl:value-of select="lower-case($s5)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:param>
+        
         <stem>
+            <xsl:attribute name="value" select="$finalstem"/>
             <xsl:attribute name="weight" select="./@weight"/>
-            <xsl:attribute name="word" select="lower-case($word)"></xsl:attribute>
-            <!--<xsl:attribute name="short" select="$isShort"></xsl:attribute>
-            <xsl:attribute name="r1" select="$R1"></xsl:attribute>
-            <xsl:attribute name="r2" select="$R2"></xsl:attribute>-->
-            <xsl:value-of select="$finalstem"/>
+            <!--<xsl:attribute name="word" select="lower-case($word)"></xsl:attribute>
+            <xsl:attribute name="R1precededByShort" select="$R1precededByShort"></xsl:attribute>
+            <xsl:attribute name="R1" select="$R1"></xsl:attribute>
+            <xsl:attribute name="R2" select="$R2"></xsl:attribute>-->
         </stem>
     </xsl:template>
     
+    
+    <!-- === COMBINE STEMS FOR TOPIC === -->
+    
+    <xsl:variable name="allstems">
+        <xsl:apply-templates select="$stems" mode="combinestems"/>
+    </xsl:variable>
+    
+    <xsl:template match="//stems" mode="combinestems">
+        <xsl:for-each-group select="//stem" group-by="@value">
+            <xsl:sort select="@value"/>
+            <stem>
+                <xsl:attribute name="value" select="current-grouping-key()"/>
+                <xsl:attribute name="score" select="sum(current-group()/@weight)"/>
+                <xsl:attribute name="href" select="$thishref"/>
+            </stem>
+        </xsl:for-each-group>
+    </xsl:template>
     
     
     <!-- === OUTPUT === -->
@@ -410,11 +463,14 @@
         <!-- problems to figure out (maybe all handled with preprocessing?):
             * topics not in flat output file structure
             * copy-to 
+            * topics used as resource
              -->
         <!-- outer structure -->
-        <topicindex>
-            <xsl:copy-of select="$stems"/>
-        </topicindex>
+        <!--<topicindex>
+            <xsl:attribute name="href" select="$thishref"/>
+            <xsl:copy-of select="$allstems"/>
+        </topicindex>-->
+        <xsl:copy-of select="$allstems"/>
     </xsl:template>
     
     
