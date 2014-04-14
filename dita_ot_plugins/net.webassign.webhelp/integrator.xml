@@ -46,21 +46,23 @@
         <xslt basedir="${dita.temp.dir}"
             includesfile="${dita.temp.dir}${file.separator}fullditatopic.list" 
             destdir="${dita.temp.dir}"
-            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}gen_index.xsl"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stemmer.xsl"
             filenameparameter="thisindextarget"
             failOnError="false" extension=".idx">
             <param name="outext" expression="${args.outext}"/>
         </xslt>
         <!-- Combine all topic indexes into a single file for further processing -->
-        <concat destfile="${dita.temp.dir}${file.separator}alltopics.idx">
-            <fileset dir="${dita.temp.dir}" includes="*.idx" excludes="alltopics.idx"/>
+        <concat destfile="${dita.temp.dir}${file.separator}allstems.idx">
+            <fileset dir="${dita.temp.dir}" includes="*.idx" excludes="allstems.idx"/>
             <header filtering="no"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <indextopics>]]></header>
             <footer filtering="no"><![CDATA[</indextopics>]]></footer>
-            
         </concat>
-        
-        <!-- ADD NEXT XSL STEP HERE -->
+        <!-- Generate JSON index file -->
+        <xslt in="${dita.temp.dir}${file.separator}allstems.idx"
+            out="${output.dir}${file.separator}helpindex.json"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stems2helpindex.xsl"
+            failOnError="false"/>
 
     </target>
 
