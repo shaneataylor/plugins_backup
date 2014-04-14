@@ -68,8 +68,12 @@
             <!-- lowercase & strip out nonword characters -->
             <xsl:value-of select='concat("  ",replace(lower-case(.),"[^a-z&apos;]","  ")," ")'/>
         </xsl:param>
+        <xsl:param name="noinitpostrophes">
+            <!-- remove apostrophes used to quote a word or at the start of a word -->
+            <xsl:value-of select='replace(replace($lowerwords," &apos;([a-z]*)&apos; "," $1 ")," &apos;"," ")'/>
+        </xsl:param>
         <!-- strip stop words -->
-        <xsl:value-of select="normalize-space(replace($lowerwords,concat('\s(',$stopwords,')\s'),' '))"/>
+        <xsl:value-of select="normalize-space(replace($noinitpostrophes,concat('\s(',$stopwords,')\s'),' '))"/>
     </xsl:template>
     
     <xsl:template match="@class" mode="nodraft">
