@@ -205,6 +205,9 @@
                 <xsl:when test="matches($s0,'(.)(ied|ies)$')">
                     <xsl:value-of select="replace($s0,'(.)(ied|ies)$','$1ie')"/>
                 </xsl:when>
+                <xsl:when test="matches($s0,'(us|ss)$')">
+                    <xsl:value-of select="$s0"/>
+                </xsl:when>
                 <xsl:when test="matches($s0,'([aeiouy][^aeiouy].*)s$')">
                     <xsl:value-of select="replace($s0,'([aeiouy][^aeiouy].*)s$','$1')"/>
                 </xsl:when>
