@@ -35,3 +35,6 @@ copy_to_sites.sh
 dita_ot_docsrc
 dita_source_files
 processes
+dita_ot_plugins/net.webassign.stemmer/test/logs
+dita_ot_plugins/net.webassign.stemmer/test/out
+dita_ot_plugins/net.webassign.stemmer/test/temp
