@@ -24,7 +24,7 @@
     <xsl:param name="classmapcount" select="count($classmaps/classmap)"/>
     <xsl:param name="stopwords">
         <!-- other potential stopwords at http://snowball.tartarus.org/algorithms/english/stop.txt -->
-        <xsl:text>i|me|my|myself|we|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|would|should|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|webassign|'\w+</xsl:text>
+        <xsl:text>i|me|my|myself|we|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|would|should|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|mostly|other|some|such|no|nor|not|only|own|same|so|than|too|very|webassign|'\w+</xsl:text>
     </xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes" indent="yes"/>
@@ -188,6 +188,27 @@
     </xsl:function>
     
     <xsl:template match="*" mode="getStems">
+        
+        <!-- 
+        Problems noticed in current version:
+        word   should be    is          example vocabulary wrong?
+        ===========================================================================
+        ied       i         ie          maybe
+        fluently  fluentli  fluent      maybe
+        congeners congen    congener
+        
+        Probably problems with my apostrophe handling
+        
+        's        's        s
+        'a        'a        a
+        a''       a'        a
+        
+        -->
+        
+        
+        
+        
+        
         <xsl:param name="word" select="replace(replace(./text(),'^y','Y'),'([aeiouy])y','$1Y')"/>
         
         <xsl:param name="s0" select='replace($word,"&apos;s?&apos;?$","")'/>
@@ -225,6 +246,7 @@
         </xsl:param>
         
         <xsl:param name="s1b">
+            <!-- "ied" as a word might be an error in the Porter2 sample -->
             <xsl:choose>
                 <xsl:when test="string-length($s1b_sfx)=1">
                     <xsl:value-of select="$s1a"/>
@@ -295,7 +317,7 @@
                 <xsl:when test="ends-with($s1c,'logi') and contains(fn:R1($s1c),'ogi')">
                     <xsl:value-of select="replace($s1c,'ogi$','og')"/>
                 </xsl:when>
-                <xsl:when test="matches($s1c,'[cdeghkmnrt]li$')">
+                <xsl:when test="ends-with(fn:R1($s1c),'li') and matches($s1c,'[cdeghkmnrt]li$')">
                     <xsl:value-of select="replace($s1c,'li$','')"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -451,7 +473,7 @@
             <xsl:attribute name="value" select="$finalstem"/>
             <xsl:attribute name="weight" select="./@weight"/>
             <xsl:attribute name="word" select="lower-case($word)"/>
-            <xsl:attribute name="tbs" select="ends-with('','e')"/>
+            <xsl:attribute name="tbs" select="ends-with(fn:R1($s1c),'li')"/>
         </stem>
     </xsl:template>
     
