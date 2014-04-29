@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="stemmer_test_source">
-    <title>Stemmer Test Sample Vocabulary</title>
+    <title><!--Stemmer Test Sample Vocabulary--></title>
     <prolog>
         <source format="txt" href="http://snowball.tartarus.org/algorithms/english/voc.txt"
             scope="external"/>
