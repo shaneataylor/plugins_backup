@@ -230,10 +230,11 @@
         </stems>
     </xsl:variable>
     
-    <xsl:function name="fn:R1" as="xs:string">
-        <xsl:param name="thisword"/>
+    <xsl:function name="fn:R1base" as="xs:string">
+        <xsl:param name="thisword" as="xs:string"/>
+        <xsl:param name="exceptions" as="xs:boolean"/>
         <xsl:choose>
-            <xsl:when test="matches($thisword,'^(gener|commun|arsen)')">
+            <xsl:when test="$exceptions and matches($thisword,'^(gener|commun|arsen)')">
                 <xsl:value-of select="replace($thisword,'^(gener|commun|arsen)','')"/>
             </xsl:when>
             <xsl:when test="matches($thisword,'^.*?[aeiouy][^aeiouy]')">
@@ -243,9 +244,15 @@
         </xsl:choose>
     </xsl:function>
     
+    <xsl:function name="fn:R1" as="xs:string">
+        <xsl:param name="thisword" as="xs:string"/>
+        <!-- R1base with exceptions -->
+        <xsl:value-of select="fn:R1base($thisword,true())"/>
+    </xsl:function>
+    
     <xsl:function name="fn:R2" as="xs:string">
         <xsl:param name="thisword"/>
-        <xsl:value-of select="fn:R1(fn:R1($thisword))"/>
+        <xsl:value-of select="fn:R1base(fn:R1($thisword),false())"/>
     </xsl:function>
     
     <xsl:function name="fn:endsWithShortSyllable" as="xs:boolean">
@@ -459,7 +466,7 @@
             <xsl:attribute name="weight" select="./@weight"/>
             <xsl:attribute name="word" select="$word"/>
             <xsl:if test="$stemmer.debug">
-                <xsl:attribute name="tbs" select="$s1a"/>
+                <xsl:attribute name="tbs" select="$s3"/>
                 <xsl:message>
                     <xsl:value-of select="concat(substring(concat(./text(),'                                                  '),1,50),$finalstem)"/>
                 </xsl:message>
