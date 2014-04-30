@@ -11,6 +11,7 @@
     <xsl:param name="thisindextarget" />
     <xsl:param name="outext" />
     <xsl:param name="thishref" select="replace($thisindextarget,'\.xml$',$outext)"/>
+    <xsl:param name="stemmer.debug" select="true()"/>
     
     <xsl:param name="classmaps">
         <classmap ditaclass=" topic/body " element="body" weight="1" />
@@ -29,7 +30,91 @@
     
     <xsl:output method="xml" encoding="UTF-8" omit-xml-declaration="yes" indent="yes"/>
     
+    <!-- Static variables -->
+    
     <xsl:variable name="apos">'</xsl:variable>
+    
+    <xsl:variable name="s0_sfxs">('|'s|'s')$</xsl:variable>
+    
+    <xsl:variable name="s1a_exceptionlist">^(inning|outing|canning|herring|earring|proceed|exceed|succeed)$</xsl:variable>
+    
+    <xsl:variable name="s2replacements">
+        <replace suffix="ational" with="ate"/>
+        <replace suffix="ization" with="ize" />
+        <replace suffix="fulness" with="ful" />
+        <replace suffix="ousness" with="ous" />
+        <replace suffix="iveness" with="ive" />
+        <replace suffix="tional" with="tion"/>
+        <replace suffix="biliti" with="ble" />
+        <replace suffix="lessli" with="less" />
+        <replace suffix="entli" with="ent" />
+        <replace suffix="ation" with="ate" />
+        <replace suffix="alism" with="al" />
+        <replace suffix="aliti" with="al" />
+        <replace suffix="ousli" with="ous" />
+        <replace suffix="iviti" with="ive" />
+        <replace suffix="fulli" with="ful" />
+        <replace suffix="enci" with="ence"/>
+        <replace suffix="anci" with="ance"/>
+        <replace suffix="abli" with="able"/>
+        <replace suffix="izer" with="ize" />
+        <replace suffix="ator" with="ate" />
+        <replace suffix="alli" with="al" />
+        <replace suffix="bli" with="ble" />
+    </xsl:variable>
+    
+    <xsl:variable name="s3replacements">
+        <replace suffix="ational" with="ate"/>
+        <replace suffix="tional" with="tion"/>
+        <replace suffix="alize" with="al"/>
+        <replace suffix="icate" with="ic"/>
+        <replace suffix="iciti" with="ic"/>
+        <replace suffix="ical" with="ic"/>
+        <replace suffix="ness" with=""/>
+        <replace suffix="ful" with=""/>
+    </xsl:variable>
+    
+    <xsl:variable name="s4replacements">
+        <replace suffix="ement" with=""/>
+        <replace suffix="ance" with=""/>
+        <replace suffix="ence" with=""/>
+        <replace suffix="able" with=""/>
+        <replace suffix="ible" with=""/>
+        <replace suffix="ment" with=""/>
+        <replace suffix="ant" with=""/>
+        <replace suffix="ent" with=""/>
+        <replace suffix="ism" with=""/>
+        <replace suffix="ate" with=""/>
+        <replace suffix="iti" with=""/>
+        <replace suffix="ous" with=""/>
+        <replace suffix="ive" with=""/>
+        <replace suffix="ize" with=""/>
+        <replace suffix="ic" with=""/>
+        <replace suffix="er" with=""/>
+        <replace suffix="al" with=""/>
+    </xsl:variable>
+    
+    <xsl:variable name="exceptionlist">
+        <exception word="skis" stem="ski" />
+        <exception word="skies" stem="sky" />
+        <exception word="dying" stem="die" />
+        <exception word="lying" stem="lie" />
+        <exception word="tying" stem="tie" />
+        <exception word="idly" stem="idl" />
+        <exception word="gently" stem="gentl" />
+        <exception word="ugly" stem="ugli" />
+        <exception word="early" stem="earli" />
+        <exception word="only" stem="onli" />
+        <exception word="singly" stem="singl" />
+        <!-- don't change -->
+        <exception word="sky" stem="sky" />
+        <exception word="news" stem="news" />
+        <exception word="howe" stem="howe" />
+        <exception word="atlas" stem="atlas" />
+        <exception word="cosmos" stem="cosmos" />
+        <exception word="bias" stem="bias" />
+        <exception word="andes" stem="andes" />
+    </xsl:variable>
     
     <!-- 
         Possibly also add @locations:
@@ -180,7 +265,6 @@
         Problems noticed in current version:
         word       should be  is          example vocabulary wrong?
         ===========================================================================
-        ied        i          ie          maybe
         fluently   fluentli   fluent      maybe
         congeners  congen     congener
         
@@ -190,8 +274,6 @@
         <xsl:param name="noinitpostrophes" select="replace($word,concat('^',$apos),'')"/>
         
         <xsl:param name="consonantY" select="replace($noinitpostrophes,'(^|[aeiouy])y','$1Y')"/>
-        
-        <xsl:param name="s0_sfxs">('|'s|'s')$</xsl:param>
         
         <xsl:param name="s0" select="replace($consonantY,$s0_sfxs,'')"/>
         
@@ -203,8 +285,8 @@
                 <xsl:when test="matches($s0,'(..)(ied|ies)$')">
                     <xsl:value-of select="replace($s0,'(..)(ied|ies)$','$1i')"/>
                 </xsl:when>
-                <xsl:when test="matches($s0,'(.)(ied|ies)$')">
-                    <xsl:value-of select="replace($s0,'(.)(ied|ies)$','$1ie')"/>
+                <xsl:when test="matches($s0,'(ied|ies)$')">
+                    <xsl:value-of select="replace($s0,'(ied|ies)$','ie')"/>
                 </xsl:when>
                 <xsl:when test="matches($s0,'(us|ss)$')">
                     <xsl:value-of select="$s0"/>
@@ -219,7 +301,7 @@
         </xsl:param>
         
         <xsl:param name="s1b_sfx">
-            <!-- relies on greedy matching -->
+            <!-- relies on greedy matching to get longest suffix -->
             <xsl:value-of select="concat(replace($s1a,'^.*?(eed|eedly|ed|edly|ing|ingly)$','$1'),'$')"/>
         </xsl:param>
         
@@ -228,7 +310,6 @@
         </xsl:param>
         
         <xsl:param name="s1b">
-            <!-- "ied" as a word might be an error in the Porter2 sample -->
             <xsl:choose>
                 <xsl:when test="string-length($s1b_sfx)=1">
                     <xsl:value-of select="$s1a"/>
@@ -262,31 +343,6 @@
             <xsl:value-of select="replace($s1b,'(.[^aeiouy])[yY]$','$1i')"/>
         </xsl:param>
         
-        <xsl:param name="s2replacements">
-            <replace suffix="ational" with="ate"/>
-            <replace suffix="ization" with="ize" />
-            <replace suffix="fulness" with="ful" />
-            <replace suffix="ousness" with="ous" />
-            <replace suffix="iveness" with="ive" />
-            <replace suffix="tional" with="tion"/>
-            <replace suffix="biliti" with="ble" />
-            <replace suffix="lessli" with="less" />
-            <replace suffix="entli" with="ent" />
-            <replace suffix="ation" with="ate" />
-            <replace suffix="alism" with="al" />
-            <replace suffix="aliti" with="al" />
-            <replace suffix="ousli" with="ous" />
-            <replace suffix="iviti" with="ive" />
-            <replace suffix="fulli" with="ful" />
-            <replace suffix="enci" with="ence"/>
-            <replace suffix="anci" with="ance"/>
-            <replace suffix="abli" with="able"/>
-            <replace suffix="izer" with="ize" />
-            <replace suffix="ator" with="ate" />
-            <replace suffix="alli" with="al" />
-            <replace suffix="bli" with="ble" />
-        </xsl:param>
-        
         <xsl:param name="s2match" select="$s2replacements/replace[ends-with($s1c,@suffix)][1]/@suffix"/>
         
         <xsl:param name="s2replace" select="$s2replacements/replace[ends-with($s1c,@suffix)][1]/@with"/>
@@ -308,17 +364,6 @@
             </xsl:choose>
         </xsl:param>
         
-        <xsl:param name="s3replacements">
-            <replace suffix="ational" with="ate"/>
-            <replace suffix="tional" with="tion"/>
-            <replace suffix="alize" with="al"/>
-            <replace suffix="icate" with="ic"/>
-            <replace suffix="iciti" with="ic"/>
-            <replace suffix="ical" with="ic"/>
-            <replace suffix="ness" with=""/>
-            <replace suffix="ful" with=""/>
-        </xsl:param>
-        
         <xsl:param name="s3match" select="$s3replacements/replace[ends-with($s2,@suffix)][1]/@suffix"/>
         
         <xsl:param name="s3replace" select="$s3replacements/replace[ends-with($s2,@suffix)][1]/@with"/>
@@ -335,26 +380,6 @@
                     <xsl:value-of select="$s2"/>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:param>
-        
-        <xsl:param name="s4replacements">
-            <replace suffix="ement" with=""/>
-            <replace suffix="ance" with=""/>
-            <replace suffix="ence" with=""/>
-            <replace suffix="able" with=""/>
-            <replace suffix="ible" with=""/>
-            <replace suffix="ment" with=""/>
-            <replace suffix="ant" with=""/>
-            <replace suffix="ent" with=""/>
-            <replace suffix="ism" with=""/>
-            <replace suffix="ate" with=""/>
-            <replace suffix="iti" with=""/>
-            <replace suffix="ous" with=""/>
-            <replace suffix="ive" with=""/>
-            <replace suffix="ize" with=""/>
-            <replace suffix="ic" with=""/>
-            <replace suffix="er" with=""/>
-            <replace suffix="al" with=""/>
         </xsl:param>
         
         <xsl:param name="s4match" select="$s4replacements/replace[ends-with($s3,@suffix)][1]/@suffix"/>
@@ -410,28 +435,6 @@
             
         </xsl:param>
         
-        <xsl:param name="exceptionlist">
-            <exception word="skis" stem="ski" />
-            <exception word="skies" stem="sky" />
-            <exception word="dying" stem="die" />
-            <exception word="lying" stem="lie" />
-            <exception word="tying" stem="tie" />
-            <exception word="idly" stem="idl" />
-            <exception word="gently" stem="gentl" />
-            <exception word="ugly" stem="ugli" />
-            <exception word="early" stem="earli" />
-            <exception word="only" stem="onli" />
-            <exception word="singly" stem="singl" />
-            <!-- don't change -->
-            <exception word="sky" stem="sky" />
-            <exception word="news" stem="news" />
-            <exception word="howe" stem="howe" />
-            <exception word="atlas" stem="atlas" />
-            <exception word="cosmos" stem="cosmos" />
-            <exception word="bias" stem="bias" />
-            <exception word="andes" stem="andes" />
-        </xsl:param>
-        
         <xsl:param name="exceptionstem" select="$exceptionlist/exception[@word=$word][1]/@stem"/>
         
         <xsl:param name="finalstem">
@@ -442,7 +445,7 @@
                 <xsl:when test="string-length($exceptionstem)!=0">
                     <xsl:value-of select="$exceptionstem"/>
                 </xsl:when>
-                <xsl:when test="matches($s1a,'^(inning|outing|canning|herring|earring|proceed|exceed|succeed)$')">
+                <xsl:when test="matches($s1a,$s1a_exceptionlist)">
                     <xsl:value-of select="$s1a"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -455,10 +458,12 @@
             <xsl:attribute name="value" select="$finalstem"/>
             <xsl:attribute name="weight" select="./@weight"/>
             <xsl:attribute name="word" select="$word"/>
-            <xsl:attribute name="tbs" select="."/>
-            <xsl:message>
-                <xsl:value-of select="concat(substring(concat(./text(),'                                                  '),1,50),$finalstem)"/>
-            </xsl:message>
+            <xsl:if test="$stemmer.debug">
+                <xsl:attribute name="tbs" select="$s1a"/>
+                <xsl:message>
+                    <xsl:value-of select="concat(substring(concat(./text(),'                                                  '),1,50),$finalstem)"/>
+                </xsl:message>
+            </xsl:if>
         </stem>
     </xsl:template>
     
@@ -477,7 +482,9 @@
                 <xsl:attribute name="score" select="sum(current-group()/@weight)"/>
                 <xsl:attribute name="href" select="$thishref"/>
                 <xsl:attribute name="words" select="string-join(current-group()/@word,',')"/>
-                <xsl:attribute name="tbs" select="string-join(current-group()/@tbs,',')"/>
+                <xsl:if test="$stemmer.debug">
+                    <xsl:attribute name="tbs" select="string-join(current-group()/@tbs,',')"/>
+                </xsl:if>
             </stem>
         </xsl:for-each-group>
     </xsl:template>
@@ -493,12 +500,6 @@
              -->
         
         <xsl:copy-of select="$allstems"/>
-        <!--<xsl:copy-of select="$stems"/>-->
     </xsl:template>
-    
-    
-    <!-- === UNUSED === -->
-    
-    
     
 </xsl:stylesheet>
