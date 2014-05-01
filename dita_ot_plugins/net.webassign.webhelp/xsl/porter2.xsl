@@ -15,46 +15,88 @@
     
     <xsl:variable name="porter2:s1a_exceptionlist">^(inning|outing|canning|herring|earring|proceed|exceed|succeed)$</xsl:variable>
     
+    <!-- 
+        
+        Replacements sets
+        
+        Use the following attributes & define processing accordingly
+        
+        @ifprecededby    : suffix must be preceded by pattern to do replacement
+        @ifin            : (tokenized list of "R1" or "R2") suffix must be in specified region to do replacement 
+        @complexrule     : identifies a complex replacement rule to use
+        
+    -->
     <xsl:variable name="porter2:s1a_replacements">
-        <!-- ordered longest to shortest -->
-        <replace suffix="sses" with="ss"/>
-        <replace suffix="ied" with="i" ifprecededby=".."/>
-        <replace suffix="ied" with="ie"/>
-        <replace suffix="ies" with="i" ifprecededby=".."/>
-        <replace suffix="ies" with="ie"/>
-        <replace suffix="us" with="us"/>
-        <replace suffix="ss" with="ss"/>
-        <replace suffix="s" with="" ifprecededby="[aeiouy].+"/>
+        <replacements>
+            <!-- ordered longest to shortest -->
+            <replace suffix="sses" with="ss"/>
+            <replace suffix="ied" with="i|ie" complexrule="s1a_ied_ies"/>
+            <replace suffix="ies" with="i|ie" complexrule="s1a_ied_ies"/>
+            <replace suffix="us" with="us"/>
+            <replace suffix="ss" with="ss"/>
+            <replace suffix="s" with="" ifprecededby="[aeiouy].+"/>
+        </replacements>
     </xsl:variable>
     
     
-    <!--
-    <xsl:function name="porter2:replacesfx" as="xs:string">
+    <xsl:template mode="porter2:replace_suffix" match="//replacements">
         <xsl:param name="thisword" as="xs:string"/>
-        <xsl:param name="replacements" as="node()"/>
-        <xsl:message>
-            <xsl:value-of select="concat($thisword,' = ',count($replacements/replace[matches($thisword,concat(@ifprecededby,@suffix,'$'))]))" />
-        </xsl:message>
-        <!-\-<xsl:message select="$replacements/replace[matches($thisword,concat(@ifprecededby,@suffix,'$'))][1]"></xsl:message>-\->
-        <!-\-<xsl:apply-templates mode="porter2:replacesfx"
-            select="$replacements/replace[matches($thisword,concat(@ifprecededby,@suffix,'$'))][1]" >
-            <xsl:with-param name="thisword" select="$thisword"/>
-        </xsl:apply-templates>-\->
-        <xsl:value-of select="$thisword"></xsl:value-of>
-        <!-\-<xsl:value-of select="porter2:doreplacesfx($thisword,$replacements/replace[matches($thisword,concat(@ifprecededby,@suffix,'$'))][1])"></xsl:value-of>-\->
-    </xsl:function>
-    
-    <xsl:function name="porter2:doreplacesfx" as="xs:string">
-        <xsl:param name="thisword" as="xs:string"/>
-        <xsl:param name="replacement" as="node()"/>
-        <xsl:value-of select="replace($thisword,concat($replacement/@suffix,'$'),$replacement/@with)"/>
-    </xsl:function>
-    
-    <xsl:template mode="porter2:replacesfx" match="*">
-        <xsl:param name="thisword"/>
-        <xsl:value-of select="replace($thisword,concat(./@suffix,'$'),./@with)"/>
+        <xsl:param name="ismatch" as="xs:boolean" 
+            select="1=count(./replace[matches($thisword,concat(@suffix,'$'))][1])"/>
+        <xsl:param name="replace"
+            select="./replace[matches($thisword,concat(@suffix,'$'))][1]"/>
+        <xsl:param name="restrictions">
+            <xsl:if test="contains($replace/@ifin,'R1')"><xsl:text>R1</xsl:text></xsl:if>
+            <xsl:if test="contains($replace/@ifin,'R2')"><xsl:text>R2</xsl:text></xsl:if>
+            <xsl:if test="string-length($replace/@ifprecededby)>0"><xsl:text>PrecededBy</xsl:text></xsl:if>
+            <xsl:if test="string-length($replace/@complexrule)>0">
+                <xsl:text>ComplexRule_</xsl:text>
+                <xsl:value-of select="$replace/@complexrule"/>
+            </xsl:if>
+        </xsl:param>
+        
+        <xsl:choose>
+            <xsl:when test="not($ismatch)">
+                <xsl:value-of select="$thisword"/>
+            </xsl:when>
+            
+        <!-- no restrictions -->
+            <xsl:when test="string-length($restrictions)=0">
+                <xsl:value-of select="replace($thisword,concat($replace/@suffix,'$'),$replace/@with)"/>
+            </xsl:when>
+        <!-- single restrictions -->
+            <xsl:when test="$restrictions='R1' and ends-with(porter2:R1($thisword),$replace/@suffix)">
+                <xsl:value-of select="replace($thisword,concat($replace/@suffix,'$'),$replace/@with)"/>
+            </xsl:when>
+            
+            <xsl:when test="$restrictions='R2' and ends-with(porter2:R2($thisword),$replace/@suffix)">
+                <xsl:value-of select="replace($thisword,concat($replace/@suffix,'$'),$replace/@with)"/>
+            </xsl:when>
+            
+            <xsl:when test="$restrictions='PrecededBy' and matches($thisword,concat($replace/@ifprecededby,$replace/@suffix))">
+                <xsl:value-of select="replace($thisword,concat($replace/@suffix,'$'),$replace/@with)"/>
+            </xsl:when>
+            
+            <xsl:when test="$restrictions='ComplexRule_s1a_ied_ies'">
+                <xsl:choose>
+                    <xsl:when test="matches($thisword,'(..)(ied|ies)$')">
+                        <xsl:value-of select="replace($thisword,'(ied|ies)$','i')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="replace($thisword,'(ied|ies)$','ie')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+        <!-- combinations -->
+            
+            
+            <xsl:otherwise>
+                <xsl:value-of select="$thisword"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
-    -->
+    
     
     <xsl:variable name="porter2:s2replacements">
         <!-- ordered longest to shortest -->
@@ -229,26 +271,9 @@
         <xsl:param name="s0" select="replace($consonantY,$porter2:s0_sfxs,'')"/>
         
         <xsl:param name="s1a">
-            <xsl:choose>
-                <xsl:when test="matches($s0,'sses$')">
-                    <xsl:value-of select="replace($s0,'sses$','ss')"/>
-                </xsl:when>
-                <xsl:when test="matches($s0,'(..)(ied|ies)$')">
-                    <xsl:value-of select="replace($s0,'(..)(ied|ies)$','$1i')"/>
-                </xsl:when>
-                <xsl:when test="matches($s0,'(ied|ies)$')">
-                    <xsl:value-of select="replace($s0,'(ied|ies)$','ie')"/>
-                </xsl:when>
-                <xsl:when test="matches($s0,'(us|ss)$')">
-                    <xsl:value-of select="$s0"/>
-                </xsl:when>
-                <xsl:when test="matches($s0,'[aeiouy].+s$')">
-                    <xsl:value-of select="replace($s0,'s$','')"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$s0"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="$porter2:s1a_replacements" mode="porter2:replace_suffix">
+                <xsl:with-param name="thisword" select="$s0"/>
+            </xsl:apply-templates>
         </xsl:param>
         
         <xsl:param name="s1b_sfx">
