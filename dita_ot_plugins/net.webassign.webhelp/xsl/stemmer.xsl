@@ -39,6 +39,7 @@
     <xsl:variable name="s1a_exceptionlist">^(inning|outing|canning|herring|earring|proceed|exceed|succeed)$</xsl:variable>
     
     <xsl:variable name="s2replacements">
+        <!-- ordered longest to shortest -->
         <replace suffix="ational" with="ate"/>
         <replace suffix="ization" with="ize" />
         <replace suffix="fulness" with="ful" />
@@ -64,6 +65,7 @@
     </xsl:variable>
     
     <xsl:variable name="s3replacements">
+        <!-- ordered longest to shortest -->
         <replace suffix="ational" with="ate"/>
         <replace suffix="tional" with="tion"/>
         <replace suffix="alize" with="al"/>
@@ -75,6 +77,7 @@
     </xsl:variable>
     
     <xsl:variable name="s4replacements">
+        <!-- ordered longest to shortest -->
         <replace suffix="ement" with=""/>
         <replace suffix="ance" with=""/>
         <replace suffix="ence" with=""/>
@@ -268,14 +271,6 @@
     
     <xsl:template match="*" mode="getStems">
         
-        <!-- 
-        Problems noticed in current version:
-        word       should be  is          example vocabulary wrong?
-        ===========================================================================
-        fluently   fluentli   fluent      maybe
-        congeners  congen     congener
-        
-        -->
         <xsl:param name="word" select="lower-case(./text())"/>
         
         <xsl:param name="noinitpostrophes" select="replace($word,concat('^',$apos),'')"/>
@@ -358,6 +353,10 @@
             <xsl:choose>
                 <xsl:when test="string-length($s2match)!=0 and contains(fn:R1($s1c),$s2match)">
                     <xsl:value-of select="replace($s1c,concat($s2match,'$'),$s2replace)"/>
+                </xsl:when>
+                <xsl:when test="string-length($s2match)!=0">
+                    <!-- don't attempt further s2 replacements -->
+                    <xsl:value-of select="$s1c"/>
                 </xsl:when>
                 <xsl:when test="ends-with($s1c,'logi') and contains(fn:R1($s1c),'ogi')">
                     <xsl:value-of select="replace($s1c,'ogi$','og')"/>
