@@ -256,7 +256,7 @@
             case "PrecededByComplexRule_s1b":
                 if (thisword.search(precededsuffix) > -1) {
                     thisword = thisword.replace(suffix,'');
-                    if (thisword.search(/atbliz$/) > -1) {
+                    if (thisword.search(/(at|bl|iz)$/) > -1) {
                         thisword = thisword + 'e';
                     } else if (thisword.search(/(bb|dd|ff|gg|mm|nn|pp|rr|tt)$/) > -1) {
                         thisword = thisword.replace(/.$/,'');
