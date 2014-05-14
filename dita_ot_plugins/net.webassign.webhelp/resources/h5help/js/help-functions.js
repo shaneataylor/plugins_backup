@@ -11,13 +11,13 @@ h5help.href=h5help.initialUrl.replace(/^.*\//,""); // just the topic
 //var disqus_shortname = h5help.params.disqus_shortname; 
 
 h5help.initAll = function() {
-    defineHandlers();
-    improveCompatibility();
-    loadInitialContent();
+    h5help.defineHandlers();
+    h5help.improveCompatibility();
+    h5help.loadInitialContent();
     h5help.initSearch(); // do this last so nothing else is waiting on google
     // loadCommentScript();
 };
-function improveCompatibility(){
+h5help.improveCompatibility = function (){
     // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
     if (navigator.userAgent.match(/Android [12]\./gi)) {
         $("div#toolbar,a#menu_button").css({'position':'fixed'});
@@ -31,10 +31,11 @@ function toggleMenu(){
 function closeMenu(){
 	$("ul#menu").addClass("hidden");
 }
-function printTopic(){
+h5help.printTopic = function(){
     closeMenu();
-    javascript:window.print();
-}
+    window.print();
+};
+
 function showAbout(){
     var modalContent="<h1>About Help</h1><p>Blah blah blah</p>";
     showModal(modalContent);
@@ -48,7 +49,7 @@ function showModal(modalContent){
 function hideModal(){
 	$("div#modal_back,div.modal").addClass("hidden");
 }
-function loadInitialContent(){
+h5help.loadInitialContent = function(){
     var initialTopic = h5help.href; // because h5help.href will be reset by toc load
     loadDiv("div#toc", h5help.params.toc_file); // open TOC 
     h5help.href = initialTopic; // restore to previous value
@@ -74,9 +75,8 @@ function loadInitialContent(){
         // nothing
         prettifyIfEnabled();
         addCommentSection();
-
     }
-}
+};
 
 function getQuery() {
     var searchString = window.location.search;
@@ -167,11 +167,9 @@ function loadDiv(targetDiv, linkHref, addHistory){
             }
             return;
         }
-        if (targetDiv == "div#toc") {
-            initTOC();
-        }
-        else if (targetDiv == "div#topic") {
-            initTopic(addHistory,h5help.href);
+        switch(targetDiv) {
+            case "div#toc"   : initTOC(); break;
+            case "div#topic" : initTopic(addHistory,h5help.href); break;
         }
         $(targetDiv).trigger('divloaded'); // use this to let other processes know this is done
     });
@@ -236,8 +234,7 @@ function googleAnalytics(){
     s.parentNode.insertBefore(g,s)}(document,'script'));
         }
 
-function defineHandlers(){
-    // Future: create keyboard shortcuts for visually impaired users
+h5help.defineHandlers = function (){
     $("a#menu_button").on("click focusin focusout", toggleMenu); 
     $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
@@ -246,7 +243,7 @@ function defineHandlers(){
     $("#view_topic").on("click", function(){slideTOC(true)});
     $("#view_min").on("click", toggleMenu);
     $("#view_max").on("click", toggleMenu);
-    $("#print_topic").on("click", printTopic);
+    $("#print_topic").on("click", h5help.printTopic);
     $("#customer_support").on("click", closeMenu);
     
     $("#about_help").on("click", showAbout);
@@ -255,7 +252,7 @@ function defineHandlers(){
     if (Modernizr.history) {
         $(window).on("popstate",function(){
             loadDiv("div#topic", location.pathname, false); // last arg to prevent adding to history
-        })
+        });
     }
     
     // delegation binds handler to current and future a descendants of selector
@@ -274,7 +271,8 @@ function defineHandlers(){
     
     $("div#sizer").on("click", slideTOC);
     $(window).resize(mobilize);
-}
+};
+
 function initTOC(){
     $("div#toc li").prepend('<span class="ua_control">&nbsp;</span>');
     $("div#toc ul:empty").remove(); // remove empty ul so parent not expandable 
@@ -356,29 +354,23 @@ h5help.doSearch = function() {
         if ( typeof(h5help.helpindex[stem]) != 'undefined' ) {
             for (var j = 0; j < h5help.helpindex[stem].length; j++) { // each result for the term
                 var thishref = Object.keys(h5help.helpindex[stem][j])[0];
-                results.push({
+                var thisresult = {
                     "href":thishref,
                     "term":h5help.searchTerms[i],
-                    "score":h5help.helpindex[stem][j][thishref]
-                });
+                    "score":parseInt(h5help.helpindex[stem][j][thishref]) + 1000
+                    };
+                if (h5help.searchTerms.length > 1) { // combine dups
+                    var matched = results.filter(function(item){ return item.href == thishref; }); 
+                    if (matched.length == 1) { // matched.length can be 0 or 1
+                        var unmatched = results.filter(function(item){ return item.href != thishref; }); 
+                        thisresult.term += " " + matched[0].term;
+                        thisresult.score += matched[0].score;
+                        results = unmatched;
+                    }
+                }
+                results.push(thisresult);
             }
         }
-    }
-    if (h5help.searchTerms.length > 1) {
-    // combine dups
-        var uniqueresults = [];
-        while (results.length > 0) {
-            var matched = results.filter(function(item){ return item.href == results[0].href; }); 
-            var unmatched = results.filter(function(item){ return item.href != results[0].href; }); 
-            var thisresult = {"href":results[0].href,"term":"","score":0};
-            for (var j = 0; j < matched.length; j++) {
-                thisresult.term += matched[j].term + " ";
-                thisresult.score += parseInt(matched[j].score) + 1000; // each term has 1000 bonus
-            }
-            uniqueresults.push(thisresult);
-            results = unmatched;
-        }
-        results = uniqueresults;
     }
     results.sort(function(a,b) {return b.score - a.score});
     // display results
@@ -387,7 +379,7 @@ h5help.doSearch = function() {
         resultsHTML += '<li><a href="' + results[i].href + '" title="' + results[i].term + results[i].score + '">';
         resultsHTML += results[i].href + '</a></li>';
     }
-    $("div#searchresults > div").html('<ul>'+resultsHTML+'</ul>');
+    $("div#searchresults > div").html('<ol>'+resultsHTML+'</ol>');
 };
 
 function showSearchResults(){
