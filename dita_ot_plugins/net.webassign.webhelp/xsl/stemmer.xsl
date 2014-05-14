@@ -75,10 +75,10 @@
     
     <!-- remove stuff -->
     <xsl:template match="*[contains(@class,' topic/related-links ')]" mode="nodraft"></xsl:template>
-    <xsl:template match="*[contains(@class,' topic/draft-comment ')]" mode="nodraft"></xsl:template>
-    <xsl:template match="*[contains(@class,' topic/required-cleanup ')]" mode="nodraft"></xsl:template>
-    <xsl:template match="processing-instruction()" mode="nodraft"></xsl:template>
-    <xsl:template match="comment()" mode="nodraft"></xsl:template>
+    <xsl:template match="*[contains(@class,' topic/draft-comment ')]" mode="nodraft topicSummary"></xsl:template>
+    <xsl:template match="*[contains(@class,' topic/required-cleanup ')]" mode="nodraft topicSummary"></xsl:template>
+    <xsl:template match="processing-instruction()" mode="nodraft topicSummary"></xsl:template>
+    <xsl:template match="comment()" mode="nodraft topicSummary"></xsl:template>
     
     
     
@@ -191,6 +191,35 @@
         </xsl:for-each-group>
     </xsl:template>
     
+    <!-- === GET TOPIC SUMMARY INFO === -->
+    
+    <xsl:template match="/*[contains(@class,' topic/topic ')]" mode="topicSummary">
+        <xsl:variable name="schtitle"><xsl:apply-templates select="*[contains(@class, ' topic/titlealts ')]/*[contains(@class, ' topic/searchtitle ')]" mode="topicSummary"/></xsl:variable>
+        <xsl:variable name="maintitle"><xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="topicSummary"/></xsl:variable>
+        <xsl:variable name="mapschtitle"><xsl:apply-templates select="*[contains(@class, ' topic/titlealts ')]/*[contains(@class, ' map/searchtitle ')]" mode="topicSummary"/></xsl:variable>
+        <xsl:variable name="searchTitle">
+            <xsl:choose>
+                <xsl:when test="string-length($schtitle)> 0"><xsl:value-of select="normalize-space($schtitle)"/></xsl:when>
+                <xsl:when test="string-length($mapschtitle)> 0"><xsl:value-of select="normalize-space($mapschtitle)"/></xsl:when>
+                <xsl:when test="string-length($maintitle) > 0"><xsl:value-of select="normalize-space($maintitle)"/></xsl:when>
+                <xsl:otherwise><xsl:text>[No Title]</xsl:text></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="shortDesc"><xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')][1]" mode="topicSummary"/></xsl:variable>
+        <topicSummary>
+            <xsl:attribute name="href" select="$thishref"/>
+            <xsl:attribute name="searchtitle" select="$searchTitle"/>
+            <xsl:attribute name="shortdesc" select="$shortDesc"/>
+        </topicSummary>
+    </xsl:template>
+    
+    <xsl:template match="*" mode="topicSummary">
+        <xsl:apply-templates select="node()|text()" mode="topicSummary"/>
+    </xsl:template>
+    
+    <xsl:template match="text()" mode="topicSummary">
+        <xsl:value-of select="replace(replace(.,'\s+',' '),'&quot;','&#x201c;')"/>
+    </xsl:template>
     
     <!-- === OUTPUT === -->
     
@@ -200,8 +229,8 @@
             * copy-to 
             * topics used as resource
              -->
-        
         <xsl:copy-of select="$allstems"/>
+        <xsl:apply-templates select="//*[contains(@class,' topic/topic ')][1]" mode="topicSummary"/>
     </xsl:template>
     
 </xsl:stylesheet>

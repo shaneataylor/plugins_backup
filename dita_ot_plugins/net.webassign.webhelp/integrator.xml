@@ -63,7 +63,11 @@
             out="${output.dir}${file.separator}helpindex.json"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stems2helpindex.xsl"
             failOnError="false"/>
-
+        <!-- Generate JSON topicsummaries file -->
+        <xslt in="${dita.temp.dir}${file.separator}allstems.idx"
+            out="${output.dir}${file.separator}topicsummaries.json"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}topicsummaries.xsl"
+            failOnError="false"/>
     </target>
 
     <target name="copy-h5help-resources">
