@@ -4,7 +4,7 @@
     
     <!-- set default values for plugin build params -->
     <property name="h5help.name" value=""/>
-    <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
+    <property name="h5help.google.cse.id" value=""/>
     <property name="h5help.google.cse.refinement" value=""/>
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
     <property name="h5help.prettify.code" value="no"/><!-- prettify code examples (yes or no) -->
@@ -78,12 +78,32 @@
         </copy>
         <copy file="${args.input.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
         <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
+        
+        <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
+            <and>
+                <not>
+                    <isset property="h5help.search"/>
+                </not>
+                <not>
+                    <length string="${h5help.google.cse.id}" trim="true" length="0" />
+                </not>
+            </and>
+            <then>
+                <property name="h5help.search" value="google"/>
+            </then>
+            <else>
+                <property name="h5help.search" value="internal"/>
+            </else>
+        </if>
+        
+        
         <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
         
         <!-- make h5params.json -->
         <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
 "toc_file"                  : "${args.xhtml.toc}${args.outext}",
 "help_name"                 : "${h5help.name}",
+"search"                    : "${h5help.search}",
 "google_cse_id"             : "${h5help.google.cse.id}",
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
 "disqus_shortname"          : "${h5help.disqus.shortname}",
