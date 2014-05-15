@@ -17,8 +17,21 @@ WORKING_DIR=$PWD
 # cd "${DITA_OT_DIR}"
 # . ./startcmd.sh
 
-cd "${WORKING_DIR}"
-export ANT_HOME="$DITA_DIR"/tools/ant
-$ANT_HOME/bin/ant -buildfile buildfile.xml
+cd /Users/staylor/Documents/Repos/build-techcomm
+. bootstrap.sh
 
 cd "${WORKING_DIR}"
+export ANT_HOME="$DITA_DIR"/tools/ant
+export ANT_OPTS="-Xmx512m"
+export ANT_OPTS="$ANT_OPTS -Djavax.xml.transform.TransformerFactory=net.sf.saxon.TransformerFactoryImpl"
+export ANT_OPTS="$ANT_OPTS -Dant.XmlLogger.stylesheet.uri=build_log.xsl"
+export ANT_OPTS="$ANT_OPTS -Ddita.dir=$DITA_DIR"
+export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
+
+export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
+
+$ANT_HOME/bin/ant -logfile "$WORKING_DIR/logs/test_stemmer.xml" -buildfile buildfile.xml
+
+cd "${WORKING_DIR}"
+
+cp -vf logs/test_stemmer.xml ~/Sites/stemmer_logs/
