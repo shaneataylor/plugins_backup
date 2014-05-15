@@ -301,18 +301,16 @@ function collapseTOCItem(){
     return false; // don't bubble event up to parents
 }
 h5help.initSearch = function(){
-    // fix param values
-    if ( h5help.params.search == '' && h5help.params.google_cse_id !== '' ) {
-        h5help.params.search = 'google';
-    } else if ( h5help.params.search == 'google'  && h5help.params.google_cse_id == '' ) {
-        h5help.params.search = '';
-    }
     switch (h5help.params.search) {
         case "internal":
             $.getJSON('helpindex.json', function(data, status, xhr) {
                 if (status !== 'error') {
                     h5help.helpindex = data;
-                    $("div#searchbox").html('<input name="search" title="Search the help" placeholder="Search the help" tabindex="3"></input>');
+                    $.getJSON('topicsummaries.json', function(data, status, xhr) { 
+                        if (status !== 'error') { h5help.topicsummaries = data; }
+                        else { h5help.topicsummaries = {}; }
+                    });
+                    $("div#searchbox").html('<input name="search" title="Search the help" placeholder="Search the help" tabindex="3" type="text"></input>');
                     $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
                     '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a><div></div>');
                     $("div#searchbox").on("keyup", "input", function(){
@@ -375,11 +373,21 @@ h5help.doSearch = function() {
     results.sort(function(a,b) {return b.score - a.score});
     // display results
     var resultsHTML = "";
-    for (var i = 0; i < results.length; i++) {
-        resultsHTML += '<li><a href="' + results[i].href + '" title="' + results[i].term + results[i].score + '">';
-        resultsHTML += results[i].href + '</a></li>';
+    if ( results.length > 0 ) {
+        resultsHTML += "<ol>";
+        for (var i = 0; i < results.length; i++) {
+            var thissummary = h5help.topicsummaries[results[i].href] || {"searchtitle":"","shortdesc": ""};
+            var thistitle = (thissummary.searchtitle.length > 0) ? thissummary.searchtitle : "[no title]";
+            var thisdesc = (thissummary.shortdesc.length > 0) ? thissummary.shortdesc : "";
+            resultsHTML += '<li><a href="' + results[i].href + '" title="' + results[i].term + results[i].score + '">';
+            resultsHTML += thistitle + '</a><p class="shortdesc">' + thisdesc + '</p></li>';
+        }
+        resultsHTML += "</ol>";
     }
-    $("div#searchresults > div").html('<ol>'+resultsHTML+'</ol>');
+    else {
+        resultsHTML = "<p>No topics matched your search criteria.</p>";
+    }
+    $("div#searchresults > div").html(resultsHTML);
 };
 
 function showSearchResults(){
