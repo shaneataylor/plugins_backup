@@ -53,7 +53,6 @@ export ANT_OPTS="$ANT_OPTS -Dfop.home=$FOP_HOME"
 export ANT_ARGS="-logger org.apache.tools.ant.XmlLogger"
 
 STEPS=(\
-"gitpull" \
 "styleguide")
 
 MESSAGES=(\

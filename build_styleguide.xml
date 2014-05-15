@@ -1,4 +1,4 @@
-<project name="techcomm" default="all" basedir="styleguide">
+<project name="techcomm" default="all" basedir=".">
     <description>
         Build the WebAssign Technical Communications Deliverables.
     </description>
@@ -7,12 +7,12 @@
     <pathelement location="../deps/ant-contrib/ant-contrib/ant-contrib-1.0b3.jar"/>
   </classpath>
   </taskdef>
-  <property name="source.dir" location="." />
-  <property name="args.logdir" location="../logs" />
+  <property name="source.dir" location=".." />
+  <property name="args.logdir" location="logs" />
   <property name="clean.temp" value="no" />
   <property name="clean.output" value="yes" />
   <property name="generate.copy.outer" value="1" />
-  <property name="dita.dir" location="../deps/DITA-OT1.8"/><!-- If possible, set from environment -->
+  <property name="dita.dir" location="deps/DITA-OT1.8"/><!-- If possible, set from environment -->
   
   <property name="transtype" value="xhtml"/>
   <property name="args.copycss" value="yes" />
@@ -25,7 +25,7 @@
   <property name="args.debug" value="no" />
   <property name="clean.output" value="yes" />
   <property name="dita.ext" value=".xml" />
-  <property name="args.logdir" location="../logs"/>
+  <property name="args.logdir" location="logs"/>
   
   <import file="${dita.dir}/build.xml" />
   
@@ -45,18 +45,18 @@
   
   <target name="styleguide" depends="timestamp">
     <antcall target="clean_output_path" >
-      <param name="output.dir" location="../out/styleguide"/>
+      <param name="output.dir" location="out/styleguide"/>
     </antcall>
     <antcall target="init">
-      <param name="output.dir" location="../out/styleguide" />
+      <param name="output.dir" location="out/styleguide" />
       <!--<param name="custom.webhelp.search" value="google_instructor" />-->
       <param name="args.input" value="${source.dir}/m_d_styleguide.ditamap"/>
-      <param name="args.filter" value="${source.dir}/flagstatus.ditaval" /><!-- 1.6.x -->
-      <param name="dita.temp.dir" location="../temp/styleguide" />
-      <param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />
+      <!--<param name="args.filter" value="${source.dir}/flagstatus.ditaval" />--><!-- 1.6.x -->
+      <param name="dita.temp.dir" location="temp/styleguide" />
+      <!--<param name="args.ftr" value="/Users/staylor/Documents/Repos/build-techcomm/_temp_header_.html" />-->
     </antcall>
     <antcall target="copy_extra_files">
-      <param name="output.dir" value="../out/styleguide"/>
+      <param name="output.dir" value="out/styleguide"/>
     </antcall>
   </target>
   
