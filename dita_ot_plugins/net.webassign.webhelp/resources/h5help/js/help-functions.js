@@ -1,20 +1,23 @@
 // Init globals
-var h5Url=window.location.href; 
-var h5baseUrl=h5Url.replace(/\/[^\/]*$/gi,'/'); 
-    h5baseUrl=h5baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
-var h5Path=window.location.pathname;
-var h5timer;
-var thisHref=h5Url.replace(/^.*\//,""); // just the topic
-var disqus_shortname = h5params.disqus_shortname; 
 
-function initAll() {
-    defineHandlers();
-    improveCompatibility();
-    loadInitialContent();
-    initSearch(); // do this last so nothing else is waiting on google
+var h5help = h5help || {};
+
+h5help.initialUrl=window.location.href; 
+h5help.baseUrl=h5help.initialUrl.replace(/\/[^\/]*$/gi,'/'); 
+h5help.baseUrl=h5help.baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
+h5help.href=h5help.initialUrl.replace(/^.*\//,""); // just the topic
+//var h5Path=window.location.pathname;
+//var h5help.timer;
+//var disqus_shortname = h5help.params.disqus_shortname; 
+
+h5help.initAll = function() {
+    h5help.defineHandlers();
+    h5help.improveCompatibility();
+    h5help.loadInitialContent();
+    h5help.initSearch(); // do this last so nothing else is waiting on google
     // loadCommentScript();
-}
-function improveCompatibility(){
+};
+h5help.improveCompatibility = function (){
     // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
     if (navigator.userAgent.match(/Android [12]\./gi)) {
         $("div#toolbar,a#menu_button").css({'position':'fixed'});
@@ -28,10 +31,11 @@ function toggleMenu(){
 function closeMenu(){
 	$("ul#menu").addClass("hidden");
 }
-function printTopic(){
+h5help.printTopic = function(){
     closeMenu();
-    javascript:window.print();
-}
+    window.print();
+};
+
 function showAbout(){
     var modalContent="<h1>About Help</h1><p>Blah blah blah</p>";
     showModal(modalContent);
@@ -45,10 +49,10 @@ function showModal(modalContent){
 function hideModal(){
 	$("div#modal_back,div.modal").addClass("hidden");
 }
-function loadInitialContent(){
-    var initialTopic = thisHref; // because thisHref will be reset by toc load
-    loadDiv("div#toc", h5params.toc_file); // open TOC 
-    thisHref = initialTopic; // restore to previous value
+h5help.loadInitialContent = function(){
+    var initialTopic = h5help.href; // because h5help.href will be reset by toc load
+    loadDiv("div#toc", h5help.params.toc_file); // open TOC 
+    h5help.href = initialTopic; // restore to previous value
     var query = getQuery();
     switch (query[0]) {
     case "t":
@@ -71,9 +75,8 @@ function loadInitialContent(){
         // nothing
         prettifyIfEnabled();
         addCommentSection();
-
     }
-}
+};
 
 function getQuery() {
     var searchString = window.location.search;
@@ -104,7 +107,7 @@ function handleLink(event){
         linkHref = $(this).attr("data-ctorig");
         linkTarget = "h5topic";
     }
-    if (linkTarget == "h5topic" && (getServer(linkHref) != getServer(h5baseUrl)) ) {
+    if (linkTarget == "h5topic" && (getServer(linkHref) != getServer(h5help.baseUrl)) ) {
         // COMM-587: Compare server of link & help system; set linkTarget="_top" if different
         linkTarget="_top";
     }
@@ -138,22 +141,22 @@ function loadDiv(targetDiv, linkHref, addHistory){
     
     var hrefDiv = "";
     
-    thisHref = linkHref.replace(/index\.html$/,""); // normalize link
+    h5help.href = linkHref.replace(/index\.html$/,""); // normalize link
     // add code to be agnostic to www prefix, or change search results to exclude without www prefix?
     
-    thisHref = thisHref.replace(/^https?:/gi,""); // agnostic to http or https (use current)
-    thisHref = thisHref.replace(/^\/\/webassign.net/gi,"//www.webassign.net"); // adds "www" if omitted
-    thisHref = thisHref.replace(h5baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
+    h5help.href = h5help.href.replace(/^https?:/gi,""); // agnostic to http or https (use current)
+    h5help.href = h5help.href.replace(/^\/\/webassign.net/gi,"//www.webassign.net"); // adds "www" if omitted
+    h5help.href = h5help.href.replace(h5help.baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
     if (targetDiv == "div#topic") { hrefDiv = ' div#topic>*' }
     if (targetDiv == "div#toc" || targetDiv == "div#topic") { hideSearchResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
     // FUTURE: allow base to change when switching help system contexts (instructor/admin)
     //         --Treat as external link--
-    $(targetDiv).load(thisHref+hrefDiv, function(response, status, xhr){
+    $(targetDiv).load(h5help.href+hrefDiv, function(response, status, xhr){
         if (status == "error") {
             var modalContent = "<h1>" + xhr.status + "</h1>";
-            modalContent += "<p>Could not open " + thisHref + ".</p>";
+            modalContent += "<p>Could not open " + h5help.href + ".</p>";
             modalContent += "<p>" + xhr.statusText + "</p>";
             showModal(modalContent);
             if (Modernizr.history) {
@@ -164,19 +167,17 @@ function loadDiv(targetDiv, linkHref, addHistory){
             }
             return;
         }
-        if (targetDiv == "div#toc") {
-            initTOC();
-        }
-        else if (targetDiv == "div#topic") {
-            initTopic(addHistory,thisHref);
+        switch(targetDiv) {
+            case "div#toc"   : initTOC(); break;
+            case "div#topic" : initTopic(addHistory,h5help.href); break;
         }
         $(targetDiv).trigger('divloaded'); // use this to let other processes know this is done
     });
     
 }
-function initTopic(addHistory,thisHref){
+function initTopic(addHistory,thishref){
     if (Modernizr.history && addHistory) {
-        window.history.pushState(null,null, thisHref); // add page to history for modern browsers
+        window.history.pushState(null,null, thishref); // add page to history for modern browsers
     }
     var title = $("div#topic h1").text();
     $("title").html(title);
@@ -188,7 +189,7 @@ function initTopic(addHistory,thisHref){
 }
 
 function prettifyIfEnabled(){
-    if ( h5params.prettify_code == 'yes') { PR.prettyPrint() }
+    if ( h5help.params.prettify_code == 'yes') { PR.prettyPrint() }
 }
 
 function syncTOCandBreadcrumbs() {
@@ -196,7 +197,7 @@ function syncTOCandBreadcrumbs() {
     $("div#toc a.current").removeClass("current");
     $('div#toc a.clicked').addClass("current").removeClass("clicked");
     if ($('div#toc a.current').length == 0) {
-        $('div#toc a[href="' + thisHref + '"]:eq(0)').addClass("current"); // pick the first matching href
+        $('div#toc a[href="' + h5help.href + '"]:eq(0)').addClass("current"); // pick the first matching href
     }
     $("div#toc a.current").parents("li.expandable").addClass("collapsible").removeClass("expandable");
     
@@ -211,15 +212,15 @@ function syncTOCandBreadcrumbs() {
 
 }
 function addCommentSection() {
-    if (disqus_shortname.length > 0) {
+    if (h5help.params.disqus_shortname.length > 0) {
         $('div#topic').append('<div id="disqus_thread"></div><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>');
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + h5help.params.disqus_shortname + '.disqus.com/embed.js';
             $('div#topic').append(dsq);
         })();
     }
-    if ( h5params.feedback == 'yes') {
+    if ( h5help.params.feedback == 'yes') {
         initFeedbackForm();
     }
 }
@@ -233,8 +234,7 @@ function googleAnalytics(){
     s.parentNode.insertBefore(g,s)}(document,'script'));
         }
 
-function defineHandlers(){
-    // Future: create keyboard shortcuts for visually impaired users
+h5help.defineHandlers = function (){
     $("a#menu_button").on("click focusin focusout", toggleMenu); 
     $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", closeMenu);
     
@@ -243,7 +243,7 @@ function defineHandlers(){
     $("#view_topic").on("click", function(){slideTOC(true)});
     $("#view_min").on("click", toggleMenu);
     $("#view_max").on("click", toggleMenu);
-    $("#print_topic").on("click", printTopic);
+    $("#print_topic").on("click", h5help.printTopic);
     $("#customer_support").on("click", closeMenu);
     
     $("#about_help").on("click", showAbout);
@@ -252,7 +252,7 @@ function defineHandlers(){
     if (Modernizr.history) {
         $(window).on("popstate",function(){
             loadDiv("div#topic", location.pathname, false); // last arg to prevent adding to history
-        })
+        });
     }
     
     // delegation binds handler to current and future a descendants of selector
@@ -271,7 +271,8 @@ function defineHandlers(){
     
     $("div#sizer").on("click", slideTOC);
     $(window).resize(mobilize);
-}
+};
+
 function initTOC(){
     $("div#toc li").prepend('<span class="ua_control">&nbsp;</span>');
     $("div#toc ul:empty").remove(); // remove empty ul so parent not expandable 
@@ -299,29 +300,96 @@ function collapseTOCItem(){
     $(this).attr("title","Click to expand");
     return false; // don't bubble event up to parents
 }
-function initSearch(){
-    if ( h5params.google_cse_id !== '' ) {
-        $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
-        $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
-        '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a>'+
-        '<div class="gcse-searchresults" data-gname="wasearch"></div>');
-        (function() {
-            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + h5params.google_cse_id;
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-        })();
-        h5timer = window.setInterval(function() { // test for search box periodically until found
-            if ($("div#searchbox input").length != 0) {
-                $("div#searchbox input").attr({
-                    placeholder:"Search the help",
-                    tabindex:3
+h5help.initSearch = function(){
+    switch (h5help.params.search) {
+        case "internal":
+            $.getJSON('helpindex.json', function(data, status, xhr) {
+                if (status !== 'error') {
+                    h5help.helpindex = data;
+                    $.getJSON('topicsummaries.json', function(data, status, xhr) { 
+                        if (status !== 'error') { h5help.topicsummaries = data; }
+                        else { h5help.topicsummaries = {}; }
                     });
-                window.clearInterval(h5timer);
-            }
-        },100);
+                    $("div#searchbox").html('<input name="search" title="Search the help" placeholder="Search the help" tabindex="3" type="text"></input>');
+                    $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
+                    '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a><div></div>');
+                    $("div#searchbox").on("keyup", "input", function(){
+                        window.clearInterval(h5help.timer);
+                        h5help.timer = window.setInterval(h5help.doSearch,500);
+                    });
+                }
+            });
+        break;
+        case "google":
+                h5help.timer = window.setInterval(function() { // test for search box periodically until found
+                    if ($("div#searchbox input").length != 0) {
+                        $("div#searchbox input").attr({ placeholder:"Search the help", tabindex:3 });
+                        window.clearInterval(h5help.timer);
+                    }
+                },100);
+            $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5help.params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
+            $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
+            '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a>'+
+            '<div class="gcse-searchresults" data-gname="wasearch"></div>');
+            (function() {
+                var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + h5help.params.google_cse_id;
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+            })();
+        break;
+        default:
+            window.clearInterval(h5help.timer);
+        break;
     }
+};
 
-}
+h5help.doSearch = function() {
+    window.clearInterval(h5help.timer);
+    h5help.searchTerms = $("div#searchbox input").val().replace(/[^'a-zA-z]/," ").split(" ");
+    var results = [];
+    for (var i = 0; i < h5help.searchTerms.length; i++) { // each search term
+        var stem = porter2.stem(h5help.searchTerms[i]);
+        if ( typeof(h5help.helpindex[stem]) != 'undefined' ) {
+            for (var j = 0; j < h5help.helpindex[stem].length; j++) { // each result for the term
+                var thishref = Object.keys(h5help.helpindex[stem][j])[0];
+                var thisresult = {
+                    "href":thishref,
+                    "term":h5help.searchTerms[i],
+                    "score":parseInt(h5help.helpindex[stem][j][thishref]) + 1000
+                    };
+                if (h5help.searchTerms.length > 1) { // combine dups
+                    var matched = results.filter(function(item){ return item.href == thishref; }); 
+                    if (matched.length == 1) { // matched.length can be 0 or 1
+                        var unmatched = results.filter(function(item){ return item.href != thishref; }); 
+                        thisresult.term += " " + matched[0].term;
+                        thisresult.score += matched[0].score;
+                        results = unmatched;
+                    }
+                }
+                results.push(thisresult);
+            }
+        }
+    }
+    results.sort(function(a,b) {return b.score - a.score});
+    // display results
+    var resultsHTML = "";
+    if ( results.length > 0 ) {
+        resultsHTML += "<ol>";
+        for (var i = 0; i < results.length; i++) {
+            var thissummary = h5help.topicsummaries[results[i].href] || {"searchtitle":"","shortdesc": ""};
+            var thistitle = (thissummary.searchtitle.length > 0) ? thissummary.searchtitle : "[no title]";
+            var thisdesc = (thissummary.shortdesc.length > 0) ? thissummary.shortdesc : "";
+            resultsHTML += '<li><a href="' + results[i].href + '" title="' + results[i].term + results[i].score + '">';
+            resultsHTML += thistitle + '</a><p class="shortdesc">' + thisdesc + '</p></li>';
+        }
+        resultsHTML += "</ol>";
+    }
+    else {
+        resultsHTML = "<p>No topics matched your search criteria.</p>";
+    }
+    $("div#searchresults > div").html(resultsHTML);
+};
+
 function showSearchResults(){
     $("div#searchresults").removeClass("hidden");
     $("div#topic").addClass("hidden");

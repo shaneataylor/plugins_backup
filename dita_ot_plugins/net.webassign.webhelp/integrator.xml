@@ -4,7 +4,7 @@
     
     <!-- set default values for plugin build params -->
     <property name="h5help.name" value=""/>
-    <property name="h5help.google.cse.id" value=""/><!-- non-empty tries to render search -->
+    <property name="h5help.google.cse.id" value=""/>
     <property name="h5help.google.cse.refinement" value=""/>
     <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
     <property name="h5help.prettify.code" value="no"/><!-- prettify code examples (yes or no) -->
@@ -14,10 +14,30 @@
     <property name="h5help.args.hdr" value="${args.hdr}"/>
     
     <target name="dita2h5help"
-        depends="build-init, preprocess, copy-mathML, dita.map.xhtml,
+        depends="set.search.default, build-init, preprocess, copy-mathML, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
-        dita.outer.topics.xhtml, xhtml2h5help, gen-sitemap, copy-h5help-resources"/>
+        dita.outer.topics.xhtml, xhtml2h5help, h5help.gen.index, gen-sitemap, copy-h5help-resources"/>
     
+    <target name="set.search.default">
+        <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
+            <and>
+                <not>
+                    <isset property="h5help.search"/>
+                </not>
+                <not>
+                    <length string="${h5help.google.cse.id}" trim="true" length="0" />
+                </not>
+            </and>
+            <then>
+                <property name="h5help.search" value="google"/>
+                <property name="h5help.genindex" value="false" />
+            </then>
+            <else>
+                <property name="h5help.search" value="internal"/>
+                <property name="h5help.genindex" value="true" />
+            </else>
+        </if>
+    </target>
     
     <target name="copy-mathML">
         <copy todir="${dita.temp.dir}${file.separator}mathml" failonerror="false">
@@ -39,6 +59,36 @@
             <param name="h5help.conreftarget.rule" expression="${h5help.conreftarget.rule}"></param>
         </xslt>
     </target>
+    
+    <target name="h5help.gen.index" description="Generate a JSON index of the help content." if="${h5help.genindex}">
+        <!-- Future: generate & use searchtargets list of topics for which @search != no -->
+        <!-- Index each topic individually first -->
+        <xslt basedir="${dita.temp.dir}"
+            includesfile="${dita.temp.dir}${file.separator}fullditatopic.list" 
+            destdir="${dita.temp.dir}"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stemmer.xsl"
+            filenameparameter="thisindextarget"
+            failOnError="false" extension=".idx">
+            <param name="outext" expression="${args.outext}"/>
+        </xslt>
+        <!-- Combine all topic indexes into a single file for further processing -->
+        <concat destfile="${dita.temp.dir}${file.separator}allstems.idx">
+            <fileset dir="${dita.temp.dir}" includes="*.idx" excludes="allstems.idx"/>
+            <header filtering="no"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<indextopics>]]></header>
+            <footer filtering="no"><![CDATA[</indextopics>]]></footer>
+        </concat>
+        <!-- Generate JSON index file -->
+        <xslt in="${dita.temp.dir}${file.separator}allstems.idx"
+            out="${output.dir}${file.separator}helpindex.json"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stems2helpindex.xsl"
+            failOnError="false"/>
+        <!-- Generate JSON topicsummaries file -->
+        <xslt in="${dita.temp.dir}${file.separator}allstems.idx"
+            out="${output.dir}${file.separator}topicsummaries.json"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}topicsummaries.xsl"
+            failOnError="false"/>
+    </target>
 
     <target name="copy-h5help-resources">
         <copy todir="${output.dir}" failonerror="false">
@@ -54,6 +104,7 @@
         <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
 "toc_file"                  : "${args.xhtml.toc}${args.outext}",
 "help_name"                 : "${h5help.name}",
+"search"                    : "${h5help.search}",
 "google_cse_id"             : "${h5help.google.cse.id}",
 "google_cse_refinement"     : "${h5help.google.cse.refinement}",
 "disqus_shortname"          : "${h5help.disqus.shortname}",

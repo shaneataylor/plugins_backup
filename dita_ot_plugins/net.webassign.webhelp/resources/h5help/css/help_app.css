@@ -879,6 +879,8 @@ div#searchbox input[type="text"], div#searchbox input.gsc-input {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
+    width: 100%;
+    padding-left: 6px;
 }
 div#searchbox td.gsc-search-button, div#searchbox td.gsc-clear-button {
     display: none;
@@ -1173,6 +1175,26 @@ div#searchresults > h1 {
     font-size: 1.34em;
     margin: 10px 0px 0px 10px;
 }
+/*Internal search*/
+div#searchresults > div > p {
+    margin: 10px 0px 0px 10px;
+}
+div#searchresults > div > ol {
+    margin: 10px 0px 0px 10px;
+    padding-left: 0px;
+    list-style-type:none;
+}
+div#searchresults > div > ol > li {
+    padding-left: 0px;
+    font-size: large;
+}
+div#searchresults > div > ol > li > p.shortdesc {
+    margin-top: 0px;
+    font-size: small;
+    color: #444;
+}
+
+
 div#searchresults a#closesearch {
     cursor: pointer;
     display: block;

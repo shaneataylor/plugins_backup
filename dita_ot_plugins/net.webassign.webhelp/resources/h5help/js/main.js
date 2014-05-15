@@ -1,8 +1,11 @@
 
+var h5help = h5help || {};
+
 // set fallback values if JSON file cannot be loaded
-h5params = {
+h5help.params = {
 "help_name"                        : "WebAssign Help",
 "toc_file"                         : "toc.htm",
+"search"                           : "internal",
 "google_cse_id"                    : "",
 "google_cse_refinement"            : "",
 "disqus_shortname"                 : "",
@@ -17,20 +20,19 @@ requirejs.config({
       "modernizr"      : "vendor/modernizr-2.6.2.min",
       "mathjax"        : "../../../vendor/mathjax/MathJax",
       "prettify"       : "prettify-code-google/prettify",
+      "porter2"        : "porter2",
       "help-functions" : "help-functions"
     }});
 
 require(["jquery"],function(){
     $.getJSON('h5help/h5params.json',function(data, status, xhr){
-        if (status !== 'error') { h5params = data; }
-        if (h5params.prettify_code == "yes") {
-            otherrequires = ["modernizr","prettify","help-functions","mathjax"];
-        }
-        else {
-            otherrequires = ["modernizr","help-functions","mathjax"];
-        }
+        if (status !== 'error') { h5help.params = data; }
+        var otherrequires = ["modernizr"];
+        if (h5help.params.prettify_code == "yes") { otherrequires.push("prettify"); }
+        if (h5help.params.search == "internal")   { otherrequires.push("porter2"); }
+        otherrequires.push("help-functions","mathjax");
         require(otherrequires,function(){
-            initAll();
+            h5help.initAll();
         });
     });
 });
