@@ -193,7 +193,7 @@
     
     <!-- === GET TOPIC SUMMARY INFO === -->
     
-    <xsl:template match="/*[contains(@class,' topic/topic ')]" mode="topicSummary">
+    <xsl:template match="*[contains(@class,' topic/topic ')]" mode="topicSummary">
         <xsl:variable name="schtitle"><xsl:apply-templates select="*[contains(@class, ' topic/titlealts ')]/*[contains(@class, ' topic/searchtitle ')]" mode="topicSummary"/></xsl:variable>
         <xsl:variable name="maintitle"><xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="topicSummary"/></xsl:variable>
         <xsl:variable name="mapschtitle"><xsl:apply-templates select="*[contains(@class, ' topic/titlealts ')]/*[contains(@class, ' map/searchtitle ')]" mode="topicSummary"/></xsl:variable>
@@ -205,7 +205,7 @@
                 <xsl:otherwise><xsl:text>[No Title]</xsl:text></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="shortDesc"><xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')][1]" mode="topicSummary"/></xsl:variable>
+        <xsl:variable name="shortDesc"><xsl:apply-templates select=".//*[contains(@class, ' topic/shortdesc ')][1]" mode="topicSummary"/></xsl:variable>
         <topicSummary>
             <xsl:attribute name="href" select="$thishref"/>
             <xsl:attribute name="searchtitle" select="$searchTitle"/>
@@ -230,7 +230,7 @@
             * topics used as resource
              -->
         <xsl:copy-of select="$allstems"/>
-        <xsl:apply-templates select="//*[contains(@class,' topic/topic ')][1]" mode="topicSummary"/>
+        <xsl:apply-templates select="(/*[contains(@class,' topic/topic ')] | /dita/*[contains(@class,' topic/topic ')])[1]" mode="topicSummary"/>
     </xsl:template>
     
 </xsl:stylesheet>
