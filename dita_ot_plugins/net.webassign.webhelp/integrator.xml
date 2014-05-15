@@ -14,10 +14,30 @@
     <property name="h5help.args.hdr" value="${args.hdr}"/>
     
     <target name="dita2h5help"
-        depends="build-init, preprocess, copy-mathML, dita.map.xhtml,
+        depends="set.search.default, build-init, preprocess, copy-mathML, dita.map.xhtml,
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
         dita.outer.topics.xhtml, xhtml2h5help, h5help.gen.index, gen-sitemap, copy-h5help-resources"/>
     
+    <target name="set.search.default">
+        <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
+            <and>
+                <not>
+                    <isset property="h5help.search"/>
+                </not>
+                <not>
+                    <length string="${h5help.google.cse.id}" trim="true" length="0" />
+                </not>
+            </and>
+            <then>
+                <property name="h5help.search" value="google"/>
+                <property name="h5help.genindex" value="false" />
+            </then>
+            <else>
+                <property name="h5help.search" value="internal"/>
+                <property name="h5help.genindex" value="true" />
+            </else>
+        </if>
+    </target>
     
     <target name="copy-mathML">
         <copy todir="${dita.temp.dir}${file.separator}mathml" failonerror="false">
@@ -40,7 +60,7 @@
         </xslt>
     </target>
     
-    <target name="h5help.gen.index" description="Generate a JSON index of the help content.">
+    <target name="h5help.gen.index" description="Generate a JSON index of the help content." if="${h5help.genindex}">
         <!-- Future: generate & use searchtargets list of topics for which @search != no -->
         <!-- Index each topic individually first -->
         <xslt basedir="${dita.temp.dir}"
@@ -78,25 +98,6 @@
         </copy>
         <copy file="${args.input.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
         <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
-        
-        <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
-            <and>
-                <not>
-                    <isset property="h5help.search"/>
-                </not>
-                <not>
-                    <length string="${h5help.google.cse.id}" trim="true" length="0" />
-                </not>
-            </and>
-            <then>
-                <property name="h5help.search" value="google"/>
-            </then>
-            <else>
-                <property name="h5help.search" value="internal"/>
-            </else>
-        </if>
-        
-        
         <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
         
         <!-- make h5params.json -->
