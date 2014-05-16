@@ -60,10 +60,10 @@ STEPS=(\
 "internal_admin_webhelp" \
 "instructor_webhelp" \
 "wa2_instructor_help" \
-"apis" \
-"styleguide" \
-"wa2_angular_test" \
-"comm_processes" )
+"apis" )
+#"styleguide" \
+#"wa2_angular_test" \
+#"comm_processes" )
 
 MESSAGES=(\
 "\nBuilding student help." \
@@ -71,10 +71,10 @@ MESSAGES=(\
 "\nBuilding internal admin help." \
 "\nBuilding instructor help." \
 "\nBuilding WA2 instructor help." \
-"\nBuilding API help." \
-"\nBuilding styleguide." \
-"\nBuilding WA2 Angular Help Test." \
-"\nBuilding comm. team processes." )
+"\nBuilding API help." )
+#"\nBuilding styleguide." \
+#"\nBuilding WA2 Angular Help Test." \
+#"\nBuilding comm. team processes." )
 
 function buildstep()
 {
