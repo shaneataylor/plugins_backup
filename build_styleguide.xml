@@ -42,14 +42,12 @@
     <antcall target="styleguide" />
   </target>
   
-  
   <target name="styleguide" depends="timestamp">
     <antcall target="clean_output_path" >
       <param name="output.dir" location="out/styleguide"/>
     </antcall>
     <antcall target="init">
       <param name="output.dir" location="out/styleguide" />
-      <!--<param name="custom.webhelp.search" value="google_instructor" />-->
       <param name="args.input" value="${source.dir}/m_d_styleguide.ditamap"/>
       <!--<param name="args.filter" value="${source.dir}/flagstatus.ditaval" />--><!-- 1.6.x -->
       <param name="dita.temp.dir" location="temp/styleguide" />
@@ -60,18 +58,11 @@
     </antcall>
   </target>
   
-  
-  
   <target name="clean_output_path">
     <delete dir="${output.dir}"/>
   </target>
   
   <target name="copy_extra_files">
-    <!--<copy file="${source.dir}/csh.json" todir="${output.dir}" verbose="true"/>-->
-    <!--<copy file="${dita.dir}/plugins/net.webassign.webhelp/googlea98ae97064cf3d0e.html" todir="${output.dir}" verbose="true"/>
-      <copy file="${dita.dir}/plugins/net.webassign.webhelp/quickstart.css" todir="${output.dir}" verbose="true"/>-->
-    
   </target>
-  
   
 </project>

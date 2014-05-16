@@ -7,7 +7,13 @@
 # TODO: Usage help
 #
 # Get the absolute path of our current directory
-WORKING_DIR=$( cd "$( dirname "$0" )" && pwd )
+if [ "$1" == "-workspace" ]; then
+    WORKING_DIR=$2
+    shift
+    shift
+else
+    WORKING_DIR=$PWD
+fi
 cd ${WORKING_DIR}
 echo -e "\nCurrent path is ${WORKING_DIR}"
 DITA_OT_VERSION='1.8'
@@ -56,7 +62,6 @@ STEPS=(\
 "styleguide")
 
 MESSAGES=(\
-"\nPulling DITA files from git." \
 "\nBuilding styleguide." )
 
 function buildstep()
