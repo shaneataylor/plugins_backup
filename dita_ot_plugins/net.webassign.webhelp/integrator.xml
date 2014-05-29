@@ -64,7 +64,8 @@
         <!-- Future: generate & use searchtargets list of topics for which @search != no -->
         <!-- Index each topic individually first -->
         <xslt basedir="${dita.temp.dir}"
-            includesfile="${dita.temp.dir}${file.separator}fullditatopic.list" 
+            includesfile="${dita.temp.dir}${file.separator}fullditatopic.list"
+            excludesfile="${dita.temp.dir}${file.separator}resourceonly.list"
             destdir="${dita.temp.dir}"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stemmer.xsl"
             filenameparameter="thisindextarget"
