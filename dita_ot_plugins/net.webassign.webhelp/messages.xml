@@ -13,6 +13,10 @@
         <reason>Generated help topic is missing revision date or owner metadata.</reason>
         <response>Topic: (%1). Owner: (%2). Revision date: (%3). No copyright footer will be generated. This topic might have been created by an &lt;xref&gt;.</response>
     </message>
+    <message id="DOTX096W" type="WARN">
+        <reason>INDEXING: Can't resolve target topic title for short description.</reason>
+        <response>The short description for the indexed topic %1 will not contain the text of the &lt;xref&gt; or &lt;keyword&gt; that references %2.</response>
+    </message>
     <!--<message id="DOTX098I" type="INFO">
         <reason>Adding @outputclass for @audience.</reason>
         <response>No action needed.</response>

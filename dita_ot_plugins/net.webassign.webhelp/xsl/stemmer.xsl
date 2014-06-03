@@ -14,6 +14,9 @@
     <xsl:param name="thisindextarget" />
     <xsl:param name="outext" />
     <xsl:param name="thishref" select="replace($thisindextarget,'\.xml$',$outext)"/>
+    <xsl:param name="thisdir">
+        <xsl:value-of select="concat(/processing-instruction('workdir-uri')[1],/processing-instruction('path2project-uri')[1])"/>
+    </xsl:param>
     <xsl:param name="stemmer.debug" select="false()"/>
     
     <xsl:param name="classmaps">
@@ -219,6 +222,31 @@
     
     <xsl:template match="text()" mode="topicSummary">
         <xsl:value-of select="replace(replace(.,'\s+',' '),'&quot;','&#x201c;')"/>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class,' topic/xref ')] | *[contains(@class,' topic/keyword ')]" 
+        mode="topicSummary">
+        <xsl:choose>
+            <xsl:when test="string-length(normalize-space(string-join(.//text(),''))) > 0">
+                <xsl:apply-templates select="node()|text()" mode="topicSummary"/>
+            </xsl:when>
+            <xsl:when test="string-length(./@href) > 0 and not(contains(./@href,'://'))">
+                <!-- resolve title of referenced topic -->
+                <xsl:value-of select="document(concat($thisdir, ./@href))//*[contains(@class, ' topic/topic ')][1]/*[contains(@class, ' topic/title ')]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- warn user that it's not being resolved -->
+                <xsl:call-template name="output-message">
+                    <xsl:with-param name="msgnum">096</xsl:with-param>
+                    <xsl:with-param name="msgsev">W</xsl:with-param>
+                    <xsl:with-param name="msgparams">%1=<xsl:value-of select="$thisindextarget"/>;%2=<xsl:value-of select="./@href"/></xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class,' topic/desc ')]" mode="topicSummary">
+        <!-- don't include in indexed short description -->
     </xsl:template>
     
     <!-- === OUTPUT === -->
