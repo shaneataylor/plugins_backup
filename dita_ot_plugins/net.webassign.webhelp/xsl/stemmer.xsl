@@ -37,12 +37,12 @@
     
     <xsl:param name="classmaps">
         <classmap ditaclass=" topic/body " element="body" weight="1" />
-        <classmap ditaclass=" topic/abstract " element="abstracts" weight="3"/>
-        <classmap ditaclass=" topic/shortdesc " element="shortdesc" first="true" weight="5"/>
-        <classmap ditaclass=" topic/keyword " element="keywords" weight="5"/>
-        <classmap ditaclass=" topic/indexterm " element="indexterms" weight="5"/>
+        <classmap ditaclass=" topic/abstract " element="abstracts" weight="10"/>
+        <classmap ditaclass=" topic/shortdesc " element="shortdesc" first="true" weight="15"/>
+        <classmap ditaclass=" topic/keyword " element="keywords" weight="15"/>
+        <classmap ditaclass=" topic/indexterm " element="indexterms" weight="15"/>
         <classmap ditaclass=" topic/title " element="titles" weight="7"/>
-        <classmap ditaclass=" topic/title " element="firsttitle" first="true" weight="10" />
+        <classmap ditaclass=" topic/title " element="firsttitle" first="true" weight="20" />
     </xsl:param>
     <xsl:param name="classmapcount" select="count($classmaps/classmap)"/>
     

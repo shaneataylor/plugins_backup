@@ -355,6 +355,7 @@ h5help.doSearch = function() {
     
     var results = [];
     for (var i = 0; i < h5help.searchStems.length; i++) { // each search stem (including synonyms)
+        var termbonus = (i >= h5help.searchTerms.length ? 250 : 1000 ); // reduced bonus for synonyms
         var stem = h5help.searchStems[i];
         if ( typeof(h5help.helpindex[stem]) != 'undefined' ) {
             for (var j = 0; j < h5help.helpindex[stem].length; j++) { // each result for the term
@@ -362,7 +363,7 @@ h5help.doSearch = function() {
                 var thisresult = {
                     "href":thishref,
                     "term":stem,
-                    "score":parseInt(h5help.helpindex[stem][j][thishref]) + 1000
+                    "score":parseInt(h5help.helpindex[stem][j][thishref]) + termbonus
                     };
                 if (h5help.searchStems.length > 1) { // combine dups
                     var matched = results.filter(function(item){ return item.href == thishref; }); 
@@ -384,9 +385,10 @@ h5help.doSearch = function() {
         resultsHTML += "<ol>";
         for (var i = 0; i < results.length; i++) {
             var thissummary = h5help.topicsummaries[results[i].href] || {"searchtitle":"","shortdesc": ""};
-            var thistitle = (thissummary.searchtitle.length > 0) ? thissummary.searchtitle : "[no title]";
-            var thisdesc = (thissummary.shortdesc.length > 0) ? thissummary.shortdesc : "";
-            resultsHTML += '<li><a href="' + results[i].href + '">' + thistitle + '</a>';
+            var thistitle = (thissummary.searchtitle.length > 0) ? thissummary.searchtitle.replace(/[<>]/gi,'') : "[no title]";
+            var thisdesc = (thissummary.shortdesc.length > 0) ? thissummary.shortdesc.replace(/[<>]/gi,'') : "";
+            resultsHTML += '<li score="' + results[i].score + '">';
+            resultsHTML += '<a href="' + results[i].href + '">' + thistitle + '</a>';
             resultsHTML += '<p class="shortdesc">' + thisdesc + '</p></li>';
         }
         resultsHTML += "</ol>";
@@ -407,10 +409,14 @@ h5help.getSynonyms = function(stemlist){
             }
         }
     }
-    /*NEED TO:
-        REMOVE DUPLICATES
-        SPLIT UP MULTI-WORD VARIANTS SO THEY CAN BE STEMMED (MIGHT DO WHEN GENERATING CONFIGS)
-    */
+    for (var i = 0; i < synonyms.length; i++) { // remove duplicates
+        for (var j = 0; j < stemlist.length; j++) {
+            if (synonyms[i] == stemlist[j]) { synonyms.splice(i,1); }
+        }
+        for (var j = i+1; j < synonyms.length; j++) {
+            if (synonyms[i] == synonyms[j]) { synonyms.splice(j,1); }
+        }
+    }
     return synonyms;
 }
 
