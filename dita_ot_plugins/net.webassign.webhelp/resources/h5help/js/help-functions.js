@@ -310,6 +310,7 @@ h5help.initSearch = function(){
                         if (status !== 'error') { h5help.topicsummaries = data; }
                         else { h5help.topicsummaries = {}; }
                     });
+                    porter2.exceptionlist = h5help.params.searchconfig.exceptionalforms; // override porter2 defaults 
                     $("div#searchbox").html('<input name="search" title="Search the help" placeholder="Search the help" tabindex="3" type="text"></input>');
                     $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
                     '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a><div></div>');
@@ -346,18 +347,24 @@ h5help.initSearch = function(){
 h5help.doSearch = function() {
     window.clearInterval(h5help.timer);
     h5help.searchTerms = $("div#searchbox input").val().replace(/[^'a-zA-z]/," ").split(" ");
+    h5help.searchStems = [];
+    for (var i = 0; i < h5help.searchTerms.length; i++) { // stem each search term
+        h5help.searchStems.push(porter2.stem(h5help.searchTerms[i]));
+    }
+    h5help.searchStems = h5help.searchStems.concat(h5help.getSynonyms(h5help.searchStems));
+    
     var results = [];
-    for (var i = 0; i < h5help.searchTerms.length; i++) { // each search term
-        var stem = porter2.stem(h5help.searchTerms[i]);
+    for (var i = 0; i < h5help.searchStems.length; i++) { // each search stem (including synonyms)
+        var stem = h5help.searchStems[i];
         if ( typeof(h5help.helpindex[stem]) != 'undefined' ) {
             for (var j = 0; j < h5help.helpindex[stem].length; j++) { // each result for the term
                 var thishref = Object.keys(h5help.helpindex[stem][j])[0];
                 var thisresult = {
                     "href":thishref,
-                    "term":h5help.searchTerms[i],
+                    "term":stem,
                     "score":parseInt(h5help.helpindex[stem][j][thishref]) + 1000
                     };
-                if (h5help.searchTerms.length > 1) { // combine dups
+                if (h5help.searchStems.length > 1) { // combine dups
                     var matched = results.filter(function(item){ return item.href == thishref; }); 
                     if (matched.length == 1) { // matched.length can be 0 or 1
                         var unmatched = results.filter(function(item){ return item.href != thishref; }); 
@@ -379,8 +386,8 @@ h5help.doSearch = function() {
             var thissummary = h5help.topicsummaries[results[i].href] || {"searchtitle":"","shortdesc": ""};
             var thistitle = (thissummary.searchtitle.length > 0) ? thissummary.searchtitle : "[no title]";
             var thisdesc = (thissummary.shortdesc.length > 0) ? thissummary.shortdesc : "";
-            resultsHTML += '<li><a href="' + results[i].href + '" title="' + results[i].term + results[i].score + '">';
-            resultsHTML += thistitle + '</a><p class="shortdesc">' + thisdesc + '</p></li>';
+            resultsHTML += '<li><a href="' + results[i].href + '">' + thistitle + '</a>';
+            resultsHTML += '<p class="shortdesc">' + thisdesc + '</p></li>';
         }
         resultsHTML += "</ol>";
     }
@@ -389,6 +396,23 @@ h5help.doSearch = function() {
     }
     $("div#searchresults > div").html(resultsHTML);
 };
+
+h5help.getSynonyms = function(stemlist){
+    var synonyms = [];
+    for (var i = 0; i < stemlist.length; i++) {
+        for (var j = stemlist.length; j >= i; j--) { // find longest matching phrase from end
+            var phrase = stemlist.slice(i,j+1).join('_');
+            if ( phrase in h5help.params.searchconfig.synonyms ) {
+                synonyms = synonyms.concat(h5help.params.searchconfig.synonyms[phrase]);
+            }
+        }
+    }
+    /*NEED TO:
+        REMOVE DUPLICATES
+        SPLIT UP MULTI-WORD VARIANTS SO THEY CAN BE STEMMED (MIGHT DO WHEN GENERATING CONFIGS)
+    */
+    return synonyms;
+}
 
 h5help.showSearchResults = function(){
     $("div#searchresults").removeClass("hidden");

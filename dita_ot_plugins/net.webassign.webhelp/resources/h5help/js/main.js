@@ -10,8 +10,11 @@ h5help.params = {
 "google_cse_refinement"            : "",
 "disqus_shortname"                 : "",
 "feedback"                         : "no",
-"prettify_code"                    : "no"
+"prettify_code"                    : "no",
+"vendorpath"                       : ""
 };
+// build will rewrite vendorpath value so it's present without loading h5params.json
+// TO DO: Update paths below after vendorpath is written
 
 requirejs.config({
     "baseUrl": "./h5help/js",

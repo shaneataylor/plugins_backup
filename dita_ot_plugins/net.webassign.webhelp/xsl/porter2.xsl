@@ -195,13 +195,22 @@
         </xsl:call-template>
     </xsl:function>
     
+    <xsl:function name="porter2:stem" as="xs:string">
+        <xsl:param name="thisword" as="xs:string"/>
+        <xsl:param name="customexceptions" />
+        <xsl:call-template name="porter2:stemOrException">
+            <xsl:with-param name="word" select="replace(lower-case($thisword),$porter2:nonwordchars,'')"/>
+            <xsl:with-param name="exceptionlist" select="$customexceptions"/>
+        </xsl:call-template>
+    </xsl:function>
+    
     <!-- Templates -->
     
     <xsl:template name="porter2:stemOrException">
         
         <xsl:param name="word" />
-        
-        <xsl:param name="exceptionstem" select="$porter2:exceptionlist/exception[@word=$word][1]/@stem"/>
+        <xsl:param name="exceptionlist" select="$porter2:exceptionlist"/>
+        <xsl:param name="exceptionstem" select="$exceptionlist/exception[@word=$word][1]/@stem"/>
         
         <xsl:choose>
             <xsl:when test="string-length($word) &lt;= 2">

@@ -6,12 +6,15 @@
     <property name="h5help.name" value=""/>
     <property name="h5help.google.cse.id" value=""/>
     <property name="h5help.google.cse.refinement" value=""/>
-    <property name="h5help.feedback" value="no"/><!-- add feedback feature (yes or no) -->
-    <property name="h5help.prettify.code" value="no"/><!-- prettify code examples (yes or no) -->
+    <property name="h5help.feedback" value="no"/>                 <!-- add feedback feature (yes or no) -->
+    <property name="h5help.prettify.code" value="no"/>            <!-- prettify code examples (yes or no) -->
     <property name="h5help.disqus.shortname" value=""/>
     <property name="h5help.conreftarget.rule" value=""/>
     <property name="h5help.copy.cssroot" value="no"/>
     <property name="h5help.args.hdr" value="${args.hdr}"/>
+    <!-- h5help.search and h5help.genindex -->                    <!-- set in set.search.default target  -->
+    <property name="h5help.vendorpath" value="vendor"/>
+    <property name="h5help.search.configfile" location="searchconfig.xml"/>
     
     <target name="dita2h5help"
         depends="set.search.default, build-init, preprocess, copy-mathML, dita.map.xhtml,
@@ -60,8 +63,21 @@
         </xslt>
     </target>
     
-    <target name="h5help.gen.index" description="Generate a JSON index of the help content." if="${h5help.genindex}">
+    <target name="h5help.gen.index" depends="h5help.gen.empty.index,h5help.gen.search.index"/>
+    
+    <target name="h5help.gen.search.index" description="Generate a JSON index of the help content." if="${h5help.genindex}">
         <!-- Future: generate & use searchtargets list of topics for which @search != no -->
+        <condition property="configfile.found">
+            <available file="${h5help.search.configfile}"/>
+        </condition>
+        <!-- Combine user and default search configs -->
+        <xslt in="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}searchconfig.xml"
+            out="${dita.temp.dir}${file.separator}searchconfigs.xml"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}init_searchconfigs.xsl"
+            failOnError="false">
+            <param name="configfile" expression="${h5help.search.configfile}"/>
+            <param name="configfilefound" expression="${configfile.found}"/>
+        </xslt>
         <!-- Index each topic individually first -->
         <xslt basedir="${dita.temp.dir}"
             includesfile="${dita.temp.dir}${file.separator}fullditatopic.list"
@@ -71,6 +87,8 @@
             filenameparameter="thisindextarget"
             failOnError="false" extension=".idx">
             <param name="outext" expression="${args.outext}"/>
+            <param name="configfile" expression="${dita.temp.dir}${file.separator}searchconfigs.xml"/>
+            
         </xslt>
         <!-- Combine all topic indexes into a single file for further processing -->
         <concat destfile="${dita.temp.dir}${file.separator}allstems.idx">
@@ -90,6 +108,12 @@
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}topicsummaries.xsl"
             failOnError="false"/>
     </target>
+    
+    <target name="h5help.gen.empty.index" description="Generate an empty searchconfigs file if not indexing." unless="${h5help.genindex}">
+        <echo append="no" file="${dita.temp.dir}${file.separator}searchconfigs.xml" force="yes">
+            <![CDATA[<searchconfig></searchconfig>]]>
+        </echo>
+    </target>
 
     <target name="copy-h5help-resources">
         <copy todir="${output.dir}" failonerror="false">
@@ -99,20 +123,21 @@
         </copy>
         <copy file="${args.input.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
         <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
-        <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
-        
         <!-- make h5params.json -->
-        <echo append="no" file="${output.dir}${file.separator}h5help${file.separator}h5params.json" force="yes">{
-"toc_file"                  : "${args.xhtml.toc}${args.outext}",
-"help_name"                 : "${h5help.name}",
-"search"                    : "${h5help.search}",
-"google_cse_id"             : "${h5help.google.cse.id}",
-"google_cse_refinement"     : "${h5help.google.cse.refinement}",
-"disqus_shortname"          : "${h5help.disqus.shortname}",
-"feedback"                  : "${h5help.feedback}",
-"prettify_code"             : "${h5help.prettify.code}"
-}</echo>
-        
+        <echo level="info">Creating ${output.dir}${file.separator}h5help${file.separator}h5params.json</echo>
+        <xslt in="${dita.temp.dir}${file.separator}searchconfigs.xml"
+            out="${output.dir}${file.separator}h5help${file.separator}h5params.json"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}gen_h5params.xsl"
+            failOnError="false">
+            <param name="toc_file" expression="${args.xhtml.toc}${args.outext}" />
+            <param name="help_name" expression="${h5help.name}" />
+            <param name="search" expression="${h5help.search}" />
+            <param name="google_cse_id" expression="${h5help.google.cse.id}" />
+            <param name="google_cse_refinement" expression="${h5help.google.cse.refinement}" />
+            <param name="disqus_shortname" expression="${h5help.disqus.shortname}" />
+            <param name="feedback" expression="${h5help.feedback}" />
+            <param name="prettify_code" expression="${h5help.prettify.code}" />
+        </xslt>
         <antcall target="copy-cssroot"/>
         
     </target>
