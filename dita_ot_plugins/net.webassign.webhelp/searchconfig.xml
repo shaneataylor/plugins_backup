@@ -179,25 +179,25 @@
     </stopwords>
     <exceptionalforms>
         <!-- Standard Porter2 exceptions -->
-        <exception word="skis" stem="ski" />
-        <exception word="skies" stem="sky" />
-        <exception word="dying" stem="die" />
-        <exception word="lying" stem="lie" />
-        <exception word="tying" stem="tie" />
-        <exception word="idly" stem="idl" />
-        <exception word="gently" stem="gentl" />
-        <exception word="ugly" stem="ugli" />
-        <exception word="early" stem="earli" />
-        <exception word="only" stem="onli" />
-        <exception word="singly" stem="singl" />
-        <exception word="sky" stem="sky" />
-        <exception word="news" stem="news" />
-        <exception word="howe" stem="howe" />
-        <exception word="atlas" stem="atlas" />
-        <exception word="cosmos" stem="cosmos" />
-        <exception word="bias" stem="bias" />
-        <exception word="andes" stem="andes" />
-        
+        <exception word="skis" stem="ski"/>
+        <exception word="skies" stem="sky"/>
+        <exception word="dying" stem="die"/>
+        <exception word="lying" stem="lie"/>
+        <exception word="tying" stem="tie"/>
+        <exception word="idly" stem="idl"/>
+        <exception word="gently" stem="gentl"/>
+        <exception word="ugly" stem="ugli"/>
+        <exception word="early" stem="earli"/>
+        <exception word="only" stem="onli"/>
+        <exception word="singly" stem="singl"/>
+        <exception word="sky" stem="sky"/>
+        <exception word="news" stem="news"/>
+        <exception word="howe" stem="howe"/>
+        <exception word="atlas" stem="atlas"/>
+        <exception word="cosmos" stem="cosmos"/>
+        <exception word="bias" stem="bias"/>
+        <exception word="andes" stem="andes"/>
+
         <!-- Additional exceptions -->
         <exception word="cacti" stem="cactus"/>
         <exception word="addenda" stem="addendum"/>
@@ -228,9 +228,378 @@
         <exception word="strata" stem="stratum"/>
         <exception word="theses" stem="thesi"/>
         <exception word="vortices" stem="vortex"/>
+
+        <!-- irregular verbs -->
+        <exception word="arose" stem="aris"/>
+        <exception word="arisen" stem="aris"/>
+        <exception word="awaken" stem="awak"/>
+        <exception word="awoke" stem="awak"/>
+        <exception word="awoken" stem="awak"/>
+        <exception word="was" stem="be"/>
+        <exception word="were" stem="be"/>
+        <exception word="been" stem="be"/>
+        <exception word="bore" stem="bear"/>
+        <exception word="born" stem="bear"/>
+        <exception word="beaten" stem="beat"/>
+        <exception word="became" stem="becom"/>
+        <exception word="began" stem="begin"/>
+        <exception word="begun" stem="begin"/>
+        <exception word="bent" stem="bend"/>
+        <exception word="bound" stem="bind"/>
+        <exception word="bit" stem="bite"/>
+        <exception word="bitten" stem="bite"/>
+        <exception word="bled" stem="bleed"/>
+        <exception word="blew" stem="blow"/>
+        <exception word="blown" stem="blow"/>
+        <exception word="broke" stem="break"/>
+        <exception word="broken" stem="break"/>
+        <exception word="bred" stem="breed"/>
+        <exception word="brought" stem="bring"/>
+        <exception word="built" stem="build"/>
+        <exception word="burnt" stem="burn"/>
+        <exception word="bought" stem="buy"/>
+        <exception word="caught" stem="catch"/>
+        <exception word="chose" stem="choos"/>
+        <exception word="chosen" stem="choos"/>
+        <exception word="clung" stem="cling"/>
+        <exception word="came" stem="come"/>
+        <exception word="crept" stem="creep"/>
+        <exception word="dealt" stem="deal"/>
+        <exception word="dug" stem="dig"/>
+        <exception word="dove" stem="dive"/>
+        <exception word="did" stem="do"/>
+        <exception word="done" stem="do"/>
+        <exception word="drew" stem="draw"/>
+        <exception word="drawn" stem="draw"/>
+        <exception word="drank" stem="drink"/>
+        <exception word="drunk" stem="drink"/>
+        <exception word="drove" stem="drive"/>
+        <exception word="driven" stem="drive"/>
+        <exception word="ate" stem="eat"/>
+        <exception word="eaten" stem="eat"/>
+        <exception word="fell" stem="fall"/>
+        <exception word="fallen" stem="fall"/>
+        <exception word="fed" stem="feed"/>
+        <exception word="felt" stem="feel"/>
+        <exception word="fought" stem="fight"/>
+        <exception word="found" stem="find"/>
+        <exception word="fled" stem="flee"/>
+        <exception word="flung" stem="fling"/>
+        <exception word="flew" stem="fli"/>
+        <exception word="flown" stem="fli"/>
+        <exception word="forbad" stem="forbid"/>
+        <exception word="forbidden" stem="forbid"/>
+        <exception word="foresaw" stem="forese"/>
+        <exception word="foreseen" stem="forese"/>
+        <exception word="forgot" stem="forget"/>
+        <exception word="forgotten" stem="forget"/>
+        <exception word="forgave" stem="forgiv"/>
+        <exception word="forgiven" stem="forgiv"/>
+        <exception word="forsook" stem="forsak"/>
+        <exception word="forsaken" stem="forsak"/>
+        <exception word="froze" stem="freez"/>
+        <exception word="frozen" stem="freez"/>
+        <exception word="frostbitten" stem="frostbit"/>
+        <exception word="got" stem="get"/>
+        <exception word="gotten" stem="get"/>
+        <exception word="gave" stem="give"/>
+        <exception word="given" stem="give"/>
+        <exception word="went" stem="go"/>
+        <exception word="gone" stem="go"/>
+        <exception word="ground" stem="grind"/>
+        <exception word="grew" stem="grow"/>
+        <exception word="grown" stem="grow"/>
+        <exception word="handwritten" stem="handwrit"/>
+        <exception word="hung" stem="hang"/>
+        <exception word="had" stem="have"/>
+        <exception word="heard" stem="hear"/>
+        <exception word="hid" stem="hide"/>
+        <exception word="hidden" stem="hide"/>
+        <exception word="held" stem="hold"/>
+        <exception word="inlaid" stem="inlay"/>
+        <exception word="interwove" stem="interweav"/>
+        <exception word="interwoven" stem="interweav"/>
+        <exception word="kept" stem="keep"/>
+        <exception word="knelt" stem="kneel"/>
+
+        <exception word="knew" stem="know"/>
+        <exception word="known" stem="know"/>
+        <exception word="laid" stem="lay"/>
+        <exception word="led" stem="lead"/>
+        <exception word="leapt" stem="leap"/>
+        <exception word="left" stem="leav"/>
+        <exception word="lent" stem="lend"/>
+
+        <exception word="lay" stem="lie"/>
+        <exception word="lain" stem="lie"/>
+        <exception word="lit" stem="light"/>
+        <exception word="lost" stem="lose"/>
+        <exception word="made" stem="make"/>
+        <exception word="meant" stem="mean"/>
+        <exception word="met" stem="meet"/>
+        <exception word="misheard" stem="mishear"/>
+        <exception word="mislaid" stem="mislay"/>
+        <exception word="misled" stem="mislead"/>
+        <exception word="misspoke" stem="misspeak"/>
+        <exception word="misspoken" stem="misspeak"/>
+        <exception word="misspent" stem="misspend"/>
+        <exception word="mistook" stem="mistak"/>
+        <exception word="mistaken" stem="mistak"/>
+        <exception word="mistaught" stem="misteach"/>
+        <exception word="misunderstood" stem="misunderstand"/>
+        <exception word="miswrote" stem="miswrit"/>
+        <exception word="miswritten" stem="miswrit"/>
+        <exception word="mown" stem="mow"/>
+        <exception word="outdid" stem="outdo"/>
+        <exception word="outdone" stem="outdo"/>
+        <exception word="outdrew" stem="outdraw"/>
+        <exception word="outdrawn" stem="outdraw"/>
+        <exception word="outdrank" stem="outdrink"/>
+        <exception word="outdrunk" stem="outdrink"/>
+        <exception word="outdrove" stem="outdriv"/>
+        <exception word="outdriven" stem="outdriv"/>
+        <exception word="outfought" stem="outfight"/>
+        <exception word="outflew" stem="outfli"/>
+        <exception word="outflown" stem="outfli"/>
+        <exception word="outgrew" stem="outgrow"/>
+        <exception word="outgrown" stem="outgrow"/>
+        <exception word="outrode" stem="outrid"/>
+        <exception word="outridden" stem="outrid"/>
+        <exception word="outran" stem="outrun"/>
+        <exception word="outsold" stem="outsel"/>
+        <exception word="outshone" stem="outshin"/>
+        <exception word="outshot" stem="outshoot"/>
+        <exception word="outsang" stem="outs"/>
+        <exception word="outsung" stem="outs"/>
+        <exception word="outsat" stem="outsit"/>
+        <exception word="outslept" stem="outsleep"/>
+        <exception word="outspoke" stem="outspeak"/>
+        <exception word="outspoken" stem="outspeak"/>
+        <exception word="outsped" stem="outspe"/>
+        <exception word="outspent" stem="outspend"/>
+        <exception word="outswore" stem="outswear"/>
+        <exception word="outsworn" stem="outswear"/>
+        <exception word="outswam" stem="outswim"/>
+        <exception word="outswum" stem="outswim"/>
+        <exception word="outthought" stem="outthink"/>
+        <exception word="outthrew" stem="outthrow"/>
+        <exception word="outthrown" stem="outthrow"/>
+        <exception word="outwrote" stem="outwrit"/>
+        <exception word="outwritten" stem="outwrit"/>
+        <exception word="overbreed" stem="overbre"/>
+        <exception word="overbuilt" stem="overbuild"/>
+        <exception word="overbought" stem="overbuy"/>
+        <exception word="overcame" stem="overcom"/>
+        <exception word="overdid" stem="overdo"/>
+        <exception word="overdone" stem="overdo"/>
+        <exception word="overdrew" stem="overdraw"/>
+        <exception word="overdrawn" stem="overdraw"/>
+        <exception word="overdrank" stem="overdrink"/>
+        <exception word="overdrunk" stem="overdrink"/>
+        <exception word="overate" stem="overeat"/>
+        <exception word="overeaten" stem="overeat"/>
+        <exception word="overfeed" stem="overfe"/>
+        <exception word="overhung" stem="overhang"/>
+        <exception word="overheard" stem="overhear"/>
+        <exception word="overlaid" stem="overlay"/>
+        <exception word="overpaid" stem="overpay"/>
+        <exception word="overrode" stem="overrid"/>
+        <exception word="overridden" stem="overrid"/>
+        <exception word="overran" stem="overrun"/>
+        <exception word="oversaw" stem="overse"/>
+        <exception word="overseen" stem="overse"/>
+        <exception word="oversold" stem="oversel"/>
+        <exception word="oversewn" stem="oversew"/>
+        <exception word="overshot" stem="overshoot"/>
+        <exception word="overslept" stem="oversleep"/>
+        <exception word="overspoke" stem="overspeak"/>
+        <exception word="overspoken" stem="overspeak"/>
+        <exception word="overtook" stem="overtak"/>
+        <exception word="overtaken" stem="overtak"/>
+        <exception word="overthought" stem="overthink"/>
+        <exception word="overthrew" stem="overthrow"/>
+        <exception word="overthrown" stem="overthrow"/>
+        <exception word="overwound" stem="overwind"/>
+        <exception word="overwrote" stem="overwrit"/>
+        <exception word="overwritten" stem="overwrit"/>
+        <exception word="partook" stem="partak"/>
+        <exception word="partaken" stem="partak"/>
+        <exception word="paid" stem="pay"/>
+        <exception word="pled" stem="plead"/>
+        <exception word="prebuilt" stem="prebuild"/>
+        <exception word="predid" stem="predo"/>
+        <exception word="predone" stem="predo"/>
+        <exception word="premade" stem="premak"/>
+        <exception word="prepaid" stem="prepay"/>
+        <exception word="presold" stem="presel"/>
+        <exception word="preshrank" stem="preshrink"/>
+        <exception word="preshrunk" stem="preshrink"/>
+
+        <exception word="proven" stem="prove"/>
+        <exception word="reawoke" stem="reawak"/>
+        <exception word="reawaken" stem="reawak"/>
+        <exception word="rebound" stem="rebind"/>
+        <exception word="rebuilt" stem="rebuild"/>
+        <exception word="redealt" stem="redeal"/>
+        <exception word="redid" stem="redo"/>
+        <exception word="redone" stem="redo"/>
+        <exception word="redrew" stem="redraw"/>
+        <exception word="redrawn" stem="redraw"/>
+        <exception word="reground" stem="regrind"/>
+        <exception word="regrew" stem="regrow"/>
+        <exception word="regrown" stem="regrow"/>
+        <exception word="rehung" stem="rehang"/>
+        <exception word="reheard" stem="rehear"/>
+        <exception word="relaid" stem="relay"/>
+        <exception word="relit" stem="relight"/>
+        <exception word="remad" stem="remak"/>
+        <exception word="repaid" stem="repay"/>
+        <exception word="reran" stem="rerun"/>
+        <exception word="resold" stem="resel"/>
+        <exception word="resent" stem="resend"/>
+        <exception word="resewn" stem="resew"/>
+        <exception word="retook" stem="retak"/>
+        <exception word="retaken" stem="retak"/>
+        <exception word="retaught" stem="reteach"/>
+        <exception word="retore" stem="retear"/>
+        <exception word="retorn" stem="retear"/>
+        <exception word="retold" stem="retel"/>
+        <exception word="rethought" stem="rethink"/>
+        <exception word="rewoke" stem="rewak"/>
+
+        <exception word="rewaken" stem="rewak"/>
+        <exception word="rewore" stem="rewear"/>
+        <exception word="reworn" stem="rewear"/>
+        <exception word="rewove" stem="reweav"/>
+        <exception word="rewoven" stem="reweav"/>
+        <exception word="rewon" stem="rewin"/>
+        <exception word="rewound" stem="rewind"/>
+        <exception word="rewrote" stem="rewrit"/>
+        <exception word="rewritten" stem="rewrit"/>
+        <exception word="rode" stem="ride"/>
+        <exception word="ridden" stem="ride"/>
+        <exception word="rang" stem="ring"/>
+        <exception word="rung" stem="ring"/>
+        <exception word="rose" stem="rise"/>
+        <exception word="risen" stem="rise"/>
+        <exception word="ran" stem="run"/>
+        <exception word="sawn" stem="saw"/>
+        <exception word="said" stem="say"/>
+        <exception word="saw" stem="see"/>
+        <exception word="seen" stem="see"/>
+        <exception word="sought" stem="seek"/>
+        <exception word="sold" stem="sell"/>
+        <exception word="sent" stem="send"/>
+        <exception word="sewn" stem="sew"/>
+        <exception word="shook" stem="shake"/>
+        <exception word="shaken" stem="shake"/>
+        <exception word="shaven" stem="shave"/>
+        <exception word="shorn" stem="shear"/>
+        <exception word="shone" stem="shine"/>
+        <exception word="shot" stem="shoot"/>
+        <exception word="shown" stem="show"/>
+        <exception word="shrank" stem="shrink"/>
+        <exception word="shrunk" stem="shrink"/>
+        <exception word="sang" stem="sing"/>
+        <exception word="sung" stem="sing"/>
+        <exception word="sank" stem="sink"/>
+        <exception word="sunk" stem="sink"/>
+        <exception word="sat" stem="sit"/>
+        <exception word="slept" stem="sleep"/>
+        <exception word="slid" stem="slide"/>
+        <exception word="slung" stem="sling"/>
+        <exception word="sown" stem="sow"/>
+        <exception word="spoke" stem="speak"/>
+        <exception word="spoken" stem="speak"/>
+        <exception word="sped" stem="speed"/>
+        <exception word="spent" stem="spend"/>
+        <exception word="spun" stem="spin"/>
+        <exception word="spat" stem="spit"/>
+        <exception word="sprang" stem="spring"/>
+        <exception word="sprung" stem="spring"/>
+        <exception word="stood" stem="stand"/>
+        <exception word="stole" stem="steal"/>
+        <exception word="stolen" stem="steal"/>
+        <exception word="stuck" stem="stick"/>
+        <exception word="stung" stem="sting"/>
+        <exception word="stank" stem="stink"/>
+        <exception word="stunk" stem="stink"/>
+        <exception word="strewn" stem="strew"/>
+        <exception word="strode" stem="stride"/>
+        <exception word="stridden" stem="stride"/>
+        <exception word="struck" stem="strike"/>
+        <exception word="stricken" stem="strike"/>
+        <exception word="strung" stem="string"/>
+        <exception word="strove" stem="strive"/>
+        <exception word="striven" stem="strive"/>
+        <exception word="swore" stem="swear"/>
+        <exception word="sworn" stem="swear"/>
+        <exception word="swept" stem="sweep"/>
+        <exception word="swollen" stem="swell"/>
+        <exception word="swam" stem="swim"/>
+        <exception word="swum" stem="swim"/>
+        <exception word="swung" stem="swing"/>
+        <exception word="took" stem="take"/>
+        <exception word="taken" stem="take"/>
+        <exception word="taught" stem="teach"/>
+        <exception word="tore" stem="tear"/>
+        <exception word="torn" stem="tear"/>
+        <exception word="told" stem="tell"/>
+        <exception word="thought" stem="think"/>
+        <exception word="threw" stem="throw"/>
+        <exception word="thrown" stem="throw"/>
+        <exception word="typewrote" stem="typewrit"/>
+        <exception word="typewritten" stem="typewrit"/>
+        <exception word="unbound" stem="unbind"/>
+        <exception word="underfeed" stem="underfe"/>
+        <exception word="underwent" stem="undergo"/>
+        <exception word="undergone" stem="undergo"/>
+        <exception word="underlay" stem="underli"/>
+        <exception word="underlain" stem="underli"/>
+        <exception word="undersold" stem="undersel"/>
+        <exception word="underspent" stem="underspend"/>
+        <exception word="understood" stem="understand"/>
+        <exception word="undertook" stem="undertak"/>
+        <exception word="undertaken" stem="undertak"/>
+        <exception word="underwrote" stem="underwrit"/>
+        <exception word="underwritten" stem="underwrit"/>
+        <exception word="undid" stem="undo"/>
+        <exception word="undone" stem="undo"/>
+        <exception word="unfroze" stem="unfreez"/>
+        <exception word="unfrozen" stem="unfreez"/>
+        <exception word="unhung" stem="unhang"/>
+
+        <exception word="unhidden" stem="unhid"/>
+        <exception word="unsewn" stem="unsew"/>
+        <exception word="unslung" stem="unsl"/>
+        <exception word="unspun" stem="unspin"/>
+        <exception word="unstuck" stem="unstick"/>
+        <exception word="unstrung" stem="unstr"/>
+        <exception word="unwove" stem="unweav"/>
+        <exception word="unwoven" stem="unweav"/>
+        <exception word="unwound" stem="unwind"/>
+        <exception word="upheld" stem="uphold"/>
+        <exception word="woke" stem="wake"/>
+        <exception word="woken" stem="wake"/>
+        <exception word="waylaid" stem="waylay"/>
+        <exception word="wore" stem="wear"/>
+        <exception word="worn" stem="wear"/>
+        <exception word="wove" stem="weav"/>
+        <exception word="woven" stem="weav"/>
+        <exception word="wept" stem="weep"/>
+        <exception word="won" stem="win"/>
+        <exception word="wound" stem="wind"/>
+        <exception word="withdrew" stem="withdraw"/>
+        <exception word="withdrawn" stem="withdraw"/>
+        <exception word="withheld" stem="withhold"/>
+        <exception word="withstood" stem="withstand"/>
+        <exception word="wrung" stem="wring"/>
+        <exception word="wrote" stem="write"/>
+        <exception word="written" stem="write"/>
+        <exception word="unbent" stem="unbend"/>
+
         <!-- 
             also see:
-            http://www.englishpage.com/irregularverbs/irregularverbs.html
             http://www.writers.com/tips_spelling.html
         -->
     </exceptionalforms>
