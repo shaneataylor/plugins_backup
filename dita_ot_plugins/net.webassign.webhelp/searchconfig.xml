@@ -597,11 +597,36 @@
         <exception word="wrote" stem="write"/>
         <exception word="written" stem="write"/>
         <exception word="unbent" stem="unbend"/>
-
-        <!-- 
-            also see:
-            http://www.writers.com/tips_spelling.html
-        -->
+        
+        <!-- more irregular plurals -->
+        <exception word="calves" stem="calf"/>
+        <exception word="elves" stem="elf"/>
+        <exception word="halves" stem="half"/>
+        <exception word="hooves" stem="hoof"/>
+        <exception word="knives" stem="knife"/>
+        <exception word="leaves" stem="leaf"/>
+        <exception word="lives" stem="life"/>
+        <exception word="loaves" stem="loaf"/>
+        <exception word="shelves" stem="shelf"/>
+        <exception word="thieves" stem="thief"/>
+        <exception word="wives" stem="wife"/>
+        <exception word="wolves" stem="wolf"/>
+        <exception word="scarves" stem="scarf"/>
+        <exception word="wharves" stem="wharf"/>
+        <exception word="dwarves" stem="dwarf"/>
+        
+        <exception word="analyses" stem="analysi"/>
+        <exception word="axis" stem="axe"/><!-- make axes, axe, axis the same -->
+        <exception word="hypotheses" stem="hypothesi"/>
+        <exception word="parentheses" stem="parenthesi"/>
+        <exception word="synopses" stem="synopsi"/>
+        
+        <exception word="curricula" stem="curriculum"/>
+        <exception word="millenia" stem="millenium"/>
+        <exception word="criteria" stem="criterion"/>
+        <exception word="phenomena" stem="phenomenon"/>
+        <exception word="alumni" stem="alumnus"/><!-- alumnae already stems to alumna -->
+        <exception word="antennae" stem="antenna"/>
     </exceptionalforms>
     <synonyms>
         <synonym term="abandon"><variant>forsake</variant><variant>desert</variant></synonym>
