@@ -23,6 +23,7 @@
     <property name="dita.ext" value=".xml" />
     <property name="args.logdir" location="logs"/>
     <property name="h5help.conreftarget.rule" value="^(#|symbols|m_a_common_)"/>
+    <property name="h5help.vendorpath" value="//www.webassign.net/manual/vendor"/>
     <property name="onlytopic.in.map" value="true"/>
     
     <import file="${dita.dir}/build.xml" />

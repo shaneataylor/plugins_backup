@@ -13,7 +13,7 @@
     <property name="h5help.copy.cssroot" value="no"/>
     <property name="h5help.args.hdr" value="${args.hdr}"/>
     <!-- h5help.search and h5help.genindex -->                    <!-- set in set.search.default target  -->
-    <property name="h5help.vendorpath" value="vendor"/>
+    <property name="h5help.vendorpath" value=""/>
     <property name="h5help.search.configfile" value=""/>
     
     <target name="dita2h5help"
@@ -116,11 +116,11 @@
     </target>
 
     <target name="copy-h5help-resources">
-        <copy todir="${output.dir}" failonerror="false">
-            <fileset
+        <copy todir="${output.dir}" failonerror="true">
+                <fileset
                 dir="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}resources"
                 includes="**${file.separator}*"/>
-        </copy>
+                </copy>
         <copy file="${args.input.dir}${file.separator}h5csh.json" todir="${output.dir}" verbose="true" failonerror="false"/>
         <copy file="${output.dir}${file.separator}index.htm" tofile="${output.dir}${file.separator}index.html" verbose="true" failonerror="false"/>
         <!-- make h5params.json -->
@@ -138,6 +138,16 @@
             <param name="feedback" expression="${h5help.feedback}" />
             <param name="prettify_code" expression="${h5help.prettify.code}" />
         </xslt>
+        <!-- prepend vendor path to main.js -->
+        <echo file="${output.dir}${file.separator}h5help${file.separator}js${file.separator}vendor.js" 
+            append="no" force="yes">var h5help = h5help || {};
+h5help.vendorpath = "${h5help.vendorpath}";
+</echo>
+        <concat destfile="${output.dir}${file.separator}h5help${file.separator}js${file.separator}main.js">
+            <filelist dir="${output.dir}${file.separator}h5help${file.separator}js"
+                files="vendor.js,main-base.js"/>
+        </concat>
+        
         <antcall target="copy-cssroot"/>
         
     </target>
@@ -213,6 +223,7 @@
             <param name="h5help.feedback" expression="${h5help.feedback}"/>
             <param name="h5help.name" expression="${h5help.name}"/>
             <param name="h5help.args.hdr" expression="${h5help.args.hdr}"/>
+            <param name="h5help.vendorpath" expression="${h5help.vendorpath}"/>
         </xslt>
         <!-- Clean up temp directory -->
         <delete dir="${output.dir}${file.separator}temp_xhtml"></delete>

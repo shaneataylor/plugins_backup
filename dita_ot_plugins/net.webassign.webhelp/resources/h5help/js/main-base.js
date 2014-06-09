@@ -1,27 +1,25 @@
-
-var h5help = h5help || {};
+// build prepends h5help init and h5help.vendorpath to this file, e.g.:
+//     var h5help = h5help || {};
+//     h5help.vendorpath = "//www.webassign.net/manual/vendor";
 
 // set fallback values if JSON file cannot be loaded
 h5help.params = {
 "help_name"                        : "WebAssign Help",
 "toc_file"                         : "toc.htm",
-"search"                           : "internal",
+"search"                           : "none",
 "google_cse_id"                    : "",
 "google_cse_refinement"            : "",
 "disqus_shortname"                 : "",
 "feedback"                         : "no",
-"prettify_code"                    : "no",
-"vendorpath"                       : ""
+"prettify_code"                    : "no"
 };
-// build will rewrite vendorpath value so it's present without loading h5params.json
-// TO DO: Update paths below after vendorpath is written
 
 requirejs.config({
     "baseUrl": "./h5help/js",
     "paths": {
-      "jquery"         : "vendor/jquery-1.8.3.min",
-      "modernizr"      : "vendor/modernizr-2.6.2.min",
-      "mathjax"        : "../../../vendor/mathjax/MathJax",
+      "jquery"         : h5help.vendorpath + "/jquery-1.8.3.min",
+      "modernizr"      : h5help.vendorpath + "/modernizr-2.6.2.min",
+      "mathjax"        : h5help.vendorpath + "/mathjax/MathJax",
       "prettify"       : "prettify-code-google/prettify",
       "porter2"        : "porter2",
       "help-functions" : "help-functions"

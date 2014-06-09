@@ -10,6 +10,7 @@
     <xsl:param name="h5help.feedback">no</xsl:param>
     <xsl:param name="h5help.name"></xsl:param>
     <xsl:param name="h5help.args.hdr"></xsl:param>
+    <xsl:param name="h5help.vendorpath"/>
     
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
@@ -17,6 +18,12 @@
         <xsl:attribute name="lang">en-us</xsl:attribute>
         <xsl:attribute name="xml:lang">en-us</xsl:attribute>
         <xsl:attribute name="class">no-js</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="scriptattrs">
+        <xsl:attribute name="data-main">h5help/js/main</xsl:attribute>
+        <xsl:attribute name="type">text/javascript</xsl:attribute>
+        <xsl:attribute name="src" select="concat($h5help.vendorpath,'/require.js')"/>
     </xsl:attribute-set>
     
     <xsl:variable name="HDRFILE">
@@ -128,7 +135,9 @@
                     <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
                 </xsl:call-template>
         </div>
-        <script data-main="h5help/js/main" type="text/javascript" src="h5help/js/vendor/require.js"><xsl:comment></xsl:comment></script>
+        <xsl:element name="script" use-attribute-sets="scriptattrs">
+            <xsl:comment></xsl:comment>
+        </xsl:element>
         </body>
     </xsl:template>
     
