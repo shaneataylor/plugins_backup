@@ -119,6 +119,8 @@
             <param name="args.filter" value="${source.dir}/d_i_help.ditaval" /><!-- 1.6.x -->
             <param name="dita.temp.dir" location="temp/m_i_wa2" />
             <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
+            <param name="h5help.search" value="internal"/>
+            <param name="h5help.search.configfile" location="searchconfig.xml"/>
         </antcall>
     </target>
     
@@ -134,6 +136,8 @@
             <param name="dita.temp.dir" location="temp/api" />
             <param name="h5help.conreftarget.rule" value=".*"/>
             <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
+            <param name="h5help.search" value="internal"/>
+            <param name="h5help.search.configfile" location="searchconfig.xml"/>
         </antcall>
     </target>
     
