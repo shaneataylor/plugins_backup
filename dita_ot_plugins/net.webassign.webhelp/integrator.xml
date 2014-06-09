@@ -14,7 +14,7 @@
     <property name="h5help.args.hdr" value="${args.hdr}"/>
     <!-- h5help.search and h5help.genindex -->                    <!-- set in set.search.default target  -->
     <property name="h5help.vendorpath" value="vendor"/>
-    <property name="h5help.search.configfile" location="searchconfig.xml"/>
+    <property name="h5help.search.configfile" value=""/>
     
     <target name="dita2h5help"
         depends="set.search.default, build-init, preprocess, copy-mathML, dita.map.xhtml,
