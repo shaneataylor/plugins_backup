@@ -355,7 +355,7 @@ h5help.doSearch = function() {
     
     var results = [];
     for (var i = 0; i < h5help.searchStems.length; i++) { // each search stem (including synonyms)
-        var termbonus = (i >= h5help.searchTerms.length ? 1 : 10 ); // reduced bonus for synonyms
+        var termbonus = (i >= h5help.searchTerms.length ? 100 : 1000 ); // reduced bonus for synonyms
         var stem = h5help.searchStems[i];
         if ( typeof(h5help.helpindex[stem]) != 'undefined' ) {
             for (var j = 0; j < h5help.helpindex[stem].length; j++) { // each result for the term
@@ -363,7 +363,7 @@ h5help.doSearch = function() {
                 var thisresult = {
                     "href":thishref,
                     "term":stem,
-                    "score":parseInt(h5help.helpindex[stem][j][thishref]) * termbonus
+                    "score":parseInt(h5help.helpindex[stem][j][thishref]) + termbonus
                     };
                 if (h5help.searchStems.length > 1) { // combine dups
                     var matched = results.filter(function(item){ return item.href == thishref; }); 
