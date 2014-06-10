@@ -167,6 +167,8 @@
             <param name="args.filter" value="${source.dir}/flagstatus.ditaval" />
             <param name="dita.temp.dir" location="temp/m_d_styleguide" />
             <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
+            <param name="h5help.search" value="internal"/>
+            <param name="h5help.search.configfile" location="searchconfig.xml"/>
         </antcall>
     </target>
     
