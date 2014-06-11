@@ -160,7 +160,7 @@
         <antcall target="buildit">
             <param name="output.dir" location="out/styleguide" />
             <param name="args.draft" value="yes"/>
-            <param name="h5help.name" value="Global Experience Standards" />
+            <param name="h5help.name" value="Style Manual" />
             <param name="h5help.feedback" value="yes" />
             <param name="h5help.prettify.code" value="yes" />
             <param name="args.input" value="m_d_styleguide.ditamap"/>
