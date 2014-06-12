@@ -1150,12 +1150,15 @@
                                 </xsl:call-template>
                             </stentry>
                             <stentry>
-                                <xsl:attribute name="conkeyref">
+                                <xsl:apply-templates select="annotations">
+                                    <xsl:with-param name="asData" select="false()"/>
+                                </xsl:apply-templates>
+                                <!--<xsl:attribute name="conkeyref">
                                     <xsl:value-of select="concat('Attribute-',ref/@refId,'/description')"/>
                                 </xsl:attribute>
                                 <xsl:attribute name="conref">
                                     <xsl:value-of select="concat('#',$rootID,'/undefined_description')"/>
-                                </xsl:attribute>
+                                </xsl:attribute>-->
                             </stentry>
                             <stentry>
                                 <xsl:call-template name="typeEmitter">
@@ -1753,47 +1756,41 @@
     </xsl:template>
 
     <xsl:template match="annotations">
+        <xsl:param name="asData" select="true()"/>
         <xsl:variable name="boxID" select="func:getDivId(.)"/>
-        <tr>
-            <td class="firstColumn">
-                <div class="floatLeft"><b>Annotations</b></div>
-                <div class="floatRight">
-                    <xsl:copy-of select="func:createControl($boxID, func:getButtonId(.))"/>
-                </div>
-            </td>
-            <td>
-                <div id="{$boxID}" style="display:block">
+        <xsl:choose>
+            <xsl:when test="$asData">
+                <data><!-- So content can be conrefed but is not included otherwise -->
                     <xsl:for-each select="annotation">
-                        <div class="annotation">
+                        <ph>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="concat($boxID,'_',position())"/>
+                            </xsl:attribute>
                             <xsl:call-template name="buildAnnotation"/>
-                        </div>
+                        </ph>
                     </xsl:for-each>
-                </div>
-            </td>
-        </tr>
+                </data>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="annotation">
+                    <p>
+                        <xsl:call-template name="buildAnnotation"/>
+                    </p>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
         <xd:desc>Builds an annotation representation from the context annotation </xd:desc>
     </xd:doc>
     <xsl:template name="buildAnnotation">
-        <xsl:if test="exists(@source)">
+        <!--<xsl:if test="exists(@source)">
                 <p><a href="{@source}"><xsl:value-of select="@source"/></a></p>
-        </xsl:if>
-        <xsl:variable name="tokens" select="token"/>
-        <xsl:choose>
-            <xsl:when test="empty($tokens)">
-                <xsl:for-each select="child::node()">
-                    <xsl:copy-of select="." copy-namespaces="no"/>
-                </xsl:for-each>
-            </xsl:when>
-            <xsl:otherwise>
-                <!-- Formats an XML source section-->
-                <xsl:call-template name="formatXmlSource">
-                    <xsl:with-param name="tokens" select="$tokens"/>
-                </xsl:call-template>
-            </xsl:otherwise>
-        </xsl:choose>
+        </xsl:if>-->
+        <xsl:for-each select="child::node()">
+            <xsl:copy-of select="." copy-namespaces="no"/>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="formatXmlSource">
