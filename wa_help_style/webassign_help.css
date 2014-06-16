@@ -452,6 +452,9 @@ div.fn {
     margin-top: 0 !important;
 
 }
+span.data.userdata {
+    color: #0b79bd;
+}
 
 
 /* TITLES */

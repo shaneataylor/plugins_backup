@@ -224,12 +224,9 @@
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' topic/data ')][@datatype='userdata']">
-        <span class="data userdata">
-            <xsl:if test="@name">
-                <xsl:attribute name="id">
-                    <xsl:value-of select="concat('userdata_',@name)"/>
-                </xsl:attribute>
-            </xsl:if>
+        <span>
+            <xsl:attribute name="class" select="concat('data userdata ',@outputclass)"/>
+            <xsl:copy-of select="@name"/>
             <xsl:choose><!-- Either use @value or the contents of the data element -->
                 <xsl:when test="@value">
                     <xsl:value-of select="@value"/>

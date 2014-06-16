@@ -2,6 +2,7 @@
 
 var h5help = h5help || {};
 
+h5help.userdata = h5help.userdata || {};
 h5help.initialUrl=window.location.href; 
 h5help.baseUrl=h5help.initialUrl.replace(/\/[^\/]*$/gi,'/'); 
 h5help.baseUrl=h5help.baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
@@ -73,6 +74,7 @@ h5help.loadInitialContent = function(){
         break;
     default:
         // nothing
+        h5help.populateUserData();
         h5help.prettifyIfEnabled();
         h5help.addCommentSection();
     }
@@ -181,11 +183,24 @@ h5help.initTopic = function(addHistory,thishref){
     }
     var title = $("div#topic h1").text();
     $("title").html(title);
+    h5help.populateUserData();
     h5help.prettifyIfEnabled();
     h5help.mobilize();
     h5help.syncTOCandBreadcrumbs();
     h5help.addCommentSection();
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
+}
+
+h5help.populateUserData = function() {
+    $("span.data.userdata").each(function(){
+        var dataname = $(this).attr("name");
+        var dataval = h5help.userdata[dataname] || parent.h5help.userdata[dataname];
+        if ( typeof dataval != 'undefined' ) {
+            $(this).html(dataval);
+        } else {
+            $(this).removeClass("userdata"); 
+        }
+    })
 }
 
 h5help.prettifyIfEnabled = function(){
