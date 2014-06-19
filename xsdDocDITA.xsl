@@ -506,6 +506,11 @@
                 </keyword>
                 <xsl:value-of select="func:refTextQualifier($ref/text())"/>
             </xsl:when>
+            <xsl:when test="func:string-compare($refType,'Simple_Type')">
+                <xsl:comment>
+                    <xsl:value-of select="concat($ref/@refType,'-',$ref/@refId)"/>
+                </xsl:comment>
+            </xsl:when>
             <xsl:when test="func:string-compare($refID,'noID')">
                 <ph>
                     <xsl:value-of select="func:refTextOnly($ref/text())"/>
@@ -1055,7 +1060,8 @@
 
     <xsl:template match="usedBy">
         <xsl:variable name="allRefsAreComplex" as="xs:boolean">
-            <xsl:value-of select="(count(ref) = count(ref[@refType='Complex_Type']))"/>
+            <xsl:value-of select="true()"/>
+            <!--<xsl:value-of select="(count(ref) = count(ref[@refType='Complex_Type']))"/>-->
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="not($allRefsAreComplex)">
@@ -1086,7 +1092,8 @@
     
     <xsl:template name="usedByImplied">
         <xsl:param name="thisId"/>
-        <section>
+        <xsl:param name="boxID" select="concat('allowed_contexts_',$thisId)"/>
+        <section id="{$boxID}">
             <title>Allowed In</title>
             <p><xsl:comment>implied by reference to <xsl:value-of select="$thisId"/></xsl:comment>
                 <xsl:for-each select="key('elementUsesID',$thisId)">
@@ -1103,7 +1110,8 @@
     </xsl:template>
 
     <xsl:template match="attributes">
-        <section>
+        <xsl:variable name="boxID" select="func:getDivId(.)"/>
+        <section id="{$boxID}">
             <title>Attributes</title>
             <xsl:if test="count(attr) > 0 or count(defaultAttr) > 0">
                 <xsl:variable name="showFixed" select="exists(attr/fixed/text()) or exists(defaultAttr/fixed/text())" as="xs:boolean"/>
@@ -1112,7 +1120,8 @@
                 <xsl:variable name="showInheritable" select="exists(attr/inheritable/text()) or exists(defaultAttr/inheritable/text())" as="xs:boolean"/>
                 <!--<xsl:variable name="showAnn" select="exists(attr/annotations) or exists(defaultAttr/annotations)" as="xs:boolean"/>-->
                 <xsl:variable name="showAnn" select="exists(attr/annotations) or exists(defaultAttr/annotations)" as="xs:boolean"/>
-                <simpletable relcolwidth="15* 55* 15* 15*">
+                
+                <simpletable relcolwidth="15* 45* 25* 15*">
                     <!--<thead>
                         <tr>
                             <th>QName</th>
@@ -1137,12 +1146,13 @@
                     <sthead>
                         <stentry>Attribute</stentry>
                         <stentry>Description</stentry>
-                        <stentry>Data Type</stentry>
+                        <stentry>Values</stentry>
                         <stentry>Required</stentry>
                     </sthead>
                     
                     <xsl:for-each select="attr|defaultAttr">
                         <xsl:sort select="ref/text()"/>
+                        <xsl:variable name="typeRefId" select="type/ref/@refId"/>
                         <strow>
                             <stentry>
                                 <xsl:call-template name="reference">
@@ -1153,26 +1163,21 @@
                                 <xsl:apply-templates select="annotations">
                                     <xsl:with-param name="asData" select="false()"/>
                                 </xsl:apply-templates>
-                                <!--<xsl:attribute name="conkeyref">
-                                    <xsl:value-of select="concat('Attribute-',ref/@refId,'/description')"/>
-                                </xsl:attribute>
-                                <xsl:attribute name="conref">
-                                    <xsl:value-of select="concat('#',$rootID,'/undefined_description')"/>
-                                </xsl:attribute>-->
                             </stentry>
                             <stentry>
-                                <xsl:call-template name="typeEmitter">
-                                    <xsl:with-param name="type" select="type"/>
-                                </xsl:call-template>
+                                <xsl:apply-templates select="/schemaDoc/simpleType[@id=$typeRefId]/annotations">
+                                    <xsl:with-param name="asData" select="false()"/>
+                                </xsl:apply-templates>
                             </stentry>
                             <stentry>
                                 <xsl:if test="$showUse">
                                     <xsl:value-of select="use"/>
                                 </xsl:if>
-                                <xsl:if test="$showDefault">
+                                <xsl:if test="$showDefault and default/text()!=''">
+                                    
                                     <p>
                                         <xsl:text>(default value: </xsl:text>
-                                        <keyword><xsl:value-of select="default"/></keyword>
+                                        <xsl:value-of select="default"/>
                                         <xsl:text>)</xsl:text>
                                     </p>
                                 </xsl:if>
@@ -1408,17 +1413,12 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="element/type | complexType/type | attribute/type | simpleType/type">
-        <tr>
-            <td class="firstColumn">
-                <b>Type</b>
-            </td>
-            <td>
+    <xsl:template match="complexType/type | attribute/type | simpleType/type"><!-- element/type |  -->
+        <section>
                 <xsl:call-template name="typeEmitter">
                     <xsl:with-param name="type" select="."/>
                 </xsl:call-template>
-            </td>
-        </tr>
+        </section>
     </xsl:template>
 
     <xd:doc>
@@ -1457,9 +1457,15 @@
     </xsl:template>
     
     <xsl:template match="model">
-        <section>
+        <xsl:variable name="boxID" select="func:getDivId(.)"/>
+        <section id="{$boxID}">
         <title>Content Model</title>
-        <p>
+        <xsl:if test="local-name(..)='elementGroup'">
+            <xsl:apply-templates select="../annotations">
+                <xsl:with-param name="asData" select="false()"/>
+            </xsl:apply-templates>
+        </xsl:if>
+        <p id="{$boxID}_p">
             <!-- Add a table only if we have an open content to display in the model. --> 
             <xsl:choose>
                 <xsl:when test="exists(openContent)">
@@ -1762,20 +1768,34 @@
             <xsl:when test="$asData">
                 <data><!-- So content can be conrefed but is not included otherwise -->
                     <xsl:for-each select="annotation">
-                        <ph>
-                            <xsl:attribute name="id">
-                                <xsl:value-of select="concat($boxID,'_',position())"/>
-                            </xsl:attribute>
-                            <xsl:call-template name="buildAnnotation"/>
-                        </ph>
+                        <xsl:choose>
+                            <xsl:when test="./*[matches(local-name(),'^(p|ul|ol)$')]">
+                                <xsl:value-of select="."/><!-- don't build formatted annotation -->
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <ph>
+                                    <xsl:attribute name="id">
+                                        <xsl:value-of select="concat($boxID,'_',position())"/>
+                                    </xsl:attribute>
+                                    <xsl:call-template name="buildAnnotation"/>
+                                </ph>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </data>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:for-each select="annotation">
-                    <p>
-                        <xsl:call-template name="buildAnnotation"/>
-                    </p>
+                    <xsl:choose>
+                        <xsl:when test="./*[matches(local-name(),'^(p|ul|ol)$')]">
+                            <xsl:call-template name="buildAnnotation"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <p>
+                                <xsl:call-template name="buildAnnotation"/>
+                            </p>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:for-each>
             </xsl:otherwise>
         </xsl:choose>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="15.0" xml:space="preserve">
+<serialized version="15.2" xml:space="preserve">
 	<map>
 		<entry>
 			<String>xsd.documentation.options</String>
@@ -50,7 +50,7 @@
 					<Boolean>false</Boolean>
 				</field>
 				<field name="detailsType">
-					<Boolean>false</Boolean>
+					<Boolean>true</Boolean>
 				</field>
 				<field name="detailsTypeHierarchy">
 					<Boolean>false</Boolean>
@@ -68,7 +68,7 @@
 					<Boolean>true</Boolean>
 				</field>
 				<field name="detailsProperties">
-					<Boolean>false</Boolean>
+					<Boolean>true</Boolean>
 				</field>
 				<field name="detailsFacets">
 					<Boolean>false</Boolean>
@@ -83,16 +83,16 @@
 					<Boolean>false</Boolean>
 				</field>
 				<field name="detailsEscapeAnn">
-					<Boolean>true</Boolean>
+					<Boolean>false</Boolean>
 				</field>
 				<field name="detailsSource">
 					<Boolean>false</Boolean>
 				</field>
 				<field name="detailsAnnotations">
-					<Boolean>false</Boolean>
+					<Boolean>true</Boolean>
 				</field>
 				<field name="includeIndexLocalComponents">
-					<Boolean>false</Boolean>
+					<Boolean>true</Boolean>
 				</field>
 				<field name="showAnnotationsInDiagram">
 					<Boolean>true</Boolean>
@@ -113,13 +113,13 @@
 					<Integer>1</Integer>
 				</field>
 				<field name="openOutputInBrowser">
-					<Boolean>false</Boolean>
+					<Boolean>true</Boolean>
 				</field>
 				<field name="format">
 					<Integer>4</Integer>
 				</field>
 				<field name="customXSL">
-					<URL>file:/Users/staylor/Documents/Repos/build-techcomm/xsdDocDITA.xsl</URL>
+					<URL>file:/Users/staylor/Documents/Repos/build-source/build-techcomm/xsdDocDITA.xsl</URL>
 				</field>
 				<field name="deleteXMLFiles">
 					<Boolean>false</Boolean>
