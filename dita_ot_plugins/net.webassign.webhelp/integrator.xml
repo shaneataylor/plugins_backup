@@ -21,6 +21,11 @@
         copy-css, dita.topics.xhtml, dita.inner.topics.xhtml, 
         dita.outer.topics.xhtml, xhtml2h5help, h5help.gen.index, gen-sitemap, copy-h5help-resources"/>
     
+    <!-- process coderef before conref (fixes OT bug) -->
+    <target name="preprocess" depends="gen-list,debug-filter,copy-files,coderef,conrefpush,conref,
+        move-meta-entries,keyref,mapref,mappull,chunk,maplink,move-links,topicpull,
+        flag-module" description="Preprocessing ended"/>
+    
     <target name="set.search.default">
         <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
             <and>
