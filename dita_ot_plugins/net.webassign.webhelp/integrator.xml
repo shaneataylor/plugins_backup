@@ -229,6 +229,7 @@ h5help.vendorpath = "${h5help.vendorpath}";
             <param name="h5help.name" expression="${h5help.name}"/>
             <param name="h5help.args.hdr" expression="${h5help.args.hdr}"/>
             <param name="h5help.vendorpath" expression="${h5help.vendorpath}"/>
+            <param name="h5help.prettify_code" expression="${h5help.prettify.code}"/>
         </xslt>
         <!-- Clean up temp directory -->
         <delete dir="${output.dir}${file.separator}temp_xhtml"></delete>

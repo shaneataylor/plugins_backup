@@ -20,7 +20,7 @@ requirejs.config({
       "jquery"         : h5help.vendorpath + "/jquery-1.8.3.min",
       "modernizr"      : h5help.vendorpath + "/modernizr-2.6.2.min",
       "mathjax"        : h5help.vendorpath + "/mathjax/MathJax",
-      "prettify"       : "prettify-code-google/prettify",
+      "prettify"       : h5help.vendorpath + "/google-code-prettify_minified/run_prettify.js?autorun=false&lang=wava",
       "porter2"        : "porter2",
       "help-functions" : "help-functions"
     }});

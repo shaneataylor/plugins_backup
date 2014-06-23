@@ -11,6 +11,7 @@
     <xsl:param name="h5help.name"></xsl:param>
     <xsl:param name="h5help.args.hdr"></xsl:param>
     <xsl:param name="h5help.vendorpath"/>
+    <xsl:param name="h5help.prettify_code">no</xsl:param>
     
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
@@ -65,9 +66,16 @@
 
     <!-- identity template to copy existing nodes/attributes/etc -->
     <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
+        <xsl:choose>
+            <xsl:when test="$h5help.prettify_code = 'yes' and local-name(..) = 'pre' and local-name() = 'class' and contains(.,'codeblock')">
+                <xsl:attribute name="class" select="concat(.,' prettyprint linenums')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     
