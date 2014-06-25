@@ -1443,6 +1443,10 @@ a.hidden508nav:focus {
     height:auto;
 }
 
+div[tabindex] {
+    outline: none;
+}
+
 div.brand_header {
     padding: 0px;
 }
@@ -1462,11 +1466,61 @@ div#content_container {
 }
 
 /* Custom Styles for Embedded User Assistance */
+
 div#content_container.embeddedUA {
     top: 0px;
 }
 div#content_container.embeddedUA, div#content_container.embeddedUA > div {
-    background-color: #eee;
+    background-color: #f1f1f1;
+}
+div#content_container.embeddedUA > div#topic {
+    left: 0px;
 }
 
-
+div#content_container.embeddedUA > div#topic > div > h1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #b9b9b9;
+    padding: 10px;
+    font-size: 18px;
+    color: #333333;
+    overflow: hidden;
+}
+div#content_container.embeddedUA > div#topic > div > div.body {
+    position: absolute;
+    top: 41px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow:auto;
+    font-size: 13px;
+    padding: 0px 10px;
+    color: #000000;
+}
+div#content_container.embeddedUA > div#topic > div > div.body > p.shortdesc {
+    font-size: 13px;
+    font-style:normal;
+}
+div#content_container.embeddedUA > div#topic > div > div.body table,
+div#content_container.embeddedUA > div#topic > div > div.body table td,
+div#content_container.embeddedUA > div#topic > div > div.body table tr {
+    background-color: #ffffff;
+    border-color: #b9b9b9;
+}
+div#content_container.embeddedUA > div#topic > div > div.body table th,
+div#content_container.embeddedUA > div#topic > div > div.body table tr.sthead {
+    background-color: #333333;
+    border-color: #b9b9b9;
+    color: #ffffff;
+}
+div#content_container.embeddedUA > div#topic > div > div.body table td[headers] > strong {
+    font-weight:normal;
+}
+div#content_container.embeddedUA > div#topic > div > div.body span.data.userdata {
+    color: #000000;
+    font-weight: bold;
+}

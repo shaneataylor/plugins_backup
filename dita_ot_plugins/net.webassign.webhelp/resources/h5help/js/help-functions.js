@@ -616,7 +616,7 @@ h5help.adjustForBanner = function() {
 h5help.initEmbeddedUA = function() {
     if (h5help.embeddedUA) {
         $("div#toc,div#sizer,div#toolbar,div#toolbar+div,div.brand_header").remove();
-        $("div#topic-breadcrumbs,div#feedback,div.copyright").remove();
+        $("div#topic-breadcrumbs,div#feedback,div.copyright,iframe.h5ftgt").remove();
         $("div#modal,div#modal_back,div#searchresults").remove();
         $("div#content_container").addClass("embeddedUA");
     }
