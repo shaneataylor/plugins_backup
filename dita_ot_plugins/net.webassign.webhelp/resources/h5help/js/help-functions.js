@@ -2,6 +2,7 @@
 
 var h5help = h5help || {};
 
+h5help.embeddedUA = parent.h5help.embeddedUA || h5help.embeddedUA || false;
 h5help.userdata = h5help.userdata || {};
 h5help.initialUrl=window.location.href; 
 h5help.baseUrl=h5help.initialUrl.replace(/\/[^\/]*$/gi,'/'); 
@@ -12,6 +13,7 @@ h5help.href=h5help.initialUrl.replace(/^.*\//,""); // just the topic
 //var disqus_shortname = h5help.params.disqus_shortname; 
 
 h5help.initAll = function() {
+    h5help.initEmbeddedUA();
     h5help.defineHandlers();
     h5help.improveCompatibility();
     h5help.loadInitialContent();
@@ -183,6 +185,7 @@ h5help.initTopic = function(addHistory,thishref){
     }
     var title = $("div#topic h1").text();
     $("title").html(title);
+    h5help.initEmbeddedUA();
     h5help.populateUserData();
     h5help.prettifyIfEnabled();
     h5help.mobilize();
@@ -608,4 +611,13 @@ h5help.adjustForBanner = function() {
         $("div#sizer").css("top",adjustTop);
     }
     
+}
+
+h5help.initEmbeddedUA = function() {
+    if (h5help.embeddedUA) {
+        $("div#toc,div#sizer,div#toolbar,div#toolbar+div,div.brand_header").remove();
+        $("div#topic-breadcrumbs,div#feedback,div.copyright").remove();
+        $("div#modal,div#modal_back,div#searchresults").remove();
+        $("div#content_container").addClass("embeddedUA");
+    }
 }

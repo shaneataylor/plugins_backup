@@ -1,4 +1,3 @@
-/*@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic);*/
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
 @import url(prettify.css);
 
@@ -86,7 +85,6 @@ input,
 select,
 textarea {
     font-family: sans-serif;
-    font-family: Ubuntu, sans-serif;
 }
 
 /*
@@ -827,7 +825,7 @@ textarea {
 /* ============================== HELP APP SPECIFIC ============================== */
 
 html,body {
-    font-family: Ubuntu, sans-serif;
+    font-family: sans-serif;
     font-size: 12pt;
     margin: 0 !important;
 }
@@ -1214,7 +1212,7 @@ a#closesearch > span.ua_control {
 div#searchresults *[class^='gs'],
 div#searchresults *[class^='gs'] * {
     text-decoration:none !important;
-    font-family: Ubuntu, sans-serif;
+    font-family: sans-serif;
 }
 div#searchresults div.gs-per-result-labels,
 div#searchresults div[class^='gsc-url-'],
@@ -1444,13 +1442,7 @@ a.hidden508nav:focus {
     width:auto;
     height:auto;
 }
-div#content_container {
-    position: absolute; /* so its children are positioned in relation to it */
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    top: 40px; /* script will override based on height of brand header */
-}
+
 div.brand_header {
     padding: 0px;
 }
@@ -1460,4 +1452,21 @@ div.brand_header {
         height: 0px;
     }
 }
+
+div#content_container {
+    position: absolute; /* so its children are positioned in relation to it */
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 40px; /* script will override based on height of brand header */
+}
+
+/* Custom Styles for Embedded User Assistance */
+div#content_container.embeddedUA {
+    top: 0px;
+}
+div#content_container.embeddedUA, div#content_container.embeddedUA > div {
+    background-color: #eee;
+}
+
 
