@@ -618,6 +618,8 @@ h5help.initEmbeddedUA = function() {
         $("div#toc,div#sizer,div#toolbar,div#toolbar+div,div.brand_header").remove();
         $("div#topic-breadcrumbs,div#feedback,div.copyright,iframe.h5ftgt").remove();
         $("div#modal,div#modal_back,div#searchresults").remove();
+        $("div.related-links").detach().appendTo("div.body");
         $("div#content_container").addClass("embeddedUA");
+        
     }
 }
