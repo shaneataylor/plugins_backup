@@ -528,12 +528,36 @@ div.body.quickstart div.section p {
 div.body.quickstart ol.ol {
     margin-top: 0.25em;
     margin-bottom: 0.25em;
+    counter-reset: qsteps 0;
+    list-style-type: none;
 }
+div.body.quickstart ol.ol > li {
+    counter-increment: qsteps 1;
+}
+div.body.quickstart ol.ol > li:before {
+    display: inline-block;
+    position: relative;
+    left: -12px;
+    overflow: visible;
+    width: 0px;
+    text-align: right;
+    content: counter(qsteps, decimal);
+    font-weight: bold;
+}
+
 div.body.quickstart ol[type="a"] {
-    padding-left: 18pt;
+    padding-left: 10pt;
     margin-top: 0;
     margin-bottom: 0;
+    counter-reset: qsubsteps 0;
 }
+div.body.quickstart ol[type="a"] > li {
+    counter-increment: qsubsteps 1;
+}
+div.body.quickstart ol[type="a"] > li:before {
+    content: counter(qsubsteps, lower-alpha);
+}
+
 div.body.quickstart strong.big_qsg {
     display: block;
     text-align: center;
@@ -559,6 +583,10 @@ div.body.quickstart div.left dl[compact] > dd.dd {
     color: black;
     width: 76%;
     margin-left: 2pt;
+    margin-bottom: 1em;
+}
+div.body.quickstart div.left dl[compact] > dd.dd:last-child {
+    margin-bottom: 0;
 }
 div.body.quickstart div.right dl[compact] > dt.dlterm {
     display: block;
@@ -569,6 +597,13 @@ div.body.quickstart div.right dl[compact] > dd.dd {
     color: #444;
     width: auto;
 }
+
+div.body.quickstart dd.dd > ul, div.body.quickstart dd.dd > ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
 
 div#topic > div.body.quickstart + * {
     clear: both;
