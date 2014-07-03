@@ -280,7 +280,7 @@ div.fig.topbot {
     border-bottom: 1px solid #C0C0C0 !important;
 }
 
-div.fig > img.image {
+div.fig > img.image, div.fig > embed.image {
     max-width: 100%;
 }
 div.fig > img.image:active {
