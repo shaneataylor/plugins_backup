@@ -38,3 +38,4 @@ processes
 dita_ot_plugins/net.webassign.stemmer/test/logs
 dita_ot_plugins/net.webassign.stemmer/test/out
 dita_ot_plugins/net.webassign.stemmer/test/temp
+copy_dita_source_files.sh

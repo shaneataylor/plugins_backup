@@ -26,18 +26,18 @@
     </xsl:template>
     
     <xsl:template match="item">
-        <strow>
+        <strow audience="internal"><!-- Default to internal. Change manually when editing release notes. -->
             <stentry>
                 <required-cleanup><xsl:value-of select="summary"/></required-cleanup>
             </stentry>
             <stentry>
-                <xref format="html" scope="external" otherprops="comment">
+                <ph audience="admin instructor student"><xsl:value-of select="key"/></ph>
+                <xref format="html" scope="external" otherprops="comment" audience="internal">
                     <xsl:attribute name="href">
                         <xsl:value-of select="link"/>
                     </xsl:attribute>
-                    <xsl:text>-</xsl:text>
+                    <xsl:value-of select="key"/>
                 </xref>
-                <xsl:value-of select="key"/>
             </stentry>
         </strow>
     </xsl:template>
