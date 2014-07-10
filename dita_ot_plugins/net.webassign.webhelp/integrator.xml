@@ -24,7 +24,7 @@
     <!-- process coderef before conref (fixes OT bug) -->
     <target name="preprocess" depends="gen-list,debug-filter,copy-files,coderef,conrefpush,conref,
         move-meta-entries,keyref,mapref,mappull,chunk,maplink,move-links,topicpull,
-        flag-module" description="Preprocessing ended"/>
+        flag-module,gen-nosearch-list" description="Preprocessing ended"/>
     
     <target name="set.search.default">
         <if> <!-- set default value for h5help.search based on whether or not a Google CSE is specified -->
@@ -53,6 +53,27 @@
                 dir="${args.input.dir}${file.separator}mathml"
                 includes="**${file.separator}*"/>
         </copy>
+    </target>
+    
+    <target name="gen-nosearch-list">
+        <xslt basedir="${dita.temp.dir}"
+            includesfile="${dita.temp.dir}${file.separator}fullditamap.list" 
+            destdir="${dita.temp.dir}"
+            style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}gen-nosearch-list.xsl"
+            filenameparameter="thismap"
+            failOnError="false" extension=".nosearch">
+        </xslt>
+        <concat destfile="${dita.temp.dir}${file.separator}nosearch.list">
+            <path>
+                <fileset dir="${dita.temp.dir}" includes="*.nosearch"/>
+            </path>
+            <filterchain>
+                <sortfilter/>
+                <tokenfilter>
+                    <uniqfilter/>
+                </tokenfilter>
+            </filterchain>
+        </concat>
     </target>
     
     <target name="h5help.check.conrefs" description="Ensure conref targets adhere to rule specified by h5help.conreftarget.rule">
