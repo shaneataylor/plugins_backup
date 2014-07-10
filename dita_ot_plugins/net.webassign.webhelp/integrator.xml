@@ -65,9 +65,12 @@
         </xslt>
         <concat destfile="${dita.temp.dir}${file.separator}nosearch.list">
             <path>
-                <fileset dir="${dita.temp.dir}" includes="*.nosearch"/>
+                <fileset dir="${dita.temp.dir}">
+                    <include name="*.nosearch"/>
+                    <include name="resourceonly.list"/>
+                </fileset>
             </path>
-            <filterchain>
+            <filterchain><!-- sort list entries and remove duplicates -->
                 <sortfilter/>
                 <tokenfilter>
                     <uniqfilter/>
@@ -107,7 +110,7 @@
         <!-- Index each topic individually first -->
         <xslt basedir="${dita.temp.dir}"
             includesfile="${dita.temp.dir}${file.separator}fullditatopic.list"
-            excludesfile="${dita.temp.dir}${file.separator}resourceonly.list"
+            excludesfile="${dita.temp.dir}${file.separator}nosearch.list"
             destdir="${dita.temp.dir}"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}stemmer.xsl"
             filenameparameter="thisindextarget"
@@ -241,11 +244,13 @@ h5help.vendorpath = "${h5help.vendorpath}";
                 <exclude name="${args.xhtml.toc}${args.outext}"/>
             </fileset>
         </move>
+        <loadfile property="nosearchlist" srcfile="${dita.temp.dir}${file.separator}nosearch.list"/>
         <!-- Process files to HTML5 help framework -->
         <xslt basedir="${output.dir}${file.separator}temp_xhtml" includes="*${args.outext}" 
             destdir="${output.dir}" extension="${args.outext}"
             style="${dita.dir}${file.separator}plugins${file.separator}net.webassign.webhelp${file.separator}xsl${file.separator}xhtml2h5help.xsl"
-            failOnError="true">
+            failOnError="true" filenameparameter="thistopic">
+            <param name="h5help.nosearchlist" expression="${nosearchlist}"/>
             <param name="h5help.feedback" expression="${h5help.feedback}"/>
             <param name="h5help.name" expression="${h5help.name}"/>
             <param name="h5help.args.hdr" expression="${h5help.args.hdr}"/>

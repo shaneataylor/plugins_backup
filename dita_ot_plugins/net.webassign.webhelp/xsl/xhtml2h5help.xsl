@@ -12,6 +12,8 @@
     <xsl:param name="h5help.args.hdr"></xsl:param>
     <xsl:param name="h5help.vendorpath"/>
     <xsl:param name="h5help.prettify_code">no</xsl:param>
+    <xsl:param name="thistopic"/>
+    <xsl:param name="h5help.nosearchlist"/>
     
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
@@ -26,6 +28,10 @@
         <xsl:attribute name="type">text/javascript</xsl:attribute>
         <xsl:attribute name="src" select="concat($h5help.vendorpath,'/require.js')"/>
     </xsl:attribute-set>
+    
+    <xsl:variable name="thistopicbase" select="replace($thistopic,'\.\w+$','.xml')"/>
+    
+    <xsl:variable name="nosearch" select="matches($h5help.nosearchlist,concat('\b',$thistopicbase,'\b'))"/>
     
     <xsl:variable name="HDRFILE">
         <xsl:choose>
@@ -82,6 +88,7 @@
     
     <xsl:template match="xhtml:head" xml:space="preserve">
         <head>
+            <xsl:if test="$nosearch"><meta name="robots" content="noindex"/></xsl:if>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
