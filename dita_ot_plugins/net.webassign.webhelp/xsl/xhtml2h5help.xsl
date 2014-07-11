@@ -31,7 +31,17 @@
     
     <xsl:variable name="thistopicbase" select="replace($thistopic,'\.\w+$','.xml')"/>
     
-    <xsl:variable name="nosearch" select="matches($h5help.nosearchlist,concat('\b',$thistopicbase,'\b'))"/>
+    <xsl:variable name="searchmeta">
+        <xsl:choose>
+            <xsl:when test="matches($h5help.nosearchlist,concat('^',$thistopicbase,'\s*$'),'m')">
+                <meta name="robots" content="noindex"/>
+                <xsl:message>
+                    <xsl:value-of select="concat('Excluding ',$thistopic,' from search.')"/>
+                </xsl:message>
+            </xsl:when>
+            <xsl:otherwise></xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     <xsl:variable name="HDRFILE">
         <xsl:choose>
@@ -87,8 +97,7 @@
     
     
     <xsl:template match="xhtml:head" xml:space="preserve">
-        <head>
-            <xsl:if test="$nosearch"><meta name="robots" content="noindex"/></xsl:if>
+        <head><xsl:copy-of select="$searchmeta"/>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
