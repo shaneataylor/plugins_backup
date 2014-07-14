@@ -161,7 +161,7 @@
             <param name="output.dir" location="out/styleguide" />
             <param name="args.draft" value="yes"/>
             <param name="h5help.name" value="Style Manual" />
-            <param name="h5help.feedback" value="yes" />
+            <param name="h5help.feedback" value="no" />
             <param name="h5help.prettify.code" value="yes" />
             <param name="args.input" value="m_d_styleguide.ditamap"/>
             <param name="args.filter" value="${source.dir}/flagstatus.ditaval" />
@@ -169,6 +169,7 @@
             <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
             <param name="h5help.search" value="internal"/>
             <param name="h5help.search.configfile" location="searchconfig.xml"/>
+            <param name="args.ftr" location="${source.dir}/footer.html"/>
         </antcall>
     </target>
     
