@@ -238,4 +238,167 @@
         </span>
     </xsl:template>
     
+    <xsl:template match="*[contains(@class, ' topic/data ')][@datatype='json']">
+        <script type="text/javascript">
+            var h5help = h5help || {};
+            <xsl:value-of select="concat('h5help.',@name,'={&#10;')"/>
+            <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
+            };
+        </script>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' topic/data ')]" mode="json-data">
+        <xsl:param name="endline">
+            <xsl:choose>
+                <xsl:when test="position()=last()"><xsl:value-of select="'&#10;'"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="',&#10;'"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:choose>
+            <xsl:when test="./*[contains(@class, ' topic/data ')]">
+                <xsl:value-of select="concat('&quot;',@name,'&quot; : {&#10;')"/>
+                <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
+                <xsl:value-of select="concat('}',$endline)"/>
+            </xsl:when>
+            <xsl:when test="@value">
+                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;',@value,'&quot;',$endline)"/>
+            </xsl:when>
+            <xsl:when test="@href">
+                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;',@href,'&quot;',$endline)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message>Missing JSON data: no value specified for <xsl:value-of select="@name"/></xsl:message>
+                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;&quot;',$endline)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        
+        
+    </xsl:template>
+
+
+
+
+
+
+    <xsl:template match="*[contains(@class, ' learning-d/lcSingleSelect ')]">
+        <xsl:param name="qid" select="@id"/>
+        <div>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="class" select="concat('fig lcInteractionBase lcSingleSelect ',@outputclass)"/>
+            <xsl:apply-templates mode="lc-single-select">
+                <xsl:with-param name="qid" select="$qid"/>
+            </xsl:apply-templates>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' topic/title ')]" mode="lc-single-select">
+        <xsl:param name="qid" select="@id"/>
+        <h2>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="class" select="concat('title lcSingleSelectTitle ',@outputclass)"/>
+            <xsl:apply-templates/>
+        </h2>
+    </xsl:template>
+    
+    <!-- + topic/p learningInteractionBase-d/lcQuestionBase learning-d/lcQuestion  -->
+    <xsl:template match="*[contains(@class, ' learning-d/lcQuestion ')]" mode="lc-single-select">
+        <xsl:param name="qid" select="@id"/>
+        <div>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="class" select="concat('p lcQuestionBase lcQuestion ',@outputclass)"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <!--<xsl:template match="*[contains(@class, ' learning-d/lcAnswerOptionGroup ')]" mode="lc-single-select">
+        <xsl:param name="qid"/>
+        <xsl:apply-templates mode="lc-single-select">
+            <xsl:with-param name="qid" select="$qid"/>
+        </xsl:apply-templates>
+    </xsl:template>-->
+    
+    <xsl:template match="*[contains(@class, ' topic/data ')]" mode="lc-single-select">
+        <!-- use @data to specify where a back link might lead -->
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' learning-d/lcAnswerOptionGroup ')]" mode="lc-single-select">
+        <xsl:param name="qid"/>
+        <div>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="class" select="concat('ul lcAnswerOptionGroup ',@outputclass)"/>
+            <xsl:apply-templates mode="lc-single-select">
+                <xsl:with-param name="qid" select="$qid"/>
+            </xsl:apply-templates>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' learning-d/lcAnswerOption ')]" mode="lc-single-select">
+        <xsl:param name="qid"/>
+        <xsl:param name="choiceval">
+            <xsl:choose>
+                <xsl:when test="@id">
+                    <xsl:value-of select="@id"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="position()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="choiceid" select="concat($qid,$choiceval)"/>
+        <xsl:apply-templates mode="lc-single-select"
+            select="*[contains(@class, ' learning-d/lcAnswerContent ')]|*[contains(@class, ' learning-d/lcFeedback ')]">
+            <!-- Don't do anything with lcCorrectResponse -->
+            <xsl:with-param name="qid" select="$qid"/>
+            <xsl:with-param name="choiceid" select="$choiceid"/>
+            <xsl:with-param name="choiceval" select="$choiceval"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' learning-d/lcAnswerContent ')]" mode="lc-single-select">
+        <xsl:param name="qid"/>
+        <xsl:param name="choiceid"/>
+        <xsl:param name="choiceval"/>
+        <xsl:param name="data-nexthref" select="*[contains(@class, ' topic/data ')][@name='next'][@href][1]/@href"/>
+        <xsl:param name="nexthref" >
+            <xsl:choose>
+                <xsl:when test="matches($data-nexthref,'\\#[^\\/]+\\/[^\\/]+')">
+                    <xsl:value-of select="concat('#',substring-after($data-nexthref,'/'))"/>
+                </xsl:when>
+                <xsl:when test="matches($data-nexthref,'.+\\#[^\\/]+\\/[^\\/]+')">
+                    <xsl:value-of select="replace($data-nexthref,'\\#[^\\/]+\\/','#')"/>
+                </xsl:when>
+                <xsl:otherwise>#</xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <div>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="class" select="concat('lcAnswerContent ',@outputclass)"/>
+            <input type="radio">
+                <xsl:attribute name="name" select="$qid"/>
+                <xsl:attribute name="id" select="$choiceid"/>
+                <xsl:attribute name="value" select="$choiceval"/>
+                <xsl:attribute name="next" select="$nexthref"/>
+            </input>
+            <label>
+                <xsl:attribute name="for" select="$choiceid"/>
+                <xsl:apply-templates/>
+            </label>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' learning-d/lcFeedback ')]" mode="lc-single-select">
+        <xsl:param name="qid"/>
+        <xsl:param name="choiceid"/>
+        <xsl:param name="choiceval"/>
+        <div>
+            <xsl:copy-of select="@id"/>
+            <xsl:attribute name="name" select="$qid"/>
+            <xsl:attribute name="feedbackforvalue" select="$choiceval"/>
+            <xsl:attribute name="class" select="concat('p p lcFeedback ',@outputclass)"/>
+        </div>
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    
 </xsl:stylesheet>

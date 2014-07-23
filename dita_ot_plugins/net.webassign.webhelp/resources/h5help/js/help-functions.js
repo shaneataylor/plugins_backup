@@ -17,6 +17,7 @@ h5help.initAll = function() {
     h5help.defineHandlers();
     h5help.improveCompatibility();
     h5help.loadInitialContent();
+    h5help.initInteractions();
     h5help.initSearch(); // do this last so nothing else is waiting on google
     // loadCommentScript();
 };
@@ -191,6 +192,7 @@ h5help.initTopic = function(addHistory,thishref){
     h5help.mobilize();
     h5help.syncTOCandBreadcrumbs();
     h5help.addCommentSection();
+    h5help.initInteractions();
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
 }
 
@@ -623,3 +625,17 @@ h5help.initEmbeddedUA = function() {
         
     }
 }
+
+h5help.initInteractions = function() {
+    
+    $("div.lcSingleSelect").removeClass("collapsed");
+    $("div.lcSingleSelect").on("click", "h2.lcSingleSelectTitle", function(){
+        $(this).parents("div.lcSingleSelect").toggleClass("collapsed");
+    });
+    $("div.lcSingleSelect").on("click", "label", function(){
+        $(this).parents("div.lcAnswerOptionGroup").children("div.lcAnswerContent").removeClass("checked");
+        $(this).parents("div.lcAnswerContent").addClass("checked");
+        $(this).parents("div.lcSingleSelect").addClass("collapsed");
+    });
+}
+

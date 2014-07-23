@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
 @import url(prettify.css);
 
@@ -1524,3 +1525,90 @@ div#content_container.embeddedUA > div#topic > div > div.body span.data.userdata
     color: #000000;
     font-weight: bold;
 }
+
+/* Styles for interactive learning content */
+
+div.fig.lcInteractionBase.lcSingleSelect {
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+div.p.lcQuestionBase.lcQuestion {
+    padding: 0px 4px;
+    overflow:hidden;
+    height: 70px;
+    -webkit-transition: height .5s, margin .5s;
+    -moz-transition: height .5s, margin .5s;
+    transition: height .5s, margin .5s;
+}
+
+div.fig.lcInteractionBase.lcSingleSelect.collapsed div.p.lcQuestionBase.lcQuestion,
+div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent {
+    height: 0px;
+    margin: 0px;
+    -webkit-transition: height .5s, margin .5s;
+    -moz-transition: height .5s, margin .5s;
+    transition: height .5s, margin .5s;
+}
+
+h2.lcSingleSelectTitle {
+    font-size: 1em;
+    background: #d7d2c8;
+    color: #333;
+    padding: 0px 4px;
+    margin-bottom: 0px;
+}
+
+div.lcAnswerContent {
+    display: block;
+    height: 36px;
+    margin: 10px 0px;
+    overflow:hidden;
+}
+div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent.checked {
+    margin: 0px; 
+    height: 50px;
+}
+
+div.lcAnswerContent > input[type="radio"] {
+    display: none;
+}
+
+div.lcAnswerContent > label {
+    display: block;
+    margin: 0px;
+    min-width: 88px;
+    height: 22px;
+    padding: 6px 20px 0px 20px;
+    font-family:"Open Sans", Arial, sans-serif ;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 120%;
+    color: #333;
+    text-align:center;
+    border: 1px solid #6e6e6e;
+    background: white;
+    box-shadow: 1px 1px #6e6e6e;
+    overflow:hidden;
+
+}
+
+div.lcAnswerContent > input[type="radio"]:checked + label,
+div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent > input[type="radio"]:checked + label {
+    background: #a0d705;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 90px;
+    height: 23px;
+    padding: 7px 21px 0px 21px;
+    border: 0px none;
+}
+
+
+
+
+div.lcFeedback {
+    display: none;
+}
+
