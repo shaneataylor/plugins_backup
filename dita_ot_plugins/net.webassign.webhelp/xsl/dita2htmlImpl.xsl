@@ -239,41 +239,71 @@
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' topic/data ')][@datatype='json']">
-        <script type="text/javascript">
-            var h5help = h5help || {};
-            <xsl:value-of select="concat('h5help.',@name,'={&#10;')"/>
+        <div data-only="true" data-type="text/json">
+            <xsl:value-of select="concat('&quot;',@name,'&quot; : {&#10;')"/>
             <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
-            };
-        </script>
+            }
+        </div>
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' topic/data ')]" mode="json-data">
+        <xsl:param name="inArray" select="false()"/>
+        <xsl:param name="isArray" select="@type='array'"/>
+        <xsl:param name="isNameValue" select="@name and (@value or @href)"/>
+        <xsl:param name="isValueOnly" select="not(@name) and (@value or @href)"/>
+        <xsl:param name="hasData" select="@name and (./*[contains(@class, ' topic/data ')])"/>
+        <xsl:param name="qname" select="concat('&quot;',@name,'&quot;')"/>
+        <xsl:param name="qvalue">
+            <xsl:choose>
+                <xsl:when test="@value">
+                    <xsl:value-of select="concat('&quot;',@value,'&quot;')"/>
+                </xsl:when>
+                <xsl:when test="@href">
+                    <xsl:value-of select="concat('&quot;',@href,'&quot;')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:param>
         <xsl:param name="endline">
             <xsl:choose>
                 <xsl:when test="position()=last()"><xsl:value-of select="'&#10;'"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="',&#10;'"/></xsl:otherwise>
             </xsl:choose>
         </xsl:param>
+        <!-- Invalid structures will fail silently -->
         <xsl:choose>
-            <xsl:when test="./*[contains(@class, ' topic/data ')]">
-                <xsl:value-of select="concat('&quot;',@name,'&quot; : {&#10;')"/>
+            <xsl:when test="$isArray">
+                <xsl:choose>
+                    <xsl:when test="$hasData">
+                        <xsl:value-of select="concat($qname,' : [&#10;')"/>
+                        <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data">
+                            <xsl:with-param name="inArray" select="true()"/>
+                        </xsl:apply-templates>
+                        <xsl:value-of select="concat(']',$endline)"/>
+                    </xsl:when>
+                    <xsl:when test="$isValueOnly">
+                        <xsl:value-of select="concat('[',$qvalue,']',$endline)"/>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$hasData"><!-- same whether in an array or not -->
+                <xsl:value-of select="concat($qname,' : {&#10;')"/>
                 <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
                 <xsl:value-of select="concat('}',$endline)"/>
             </xsl:when>
-            <xsl:when test="@value">
-                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;',@value,'&quot;',$endline)"/>
+            <xsl:when test="$inArray">
+                <xsl:choose>
+                    <xsl:when test="$isNameValue">
+                        <xsl:value-of select="concat('{',$qname,' : ',$qvalue,'}',$endline)"/>
+                    </xsl:when>
+                    <xsl:when test="$isValueOnly">
+                        <xsl:value-of select="concat($qvalue,$endline)"/>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:when>
-            <xsl:when test="@href">
-                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;',@href,'&quot;',$endline)"/>
+            <xsl:when test="$isNameValue">
+                <xsl:value-of select="concat($qname,' : ',$qvalue,$endline)"/>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:message>Missing JSON data: no value specified for <xsl:value-of select="@name"/></xsl:message>
-                <xsl:value-of select="concat('&quot;',@name,'&quot; : &quot;&quot;',$endline)"/>
-            </xsl:otherwise>
         </xsl:choose>
-        
-        
-        
     </xsl:template>
 
 

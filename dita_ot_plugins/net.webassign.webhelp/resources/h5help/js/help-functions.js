@@ -17,6 +17,7 @@ h5help.initAll = function() {
     h5help.defineHandlers();
     h5help.improveCompatibility();
     h5help.loadInitialContent();
+    h5help.initTopicJSON();
     h5help.initInteractions();
     h5help.initSearch(); // do this last so nothing else is waiting on google
     // loadCommentScript();
@@ -192,6 +193,7 @@ h5help.initTopic = function(addHistory,thishref){
     h5help.mobilize();
     h5help.syncTOCandBreadcrumbs();
     h5help.addCommentSection();
+    h5help.initTopicJSON();
     h5help.initInteractions();
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
 }
@@ -626,16 +628,53 @@ h5help.initEmbeddedUA = function() {
     }
 }
 
+h5help.initTopicJSON = function() {
+    var datacontent = [];
+    $("script[type='text/json'],div[data-type='text/json']").each( function(){
+        datacontent.push( $(this).html() );
+    })
+    var datajoined = "{" + datacontent.join() + "}";
+    h5help.topicJSON = JSON.parse(datajoined);
+}
+
 h5help.initInteractions = function() {
+    h5help.myInteractionPath = '';
+    $("div.lcSingleSelect").addClass("hidden");
+    h5help.showInteraction(h5help.topicJSON.interactionpath.startwith);
     
-    $("div.lcSingleSelect").removeClass("collapsed");
-    $("div.lcSingleSelect").on("click", "h2.lcSingleSelectTitle", function(){
+    /* FUTURE: LET USER GO BACK AND CHANGE ANSWERS */
+    /*$("div.lcSingleSelect").on("click", "h2.lcSingleSelectTitle", function(){
         $(this).parents("div.lcSingleSelect").toggleClass("collapsed");
-    });
-    $("div.lcSingleSelect").on("click", "label", function(){
-        $(this).parents("div.lcAnswerOptionGroup").children("div.lcAnswerContent").removeClass("checked");
-        $(this).parents("div.lcAnswerContent").addClass("checked");
-        $(this).parents("div.lcSingleSelect").addClass("collapsed");
-    });
+    });*/
+    $("div.lcSingleSelect").one("click", "label", h5help.doInteraction);
+}
+
+h5help.showInteraction = function(iname) {
+    // move the interaction to the end & unhide
+    var thisinteraction = $("div#" + iname + ".lcSingleSelect").detach();
+    $("div.lcSingleSelect").last().after(thisinteraction);
+    $("div#" + iname + ".lcSingleSelect").removeClass("hidden");
+}
+
+h5help.doInteraction = function() {
+    $(this).parents("div.lcAnswerOptionGroup").children("div.lcAnswerContent").removeClass("checked");
+    $(this).parents("div.lcAnswerContent").addClass("checked");
+    $(this).parents("div.lcSingleSelect").addClass("collapsed");
+    var thispathstepid = $(this).parents("div.lcSingleSelect").attr('id');
+    var thispathstepval = $(this).siblings("input[type='radio']").attr('value');
+    h5help.myInteractionPath += thispathstepid + '=' + thispathstepval + ';';
+    for (var i = 0; i < h5help.topicJSON.interactionpath.paths.length; i++ ) {
+        if (h5help.topicJSON.interactionpath.paths[i].indexOf(h5help.myInteractionPath) == 0) {
+            break;
+        }
+    }
+    var restofpath = h5help.topicJSON.interactionpath.paths[i].substr(h5help.myInteractionPath.length).split(/[;=]/);
+    if (restofpath[0] != 'endwith') {
+        h5help.showInteraction(restofpath[0]);
+    }
+    else {
+        // add test for valid value?
+        h5help.loadDiv("div#topic", restofpath[1]);
+    }
 }
 

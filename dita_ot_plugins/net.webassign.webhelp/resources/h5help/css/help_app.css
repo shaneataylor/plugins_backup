@@ -1528,6 +1528,10 @@ div#content_container.embeddedUA > div#topic > div > div.body span.data.userdata
 
 /* Styles for interactive learning content */
 
+div[data-only] {
+    display: none;
+}
+
 div.fig.lcInteractionBase.lcSingleSelect {
     margin: 0px;
     padding: 0px;
@@ -1553,10 +1557,12 @@ div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent {
 }
 
 h2.lcSingleSelectTitle {
+    font-family:"Open Sans", Arial, sans-serif ;
     font-size: 1em;
+    height: 22px;
     background: #d7d2c8;
     color: #333;
-    padding: 0px 4px;
+    padding: 4px;
     margin-bottom: 0px;
 }
 
