@@ -651,9 +651,13 @@ h5help.initInteractions = function() {
     $("div.lcSingleSelect").one("click", "label", h5help.doInteraction);
 }
 
-h5help.showInteraction = function(iname) {
+h5help.showInteraction = function(iname,newInteraction) {
+    if (typeof(newInteraction) == 'undefined') {
+        var thisinteraction = $("div#" + iname + ".lcSingleSelect").detach();
+    } else {
+        var thisinteraction = newInteraction;
+    }
     // move the interaction to the end & unhide
-    var thisinteraction = $("div#" + iname + ".lcSingleSelect").detach();
     $("div.lcSingleSelect").last().after(thisinteraction);
     $("div#" + iname + ".lcSingleSelect").removeClass("hidden");
 }
@@ -675,8 +679,14 @@ h5help.doInteraction = function() {
         h5help.showInteraction(restofpath[0]);
     }
     else {
-        // add test for valid value?
-        h5help.loadDiv("div#topic", restofpath[1]);
+        var newInteraction = '<div class="fig lcInteractionBase lcSingleSelect withDelay"'
+            + ' id="' + restofpath[0] + '"><h2 class="title lcSingleSelectTitle ">Finished</h2>'
+            + 'Your topic will open in a few seconds.</div>';
+        h5help.showInteraction(restofpath[0],newInteraction);
+        var a = setTimeout(function(){
+            h5help.loadDiv("div#topic", restofpath[1]);
+            },3000);
     }
 }
+
 
