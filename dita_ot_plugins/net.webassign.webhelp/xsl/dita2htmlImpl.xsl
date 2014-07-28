@@ -240,9 +240,16 @@
     
     <xsl:template match="*[contains(@class, ' topic/data ')][@datatype='json']">
         <div data-only="true" data-type="text/json">
-            <xsl:value-of select="concat('&quot;',@name,'&quot; : {&#10;')"/>
-            <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
-            }
+            <xsl:choose>
+                <xsl:when test="not(./*) and text()">
+                    <xsl:copy-of select="text()" xml:space="preserve"/>
+                </xsl:when>
+                <xsl:when test="./*[contains(@class, ' topic/data ')]">
+                    <xsl:value-of select="concat('&#10;&quot;',@name,'&quot; : {&#10;')"/>
+                    <xsl:apply-templates select="*[contains(@class, ' topic/data ')]" mode="json-data"/>
+                    <xsl:text>}</xsl:text>
+                </xsl:when>
+            </xsl:choose>
         </div>
     </xsl:template>
     

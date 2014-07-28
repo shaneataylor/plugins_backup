@@ -640,7 +640,9 @@ h5help.initTopicJSON = function() {
 h5help.initInteractions = function() {
     h5help.myInteractionPath = '';
     $("div.lcSingleSelect").addClass("hidden");
-    h5help.showInteraction(h5help.topicJSON.interactionpath.startwith);
+    if (typeof(h5help.topicJSON.interactionpath) != 'undefined') {
+        h5help.showInteraction(h5help.topicJSON.interactionpath.startwith);
+    }
     
     /* FUTURE: LET USER GO BACK AND CHANGE ANSWERS */
     /*$("div.lcSingleSelect").on("click", "h2.lcSingleSelectTitle", function(){

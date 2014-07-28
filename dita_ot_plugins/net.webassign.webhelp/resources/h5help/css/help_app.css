@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
-@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
+@import url(//fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic);
 @import url(prettify.css);
 
 /*! BASED ON normalize.css v1.0.2 | MIT License | git.io/normalize */
@@ -1532,10 +1532,29 @@ div[data-only] {
     display: none;
 }
 
-div.fig.lcInteractionBase.lcSingleSelect {
-    margin: 0px;
+div.section.lcChallenge {
+    font-family:"Open Sans", Arial, sans-serif ;
     padding: 0px;
-    
+    border: 6px solid #d7d2c8;
+    width: 520px;
+    height: 220px;
+    overflow: hidden;
+}
+
+div.fig.lcInteractionBase.lcSingleSelect {
+    margin: 10px;
+    padding: 0px;
+    width: 500px;
+    height: 200px;
+    -webkit-transition: margin 1s;
+    -moz-transition: margin 1s;
+    transition: margin 1s;
+}
+div.fig.lcInteractionBase.lcSingleSelect.collapsed {
+    margin-top: -215px;
+    -webkit-transition: margin 1s;
+    -moz-transition: margin 1s;
+    transition: margin 1s;
 }
 
 div.p.lcQuestionBase.lcQuestion {
@@ -1549,11 +1568,11 @@ div.p.lcQuestionBase.lcQuestion {
 
 div.fig.lcInteractionBase.lcSingleSelect.collapsed div.p.lcQuestionBase.lcQuestion,
 div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent {
-    height: 0px;
+    /*height: 0px;
     margin: 0px;
     -webkit-transition: height .5s, margin .5s;
     -moz-transition: height .5s, margin .5s;
-    transition: height .5s, margin .5s;
+    transition: height .5s, margin .5s;*/
 }
 
 h2.lcSingleSelectTitle {
@@ -1567,14 +1586,11 @@ h2.lcSingleSelectTitle {
 }
 
 div.lcAnswerContent {
-    display: block;
-    height: 36px;
-    margin: 10px 0px;
-    overflow:hidden;
+    display: inline-block;
 }
 div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent.checked {
-    margin: 0px; 
-    height: 50px;
+    /*margin: 0px; 
+    height: 50px;*/
 }
 
 div.lcAnswerContent > input[type="radio"] {
