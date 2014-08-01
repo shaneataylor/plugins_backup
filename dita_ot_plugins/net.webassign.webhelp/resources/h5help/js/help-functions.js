@@ -646,7 +646,7 @@ h5help.initInteractions = function() {
     
     /* FUTURE: LET USER GO BACK AND CHANGE ANSWERS */
     /*$("div.lcSingleSelect").on("click", "h2.lcSingleSelectTitle", function(){
-        $(this).parents("div.lcSingleSelect").toggleClass("collapsed");
+        $(this).parents("div.lcSingleSelect").toggleClass("answered");
     });*/
     $("div.lcSingleSelect").one("click", "label", h5help.doInteraction);
 }
@@ -665,7 +665,7 @@ h5help.showInteraction = function(iname,newInteraction) {
 h5help.doInteraction = function() {
     $(this).parents("div.lcAnswerOptionGroup").children("div.lcAnswerContent").removeClass("checked");
     $(this).parents("div.lcAnswerContent").addClass("checked");
-    $(this).parents("div.lcSingleSelect").addClass("collapsed");
+    $(this).parents("div.lcSingleSelect").addClass("answered");
     var thispathstepid = $(this).parents("div.lcSingleSelect").attr('id');
     var thispathstepval = $(this).siblings("input[type='radio']").attr('value');
     h5help.myInteractionPath += thispathstepid + '=' + thispathstepval + ';';

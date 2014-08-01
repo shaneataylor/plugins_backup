@@ -1550,7 +1550,7 @@ div.fig.lcInteractionBase.lcSingleSelect {
     -moz-transition: margin 1s;
     transition: margin 1s;
 }
-div.fig.lcInteractionBase.lcSingleSelect.collapsed {
+div.fig.lcInteractionBase.lcSingleSelect.answered {
     margin-top: -215px;
     -webkit-transition: margin 1s;
     -moz-transition: margin 1s;
@@ -1566,13 +1566,8 @@ div.p.lcQuestionBase.lcQuestion {
     transition: height .5s, margin .5s;
 }
 
-div.fig.lcInteractionBase.lcSingleSelect.collapsed div.p.lcQuestionBase.lcQuestion,
-div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent {
-    /*height: 0px;
-    margin: 0px;
-    -webkit-transition: height .5s, margin .5s;
-    -moz-transition: height .5s, margin .5s;
-    transition: height .5s, margin .5s;*/
+div.fig.lcInteractionBase.lcSingleSelect.answered div.p.lcQuestionBase.lcQuestion,
+div.fig.lcInteractionBase.lcSingleSelect.answered div.lcAnswerContent {
 }
 
 h2.lcSingleSelectTitle {
@@ -1588,7 +1583,7 @@ h2.lcSingleSelectTitle {
 div.lcAnswerContent {
     display: inline-block;
 }
-div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent.checked {
+div.fig.lcInteractionBase.lcSingleSelect.answered div.lcAnswerContent.checked {
     /*margin: 0px; 
     height: 50px;*/
 }
@@ -1599,25 +1594,24 @@ div.lcAnswerContent > input[type="radio"] {
 
 div.lcAnswerContent > label {
     display: block;
-    /*margin: 0px;
-    min-width: 88px;
-    height: 22px;*/
-    margin: 0px 5px 0px 0px;
-    width: 200px;
-    height: 52px;
+    margin: 0px 10px 0px 5px;
+    width: 190px;
+    height: 42px;
+    line-height: 42px;
     padding: 3px 20px 3px 20px;
-    font-family:"Open Sans", Arial, sans-serif ;
-    font-size: 13px;
-    font-weight: normal;
-    /*line-height: 120%;*/
-    line-height: 52px;
-    color: #333;
-    text-align:center;
-    border: 1px solid #6e6e6e;
-    background: white;
+    background: #a0d705; /* WA Green */
+    border: 1px solid #a0d705; /* WA Green */
     box-shadow: 1px 1px #6e6e6e;
     overflow:hidden;
-
+    text-align:center;
+    font-family:"Open Sans", Arial, sans-serif ;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+div.lcAnswerContent > label:hover {
+    border-color: #0b79bd;
+    cursor:pointer;
 }
 div.lcAnswerContent > label > span {
     display: inline-block;
@@ -1625,18 +1619,20 @@ div.lcAnswerContent > label > span {
     line-height: 120%;
 }
 
-div.lcAnswerContent > input[type="radio"]:checked + label,
-div.fig.lcInteractionBase.lcSingleSelect.collapsed div.lcAnswerContent > input[type="radio"]:checked + label {
-    background: #a0d705;
+div.fig.lcInteractionBase.lcSingleSelect.answered div.lcAnswerContent > label {
+    background: #dddddd; /* disabled gray */
+    border-color: #dddddd; /* disabled gray */
+    box-shadow: 1px 1px transparent;
+    font-size: 13px;
+    color: #aaaaaa; /*light gray*/
+}
+div.fig.lcInteractionBase.lcSingleSelect.answered div.lcAnswerContent > input[type="radio"]:checked + label {
+    background: #a0d705; /* WA Green */
+    border-color: #a0d705; /* WA Green */
+    box-shadow: 1px 1px #6e6e6e;
     font-size: 14px;
-    font-weight: 600;
-    /*min-width: 90px;
-    height: 23px;*/
-    width: 202px;
-    height: 53px;
-    margin-right: 3px;
-    padding: 7px 21px 0px 21px;
-    border: 0px none;
+    color: #333333; /* Rochester Gray */
+
 }
 
 div.lcInteractionBase.withDelay {
