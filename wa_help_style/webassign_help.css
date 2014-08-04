@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=GFS+Didot&subset=greek);
+@import url(//fonts.googleapis.com/css?family=GFS+Didot&subset=greek);
 
 /* =============================== OVERRIDE PLUGIN FONTS =============================== */
 html,
@@ -9,7 +9,7 @@ button,
 input,
 select,
 textarea {
-    font-family: Arial, sans-serif !important;
+    font-family: "Open Sans", Arial, sans-serif !important;
 }
 
 /* ====================================== BRANDING ====================================== */
@@ -56,7 +56,7 @@ pre.codeblock {
 pre.msgblock, samp.msgph {
     /* Wrap normally + collapse sequences of whitespace */
     white-space: normal;
-    font-family: Arial, sans-serif;
+    font-family: "Open Sans", Arial, sans-serif ;
     background-color: #eee;
 }
 pre.msgblock {
