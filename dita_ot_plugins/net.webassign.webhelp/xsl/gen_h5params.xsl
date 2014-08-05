@@ -18,6 +18,9 @@
     <xsl:param name="disqus_shortname" />
     <xsl:param name="feedback" />
     <xsl:param name="prettify_code" />
+    <xsl:param name="watermark_file"/>
+    <xsl:param name="watermark_urlpattern"/>
+    
     
     <xsl:variable name="exceptionlist">
         <xsl:copy-of select="/searchconfig/exceptionalforms/exception"/>
@@ -36,6 +39,9 @@
 <xsl:text>"disqus_shortname":"</xsl:text><xsl:value-of select="$disqus_shortname"/><xsl:text>",</xsl:text>
 <xsl:text>"feedback":"</xsl:text><xsl:value-of select="$feedback"/><xsl:text>",</xsl:text>
 <xsl:text>"prettify_code":"</xsl:text><xsl:value-of select="$prettify_code"/><xsl:text>",</xsl:text>
+<xsl:text>"watermark":{</xsl:text>
+        <xsl:text>"file":"</xsl:text><xsl:value-of select="$watermark_file"/><xsl:text>",</xsl:text>
+        <xsl:text>"urlpattern":"</xsl:text><xsl:value-of select="$watermark_urlpattern"/><xsl:text>"},</xsl:text>
 <xsl:apply-templates select="searchconfig"/>
 <xsl:text>}</xsl:text>
     </xsl:template>

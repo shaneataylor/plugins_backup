@@ -15,6 +15,8 @@
     <!-- h5help.search and h5help.genindex -->                    <!-- set in set.search.default target  -->
     <property name="h5help.vendorpath" value=""/>
     <property name="h5help.search.configfile" value=""/>
+    <property name="h5help.watermark.file" value=""/>
+    <property name="h5help.watermark.urlpattern" value=""/>
     
     <target name="dita2h5help"
         depends="set.search.default, build-init, preprocess, copy-mathML, dita.map.xhtml,
@@ -166,6 +168,8 @@
             <param name="disqus_shortname" expression="${h5help.disqus.shortname}" />
             <param name="feedback" expression="${h5help.feedback}" />
             <param name="prettify_code" expression="${h5help.prettify.code}" />
+            <param name="watermark_file" expression="${h5help.watermark.file}"/>
+            <param name="watermark_urlpattern" expression="${h5help.watermark.urlpattern}"/>
         </xslt>
         <!-- prepend vendor path to main.js -->
         <echo file="${output.dir}${file.separator}h5help${file.separator}js${file.separator}vendor.js" 

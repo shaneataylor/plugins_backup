@@ -11,7 +11,8 @@ h5help.params = {
 "google_cse_refinement"            : "",
 "disqus_shortname"                 : "",
 "feedback"                         : "no",
-"prettify_code"                    : "no"
+"prettify_code"                    : "no",
+"watermark"                        : {}
 };
 
 requirejs.config({
