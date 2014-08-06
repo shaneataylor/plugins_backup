@@ -479,7 +479,8 @@ div.body.quickstart .title, h1.title.quickstart {
     color: #004FB3 !important;
 }
 h1.title.quickstart {
-    width: 7.5in;
+    width: 6in;
+    padding-left: 1.5in;
     font-size: 24.5pt !important;
     font-weight:normal;
     text-align:right;
