@@ -695,8 +695,9 @@ h5help.addWatermark = function() {
     var nopattern = !(typeof(h5help.params.watermark.file) == 'string') || h5help.params.watermark.file == '';
     var patternmatches = !nopattern && h5help.baseUrl.match(new RegExp(h5help.params.watermark.urlpattern)) != null;
     if (haswatermark && (nopattern || patternmatches)) {
-        var wmstyle = '<style type="text/css">div#topic{'
-            + 'background: url('+h5help.params.watermark.file+') no-repeat fixed right 20px !important;'
+        var wmstyle = '<style type="text/css">div#topic:before {'
+            + 'position: fixed; display: block; top: 40px; right: 0px;'
+            + 'content:url('+h5help.params.watermark.file+'); opacity: 0.25;'
             + '}</style>';
         $("head").append(wmstyle);
     }
