@@ -6,16 +6,16 @@ pre.codeblock.prettyprinted .pln{
         color:#961313;
     }
     pre.codeblock.prettyprinted .kwd{
-        color:#3447b7;
+        color:#cc0000;
     }
     pre.codeblock.prettyprinted .com{
-        color:#401954;
+        color:#646669;
     }
     pre.codeblock.prettyprinted .typ{
         color:#401954;
     }
     pre.codeblock.prettyprinted .lit{
-        color:#961313;
+        color:#00506e;
     }
     pre.codeblock.prettyprinted .pun,
     pre.codeblock.prettyprinted .opn,

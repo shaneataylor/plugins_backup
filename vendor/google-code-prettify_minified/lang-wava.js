@@ -1,2 +1,25 @@
-PR.registerLangHandler(PR.createSimpleLexer([["pln",/^[\t\n\r \xa0\u2028\u2029]+/,null,"\t\n\r \u00a0\u2028\u2029"],["str",/^(?:["\u201c\u201d](?:[^"\u201c\u201d]|["\u201c\u201d]{2})(?:["\u201c\u201d]c|$)|["\u201c\u201d](?:[^"\u201c\u201d]|["\u201c\u201d]{2})*(?:["\u201c\u201d]|$))/i,null,'"\u201c\u201d'],["com",/^\/\/.*/,null,"'\u2018\u2019"]],[["kwd",/\b(?:abs|assert|compressUnique|format|gcd|isCommaDelimited|isInteger|isPrime|isSigned|lcm|mean|randNum|randPrime|round|sort|toWord|toNumber|unique)\b/,
-null],["com",/\/\/.*/],["lit",/^(?:true\b|false\b|nothing\b|\d+(?:e[+-]?\d+[dfr]?|[dfilrs])?|(?:&h[\da-f]+|&o[0-7]+)[ils]?|\d*\.\d+(?:e[+-]?\d+)?[dfr]?|#\s+(?:\d+[/-]\d+[/-]\d+(?:\s+\d+:\d+(?::\d+)?(\s*(?:am|pm))?)?|\d+:\d+(?::\d+)?(\s*(?:am|pm))?)\s+#)/i],["pln",/^(?:(?:[a-z]|_\w)\w*(?:\[[!#%&@]+])?|\[(?:[a-z]|_\w)\w*])/i],["pun",/^[^\w\t\n\r "'[\]\xa0\u2018\u2019\u201c\u201d\u2028\u2029]+/],["pun",/^(?:\[|])/]]),["wava","wavascript"]);
+PR.registerLangHandler(PR.createSimpleLexer(
+// shortcut patterns (tried first if initial character in list)
+[
+    ["pln", /^[\t\n\r \xa0]+/,null,"\t\n\r \u00a0"],
+    ["str", /^(?:["](?:[^"]|["]{2})(?:["]c|$)|["](?:[^"]|["]{2})*(?:["]|$))/i,null,'"'],
+    ["com", /^\/\/.*/,null,"\/"]
+],
+// regular patterns
+[
+    ["kwd", /^\b(?:(?:if|elseif|else)\b|(?:abs|assert|compressUnique|format|gcd|isCommaDelimited|isInteger|isPrime|isSigned|lcm|mean|randNum|randPrime|round|sort|toWord|toNumber|unique)\()/,null],
+    ["com", /\/\/.*/],
+    ["lit", /^(?:true\b|false\b|nothing\b|\d+(?:e[+-]?\d+[dfr]?|[dfilrs])?|(?:&h[\da-f]+|&o[0-7]+)[ils]?|\d*\.\d+(?:e[+-]?\d+)?[dfr]?|#\s+(?:\d+[/-]\d+[/-]\d+(?:\s+\d+:\d+(?::\d+)?(\s*(?:am|pm))?)?|\d+:\d+(?::\d+)?(\s*(?:am|pm))?)\s+#)/i],
+    ["pln", /^(?:(?:[a-z]|_\w)\w*(?:\[[!#%&@]+])?|\[(?:[a-z]|_\w)\w*])/i],
+    ["pun", /^[^\w\t\n\r "'[\]\xa0]+/],
+    ["pun", /^(?:\[|];+\-*\/=)/]
+]),["wava","wavascript"]);
+
+/*
+pln - plain text
+com - comment forms
+str - string
+kwd - keyword
+lit - literal
+pun - punctuation
+*/
