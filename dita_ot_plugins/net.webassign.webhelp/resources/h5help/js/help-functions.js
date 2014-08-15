@@ -696,7 +696,7 @@ h5help.addWatermark = function() {
     var patternmatches = !nopattern && h5help.baseUrl.match(new RegExp(h5help.params.watermark.urlpattern)) != null;
     if (haswatermark && (nopattern || patternmatches)) {
         var wmstyle = '<style type="text/css">div#topic:before {'
-            + 'position: fixed; display: block; top: 40px; right: 0px;'
+            + 'position: fixed; display: block; top: 40px; right: 0px;pointer-events: none;'
             + 'content:url('+h5help.params.watermark.file+'); opacity: 0.25;'
             + '}</style>';
         $("head").append(wmstyle);
