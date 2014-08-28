@@ -699,23 +699,31 @@
     <xsl:template name="imageSizeAttrs">
         <xsl:param name="height"/>
         <xsl:param name="width"/>
-        <xsl:if test="$height">
-            <xsl:attribute name="content-height">
-                <xsl:value-of select="$height"/>
-            </xsl:attribute>
-        </xsl:if>
-        <xsl:if test="$width">
-            <xsl:attribute name="content-width">
-                <xsl:value-of select="$width"/>
-            </xsl:attribute>
-        </xsl:if>
         <xsl:choose>
-            <xsl:when test="not($width) and not($height) and @scale">
+            <xsl:when test="$height and $width">
+                <xsl:attribute name="content-height">
+                    <xsl:value-of select="$height"/>
+                </xsl:attribute>
+                <xsl:attribute name="content-width">
+                    <xsl:value-of select="$width"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:when test="$height">
+                <xsl:attribute name="content-height">
+                    <xsl:value-of select="$height"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:when test="$width">
+                <xsl:attribute name="content-width">
+                    <xsl:value-of select="$width"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:when test="@scale">
                 <xsl:attribute name="content-width">
                     <xsl:value-of select="concat(@scale,'%')"/>
                 </xsl:attribute>
             </xsl:when>
-            <xsl:when test="not($width) and not($height) and @scalefit='yes'">
+            <xsl:when test="@scalefit='yes'">
                 <xsl:attribute name="content-width">scale-down-to-fit</xsl:attribute>
                 <xsl:attribute name="max-width">95%</xsl:attribute>
             </xsl:when>
