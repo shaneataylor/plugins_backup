@@ -196,8 +196,15 @@ h5help.initTopic = function(addHistory,thishref){
     h5help.addCommentSection();
     h5help.initTopicJSON();
     h5help.initInteractions();
+    h5help.updateGoogleAnalytics();
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
 }
+
+h5help.updateGoogleAnalytics = function() {
+    if (typeof(ga) == 'function') {
+        ga('send', 'pageview');
+    }
+};
 
 h5help.populateUserData = function() {
     $("span.data.userdata").each(function(){
