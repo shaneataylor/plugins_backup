@@ -27,6 +27,7 @@
     <property name="h5help.watermark.file" value="wa_help_style/watermark.png"/>
     <property name="h5help.watermark.urlpattern" value="127.0.0.1|office.webassign.net"/>
     <property name="onlytopic.in.map" value="true"/>
+    <property name="h5help.google.analytics.id" value="UA-51863702-1"/>
     
     <import file="${dita.dir}/build.xml" />
     

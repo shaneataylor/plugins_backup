@@ -14,7 +14,8 @@
     <xsl:param name="h5help.prettify_code">no</xsl:param>
     <xsl:param name="thistopic"/>
     <xsl:param name="h5help.nosearchlist"/>
-    
+    <xsl:param name="h5help.ga_id"/>
+        
     <xsl:output method="xhtml" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
 
     <xsl:attribute-set name="htmlattrs">
@@ -110,7 +111,18 @@
                     jax: ["input/MathML","output/HTML-CSS","output/NativeMML"],
                     extensions: ["mml2jax.js","MathMenu.js","MathZoom.js"]
                     });
-                </script>
+            </script>
+        <xsl:if test="$h5help.ga_id">
+            <script>
+                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                  
+                    ga('create', '<xsl:value-of select="$h5help.ga_id"/>', 'auto');
+                    ga('send', 'pageview');
+            </script>
+        </xsl:if>
         </head>
     </xsl:template>
     
