@@ -202,6 +202,7 @@ h5help.initTopic = function(addHistory,thishref){
 
 h5help.updateGoogleAnalytics = function() {
     if (typeof(ga) == 'function') {
+        ga('set', 'location', window.location.href);
         ga('send', 'pageview');
     }
 };
