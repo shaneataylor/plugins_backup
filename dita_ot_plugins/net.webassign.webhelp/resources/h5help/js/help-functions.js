@@ -302,6 +302,7 @@ h5help.defineHandlers = function (){
     
     $("div#sizer").on("click", h5help.slideTOC);
     $(window).resize(h5help.mobilize);
+    
 };
 
 h5help.initTOC = function(){
@@ -355,8 +356,10 @@ h5help.initSearch = function(){
         case "google":
                 h5help.timer = window.setInterval(function() { // test for search box periodically until found
                     if ($("div#searchbox input").length != 0) {
-                        $("div#searchbox input").attr({ placeholder:"Search the help", tabindex:3 });
                         window.clearInterval(h5help.timer);
+                        $("div#searchbox input").attr({ placeholder:"Search the help", tabindex:3 });
+                        
+                        h5help.searchListener.start();
                     }
                 },100);
             $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5help.params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
@@ -376,6 +379,7 @@ h5help.initSearch = function(){
 };
 
 h5help.doSearch = function() {
+    // only for internal search
     window.clearInterval(h5help.timer);
     h5help.searchTerms = $("div#searchbox input").val().replace(/[^'a-zA-z]/," ").split(" ");
     h5help.searchStems = [];
@@ -453,6 +457,30 @@ h5help.getSynonyms = function(stemlist){
     }
     return synonyms;
 }
+
+h5help.searchListener = {
+    "currentquery"      : "",
+    "getQuery"          : function() {
+        var oldquery = h5help.searchListener.currentquery;
+        h5help.searchListener.currentquery = encodeURIComponent( $("div#searchbox input.gsc-input").val() );
+        return (oldquery != h5help.searchListener.currentquery);
+    },
+    "start"             : function() {
+        $("div#searchbox").on("keyup", "input.gsc-input", function(evt) {
+            if ( evt.which == 13 ) { h5help.searchListener.sendQueryToGA(); }
+        });
+        $("div#searchbox").on("change", "input.gsc-input", function(evt) {
+            // wait for field to be updated from autocomplete
+            window.setTimeout( h5help.searchListener.sendQueryToGA, 2000);
+        });
+    },
+    "sendQueryToGA"     : function() {
+        if (typeof(ga) == 'function' && h5help.searchListener.getQuery() ) {
+            ga('set', 'location', h5help.baseUrl + "?s=" + h5help.searchListener.currentquery );
+            ga('send', 'pageview');
+        }
+    }
+};
 
 h5help.showSearchResults = function(){
     $("div#searchresults").removeClass("hidden");
