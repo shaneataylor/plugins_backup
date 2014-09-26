@@ -1108,6 +1108,25 @@
         </fo:inline>
     </xsl:template>
 
+    <!-- Processing for ph that need to display in arbitrary colors (example: symbols) -->
+    <xsl:template match="*[contains(@class,' topic/ph ') and contains(@outputclass,'color=')]">
+        <xsl:param name="colorvalue" 
+            select="replace(./@outputclass,'^.*?\s*color=(#?[a-zA-Z0-9]+)($|[\s;].*?$)','$1')"/>
+        <fo:inline xsl:use-attribute-sets="ph" id="{@id}">
+            <xsl:attribute name="color"><xsl:value-of select="$colorvalue"/></xsl:attribute>
+            <xsl:apply-templates/>
+        </fo:inline>
+    </xsl:template>
+    
+    <!-- Processing for ph that need to display in small-caps (example: symbols) -->
+    <xsl:template match="*[contains(@class,' topic/ph ') and contains(@outputclass,'small-caps')]">
+        <fo:inline xsl:use-attribute-sets="ph" id="{@id}">
+            <!-- NOTE: FOP DOESN'T ACTUALLY SUPPORT font-variant YET -->
+            <xsl:attribute name="font-variant">small-caps</xsl:attribute>
+            <xsl:apply-templates/>
+        </fo:inline>
+    </xsl:template>
+    
     <!-- Processing for other items that need to display math characters not supported in the regular fonts -->
     <!-- NEEDS TESTING -->
     <xsl:template match="//*[contains(@outputclass,'Math')]">

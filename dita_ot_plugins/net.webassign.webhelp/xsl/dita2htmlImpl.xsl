@@ -177,6 +177,61 @@
         <xsl:apply-templates select="*[contains(@class, ' ditaot-d/ditaval-endprop ')]" mode="out-of-line"/>
     </xsl:template>
     
+    <!-- Override to support arbitrary colors -->
+    <xsl:template match="*" mode="set-output-class">
+        <xsl:param name="default"/>
+        <xsl:variable name="output-class">
+            <xsl:apply-templates select="." mode="get-output-class"/>
+        </xsl:variable>
+        <xsl:variable name="draft-revs">
+            <!-- If draft is on, add revisions to default class. Simplifies processing in DITA-OT 1.6 and earlier
+         that created an extra div or span around revised content, just to hold @class with revs. -->
+            <xsl:if test="$DRAFT = 'yes'">
+                <xsl:for-each select="*[contains(@class, ' ditaot-d/ditaval-startprop ')]/revprop">
+                    <xsl:value-of select="@val"/>
+                    <xsl:text> </xsl:text>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="using-output-class">
+            <xsl:choose>
+                <xsl:when test="string-length(normalize-space($output-class)) > 0"><xsl:value-of select="$output-class"/></xsl:when>
+                <xsl:when test="string-length(normalize-space($default)) > 0"><xsl:value-of select="$default"/></xsl:when>
+            </xsl:choose>
+            <xsl:if test="$draft-revs != ''">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="normalize-space($draft-revs)"/>
+            </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="ancestry">
+            <xsl:if test="$PRESERVE-DITA-CLASS = 'yes'">
+                <xsl:apply-templates select="." mode="get-element-ancestry"/>
+            </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="outputclass-attribute">
+            <xsl:apply-templates select="@outputclass" mode="get-value-for-class"/>
+        </xsl:variable>
+        <!-- Revised design with DITA-OT 1.5: include class ancestry if requested; 
+       combine user output class with element default, giving priority to the user value. -->
+        <xsl:if test="string-length(normalize-space(concat($outputclass-attribute, $using-output-class, $ancestry))) > 0">
+            <xsl:attribute name="class">
+                <xsl:value-of select="$ancestry"/>
+                <xsl:if test="string-length(normalize-space($ancestry)) > 0 and 
+                    string-length(normalize-space($using-output-class)) > 0"><xsl:text> </xsl:text></xsl:if>
+                <xsl:value-of select="normalize-space($using-output-class)"/>
+                <xsl:if test="string-length(normalize-space(concat($ancestry, $using-output-class))) > 0 and
+                    string-length(normalize-space($outputclass-attribute)) > 0"><xsl:text> </xsl:text></xsl:if>
+                <xsl:value-of select="$outputclass-attribute"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="contains($outputclass-attribute,'color=')">
+            <xsl:attribute name="style">
+                <xsl:value-of 
+                    select="concat('color:',replace($outputclass-attribute,'^.*?\s*color=(#?[a-zA-Z0-9]+)($|[\s;].*?$)','$1'))"/>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:template>
+    
     
     <!-- object, desc, & param -->
     <xsl:template match="*[contains(@class, ' topic/object ')]" name="topic.object">

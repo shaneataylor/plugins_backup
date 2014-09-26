@@ -708,3 +708,6 @@ div.MathJax_Display {
 .vtscript th, .vtscript td[id] {
     background: none;
 }
+.small-caps {
+    font-variant:small-caps;
+}
