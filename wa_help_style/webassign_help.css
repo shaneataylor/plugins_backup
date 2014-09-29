@@ -373,21 +373,11 @@ table.choicetable th>*:first-child
 }
 
 /* ======= side by side sections ====== */
-@media screen and (min-width: 1200px) {
+@media screen {
     div.bodydiv.sidebyside > div.section,
     div.bodydiv.sidebyside > div.bodydiv {
-        display: table-cell;
-        padding-left: 15px;
-        padding-right: 15px;
-        min-width: 400px;
-    }
-    div.bodydiv.sidebyside > div.section:first-child,
-    div.bodydiv.sidebyside > div.bodydiv:first-child {
-        padding-left: 0px;
-    }
-    div.bodydiv.sidebyside > div.section:last-child,
-    div.bodydiv.sidebyside > div.bodydiv:last-child {
-        padding-right: 0px;
+        display: inline-block;
+        margin-right: 30px;
     }
 }
 
