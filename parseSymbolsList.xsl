@@ -11,179 +11,17 @@
         xml:space="preserve"/>
     
     <xsl:variable name="knownIDs">
-        <symbol table="Numbers" row="" id="0arrow" description=""/>
-        <symbol table="Numbers" row="" id="0hat" description=""/>
-        <symbol table="Other_Letters" row="" id="AElig" description=""/>
-        <symbol table="Other_Letters" row="" id="ETH" description=""/>
-        <symbol table="Other_Letters" row="" id="OElig" description=""/>
-        <symbol table="O" row="" id="Ocirc" description=""/>
-        <symbol table="" row="" id="PQvecitalic" description=""/>
-        <symbol table="" row="" id="PRvecitalic" description=""/>
-        <symbol table="" row="" id="abline" description=""/>
-        <symbol table="Other_Letters" row="" id="aelig" description=""/>
-        <symbol table="Miscellaneous" row="" id="ankh" description=""/>
-        <symbol table="" row="" id="arc" description=""/>
-        <symbol table="" row="" id="arc_btm" description=""/>
-        <symbol table="" row="" id="arc_ne" description=""/>
-        <symbol table="" row="" id="arc_nw" description=""/>
-        <symbol table="" row="" id="arc_se" description=""/>
-        <symbol table="" row="" id="arc_sw" description=""/>
-        <symbol table="" row="" id="arc_top" description=""/>
-        <symbol table="" row="" id="assertion" description=""/>
-        <symbol table="" row="" id="asterism" description=""/>
-        <symbol table="" row="" id="because" description=""/>
-        <symbol table="" row="" id="bicond" description=""/>
-        <symbol table="" row="" id="bicond_acc" description=""/>
-        <symbol table="" row="" id="blackdot" description=""/>
-        <symbol table="" row="" id="bowtie_op" description=""/>
-        <symbol table="" row="" id="brokenbar" description=""/>
-        <symbol table="Ellipses" row="" id="cdots" description=""/>
-        <symbol table="Punctuation" row="" id="cedil" description=""/>
-        <symbol table="" row="" id="checklteq" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle" description=""/>
-        <symbol table="Miscellaneous" row="" id="circleasterisk" description=""/>
-        <symbol table="Miscellaneous" row="" id="circledash" description=""/>
-        <symbol table="Miscellaneous" row="" id="circledivide" description=""/>
-        <symbol table="Miscellaneous" row="" id="circledot" description=""/>
-        <symbol table="Miscellaneous" row="" id="circlering" description=""/>
-        <symbol table="Miscellaneous" row="" id="circletimes" description=""/>
-        <symbol table="Miscellaneous" row="" id="cleardot" description="clear dot"/>
-        <symbol table="Miscellaneous" row="" id="clearline" description="clear line"/>
-        <symbol table="" row="" id="complement" description=""/>
-        <symbol table="" row="" id="correspondence" description=""/>
-        <symbol table="" row="" id="corresponds" description=""/>
-        <symbol table="" row="" id="dbl_vertical" description=""/>
-        <symbol table="" row="" id="difference" description=""/>
-        <symbol table="" row="" id="downtack" description=""/>
-        <symbol table="Chemistry" row="" id="eertarrow" description=""/>
-        <symbol table="" row="" id="estimated" description=""/>
-        <symbol table="" row="" id="estimates" description=""/>
-        <symbol table="" row="" id="fdash" description=""/>
-        <symbol table="" row="" id="fnof" description=""/>
-        <symbol table="" row="" id="hor_bar" description=""/>
-        <symbol table="" row="" id="identical" description=""/>
-        <symbol table="" row="" id="intercalate" description=""/>
-        <symbol table="" row="" id="inv_ohm" description=""/>
-        <symbol table="" row="" id="lefttack" description=""/>
-        <symbol table="" row="" id="lowast" description=""/>
-        <symbol table="Miscellaneous" row="" id="lozenge" description=""/>
-        <symbol table="" row="" id="macr" description=""/>
-        <symbol table="Math" row="" id="measuredangle" description=""/>
-        <symbol table="Punctuation" row="" id="middot" description=""/>
-        <symbol table="Punctuation" row="" id="middot_acc" description=""/>
-        <symbol table="Punctuation" row="" id="middot_op" description=""/>
-        <symbol table="" row="" id="ml" description=""/>
-        <symbol table="" row="" id="models" description=""/>
-        <symbol table="" row="" id="nablaarrow" description=""/>
-        <symbol table="" row="" id="nand" description=""/>
-        <symbol table="" row="" id="naught" description=""/>
-        <symbol table="" row="" id="naught_hi" description=""/>
-        <symbol table="" row="" id="naught_lo" description=""/>
-        <symbol table="" row="" id="no" description=""/>
-        <symbol table="" row="" id="nor" description=""/>
-        <symbol table="" row="" id="norm_subgr" description=""/>
-        <symbol table="" row="" id="norm_subgr_equal" description=""/>
-        <symbol table="" row="" id="oaline" description=""/>
-        <symbol table="Other_Letters" row="" id="oelig" description=""/>
-        <symbol table="Miscellaneous" row="" id="orb_d" description=""/>
-        <symbol table="Miscellaneous" row="" id="orb_e" description=""/>
-        <symbol table="Miscellaneous" row="" id="orb_none" description=""/>
-        <symbol table="Miscellaneous" row="" id="orb_u" description=""/>
-        <symbol table="Miscellaneous" row="" id="orb_ud" description=""/>
-        <symbol table="" row="" id="ordf" description=""/>
-        <symbol table="" row="" id="ordm" description=""/>
-        <symbol table="" row="" id="overtie" description=""/>
-        <symbol table="Lines" row="" id="parabdown" description=""/>
-        <symbol table="Lines" row="" id="parabup" description=""/>
-        <symbol table="" row="" id="pipe" description=""/>
-        <symbol table="" row="" id="ratio" description=""/>
-        <symbol table="Units" row="" id="red_deg" description=""/>
-        <symbol table="" row="" id="reference" description=""/>
-        <symbol table="" row="" id="reg" description=""/>
-        <symbol table="Punctuation" row="" id="registered" description=""/>
-        <symbol table="Math" row="" id="rev_doubleprime" description=""/>
-        <symbol table="Math" row="" id="rev_prime" description=""/>
-        <symbol table="Math" row="" id="rev_tripleprime" description=""/>
-        <symbol table="" row="" id="right_dbl_bar" description=""/>
-        <symbol table="Punctuation" row="" id="rightbracket" description=""/>
-        <symbol table="Punctuation" row="" id="rightcurly" description=""/>
-        <symbol table="Arrows" row="" id="rightdoublearrow" description=""/>
-        <symbol table="" row="" id="rightdownvector" description=""/>
-        <symbol table="Punctuation" row="" id="rightparens" description=""/>
-        <symbol table="" row="" id="righttack" description=""/>
-        <symbol table="Punctuation" row="" id="ring_op" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowE" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowF" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowL" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowPt" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowp" description=""/>
-        <symbol table="Math" row="" id="semiprod_lf" description=""/>
-        <symbol table="Math" row="" id="semiprod_lf_norm" description=""/>
-        <symbol table="Math" row="" id="semiprod_rt" description=""/>
-        <symbol table="Math" row="" id="semiprod_rt_norm" description=""/>
-        <symbol table="Math" row="" id="separates" description=""/>
-        <symbol table="Math" row="" id="set_minus" description=""/>
-        <symbol table="Punctuation" row="" id="slash" description=""/>
-        <symbol table="Arrows" row="" id="slashrtarrow" description=""/>
-        <symbol table="C" row="" id="smChatitalic" description=""/>
-        <symbol table="Y" row="" id="smYhatitalic" description=""/>
-        <symbol table="Miscellaneous" row="" id="sm_preview" description=""/>
-        <symbol table="Beta" row="" id="smbetahat" description=""/>
-        <symbol table="P" row="" id="smphatitalic" description=""/>
-        <symbol table="Miscellaneous" row="" id="spades" description=""/>
-        <symbol table="" row="" id="sphericalangle" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_black" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_black_lf" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_black_nw" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_black_rt" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_black_se" description=""/>
-        <symbol table="Math" row="" id="square_root" description=""/>
-        <symbol table="Miscellaneous" row="" id="square_white" description=""/>
-        <symbol table="Miscellaneous" row="" id="star" description=""/>
-        <symbol table="Miscellaneous" row="" id="star_op" description=""/>
-        <symbol table="" row="" id="subgr_norm_contains" description=""/>
-        <symbol table="" row="" id="subgr_norm_contains_equal" description=""/>
-        <symbol table="" row="" id="succeeds" description=""/>
-        <symbol table="" row="" id="succeeds_equal" description=""/>
-        <symbol table="" row="" id="succeeds_equiv" description=""/>
-        <symbol table="" row="" id="succeeds_rel" description=""/>
-        <symbol table="Miscellaneous" row="" id="sun" description=""/>
-        <symbol table="Miscellaneous" row="" id="sun_rays" description=""/>
-        <symbol table="" row="" id="superset" description=""/>
-        <symbol table="" row="" id="supersetneq" description=""/>
-        <symbol table="Math" row="" id="surfaceintegral" description=""/>
-        <symbol table="German" row="" id="szlig" description=""/>
-        <symbol table="" row="" id="therefore_sm" description=""/>
-        <symbol table="" row="" id="tick_grey3" description=""/>
-        <symbol table="" row="" id="tilde" description=""/>
-        <symbol table="" row="" id="tilde_op" description=""/>
-        <symbol table="" row="" id="tilde_sm" description=""/>
-        <symbol table="" row="" id="tilde_trp" description=""/>
-        <symbol table="Math" row="" id="topintegral" description=""/>
-        <symbol table="Punctuation" row="" id="trademark" description=""/>
-        <symbol table="" row="" id="transform" description=""/>
-        <symbol table="" row="" id="true" description=""/>
-        <symbol table="" row="" id="undertie" description=""/>
-        <symbol table="" row="" id="uptack" description=""/>
-        <symbol table="" row="" id="v2bar" description=""/>
-        <symbol table="" row="" id="vas_rho" description=""/>
-        <symbol table="" row="" id="vecthetahat" description=""/>
-        <symbol table="" row="" id="volumeintegral" description=""/>
-        <symbol table="" row="" id="xbar_acc" description=""/>
-        <symbol table="" row="" id="xor" description=""/>
-        <symbol table="Miscellaneous" row="" id="zigzagarrow" description=""/>
-        <symbol table="" row="" id="zonar" description=""/>
-        <symbol table="A" row="" id="Acirc" description=""/>
-        <symbol table="A" row="" id="Aring" description=""/>
-        <symbol table="A" row="" id="acirc" description=""/>
-        <symbol table="A" row="" id="aring" description=""/>
-        <symbol table="A" row="" id="circleAsm" description=""/>
+        <symbol table="A" row="0" id="Acirc" description=""/>
+        <symbol table="A" row="0" id="acirc" description=""/>
+        <symbol table="A" row="0" id="Aring" description=""/>
+        <symbol table="A" row="0" id="aring" description=""/>
+        <symbol table="A" row="0" id="circleAsm" description=""/>
         <symbol table="A" row="100" id="Aacute" description=""/>
         <symbol table="A" row="100" id="aacute" description=""/>
         <symbol table="A" row="110" id="Agrave" description=""/>
         <symbol table="A" row="110" id="agrave" description=""/>
-        <symbol table="A" row="120" id="Auml" description=""/>
         <symbol table="A" row="120" id="a-umlaut" description=""/>
+        <symbol table="A" row="120" id="Auml" description=""/>
         <symbol table="A" row="120" id="auml" description=""/>
         <symbol table="A" row="150" id="Atilde" description=""/>
         <symbol table="A" row="150" id="atilde" description=""/>
@@ -223,85 +61,93 @@
         <symbol table="A" row="320" id="avecbolditalic" description=""/>
         <symbol table="A" row="330" id="scriptA" description=""/>
         <symbol table="A" row="340" id="circleA" description=""/>
+        <symbol table="Accents" row="0" id="acute" description=""/>
+        <symbol table="Accents" row="0" id="caret" description=""/>
+        <symbol table="Accents" row="0" id="caret_sm" description=""/>
+        <symbol table="Accents" row="0" id="cedil" description=""/>
+        <symbol table="Accents" row="0" id="circumflex" description=""/>
+        <symbol table="Accents" row="0" id="diaeresis" description=""/>
+        <symbol table="Accents" row="0" id="grave" description=""/>
+        <symbol table="Accents" row="0" id="tilde" description=""/>
         <symbol table="Alpha" row="100" id="Alpha" description=""/>
-        <symbol table="Alpha" row="100" id="Alpha2" description=""/>
-        <symbol table="Alpha" row="100" id="Alphabar" description=""/>
-        <symbol table="Alpha" row="100" id="Alphadbldot" description=""/>
-        <symbol table="Alpha" row="100" id="Alphadot" description=""/>
-        <symbol table="Alpha" row="100" id="Alphahat" description=""/>
-        <symbol table="Alpha" row="100" id="Alphavec" description=""/>
         <symbol table="Alpha" row="100" id="alpha" description=""/>
+        <symbol table="Alpha" row="100" id="Alpha2" description=""/>
         <symbol table="Alpha" row="100" id="alpha2" description=""/>
         <symbol table="Alpha" row="100" id="alphaarrowbold" description=""/>
+        <symbol table="Alpha" row="100" id="Alphabar" description=""/>
         <symbol table="Alpha" row="100" id="alphabar" description=""/>
         <symbol table="Alpha" row="100" id="alphabold" description=""/>
+        <symbol table="Alpha" row="100" id="Alphadbldot" description=""/>
         <symbol table="Alpha" row="100" id="alphadbldot" description=""/>
+        <symbol table="Alpha" row="100" id="Alphadot" description=""/>
         <symbol table="Alpha" row="100" id="alphadot" description=""/>
+        <symbol table="Alpha" row="100" id="Alphahat" description=""/>
         <symbol table="Alpha" row="100" id="alphahat" description=""/>
+        <symbol table="Alpha" row="100" id="Alphavec" description=""/>
         <symbol table="Alpha" row="100" id="alphavec" description=""/>
-        <symbol table="Arrows" row="" id="SEarrow" description=""/>
-        <symbol table="Arrows" row="" id="SWarrow" description=""/>
-        <symbol table="Arrows" row="" id="rightarrow" description=""/>
-        <symbol table="Arrows" row="" id="rightarrow_acc" description=""/>
-        <symbol table="Arrows" row="" id="uparrow" description=""/>
-        <symbol table="Arrows" row="" id="updoublearrow" description=""/>
-        <symbol table="Arrows" row="" id="updownarrow" description=""/>
-        <symbol table="Arrows" row="" id="upleftarrow" description=""/>
-        <symbol table="Arrows" row="" id="uprightarrow" description=""/>
-        <symbol table="Arrows" row="" id="rtarrow" description=""/>
-        <symbol table="Arrows" row="" id="rtarrowlong" description=""/>
-        <symbol table="Arrows" row="" id="NEarrow" description=""/>
-        <symbol table="Arrows" row="" id="NWarrow" description=""/>
-        <symbol table="Arrows" row="" id="arrow_circ_anti" description=""/>
-        <symbol table="Arrows" row="" id="arrow_circ_clock" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_do" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_ne" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_nw" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_se" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_sw" description=""/>
-        <symbol table="Arrows" row="" id="arrow_dbl_ver" description=""/>
-        <symbol table="Arrows" row="" id="arrow_do" description=""/>
-        <symbol table="Arrows" row="" id="arrow_do_do" description=""/>
-        <symbol table="Arrows" row="" id="arrow_do_lf" description=""/>
-        <symbol table="Arrows" row="" id="arrow_do_rt" description=""/>
-        <symbol table="Arrows" row="" id="arrow_lf_lf" description=""/>
-        <symbol table="Arrows" row="" id="arrow_lf_rt" description=""/>
-        <symbol table="Arrows" row="" id="arrow_rt_rt" description=""/>
-        <symbol table="Arrows" row="" id="arrow_semi_anti" description=""/>
-        <symbol table="Arrows" row="" id="arrow_semi_clock" description=""/>
-        <symbol table="Arrows" row="" id="arrow_trp_lf" description=""/>
-        <symbol table="Arrows" row="" id="arrow_trp_rt" description=""/>
-        <symbol table="Arrows" row="" id="arrow_up_up" description=""/>
-        <symbol table="Arrows" row="" id="arrowbold" description=""/>
-        <symbol table="Arrows" row="" id="arrowboldleft" description=""/>
-        <symbol table="Arrows" row="" id="curvedleftarrow" description=""/>
-        <symbol table="Arrows" row="" id="curvedrtarrow" description=""/>
-        <symbol table="Arrows" row="" id="curvedupdownarrow" description=""/>
-        <symbol table="Arrows" row="" id="dgarrowdnrt" description=""/>
-        <symbol table="Arrows" row="" id="dgarrowuprt" description=""/>
-        <symbol table="Arrows" row="" id="harp_do_lf" description=""/>
-        <symbol table="Arrows" row="" id="harp_lf_do" description=""/>
-        <symbol table="Arrows" row="" id="harp_lf_rt" description=""/>
-        <symbol table="Arrows" row="" id="harp_lf_up" description=""/>
-        <symbol table="Arrows" row="" id="harp_rt_do" description=""/>
-        <symbol table="Arrows" row="" id="harp_rt_up" description=""/>
-        <symbol table="Arrows" row="" id="harp_up_rt" description=""/>
-        <symbol table="Arrows" row="" id="leftarrow" description=""/>
-        <symbol table="Arrows" row="" id="leftdoublearrow" description=""/>
-        <symbol table="Arrows" row="" id="leftrtarrow" description=""/>
-        <symbol table="Arrows" row="" id="leftupvector" description=""/>
-        <symbol table="Arrows" row="" id="lftarrowlong" description=""/>
-        <symbol table="Arrows" row="" id="downarrow" description=""/>
-        <symbol table="Arrows" row="" id="downdoublearrow" description=""/>
-        <symbol table="Arrows" row="" id="downimplies" description=""/>
-        <symbol table="Arrows" row="" id="downleftarrow" description=""/>
-        <symbol table="Arrows" row="" id="downrightarrow" description=""/>
-        <symbol table="B" row="" id="cBbar" description=""/>
-        <symbol table="B" row="" id="basis" description=""/>
-        <symbol table="B" row="" id="basissm" description=""/>
-        <symbol table="B" row="" id="calBsm" description=""/>
-        <symbol table="B" row="" id="circleBsm" description=""/>
-        <symbol table="Miscellaneous" row="130" id="bdot" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_circ_anti" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_circ_clock" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_do" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_ne" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_nw" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_se" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_sw" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_dbl_ver" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_do" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_do_do" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_do_lf" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_do_rt" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_lf_lf" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_lf_rt" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_rt_rt" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_semi_anti" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_semi_clock" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_trp_lf" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_trp_rt" description=""/>
+        <symbol table="Arrows" row="0" id="arrow_up_up" description=""/>
+        <symbol table="Arrows" row="0" id="arrowbold" description=""/>
+        <symbol table="Arrows" row="0" id="arrowboldleft" description=""/>
+        <symbol table="Arrows" row="0" id="curvedleftarrow" description=""/>
+        <symbol table="Arrows" row="0" id="curvedrtarrow" description=""/>
+        <symbol table="Arrows" row="0" id="curvedupdownarrow" description=""/>
+        <symbol table="Arrows" row="0" id="dgarrowdnrt" description=""/>
+        <symbol table="Arrows" row="0" id="dgarrowuprt" description=""/>
+        <symbol table="Arrows" row="0" id="downarrow" description=""/>
+        <symbol table="Arrows" row="0" id="downdoublearrow" description=""/>
+        <symbol table="Arrows" row="0" id="downimplies" description=""/>
+        <symbol table="Arrows" row="0" id="downleftarrow" description=""/>
+        <symbol table="Arrows" row="0" id="downrightarrow" description=""/>
+        <symbol table="Arrows" row="0" id="harp_do_lf" description=""/>
+        <symbol table="Arrows" row="0" id="harp_lf_do" description=""/>
+        <symbol table="Arrows" row="0" id="harp_lf_rt" description=""/>
+        <symbol table="Arrows" row="0" id="harp_lf_up" description=""/>
+        <symbol table="Arrows" row="0" id="harp_rt_do" description=""/>
+        <symbol table="Arrows" row="0" id="harp_rt_up" description=""/>
+        <symbol table="Arrows" row="0" id="harp_up_rt" description=""/>
+        <symbol table="Arrows" row="0" id="leftarrow" description=""/>
+        <symbol table="Arrows" row="0" id="leftdoublearrow" description=""/>
+        <symbol table="Arrows" row="0" id="leftrtarrow" description=""/>
+        <symbol table="Arrows" row="0" id="lftarrowlong" description=""/>
+        <symbol table="Arrows" row="0" id="NEarrow" description=""/>
+        <symbol table="Arrows" row="0" id="NWarrow" description=""/>
+        <symbol table="Arrows" row="0" id="rightarrow" description=""/>
+        <symbol table="Arrows" row="0" id="rightarrow_acc" description=""/>
+        <symbol table="Arrows" row="0" id="rightdoublearrow" description=""/>
+        <symbol table="Arrows" row="0" id="rtarrow" description=""/>
+        <symbol table="Arrows" row="0" id="rtarrowlong" description=""/>
+        <symbol table="Arrows" row="0" id="SEarrow" description=""/>
+        <symbol table="Arrows" row="0" id="slashrtarrow" description=""/>
+        <symbol table="Arrows" row="0" id="SWarrow" description=""/>
+        <symbol table="Arrows" row="0" id="uparrow" description=""/>
+        <symbol table="Arrows" row="0" id="updoublearrow" description=""/>
+        <symbol table="Arrows" row="0" id="updownarrow" description=""/>
+        <symbol table="Arrows" row="0" id="upleftarrow" description=""/>
+        <symbol table="Arrows" row="0" id="uprightarrow" description=""/>
+        <symbol table="B" row="0" id="basis" description=""/>
+        <symbol table="B" row="0" id="basissm" description=""/>
+        <symbol table="B" row="0" id="calBsm" description=""/>
+        <symbol table="B" row="0" id="cBbar" description=""/>
+        <symbol table="B" row="0" id="circleBsm" description=""/>
         <symbol table="B" row="140" id="bdbldot" description=""/>
         <symbol table="B" row="150" id="Btilde" description=""/>
         <symbol table="B" row="160" id="Bhat" description=""/>
@@ -339,28 +185,30 @@
         <symbol table="B" row="320" id="bvecbolditalic" description=""/>
         <symbol table="B" row="335" id="calB" description=""/>
         <symbol table="B" row="340" id="circleB" description=""/>
+        <symbol table="Beta" row="0" id="smbetahat" description=""/>
         <symbol table="Beta" row="100" id="Beta" description=""/>
-        <symbol table="Beta" row="100" id="Beta2" description=""/>
-        <symbol table="Beta" row="100" id="Betabar" description=""/>
-        <symbol table="Beta" row="100" id="Betadbldot" description=""/>
-        <symbol table="Beta" row="100" id="Betadot" description=""/>
-        <symbol table="Beta" row="100" id="Betahat" description=""/>
-        <symbol table="Beta" row="100" id="Betavec" description=""/>
         <symbol table="Beta" row="100" id="beta" description=""/>
+        <symbol table="Beta" row="100" id="Beta2" description=""/>
         <symbol table="Beta" row="100" id="beta2" description=""/>
+        <symbol table="Beta" row="100" id="Betabar" description=""/>
         <symbol table="Beta" row="100" id="betabar" description=""/>
+        <symbol table="Beta" row="100" id="Betadbldot" description=""/>
         <symbol table="Beta" row="100" id="betadbldot" description=""/>
+        <symbol table="Beta" row="100" id="Betadot" description=""/>
         <symbol table="Beta" row="100" id="betadot" description=""/>
+        <symbol table="Beta" row="100" id="Betahat" description=""/>
         <symbol table="Beta" row="100" id="betahat" description=""/>
         <symbol table="Beta" row="100" id="betaminus" description=""/>
         <symbol table="Beta" row="100" id="betaplus" description=""/>
+        <symbol table="Beta" row="100" id="Betavec" description=""/>
         <symbol table="Beta" row="100" id="betavec" description=""/>
-        <symbol table="C" row="" id="Ccedil" description=""/>
-        <symbol table="C" row="" id="basisC" description=""/>
-        <symbol table="C" row="" id="calCsm" description=""/>
-        <symbol table="C" row="" id="ccedil" description=""/>
-        <symbol table="C" row="" id="circleCsm" description=""/>
-        <symbol table="C" row="" id="doubleC" description=""/>
+        <symbol table="C" row="0" id="basisC" description=""/>
+        <symbol table="C" row="0" id="calCsm" description=""/>
+        <symbol table="C" row="0" id="Ccedil" description=""/>
+        <symbol table="C" row="0" id="ccedil" description=""/>
+        <symbol table="C" row="0" id="circleCsm" description=""/>
+        <symbol table="C" row="0" id="doubleC" description=""/>
+        <symbol table="C" row="0" id="smChatitalic" description=""/>
         <symbol table="C" row="150" id="Ctilde" description=""/>
         <symbol table="C" row="160" id="Chat" description=""/>
         <symbol table="C" row="160" id="chat" description=""/>
@@ -399,95 +247,140 @@
         <symbol table="C" row="330" id="scriptC" description=""/>
         <symbol table="C" row="335" id="calC" description=""/>
         <symbol table="C" row="340" id="circleC" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrow" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrow1" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrow2" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrowH20" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrowhv" description=""/>
-        <symbol table="Chemistry" row="" id="revrxarrowred" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnarrowk" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnarrowkco" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnarrowko2" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnk1" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnk2" description=""/>
-        <symbol table="Chemistry" row="" id="revrxnkf" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowAcid" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowAcidic" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowBacteria" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowBase" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowBasic" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowClcat" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowDelta" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowEc" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowH20" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowHeat" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowNOcat" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowac" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowacidic" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowalpha" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowbeta" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowcatalyst" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowelec" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowelecap" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowelect" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowheatpressure" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowhex" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowhotCuOs" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowhv" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowk" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowk1" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowk2" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowk3" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowk4" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowlight" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowox" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowpt825" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowradeng" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowsf" description=""/>
-        <symbol table="Chemistry" row="" id="rtarrowyeast" description=""/>
-        <symbol table="Chemistry" row="" id="singlebond" description=""/>
-        <symbol table="Chemistry" row="" id="wedgearrow" description=""/>
-        <symbol table="Chemistry" row="" id="H2Ortarrow" description=""/>
-        <symbol table="Chemistry" row="" id="alphaparticle" description=""/>
-        <symbol table="Chemistry" row="" id="aromaticbond" description=""/>
-        <symbol table="Chemistry" row="" id="aromaticbondshort" description=""/>
-        <symbol table="Chemistry" row="" id="coldrtarrow" description=""/>
-        <symbol table="Chemistry" row="" id="decrtarrow" description=""/>
-        <symbol table="Chemistry" row="" id="electron" description=""/>
-        <symbol table="Chemistry" row="" id="emf" description=""/>
-        <symbol table="Chemistry" row="" id="energyarrowlong" description=""/>
-        <symbol table="Chemistry" row="" id="energyarrowshort" description=""/>
-        <symbol table="Chemistry" row="" id="energyarrowsmall" description=""/>
-        <symbol table="Chemistry" row="" id="forces" description=""/>
-        <symbol table="Chemistry" row="" id="hbar2" description=""/>
-        <symbol table="Chemistry" row="" id="hbarred" description=""/>
-        <symbol table="Chemistry" row="" id="increment" description=""/>
-        <symbol table="Chemistry" row="" id="neutron" description=""/>
-        <symbol table="Chemistry" row="" id="nuclearparticles" description=""/>
-        <symbol table="Chemistry" row="" id="planck" description=""/>
-        <symbol table="Chemistry" row="" id="planckbar" description=""/>
-        <symbol table="Chemistry" row="" id="positron" description=""/>
-        <symbol table="Chemistry" row="" id="proton" description=""/>
-        <symbol table="Chemistry" row="" id="ptrtarrow" description=""/>
-        <symbol table="Chemistry" row="" id="doublebond" description=""/>
-        <symbol table="Chemistry" row="" id="lewisdot" description=""/>
-        <symbol table="Chemistry" row="" id="triplebond" description=""/>
+        <symbol table="Calculus" row="0" id="bottomintegral" description=""/>
+        <symbol table="Calculus" row="0" id="contourintegral" description=""/>
+        <symbol table="Calculus" row="0" id="fprimex_acc" description=""/>
+        <symbol table="Calculus" row="0" id="fx_acc" description=""/>
+        <symbol table="Calculus" row="0" id="gprimex_acc" description=""/>
+        <symbol table="Calculus" row="0" id="gx_acc" description=""/>
+        <symbol table="Calculus" row="0" id="hprimex_acc" description=""/>
+        <symbol table="Calculus" row="0" id="hx_acc" description=""/>
+        <symbol table="Calculus" row="0" id="surfaceintegral" description=""/>
+        <symbol table="Calculus" row="0" id="topintegral" description=""/>
+        <symbol table="Calculus" row="0" id="volumeintegral" description=""/>
+        <symbol table="Calculus" row="345" id="doubleintegral" description=""/>
+        <symbol table="Calculus" row="350" id="doublelineint" description=""/>
+        <symbol table="Calculus" row="355" id="doubleprime" description=""/>
+        <symbol table="Calculus" row="500" id="integral" description=""/>
+        <symbol table="Calculus" row="510" id="integral_anti_cont" description=""/>
+        <symbol table="Calculus" row="520" id="integral_clock" description=""/>
+        <symbol table="Calculus" row="530" id="integral_clock_cont" description=""/>
+        <symbol table="Calculus" row="720" id="nabla" description=""/>
+        <symbol table="Calculus" row="730" id="nabla_acc" description=""/>
+        <symbol table="Calculus" row="820" id="partialderivative_acc" description=""/>
+        <symbol table="Calculus" row="1060" id="tripleintegral" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="abline" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="alphaparticle" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="aromaticbond" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="aromaticbondshort" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="bicond" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="bicond_acc" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="blackdot" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="cleardot" description="clear dot"/>
+        <symbol table="Chemistry_and_Physics" row="0" id="coldrtarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="decrtarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="doublebond" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="eertarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="electron" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="emf" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="energyarrowlong" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="energyarrowshort" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="energyarrowsmall" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="forces" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="H2Ortarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="hbar" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="hbar2" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="hbarred" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="implies" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="increment" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="intercalate" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="lewisdot" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="ml" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="neg" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="neutron" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="nuclearparticles" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="oaline" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="orb_d" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="orb_e" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="orb_none" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="orb_u" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="orb_ud" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="planck" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="planckbar" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="positron" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="propto" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="proton" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="ptrtarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrow" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrow1" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrow2" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrowH20" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrowhv" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxarrowred" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnarrowk" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnarrowkco" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnarrowko2" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnk1" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnk2" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="revrxnkf" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowac" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowAcid" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowAcidic" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowacidic" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowalpha" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowBacteria" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowBase" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowBasic" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowbeta" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowcatalyst" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowClcat" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowDelta" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowE" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowEc" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowelec" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowelecap" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowelect" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowF" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowH20" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowHeat" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowheatpressure" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowhex" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowhotCuOs" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowhv" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowk" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowk1" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowk2" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowk3" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowk4" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowL" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowlight" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowNOcat" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowox" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowp" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowPt" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowpt825" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowradeng" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowsf" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="rtarrowyeast" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="singlebond" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="triplebond" description=""/>
+        <symbol table="Chemistry_and_Physics" row="0" id="wedgearrow" description=""/>
         <symbol table="Chi" row="100" id="Chi" description=""/>
-        <symbol table="Chi" row="100" id="Chi2" description=""/>
-        <symbol table="Chi" row="100" id="Chibar" description=""/>
-        <symbol table="Chi" row="100" id="Chidbldot" description=""/>
-        <symbol table="Chi" row="100" id="Chidot" description=""/>
-        <symbol table="Chi" row="100" id="Chihat" description=""/>
-        <symbol table="Chi" row="100" id="Chivec" description=""/>
         <symbol table="Chi" row="100" id="chi" description=""/>
+        <symbol table="Chi" row="100" id="Chi2" description=""/>
         <symbol table="Chi" row="100" id="chi2" description=""/>
+        <symbol table="Chi" row="100" id="Chibar" description=""/>
         <symbol table="Chi" row="100" id="chibar" description=""/>
+        <symbol table="Chi" row="100" id="Chidbldot" description=""/>
         <symbol table="Chi" row="100" id="chidbldot" description=""/>
+        <symbol table="Chi" row="100" id="Chidot" description=""/>
         <symbol table="Chi" row="100" id="chidot" description=""/>
+        <symbol table="Chi" row="100" id="Chihat" description=""/>
         <symbol table="Chi" row="100" id="chihat" description=""/>
+        <symbol table="Chi" row="100" id="Chivec" description=""/>
         <symbol table="Chi" row="100" id="chivec" description=""/>
-        <symbol table="D" row="" id="basisD" description=""/>
-        <symbol table="D" row="" id="calDsm" description=""/>
+        <symbol table="D" row="0" id="basisD" description=""/>
+        <symbol table="D" row="0" id="calDsm" description=""/>
         <symbol table="D" row="160" id="Dhat" description=""/>
         <symbol table="D" row="160" id="dhat" description=""/>
         <symbol table="D" row="170" id="Dhatbold" description=""/>
@@ -526,21 +419,23 @@
         <symbol table="D" row="335" id="calD" description=""/>
         <symbol table="D" row="340" id="circleD" description=""/>
         <symbol table="Delta" row="100" id="Delta" description=""/>
-        <symbol table="Delta" row="100" id="Delta2" description=""/>
-        <symbol table="Delta" row="100" id="Deltabar" description=""/>
-        <symbol table="Delta" row="100" id="Deltadbldot" description=""/>
-        <symbol table="Delta" row="100" id="Deltadot" description=""/>
-        <symbol table="Delta" row="100" id="Deltahat" description=""/>
-        <symbol table="Delta" row="100" id="Deltavec" description=""/>
         <symbol table="Delta" row="100" id="delta" description=""/>
+        <symbol table="Delta" row="100" id="Delta2" description=""/>
         <symbol table="Delta" row="100" id="delta2" description=""/>
+        <symbol table="Delta" row="100" id="Deltabar" description=""/>
         <symbol table="Delta" row="100" id="deltabar" description=""/>
+        <symbol table="Delta" row="100" id="Deltadbldot" description=""/>
         <symbol table="Delta" row="100" id="deltadbldot" description=""/>
+        <symbol table="Delta" row="100" id="Deltadot" description=""/>
         <symbol table="Delta" row="100" id="deltadot" description=""/>
+        <symbol table="Delta" row="100" id="Deltahat" description=""/>
         <symbol table="Delta" row="100" id="deltahat" description=""/>
+        <symbol table="Delta" row="100" id="Deltavec" description=""/>
         <symbol table="Delta" row="100" id="deltavec" description=""/>
-        <symbol table="E" row="" id="Ecirc" description=""/>
-        <symbol table="E" row="" id="ecirc" description=""/>
+        <symbol table="Deprecated" row="0" id="angstrom" description=""/>
+        <symbol table="Deprecated" row="480" id="int" description=""/>
+        <symbol table="E" row="0" id="Ecirc" description=""/>
+        <symbol table="E" row="0" id="ecirc" description=""/>
         <symbol table="E" row="100" id="Eacute" description=""/>
         <symbol table="E" row="100" id="eacute" description=""/>
         <symbol table="E" row="110" id="Egrave" description=""/>
@@ -584,42 +479,43 @@
         <symbol table="E" row="330" id="scriptE" description=""/>
         <symbol table="E" row="330" id="scripte" description=""/>
         <symbol table="E" row="340" id="circleE" description=""/>
-        <symbol table="Ellipses" row="" id="hellipsis" description=""/>
-        <symbol table="Ellipses" row="" id="hellipsis_acc" description=""/>
-        <symbol table="Ellipses" row="" id="rellipsis" description=""/>
-        <symbol table="Ellipses" row="" id="vellipsis" description=""/>
-        <symbol table="Ellipses" row="" id="lellipsis" description=""/>
-        <symbol table="Ellipses" row="" id="mellipsis" description=""/>
+        <symbol table="Ellipses" row="0" id="cdots" description=""/>
+        <symbol table="Ellipses" row="0" id="hellipsis" description=""/>
+        <symbol table="Ellipses" row="0" id="hellipsis_acc" description=""/>
+        <symbol table="Ellipses" row="0" id="lellipsis" description=""/>
+        <symbol table="Ellipses" row="0" id="mellipsis" description=""/>
+        <symbol table="Ellipses" row="0" id="rellipsis" description=""/>
+        <symbol table="Ellipses" row="0" id="vellipsis" description=""/>
         <symbol table="Epsilon" row="100" id="Epsilon" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilon2" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilonbar" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilondbldot" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilondot" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilonhat" description=""/>
-        <symbol table="Epsilon" row="100" id="Epsilonvec" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilon2" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon2" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon3" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon_acc" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilonbar" description=""/>
         <symbol table="Epsilon" row="100" id="epsilonbar" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilondbldot" description=""/>
         <symbol table="Epsilon" row="100" id="epsilondbldot" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilondot" description=""/>
         <symbol table="Epsilon" row="100" id="epsilondot" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilonhat" description=""/>
         <symbol table="Epsilon" row="100" id="epsilonhat" description=""/>
         <symbol table="Epsilon" row="100" id="epsilontilde" description=""/>
+        <symbol table="Epsilon" row="100" id="Epsilonvec" description=""/>
         <symbol table="Epsilon" row="100" id="epsilonvec" description=""/>
         <symbol table="Eta" row="100" id="Eta" description=""/>
-        <symbol table="Eta" row="100" id="Eta2" description=""/>
-        <symbol table="Eta" row="100" id="Etabar" description=""/>
-        <symbol table="Eta" row="100" id="Etadbldot" description=""/>
-        <symbol table="Eta" row="100" id="Etadot" description=""/>
-        <symbol table="Eta" row="100" id="Etahat" description=""/>
-        <symbol table="Eta" row="100" id="Etavec" description=""/>
         <symbol table="Eta" row="100" id="eta" description=""/>
+        <symbol table="Eta" row="100" id="Eta2" description=""/>
         <symbol table="Eta" row="100" id="eta2" description=""/>
+        <symbol table="Eta" row="100" id="Etabar" description=""/>
         <symbol table="Eta" row="100" id="etabar" description=""/>
+        <symbol table="Eta" row="100" id="Etadbldot" description=""/>
         <symbol table="Eta" row="100" id="etadbldot" description=""/>
+        <symbol table="Eta" row="100" id="Etadot" description=""/>
         <symbol table="Eta" row="100" id="etadot" description=""/>
+        <symbol table="Eta" row="100" id="Etahat" description=""/>
         <symbol table="Eta" row="100" id="etahat" description=""/>
+        <symbol table="Eta" row="100" id="Etavec" description=""/>
         <symbol table="Eta" row="100" id="etavec" description=""/>
         <symbol table="F" row="160" id="Fhat" description=""/>
         <symbol table="F" row="160" id="fhat" description=""/>
@@ -657,9 +553,9 @@
         <symbol table="F" row="320" id="fvecbolditalic" description=""/>
         <symbol table="F" row="330" id="scriptF" description=""/>
         <symbol table="F" row="340" id="circleF" description=""/>
-        <symbol table="G" row="" id="calG_tilde" description=""/>
-        <symbol table="G" row="" id="calGsm" description=""/>
-        <symbol table="G" row="" id="calGsm_tilde" description=""/>
+        <symbol table="G" row="0" id="calG_tilde" description=""/>
+        <symbol table="G" row="0" id="calGsm" description=""/>
+        <symbol table="G" row="0" id="calGsm_tilde" description=""/>
         <symbol table="G" row="160" id="Ghat" description=""/>
         <symbol table="G" row="160" id="ghat" description=""/>
         <symbol table="G" row="170" id="Ghatbold" description=""/>
@@ -697,25 +593,26 @@
         <symbol table="G" row="335" id="calG" description=""/>
         <symbol table="G" row="340" id="circleG" description=""/>
         <symbol table="Gamma" row="100" id="Gamma" description=""/>
+        <symbol table="Gamma" row="100" id="gamma" description=""/>
         <symbol table="Gamma" row="100" id="Gamma2" description=""/>
+        <symbol table="Gamma" row="100" id="gamma2" description=""/>
         <symbol table="Gamma" row="100" id="Gamma_acc" description=""/>
         <symbol table="Gamma" row="100" id="Gammabar" description=""/>
-        <symbol table="Gamma" row="100" id="Gammadbldot" description=""/>
-        <symbol table="Gamma" row="100" id="Gammadot" description=""/>
-        <symbol table="Gamma" row="100" id="Gammahat" description=""/>
-        <symbol table="Gamma" row="100" id="Gammavec" description=""/>
-        <symbol table="Gamma" row="100" id="gamma" description=""/>
-        <symbol table="Gamma" row="100" id="gamma2" description=""/>
         <symbol table="Gamma" row="100" id="gammabar" description=""/>
+        <symbol table="Gamma" row="100" id="Gammadbldot" description=""/>
         <symbol table="Gamma" row="100" id="gammadbldot" description=""/>
+        <symbol table="Gamma" row="100" id="Gammadot" description=""/>
         <symbol table="Gamma" row="100" id="gammadot" description=""/>
+        <symbol table="Gamma" row="100" id="Gammahat" description=""/>
         <symbol table="Gamma" row="100" id="gammahat" description=""/>
+        <symbol table="Gamma" row="100" id="Gammavec" description=""/>
         <symbol table="Gamma" row="100" id="gammavec" description=""/>
-        <symbol table="Greek" row="" id="redOmega" description=""/>
-        <symbol table="Greek" row="" id="red_pi" description=""/>
-        <symbol table="Greek" row="" id="greenOmega" description=""/>
-        <symbol table="H" row="" id="bbH" description=""/>
-        <symbol table="H" row="" id="doubleH" description=""/>
+        <symbol table="German" row="0" id="szlig" description=""/>
+        <symbol table="Greek" row="0" id="greenOmega" description=""/>
+        <symbol table="Greek" row="0" id="red_pi" description=""/>
+        <symbol table="Greek" row="0" id="redOmega" description=""/>
+        <symbol table="H" row="0" id="bbH" description=""/>
+        <symbol table="H" row="0" id="doubleH" description=""/>
         <symbol table="H" row="160" id="Hhat" description=""/>
         <symbol table="H" row="160" id="hhat" description=""/>
         <symbol table="H" row="170" id="Hhatbold" description=""/>
@@ -725,7 +622,6 @@
         <symbol table="H" row="190" id="Hhatbolditalic" description=""/>
         <symbol table="H" row="190" id="hhatbolditalic" description=""/>
         <symbol table="H" row="200" id="Hbar" description=""/>
-        <symbol table="H" row="200" id="hbar" description=""/>
         <symbol table="H" row="210" id="Hbarbold" description=""/>
         <symbol table="H" row="210" id="hbarbold" description=""/>
         <symbol table="H" row="220" id="Hbaritalic" description=""/>
@@ -752,14 +648,14 @@
         <symbol table="H" row="320" id="hvecbolditalic" description=""/>
         <symbol table="H" row="335" id="calH" description=""/>
         <symbol table="H" row="340" id="circleH" description=""/>
-        <symbol table="Hebrew" row="" id="bet" description=""/>
-        <symbol table="Hebrew" row="" id="aleph" description=""/>
-        <symbol table="Hebrew" row="" id="dalet" description=""/>
-        <symbol table="Hebrew" row="" id="eth" description=""/>
-        <symbol table="Hebrew" row="" id="gimel" description=""/>
-        <symbol table="I" row="" id="Icirc" description=""/>
-        <symbol table="I" row="" id="icirc" description=""/>
-        <symbol table="I" row="" id="ihatboldred" description=""/>
+        <symbol table="Hyphens_and_Dashes" row="0" id="fdash" description=""/>
+        <symbol table="Hyphens_and_Dashes" row="0" id="hyphen" description=""/>
+        <symbol table="Hyphens_and_Dashes" row="0" id="hyphen_nobr" description=""/>
+        <symbol table="Hyphens_and_Dashes" row="0" id="mdash" description=""/>
+        <symbol table="Hyphens_and_Dashes" row="0" id="ndash" description=""/>
+        <symbol table="I" row="0" id="Icirc" description=""/>
+        <symbol table="I" row="0" id="icirc" description=""/>
+        <symbol table="I" row="0" id="ihatboldred" description=""/>
         <symbol table="I" row="90" id="ibold" description=""/>
         <symbol table="I" row="100" id="Iacute" description=""/>
         <symbol table="I" row="100" id="iacute" description=""/>
@@ -803,20 +699,20 @@
         <symbol table="I" row="320" id="ivecbolditalic" description=""/>
         <symbol table="I" row="340" id="circleI" description=""/>
         <symbol table="Iota" row="100" id="Iota" description=""/>
-        <symbol table="Iota" row="100" id="Iota2" description=""/>
-        <symbol table="Iota" row="100" id="Iotabar" description=""/>
-        <symbol table="Iota" row="100" id="Iotadbldot" description=""/>
-        <symbol table="Iota" row="100" id="Iotadot" description=""/>
-        <symbol table="Iota" row="100" id="Iotahat" description=""/>
-        <symbol table="Iota" row="100" id="Iotavec" description=""/>
         <symbol table="Iota" row="100" id="iota" description=""/>
+        <symbol table="Iota" row="100" id="Iota2" description=""/>
         <symbol table="Iota" row="100" id="iota2" description=""/>
+        <symbol table="Iota" row="100" id="Iotabar" description=""/>
         <symbol table="Iota" row="100" id="iotabar" description=""/>
+        <symbol table="Iota" row="100" id="Iotadbldot" description=""/>
         <symbol table="Iota" row="100" id="iotadbldot" description=""/>
+        <symbol table="Iota" row="100" id="Iotadot" description=""/>
         <symbol table="Iota" row="100" id="iotadot" description=""/>
+        <symbol table="Iota" row="100" id="Iotahat" description=""/>
         <symbol table="Iota" row="100" id="iotahat" description=""/>
+        <symbol table="Iota" row="100" id="Iotavec" description=""/>
         <symbol table="Iota" row="100" id="iotavec" description=""/>
-        <symbol table="J" row="" id="jhatboldred" description=""/>
+        <symbol table="J" row="0" id="jhatboldred" description=""/>
         <symbol table="J" row="90" id="jbold" description=""/>
         <symbol table="J" row="160" id="Jhat" description=""/>
         <symbol table="J" row="160" id="jhat" description=""/>
@@ -894,20 +790,20 @@
         <symbol table="K" row="320" id="kvecbolditalic" description=""/>
         <symbol table="K" row="340" id="circleK" description=""/>
         <symbol table="Kappa" row="100" id="Kappa" description=""/>
-        <symbol table="Kappa" row="100" id="Kappa2" description=""/>
-        <symbol table="Kappa" row="100" id="Kappabar" description=""/>
-        <symbol table="Kappa" row="100" id="Kappadbldot" description=""/>
-        <symbol table="Kappa" row="100" id="Kappadot" description=""/>
-        <symbol table="Kappa" row="100" id="Kappahat" description=""/>
-        <symbol table="Kappa" row="100" id="Kappavec" description=""/>
         <symbol table="Kappa" row="100" id="kappa" description=""/>
+        <symbol table="Kappa" row="100" id="Kappa2" description=""/>
         <symbol table="Kappa" row="100" id="kappa2" description=""/>
+        <symbol table="Kappa" row="100" id="Kappabar" description=""/>
         <symbol table="Kappa" row="100" id="kappabar" description=""/>
+        <symbol table="Kappa" row="100" id="Kappadbldot" description=""/>
         <symbol table="Kappa" row="100" id="kappadbldot" description=""/>
+        <symbol table="Kappa" row="100" id="Kappadot" description=""/>
         <symbol table="Kappa" row="100" id="kappadot" description=""/>
+        <symbol table="Kappa" row="100" id="Kappahat" description=""/>
         <symbol table="Kappa" row="100" id="kappahat" description=""/>
+        <symbol table="Kappa" row="100" id="Kappavec" description=""/>
         <symbol table="Kappa" row="100" id="kappavec" description=""/>
-        <symbol table="L" row="" id="scriptl_small" description=""/>
+        <symbol table="L" row="0" id="scriptl_small" description=""/>
         <symbol table="L" row="130" id="ldot" description=""/>
         <symbol table="L" row="160" id="Lhat" description=""/>
         <symbol table="L" row="160" id="lhat" description=""/>
@@ -947,23 +843,34 @@
         <symbol table="L" row="330" id="scriptl" description=""/>
         <symbol table="L" row="340" id="circleL" description=""/>
         <symbol table="Lambda" row="100" id="Lambda" description=""/>
-        <symbol table="Lambda" row="100" id="Lambda2" description=""/>
-        <symbol table="Lambda" row="100" id="Lambdabar" description=""/>
-        <symbol table="Lambda" row="100" id="Lambdadbldot" description=""/>
-        <symbol table="Lambda" row="100" id="Lambdadot" description=""/>
-        <symbol table="Lambda" row="100" id="Lambdahat" description=""/>
-        <symbol table="Lambda" row="100" id="Lambdavec" description=""/>
         <symbol table="Lambda" row="100" id="lambda" description=""/>
+        <symbol table="Lambda" row="100" id="Lambda2" description=""/>
         <symbol table="Lambda" row="100" id="lambda2" description=""/>
+        <symbol table="Lambda" row="100" id="Lambdabar" description=""/>
         <symbol table="Lambda" row="100" id="lambdabar" description=""/>
+        <symbol table="Lambda" row="100" id="Lambdadbldot" description=""/>
         <symbol table="Lambda" row="100" id="lambdadbldot" description=""/>
+        <symbol table="Lambda" row="100" id="Lambdadot" description=""/>
         <symbol table="Lambda" row="100" id="lambdadot" description=""/>
+        <symbol table="Lambda" row="100" id="Lambdahat" description=""/>
         <symbol table="Lambda" row="100" id="lambdahat" description=""/>
         <symbol table="Lambda" row="100" id="lambdahatsmall" description=""/>
+        <symbol table="Lambda" row="100" id="Lambdavec" description=""/>
         <symbol table="Lambda" row="100" id="lambdavec" description=""/>
-        <symbol table="Lines" row="" id="bigbackslash" description=""/>
-        <symbol table="Lines" row="" id="bigline" description=""/>
-        <symbol table="Lines" row="" id="bigslash" description=""/>
+        <symbol table="Lines" row="0" id="arc" description=""/>
+        <symbol table="Lines" row="0" id="arc_btm" description=""/>
+        <symbol table="Lines" row="0" id="arc_ne" description=""/>
+        <symbol table="Lines" row="0" id="arc_nw" description=""/>
+        <symbol table="Lines" row="0" id="arc_se" description=""/>
+        <symbol table="Lines" row="0" id="arc_sw" description=""/>
+        <symbol table="Lines" row="0" id="arc_top" description=""/>
+        <symbol table="Lines" row="0" id="bigbackslash" description=""/>
+        <symbol table="Lines" row="0" id="bigline" description=""/>
+        <symbol table="Lines" row="0" id="bigslash" description=""/>
+        <symbol table="Lines" row="0" id="overtie" description=""/>
+        <symbol table="Lines" row="0" id="parabdown" description=""/>
+        <symbol table="Lines" row="0" id="parabup" description=""/>
+        <symbol table="Lines" row="0" id="undertie" description=""/>
         <symbol table="M" row="160" id="Mhat" description=""/>
         <symbol table="M" row="160" id="mhat" description=""/>
         <symbol table="M" row="170" id="Mhatbold" description=""/>
@@ -1001,111 +908,137 @@
         <symbol table="M" row="330" id="scriptM" description=""/>
         <symbol table="M" row="335" id="calM" description=""/>
         <symbol table="M" row="340" id="circleM" description=""/>
-        <symbol table="Math" row="" id="almostequal" description=""/>
-        <symbol table="Math" row="" id="almostequal_equal" description=""/>
-        <symbol table="Math" row="" id="approximate" description=""/>
-        <symbol table="Math" row="" id="bottomintegral" description=""/>
-        <symbol table="Math" row="" id="rt_angle_arc" description=""/>
-        <symbol table="Math" row="" id="Reals" description=""/>
-        <symbol table="Math" row="" id="Reals2" description=""/>
-        <symbol table="Math" row="" id="complex" description=""/>
-        <symbol table="Math" row="" id="contains" description=""/>
-        <symbol table="Math" row="" id="contourintegral" description=""/>
-        <symbol table="Math" row="" id="cubic_root" description=""/>
-        <symbol table="Math" row="" id="divslash" description=""/>
-        <symbol table="Math" row="" id="doteq" description=""/>
-        <symbol table="Math" row="" id="element" description=""/>
-        <symbol table="Math" row="" id="end_proof" description=""/>
-        <symbol table="Math" row="" id="exists" description=""/>
-        <symbol table="Math" row="" id="forall" description=""/>
-        <symbol table="Math" row="" id="fprimex_acc" description=""/>
-        <symbol table="Math" row="" id="fracslash" description=""/>
-        <symbol table="Math" row="" id="frasl" description=""/>
-        <symbol table="Math" row="" id="fx_acc" description=""/>
-        <symbol table="Math" row="" id="gprimex_acc" description=""/>
-        <symbol table="Math" row="" id="greaterthan_rq" description=""/>
-        <symbol table="Math" row="" id="gx_acc" description=""/>
-        <symbol table="Math" row="" id="hprimex_acc" description=""/>
-        <symbol table="Math" row="" id="hx_acc" description=""/>
-        <symbol table="Math" row="" id="infin" description=""/>
-        <symbol table="Math" row="" id="lessthan_lq" description=""/>
-        <symbol table="Math" row="" id="nary_and" description=""/>
-        <symbol table="Math" row="" id="nary_coproduct" description=""/>
-        <symbol table="Math" row="" id="nary_intersect" description=""/>
-        <symbol table="Math" row="" id="nary_or" description=""/>
-        <symbol table="Math" row="" id="nary_product" description=""/>
-        <symbol table="Math" row="" id="nary_summation" description=""/>
-        <symbol table="Math" row="" id="nary_summation_acc" description=""/>
-        <symbol table="Math" row="" id="nary_union" description=""/>
-        <symbol table="Math" row="" id="neg" description=""/>
-        <symbol table="Math" row="" id="neither_approx" description=""/>
-        <symbol table="Math" row="" id="precedes" description=""/>
-        <symbol table="Math" row="" id="precedes_equal" description=""/>
-        <symbol table="Math" row="" id="precedes_equiv" description=""/>
-        <symbol table="Math" row="" id="precedes_rel" description=""/>
-        <symbol table="Math" row="" id="prime" description=""/>
-        <symbol table="Math" row="" id="proportion" description=""/>
-        <symbol table="Math" row="" id="propto" description=""/>
-        <symbol table="Math" row="" id="redmultiply" description=""/>
-        <symbol table="Math" row="" id="redplusminus" description=""/>
-        <symbol table="Math" row="" id="equal_all" description=""/>
-        <symbol table="Math" row="" id="equal_geom" description=""/>
-        <symbol table="Math" row="" id="equal_greater" description=""/>
-        <symbol table="Math" row="" id="equal_less" description=""/>
-        <symbol table="Math" row="" id="equal_parallel" description=""/>
-        <symbol table="Math" row="" id="equal_precedes" description=""/>
-        <symbol table="Math" row="" id="equal_succeeds" description=""/>
-        <symbol table="Math" row="" id="equals" description=""/>
-        <symbol table="Math" row="" id="equiangular" description=""/>
-        <symbol table="Math" row="" id="equilarrow" description=""/>
-        <symbol table="Math" row="" id="equiv_geom" description=""/>
-        <symbol table="Math" row="" id="equiv_strict" description=""/>
-        <symbol table="Math" row="" id="equiv_to" description=""/>
-        <symbol table="Math" row="" id="euler" description=""/>
-        <symbol table="Math" row="" id="greenmultiply" description=""/>
-        <symbol table="Math" row="" id="integers" description=""/>
-        <symbol table="Math" row="" id="not" description=""/>
-        <symbol table="Math" row="" id="not_almostequal" description=""/>
-        <symbol table="Math" row="" id="not_approx" description=""/>
-        <symbol table="Math" row="" id="not_asymptotic" description=""/>
-        <symbol table="Math" row="" id="not_contains" description=""/>
-        <symbol table="Math" row="" id="not_element" description=""/>
-        <symbol table="Math" row="" id="not_exists" description=""/>
-        <symbol table="Math" row="" id="not_forces" description=""/>
-        <symbol table="Math" row="" id="not_greater" description=""/>
-        <symbol table="Math" row="" id="not_identical" description=""/>
-        <symbol table="Math" row="" id="not_less" description=""/>
-        <symbol table="Math" row="" id="not_parallel" description=""/>
-        <symbol table="Math" row="" id="not_precedes" description=""/>
-        <symbol table="Math" row="" id="not_proves" description=""/>
-        <symbol table="Math" row="" id="not_subset" description=""/>
-        <symbol table="Math" row="" id="not_subset_neq" description=""/>
-        <symbol table="Math" row="" id="not_succeeds" description=""/>
-        <symbol table="Math" row="" id="not_superset" description=""/>
-        <symbol table="Math" row="" id="not_supersetneq" description=""/>
-        <symbol table="Math" row="" id="not_true" description=""/>
-        <symbol table="Math" row="" id="notcongruent" description=""/>
-        <symbol table="Math" row="" id="notdivides" description=""/>
-        <symbol table="Math" row="" id="notequal" description=""/>
-        <symbol table="Math" row="" id="notequiv" description=""/>
-        <symbol table="Math" row="" id="notgreater" description=""/>
-        <symbol table="Math" row="" id="notgreaterorequal" description=""/>
-        <symbol table="Math" row="" id="notin" description=""/>
-        <symbol table="Math" row="" id="notless" description=""/>
-        <symbol table="Math" row="" id="notlessorequal" description=""/>
-        <symbol table="Math" row="" id="notrelated" description=""/>
-        <symbol table="Math" row="" id="notsubset" description=""/>
+        <symbol table="Math" row="0" id="almostequal" description=""/>
+        <symbol table="Math" row="0" id="almostequal_equal" description=""/>
+        <symbol table="Math" row="0" id="approximate" description=""/>
+        <symbol table="Math" row="0" id="assertion" description=""/>
+        <symbol table="Math" row="0" id="because" description=""/>
+        <symbol table="Math" row="0" id="bowtie_op" description=""/>
+        <symbol table="Math" row="0" id="checklteq" description=""/>
+        <symbol table="Math" row="0" id="complement" description=""/>
+        <symbol table="Math" row="0" id="correspondence" description=""/>
+        <symbol table="Math" row="0" id="corresponds" description=""/>
+        <symbol table="Math" row="0" id="cubic_root" description=""/>
+        <symbol table="Math" row="0" id="difference" description=""/>
+        <symbol table="Math" row="0" id="divslash" description=""/>
+        <symbol table="Math" row="0" id="doteq" description=""/>
+        <symbol table="Math" row="0" id="downtack" description=""/>
+        <symbol table="Math" row="0" id="end_proof" description=""/>
+        <symbol table="Math" row="0" id="equal_all" description=""/>
+        <symbol table="Math" row="0" id="equal_geom" description=""/>
+        <symbol table="Math" row="0" id="equal_greater" description=""/>
+        <symbol table="Math" row="0" id="equal_less" description=""/>
+        <symbol table="Math" row="0" id="equal_parallel" description=""/>
+        <symbol table="Math" row="0" id="equal_precedes" description=""/>
+        <symbol table="Math" row="0" id="equal_succeeds" description=""/>
+        <symbol table="Math" row="0" id="equals" description=""/>
+        <symbol table="Math" row="0" id="equiangular" description=""/>
+        <symbol table="Math" row="0" id="equilarrow" description=""/>
+        <symbol table="Math" row="0" id="equiv_geom" description=""/>
+        <symbol table="Math" row="0" id="equiv_strict" description=""/>
+        <symbol table="Math" row="0" id="equiv_to" description=""/>
+        <symbol table="Math" row="0" id="estimated" description=""/>
+        <symbol table="Math" row="0" id="estimates" description=""/>
+        <symbol table="Math" row="0" id="euler" description=""/>
+        <symbol table="Math" row="0" id="exists" description=""/>
+        <symbol table="Math" row="0" id="fnof" description=""/>
+        <symbol table="Math" row="0" id="forall" description=""/>
+        <symbol table="Math" row="0" id="fracslash" description=""/>
+        <symbol table="Math" row="0" id="frasl" description=""/>
+        <symbol table="Math" row="0" id="greaterthan_rq" description=""/>
+        <symbol table="Math" row="0" id="greenmultiply" description=""/>
+        <symbol table="Math" row="0" id="identical" description=""/>
+        <symbol table="Math" row="0" id="infin" description=""/>
+        <symbol table="Math" row="0" id="lefttack" description=""/>
+        <symbol table="Math" row="0" id="lessthan_lq" description=""/>
+        <symbol table="Math" row="0" id="measuredangle" description=""/>
+        <symbol table="Math" row="0" id="models" description=""/>
+        <symbol table="Math" row="0" id="nablaarrow" description=""/>
+        <symbol table="Math" row="0" id="nand" description=""/>
+        <symbol table="Math" row="0" id="nary_and" description=""/>
+        <symbol table="Math" row="0" id="nary_coproduct" description=""/>
+        <symbol table="Math" row="0" id="nary_intersect" description=""/>
+        <symbol table="Math" row="0" id="nary_or" description=""/>
+        <symbol table="Math" row="0" id="nary_product" description=""/>
+        <symbol table="Math" row="0" id="nary_summation" description=""/>
+        <symbol table="Math" row="0" id="nary_summation_acc" description=""/>
+        <symbol table="Math" row="0" id="nary_union" description=""/>
+        <symbol table="Math" row="0" id="neither_approx" description=""/>
+        <symbol table="Math" row="0" id="nor" description=""/>
+        <symbol table="Math" row="0" id="norm_subgr" description=""/>
+        <symbol table="Math" row="0" id="norm_subgr_equal" description=""/>
+        <symbol table="Math" row="0" id="not" description=""/>
+        <symbol table="Math" row="0" id="not_almostequal" description=""/>
+        <symbol table="Math" row="0" id="not_approx" description=""/>
+        <symbol table="Math" row="0" id="not_asymptotic" description=""/>
+        <symbol table="Math" row="0" id="not_contains" description=""/>
+        <symbol table="Math" row="0" id="not_element" description=""/>
+        <symbol table="Math" row="0" id="not_exists" description=""/>
+        <symbol table="Math" row="0" id="not_forces" description=""/>
+        <symbol table="Math" row="0" id="not_greater" description=""/>
+        <symbol table="Math" row="0" id="not_identical" description=""/>
+        <symbol table="Math" row="0" id="not_less" description=""/>
+        <symbol table="Math" row="0" id="not_parallel" description=""/>
+        <symbol table="Math" row="0" id="not_precedes" description=""/>
+        <symbol table="Math" row="0" id="not_proves" description=""/>
+        <symbol table="Math" row="0" id="not_subset" description=""/>
+        <symbol table="Math" row="0" id="not_subset_neq" description=""/>
+        <symbol table="Math" row="0" id="not_succeeds" description=""/>
+        <symbol table="Math" row="0" id="not_superset" description=""/>
+        <symbol table="Math" row="0" id="not_supersetneq" description=""/>
+        <symbol table="Math" row="0" id="not_true" description=""/>
+        <symbol table="Math" row="0" id="notcongruent" description=""/>
+        <symbol table="Math" row="0" id="notdivides" description=""/>
+        <symbol table="Math" row="0" id="notequal" description=""/>
+        <symbol table="Math" row="0" id="notequiv" description=""/>
+        <symbol table="Math" row="0" id="notgreater" description=""/>
+        <symbol table="Math" row="0" id="notgreaterorequal" description=""/>
+        <symbol table="Math" row="0" id="notin" description=""/>
+        <symbol table="Math" row="0" id="notless" description=""/>
+        <symbol table="Math" row="0" id="notlessorequal" description=""/>
+        <symbol table="Math" row="0" id="notrelated" description=""/>
+        <symbol table="Math" row="0" id="precedes" description=""/>
+        <symbol table="Math" row="0" id="precedes_equal" description=""/>
+        <symbol table="Math" row="0" id="precedes_equiv" description=""/>
+        <symbol table="Math" row="0" id="precedes_rel" description=""/>
+        <symbol table="Math" row="0" id="prime" description=""/>
+        <symbol table="Math" row="0" id="proportion" description=""/>
+        <symbol table="Math" row="0" id="ratio" description=""/>
+        <symbol table="Math" row="0" id="redmultiply" description=""/>
+        <symbol table="Math" row="0" id="redplusminus" description=""/>
+        <symbol table="Math" row="0" id="rev_doubleprime" description=""/>
+        <symbol table="Math" row="0" id="rev_prime" description=""/>
+        <symbol table="Math" row="0" id="rev_tripleprime" description=""/>
+        <symbol table="Math" row="0" id="righttack" description=""/>
+        <symbol table="Math" row="0" id="rt_angle_arc" description=""/>
+        <symbol table="Math" row="0" id="semiprod_lf" description=""/>
+        <symbol table="Math" row="0" id="semiprod_lf_norm" description=""/>
+        <symbol table="Math" row="0" id="semiprod_rt" description=""/>
+        <symbol table="Math" row="0" id="semiprod_rt_norm" description=""/>
+        <symbol table="Math" row="0" id="separates" description=""/>
+        <symbol table="Math" row="0" id="set_minus" description=""/>
+        <symbol table="Math" row="0" id="square_root" description=""/>
+        <symbol table="Math" row="0" id="subgr_norm_contains" description=""/>
+        <symbol table="Math" row="0" id="subgr_norm_contains_equal" description=""/>
+        <symbol table="Math" row="0" id="succeeds" description=""/>
+        <symbol table="Math" row="0" id="succeeds_equal" description=""/>
+        <symbol table="Math" row="0" id="succeeds_equiv" description=""/>
+        <symbol table="Math" row="0" id="succeeds_rel" description=""/>
+        <symbol table="Math" row="0" id="superset" description=""/>
+        <symbol table="Math" row="0" id="supersetneq" description=""/>
+        <symbol table="Math" row="0" id="therefore_sm" description=""/>
+        <symbol table="Math" row="0" id="tilde_op" description=""/>
+        <symbol table="Math" row="0" id="tilde_sm" description=""/>
+        <symbol table="Math" row="0" id="tilde_trp" description=""/>
+        <symbol table="Math" row="0" id="true" description=""/>
+        <symbol table="Math" row="0" id="uptack" description=""/>
+        <symbol table="Math" row="0" id="xor" description=""/>
         <symbol table="Math" row="100" id="and" description=""/>
         <symbol table="Math" row="110" id="angle" description=""/>
         <symbol table="Math" row="120" id="approx" description=""/>
         <symbol table="Math" row="130" id="asymptotic" description=""/>
         <symbol table="Math" row="140" id="bigdiv" description=""/>
         <symbol table="Math" row="150" id="bra" description=""/>
-        <symbol table="Math" row="160" id="circle1" description=""/>
-        <symbol table="Math" row="170" id="circle2" description=""/>
-        <symbol table="Math" row="180" id="circle3" description=""/>
-        <symbol table="Math" row="190" id="circle4" description=""/>
-        <symbol table="Math" row="200" id="circle5" description=""/>
         <symbol table="Math" row="210" id="circleminus" description=""/>
         <symbol table="Math" row="220" id="circleplus" description=""/>
         <symbol table="Math" row="230" id="circleequals" description=""/>
@@ -1117,29 +1050,16 @@
         <symbol table="Math" row="290" id="compose" description=""/>
         <symbol table="Math" row="300" id="congruent" description=""/>
         <symbol table="Math" row="310" id="cross" description=""/>
-        <symbol table="Math" row="320" id="degree" description=""/>
         <symbol table="Math" row="330" id="divide" description=""/>
         <symbol table="Math" row="340" id="doubleint_r" description=""/>
-        <symbol table="Math" row="345" id="doubleintegral" description=""/>
-        <symbol table="Math" row="350" id="doublelineint" description=""/>
-        <symbol table="Math" row="355" id="doubleprime" description=""/>
-        <symbol table="Math" row="360" id="empty" description=""/>
-        <symbol table="Math" row="370" id="empty_set" description=""/>
         <symbol table="Math" row="380" id="eqq" description=""/>
         <symbol table="Math" row="400" id="equivalent" description=""/>
         <symbol table="Math" row="410" id="greaterorequal" description=""/>
         <symbol table="Math" row="420" id="greaterthan" description=""/>
-        <symbol table="Math" row="430" id="half" description=""/>
-        <symbol table="Math" row="440" id="implies" description=""/>
         <symbol table="Math" row="450" id="infinity" description=""/>
         <symbol table="Math" row="460" id="infinity_acc" description=""/>
         <symbol table="Math" row="470" id="infinitysm" description=""/>
-        <symbol table="Math" row="480" id="int" description=""/>
         <symbol table="Math" row="490" id="intbig" description=""/>
-        <symbol table="Math" row="500" id="integral" description=""/>
-        <symbol table="Math" row="510" id="integral_anti_cont" description=""/>
-        <symbol table="Math" row="520" id="integral_clock" description=""/>
-        <symbol table="Math" row="530" id="integral_clock_cont" description=""/>
         <symbol table="Math" row="540" id="intersect" description=""/>
         <symbol table="Math" row="550" id="isin" description=""/>
         <symbol table="Math" row="560" id="italicf" description=""/>
@@ -1158,8 +1078,6 @@
         <symbol table="Math" row="690" id="muchgreaterthan" description=""/>
         <symbol table="Math" row="700" id="muchlessthan" description=""/>
         <symbol table="Math" row="710" id="multiply" description=""/>
-        <symbol table="Math" row="720" id="nabla" description=""/>
-        <symbol table="Math" row="730" id="nabla_acc" description=""/>
         <symbol table="Math" row="740" id="or" description=""/>
         <symbol table="Math" row="750" id="orthogonal" description=""/>
         <symbol table="Math" row="760" id="orthogonalsm" description=""/>
@@ -1168,7 +1086,6 @@
         <symbol table="Math" row="790" id="parallel_s" description=""/>
         <symbol table="Math" row="800" id="parallel_white" description=""/>
         <symbol table="Math" row="810" id="partial" description=""/>
-        <symbol table="Math" row="820" id="partialderivative_acc" description=""/>
         <symbol table="Math" row="830" id="plus" description=""/>
         <symbol table="Math" row="840" id="plusminus" description=""/>
         <symbol table="Math" row="850" id="plusminus_acc" description=""/>
@@ -1180,71 +1097,110 @@
         <symbol table="Math" row="930" id="sqrt" description=""/>
         <symbol table="Math" row="940" id="squareminus" description=""/>
         <symbol table="Math" row="950" id="squareplus" description=""/>
-        <symbol table="Math" row="960" id="subset" description=""/>
-        <symbol table="Math" row="970" id="subseteq" description=""/>
-        <symbol table="Math" row="980" id="subsetneq" description=""/>
-        <symbol table="Math" row="990" id="subset_neq" description=""/>
         <symbol table="Math" row="1000" id="thereexists" description=""/>
         <symbol table="Math" row="1010" id="therefore" description=""/>
         <symbol table="Math" row="1020" id="times" description=""/>
         <symbol table="Math" row="1030" id="times_acc" description=""/>
         <symbol table="Math" row="1040" id="triangleminus" description=""/>
         <symbol table="Math" row="1050" id="triangleplus" description=""/>
-        <symbol table="Math" row="1060" id="tripleintegral" description=""/>
         <symbol table="Math" row="1070" id="tripleprime" description=""/>
         <symbol table="Math" row="1080" id="union" description=""/>
-        <symbol table="Math" row="1090" id="vecstart" description=""/>
-        <symbol table="Math" row="1100" id="vecstop" description=""/>
-        <symbol table="Miscellaneous" row="" id="bullseye" description=""/>
-        <symbol table="Miscellaneous" row="" id="caduceus" description=""/>
-        <symbol table="Miscellaneous" row="" id="check" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_black" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_black_do" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_black_lf" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_black_rt" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_black_up" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_overlay" description=""/>
-        <symbol table="Miscellaneous" row="" id="circle_white" description=""/>
-        <symbol table="Miscellaneous" row="" id="clubs" description=""/>
-        <symbol table="Miscellaneous" row="" id="cross_grey3" description=""/>
-        <symbol table="Miscellaneous" row="" id="diamond_black" description=""/>
-        <symbol table="Miscellaneous" row="" id="diamond_op" description=""/>
-        <symbol table="Miscellaneous" row="" id="diamond_overlay" description=""/>
-        <symbol table="Miscellaneous" row="" id="diamond_white" description=""/>
-        <symbol table="Miscellaneous" row="" id="diamonds" description=""/>
-        <symbol table="Miscellaneous" row="" id="diams" description=""/>
-        <symbol table="Miscellaneous" row="" id="female" description=""/>
-        <symbol table="Miscellaneous" row="" id="hearts" description=""/>
-        <symbol table="Miscellaneous" row="" id="male" description=""/>
-        <symbol table="Miscellaneous" row="" id="moon_fi_qrtr" description=""/>
-        <symbol table="Miscellaneous" row="" id="moon_la_qrtr" description=""/>
-        <symbol table="Miscellaneous" row="" id="numero" description=""/>
+        <symbol table="Miscellaneous" row="0" id="ankh" description=""/>
+        <symbol table="Miscellaneous" row="0" id="at" description=""/>
+        <symbol table="Miscellaneous" row="0" id="bullseye" description=""/>
+        <symbol table="Miscellaneous" row="0" id="caduceus" description=""/>
+        <symbol table="Miscellaneous" row="0" id="check" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_black" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_black_do" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_black_lf" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_black_rt" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_black_up" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_overlay" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circle_white" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circleasterisk" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circledash" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circledivide" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circledot" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circlering" description=""/>
+        <symbol table="Miscellaneous" row="0" id="circletimes" description=""/>
+        <symbol table="Miscellaneous" row="0" id="clearline" description="clear line"/>
+        <symbol table="Miscellaneous" row="0" id="clubs" description=""/>
+        <symbol table="Miscellaneous" row="0" id="copy" description=""/>
+        <symbol table="Miscellaneous" row="0" id="copyright" description=""/>
+        <symbol table="Miscellaneous" row="0" id="cross_grey3" description=""/>
+        <symbol table="Miscellaneous" row="0" id="dbl_vertical" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diamond_black" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diamond_op" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diamond_overlay" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diamond_white" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diamonds" description=""/>
+        <symbol table="Miscellaneous" row="0" id="diams" description=""/>
+        <symbol table="Miscellaneous" row="0" id="female" description=""/>
+        <symbol table="Miscellaneous" row="0" id="hearts" description=""/>
+        <symbol table="Miscellaneous" row="0" id="hor_bar" description=""/>
+        <symbol table="Miscellaneous" row="0" id="lowast" description=""/>
+        <symbol table="Miscellaneous" row="0" id="lozenge" description=""/>
+        <symbol table="Miscellaneous" row="0" id="male" description=""/>
+        <symbol table="Miscellaneous" row="0" id="moon_fi_qrtr" description=""/>
+        <symbol table="Miscellaneous" row="0" id="moon_la_qrtr" description=""/>
+        <symbol table="Miscellaneous" row="0" id="no" description=""/>
+        <symbol table="Miscellaneous" row="0" id="numero" description=""/>
+        <symbol table="Miscellaneous" row="0" id="pipe" description=""/>
+        <symbol table="Miscellaneous" row="0" id="reference" description=""/>
+        <symbol table="Miscellaneous" row="0" id="reg" description=""/>
+        <symbol table="Miscellaneous" row="0" id="registered" description=""/>
+        <symbol table="Miscellaneous" row="0" id="right_dbl_bar" description=""/>
+        <symbol table="Miscellaneous" row="0" id="sm_preview" description=""/>
+        <symbol table="Miscellaneous" row="0" id="spades" description=""/>
+        <symbol table="Miscellaneous" row="0" id="sphericalangle" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_black" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_black_lf" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_black_nw" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_black_rt" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_black_se" description=""/>
+        <symbol table="Miscellaneous" row="0" id="square_white" description=""/>
+        <symbol table="Miscellaneous" row="0" id="star" description=""/>
+        <symbol table="Miscellaneous" row="0" id="star_op" description=""/>
+        <symbol table="Miscellaneous" row="0" id="sun" description=""/>
+        <symbol table="Miscellaneous" row="0" id="sun_rays" description=""/>
+        <symbol table="Miscellaneous" row="0" id="tick_grey3" description=""/>
+        <symbol table="Miscellaneous" row="0" id="trademark" description=""/>
+        <symbol table="Miscellaneous" row="0" id="transform" description=""/>
+        <symbol table="Miscellaneous" row="0" id="v2bar" description=""/>
+        <symbol table="Miscellaneous" row="0" id="vas_rho" description=""/>
+        <symbol table="Miscellaneous" row="0" id="xbar_acc" description=""/>
+        <symbol table="Miscellaneous" row="0" id="zigzagarrow" description=""/>
+        <symbol table="Miscellaneous" row="0" id="zonar" description=""/>
+        <symbol table="Miscellaneous" row="130" id="bdot" description=""/>
+        <symbol table="Miscellaneous" row="130" id="odot" description=""/>
+        <symbol table="Miscellaneous" row="130" id="ydot" description=""/>
         <symbol table="Mu" row="100" id="Mu" description=""/>
-        <symbol table="Mu" row="100" id="Mu2" description=""/>
-        <symbol table="Mu" row="100" id="Mubar" description=""/>
-        <symbol table="Mu" row="100" id="Mudbldot" description=""/>
-        <symbol table="Mu" row="100" id="Mudot" description=""/>
-        <symbol table="Mu" row="100" id="Muhat" description=""/>
-        <symbol table="Mu" row="100" id="Muvec" description=""/>
         <symbol table="Mu" row="100" id="mu" description=""/>
+        <symbol table="Mu" row="100" id="Mu2" description=""/>
         <symbol table="Mu" row="100" id="mu2" description=""/>
         <symbol table="Mu" row="100" id="mu_acc" description=""/>
         <symbol table="Mu" row="100" id="muarrowbold" description=""/>
+        <symbol table="Mu" row="100" id="Mubar" description=""/>
         <symbol table="Mu" row="100" id="mubar" description=""/>
+        <symbol table="Mu" row="100" id="Mudbldot" description=""/>
         <symbol table="Mu" row="100" id="mudbldot" description=""/>
+        <symbol table="Mu" row="100" id="Mudot" description=""/>
         <symbol table="Mu" row="100" id="mudot" description=""/>
+        <symbol table="Mu" row="100" id="Muhat" description=""/>
         <symbol table="Mu" row="100" id="muhat" description=""/>
         <symbol table="Mu" row="100" id="mutilde" description=""/>
+        <symbol table="Mu" row="100" id="Muvec" description=""/>
         <symbol table="Mu" row="100" id="muvec" description=""/>
-        <symbol table="Music" row="" id="music_flat" description=""/>
-        <symbol table="Music" row="" id="music_natural" description=""/>
-        <symbol table="Music" row="" id="music_sharp" description=""/>
-        <symbol table="Music" row="" id="note_16th_beam" description=""/>
-        <symbol table="Music" row="" id="note_8th" description=""/>
-        <symbol table="Music" row="" id="note_8th_beam" description=""/>
-        <symbol table="Music" row="" id="note_qrtr" description=""/>
-        <symbol table="N" row="" id="bbN" description=""/>
-        <symbol table="N" row="" id="doubleN" description=""/>
+        <symbol table="Music" row="0" id="music_flat" description=""/>
+        <symbol table="Music" row="0" id="music_natural" description=""/>
+        <symbol table="Music" row="0" id="music_sharp" description=""/>
+        <symbol table="Music" row="0" id="note_16th_beam" description=""/>
+        <symbol table="Music" row="0" id="note_8th" description=""/>
+        <symbol table="Music" row="0" id="note_8th_beam" description=""/>
+        <symbol table="Music" row="0" id="note_qrtr" description=""/>
+        <symbol table="N" row="0" id="bbN" description=""/>
+        <symbol table="N" row="0" id="doubleN" description=""/>
         <symbol table="N" row="150" id="Ntilde" description=""/>
         <symbol table="N" row="150" id="ntilde" description=""/>
         <symbol table="N" row="160" id="Nhat" description=""/>
@@ -1283,65 +1239,78 @@
         <symbol table="N" row="335" id="calN" description=""/>
         <symbol table="N" row="340" id="circleN" description=""/>
         <symbol table="Nu" row="100" id="Nu" description=""/>
-        <symbol table="Nu" row="100" id="Nu2" description=""/>
-        <symbol table="Nu" row="100" id="Nubar" description=""/>
-        <symbol table="Nu" row="100" id="Nudbldot" description=""/>
-        <symbol table="Nu" row="100" id="Nudot" description=""/>
-        <symbol table="Nu" row="100" id="Nuhat" description=""/>
-        <symbol table="Nu" row="100" id="Nuvec" description=""/>
         <symbol table="Nu" row="100" id="nu" description=""/>
+        <symbol table="Nu" row="100" id="Nu2" description=""/>
         <symbol table="Nu" row="100" id="nu2" description=""/>
+        <symbol table="Nu" row="100" id="Nubar" description=""/>
         <symbol table="Nu" row="100" id="nubar" description=""/>
+        <symbol table="Nu" row="100" id="Nudbldot" description=""/>
         <symbol table="Nu" row="100" id="nudbldot" description=""/>
+        <symbol table="Nu" row="100" id="Nudot" description=""/>
         <symbol table="Nu" row="100" id="nudot" description=""/>
+        <symbol table="Nu" row="100" id="Nuhat" description=""/>
         <symbol table="Nu" row="100" id="nuhat" description=""/>
         <symbol table="Nu" row="100" id="nutilde" description=""/>
+        <symbol table="Nu" row="100" id="Nuvec" description=""/>
         <symbol table="Nu" row="100" id="nuvec" description=""/>
-        <symbol table="Numbers" row="" id="roman1" description=""/>
-        <symbol table="Numbers" row="" id="roman10" description=""/>
-        <symbol table="Numbers" row="" id="roman100" description=""/>
-        <symbol table="Numbers" row="" id="roman1000" description=""/>
-        <symbol table="Numbers" row="" id="roman1000_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman100_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman10_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman11_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman12_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman1_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman2" description=""/>
-        <symbol table="Numbers" row="" id="roman2_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman3" description=""/>
-        <symbol table="Numbers" row="" id="roman3_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman4" description=""/>
-        <symbol table="Numbers" row="" id="roman4_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman5" description=""/>
-        <symbol table="Numbers" row="" id="roman50" description=""/>
-        <symbol table="Numbers" row="" id="roman500" description=""/>
-        <symbol table="Numbers" row="" id="roman500_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman50_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman5_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman6" description=""/>
-        <symbol table="Numbers" row="" id="roman6_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman7" description=""/>
-        <symbol table="Numbers" row="" id="roman7_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman8" description=""/>
-        <symbol table="Numbers" row="" id="roman8_sm" description=""/>
-        <symbol table="Numbers" row="" id="roman9" description=""/>
-        <symbol table="Numbers" row="" id="roman9_sm" description=""/>
-        <symbol table="Numbers" row="" id="frac12" description=""/>
-        <symbol table="Numbers" row="" id="frac14" description=""/>
-        <symbol table="Numbers" row="" id="frac34" description=""/>
-        <symbol table="O" row="" id="Oslash" description=""/>
-        <symbol table="O" row="" id="ocirc" description=""/>
-        <symbol table="O" row="" id="ohatred" description=""/>
-        <symbol table="O" row="" id="oslash" description=""/>
+        <symbol table="Numbers" row="0" id="0arrow" description=""/>
+        <symbol table="Numbers" row="0" id="0hat" description=""/>
+        <symbol table="Numbers" row="0" id="frac12" description=""/>
+        <symbol table="Numbers" row="0" id="frac14" description=""/>
+        <symbol table="Numbers" row="0" id="frac34" description=""/>
+        <symbol table="Numbers" row="0" id="naught" description=""/>
+        <symbol table="Numbers" row="0" id="naught_hi" description=""/>
+        <symbol table="Numbers" row="0" id="naught_lo" description=""/>
+        <symbol table="Numbers" row="0" id="ordf" description=""/>
+        <symbol table="Numbers" row="0" id="ordm" description=""/>
+        <symbol table="Numbers" row="0" id="roman1" description=""/>
+        <symbol table="Numbers" row="0" id="roman10" description=""/>
+        <symbol table="Numbers" row="0" id="roman100" description=""/>
+        <symbol table="Numbers" row="0" id="roman1000" description=""/>
+        <symbol table="Numbers" row="0" id="roman1000_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman100_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman10_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman11_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman12_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman1_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman2" description=""/>
+        <symbol table="Numbers" row="0" id="roman2_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman3" description=""/>
+        <symbol table="Numbers" row="0" id="roman3_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman4" description=""/>
+        <symbol table="Numbers" row="0" id="roman4_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman5" description=""/>
+        <symbol table="Numbers" row="0" id="roman50" description=""/>
+        <symbol table="Numbers" row="0" id="roman500" description=""/>
+        <symbol table="Numbers" row="0" id="roman500_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman50_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman5_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman6" description=""/>
+        <symbol table="Numbers" row="0" id="roman6_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman7" description=""/>
+        <symbol table="Numbers" row="0" id="roman7_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman8" description=""/>
+        <symbol table="Numbers" row="0" id="roman8_sm" description=""/>
+        <symbol table="Numbers" row="0" id="roman9" description=""/>
+        <symbol table="Numbers" row="0" id="roman9_sm" description=""/>
+        <symbol table="Numbers" row="160" id="circle1" description=""/>
+        <symbol table="Numbers" row="170" id="circle2" description=""/>
+        <symbol table="Numbers" row="180" id="circle3" description=""/>
+        <symbol table="Numbers" row="190" id="circle4" description=""/>
+        <symbol table="Numbers" row="200" id="circle5" description=""/>
+        <symbol table="Numbers" row="430" id="half" description=""/>
+        <symbol table="O" row="0" id="Ocirc" description=""/>
+        <symbol table="O" row="0" id="ocirc" description=""/>
+        <symbol table="O" row="0" id="ohatred" description=""/>
+        <symbol table="O" row="0" id="Oslash" description=""/>
+        <symbol table="O" row="0" id="oslash" description=""/>
         <symbol table="O" row="100" id="Oacute" description=""/>
         <symbol table="O" row="100" id="oacute" description=""/>
         <symbol table="O" row="110" id="Ograve" description=""/>
         <symbol table="O" row="110" id="ograve" description=""/>
-        <symbol table="O" row="120" id="Ouml" description=""/>
         <symbol table="O" row="120" id="o-umlaut" description=""/>
+        <symbol table="O" row="120" id="Ouml" description=""/>
         <symbol table="O" row="120" id="ouml" description=""/>
-        <symbol table="Miscellaneous" row="130" id="odot" description=""/>
         <symbol table="O" row="150" id="Otilde" description=""/>
         <symbol table="O" row="150" id="otilde" description=""/>
         <symbol table="O" row="160" id="Ohat" description=""/>
@@ -1380,40 +1349,52 @@
         <symbol table="O" row="320" id="ovecbolditalic" description=""/>
         <symbol table="O" row="335" id="calO" description=""/>
         <symbol table="O" row="340" id="circleO" description=""/>
+        <symbol table="Omega" row="0" id="inv_ohm" description=""/>
         <symbol table="Omega" row="100" id="Omega" description=""/>
-        <symbol table="Omega" row="100" id="Omega2" description=""/>
-        <symbol table="Omega" row="100" id="Omegabar" description=""/>
-        <symbol table="Omega" row="100" id="Omegadbldot" description=""/>
-        <symbol table="Omega" row="100" id="Omegadot" description=""/>
-        <symbol table="Omega" row="100" id="Omegahat" description=""/>
-        <symbol table="Omega" row="100" id="Omegavec" description=""/>
         <symbol table="Omega" row="100" id="omega" description=""/>
+        <symbol table="Omega" row="100" id="Omega2" description=""/>
         <symbol table="Omega" row="100" id="omega2" description=""/>
         <symbol table="Omega" row="100" id="omegaarrowbold" description=""/>
+        <symbol table="Omega" row="100" id="Omegabar" description=""/>
         <symbol table="Omega" row="100" id="omegabar" description=""/>
         <symbol table="Omega" row="100" id="omegabold" description=""/>
+        <symbol table="Omega" row="100" id="Omegadbldot" description=""/>
         <symbol table="Omega" row="100" id="omegadbldot" description=""/>
+        <symbol table="Omega" row="100" id="Omegadot" description=""/>
         <symbol table="Omega" row="100" id="omegadot" description=""/>
+        <symbol table="Omega" row="100" id="Omegahat" description=""/>
         <symbol table="Omega" row="100" id="omegahat" description=""/>
+        <symbol table="Omega" row="100" id="Omegavec" description=""/>
         <symbol table="Omega" row="100" id="omegavec" description=""/>
         <symbol table="Omicron" row="100" id="Omicron" description=""/>
-        <symbol table="Omicron" row="100" id="Omicron2" description=""/>
-        <symbol table="Omicron" row="100" id="Omicronbar" description=""/>
-        <symbol table="Omicron" row="100" id="Omicrondbldot" description=""/>
-        <symbol table="Omicron" row="100" id="Omicrondot" description=""/>
-        <symbol table="Omicron" row="100" id="Omicronhat" description=""/>
-        <symbol table="Omicron" row="100" id="Omicronvec" description=""/>
         <symbol table="Omicron" row="100" id="omicron" description=""/>
+        <symbol table="Omicron" row="100" id="Omicron2" description=""/>
         <symbol table="Omicron" row="100" id="omicron2" description=""/>
+        <symbol table="Omicron" row="100" id="Omicronbar" description=""/>
         <symbol table="Omicron" row="100" id="omicronbar" description=""/>
+        <symbol table="Omicron" row="100" id="Omicrondbldot" description=""/>
         <symbol table="Omicron" row="100" id="omicrondbldot" description=""/>
+        <symbol table="Omicron" row="100" id="Omicrondot" description=""/>
         <symbol table="Omicron" row="100" id="omicrondot" description=""/>
+        <symbol table="Omicron" row="100" id="Omicronhat" description=""/>
         <symbol table="Omicron" row="100" id="omicronhat" description=""/>
+        <symbol table="Omicron" row="100" id="Omicronvec" description=""/>
         <symbol table="Omicron" row="100" id="omicronvec" description=""/>
-        <symbol table="Other_Letters" row="" id="THORN" description=""/>
-        <symbol table="Other_Letters" row="" id="thorn" description=""/>
-        <symbol table="P" row="" id="bbP" description=""/>
-        <symbol table="P" row="" id="doubleP" description=""/>
+        <symbol table="Other_Letters" row="0" id="AElig" description=""/>
+        <symbol table="Other_Letters" row="0" id="aelig" description=""/>
+        <symbol table="Other_Letters" row="0" id="aleph" description=""/>
+        <symbol table="Other_Letters" row="0" id="bet" description=""/>
+        <symbol table="Other_Letters" row="0" id="dalet" description=""/>
+        <symbol table="Other_Letters" row="0" id="eth" description=""/>
+        <symbol table="Other_Letters" row="0" id="ETH" description=""/>
+        <symbol table="Other_Letters" row="0" id="gimel" description=""/>
+        <symbol table="Other_Letters" row="0" id="OElig" description=""/>
+        <symbol table="Other_Letters" row="0" id="oelig" description=""/>
+        <symbol table="Other_Letters" row="0" id="THORN" description=""/>
+        <symbol table="Other_Letters" row="0" id="thorn" description=""/>
+        <symbol table="P" row="0" id="bbP" description=""/>
+        <symbol table="P" row="0" id="doubleP" description=""/>
+        <symbol table="P" row="0" id="smphatitalic" description=""/>
         <symbol table="P" row="150" id="ptilde" description=""/>
         <symbol table="P" row="160" id="Phat" description=""/>
         <symbol table="P" row="160" id="phat" description=""/>
@@ -1454,105 +1435,103 @@
         <symbol table="P" row="335" id="calP" description=""/>
         <symbol table="P" row="340" id="circleP" description=""/>
         <symbol table="Phi" row="100" id="Phi" description=""/>
-        <symbol table="Phi" row="100" id="Phi2" description=""/>
-        <symbol table="Phi" row="100" id="Phibar" description=""/>
-        <symbol table="Phi" row="100" id="Phidbldot" description=""/>
-        <symbol table="Phi" row="100" id="Phidot" description=""/>
-        <symbol table="Phi" row="100" id="Phihat" description=""/>
-        <symbol table="Phi" row="100" id="Phivec" description=""/>
         <symbol table="Phi" row="100" id="phi" description=""/>
         <symbol table="Phi" row="100" id="phi1" description=""/>
+        <symbol table="Phi" row="100" id="Phi2" description=""/>
         <symbol table="Phi" row="100" id="phi2" description=""/>
         <symbol table="Phi" row="100" id="phi_acc" description=""/>
+        <symbol table="Phi" row="100" id="Phibar" description=""/>
         <symbol table="Phi" row="100" id="phibar" description=""/>
         <symbol table="Phi" row="100" id="phibold" description=""/>
+        <symbol table="Phi" row="100" id="Phidbldot" description=""/>
         <symbol table="Phi" row="100" id="phidbldot" description=""/>
+        <symbol table="Phi" row="100" id="Phidot" description=""/>
         <symbol table="Phi" row="100" id="phidot" description=""/>
+        <symbol table="Phi" row="100" id="Phihat" description=""/>
         <symbol table="Phi" row="100" id="phihat" description=""/>
         <symbol table="Phi" row="100" id="phihatbold" description=""/>
         <symbol table="Phi" row="100" id="phioverline" description=""/>
         <symbol table="Phi" row="100" id="phism" description=""/>
+        <symbol table="Phi" row="100" id="Phivec" description=""/>
         <symbol table="Phi" row="100" id="phivec" description=""/>
         <symbol table="Pi" row="100" id="Pi" description=""/>
-        <symbol table="Pi" row="100" id="Pi2" description=""/>
-        <symbol table="Pi" row="100" id="Pibar" description=""/>
-        <symbol table="Pi" row="100" id="Pidbldot" description=""/>
-        <symbol table="Pi" row="100" id="Pidot" description=""/>
-        <symbol table="Pi" row="100" id="Pihat" description=""/>
-        <symbol table="Pi" row="100" id="Pivec" description=""/>
         <symbol table="Pi" row="100" id="pi" description=""/>
+        <symbol table="Pi" row="100" id="Pi2" description=""/>
         <symbol table="Pi" row="100" id="pi2" description=""/>
         <symbol table="Pi" row="100" id="pi_acc" description=""/>
+        <symbol table="Pi" row="100" id="Pibar" description=""/>
         <symbol table="Pi" row="100" id="pibar" description=""/>
+        <symbol table="Pi" row="100" id="Pidbldot" description=""/>
         <symbol table="Pi" row="100" id="pidbldot" description=""/>
+        <symbol table="Pi" row="100" id="Pidot" description=""/>
         <symbol table="Pi" row="100" id="pidot" description=""/>
+        <symbol table="Pi" row="100" id="Pihat" description=""/>
         <symbol table="Pi" row="100" id="pihat" description=""/>
+        <symbol table="Pi" row="100" id="Pivec" description=""/>
         <symbol table="Pi" row="100" id="pivec" description=""/>
         <symbol table="Psi" row="100" id="Psi" description=""/>
-        <symbol table="Psi" row="100" id="Psi2" description=""/>
-        <symbol table="Psi" row="100" id="Psibar" description=""/>
-        <symbol table="Psi" row="100" id="Psidbldot" description=""/>
-        <symbol table="Psi" row="100" id="Psidot" description=""/>
-        <symbol table="Psi" row="100" id="Psihat" description=""/>
-        <symbol table="Psi" row="100" id="Psivec" description=""/>
         <symbol table="Psi" row="100" id="psi" description=""/>
+        <symbol table="Psi" row="100" id="Psi2" description=""/>
         <symbol table="Psi" row="100" id="psi2" description=""/>
+        <symbol table="Psi" row="100" id="Psibar" description=""/>
         <symbol table="Psi" row="100" id="psibar" description=""/>
+        <symbol table="Psi" row="100" id="Psidbldot" description=""/>
         <symbol table="Psi" row="100" id="psidbldot" description=""/>
+        <symbol table="Psi" row="100" id="Psidot" description=""/>
         <symbol table="Psi" row="100" id="psidot" description=""/>
+        <symbol table="Psi" row="100" id="Psihat" description=""/>
         <symbol table="Psi" row="100" id="psihat" description=""/>
+        <symbol table="Psi" row="100" id="Psivec" description=""/>
         <symbol table="Psi" row="100" id="psivec" description=""/>
-        <symbol table="Punctuation" row="" id="acute" description=""/>
-        <symbol table="Punctuation" row="" id="bdagger" description=""/>
-        <symbol table="Punctuation" row="" id="bddagger" description=""/>
-        <symbol table="Punctuation" row="" id="circumflex" description=""/>
-        <symbol table="Punctuation" row="" id="dagger" description=""/>
-        <symbol table="Punctuation" row="" id="underscore" description=""/>
-        <symbol table="Punctuation" row="" id="rsquote" description=""/>
-        <symbol table="Punctuation" row="" id="section" description=""/>
-        <symbol table="Punctuation" row="" id="semicolon" description=""/>
-        <symbol table="Punctuation" row="" id="singlequote" description=""/>
-        <symbol table="Punctuation" row="" id="ampersand" description=""/>
-        <symbol table="Punctuation" row="" id="apostrophe" description=""/>
-        <symbol table="Punctuation" row="" id="asterisk" description=""/>
-        <symbol table="Punctuation" row="" id="at" description=""/>
-        <symbol table="Punctuation" row="" id="backslash" description=""/>
-        <symbol table="Punctuation" row="" id="bullet" description=""/>
-        <symbol table="Punctuation" row="" id="bullet_op" description=""/>
-        <symbol table="Punctuation" row="" id="caret" description=""/>
-        <symbol table="Punctuation" row="" id="caret_sm" description=""/>
-        <symbol table="Punctuation" row="" id="colon" description=""/>
-        <symbol table="Punctuation" row="" id="comma" description=""/>
-        <symbol table="Punctuation" row="" id="copy" description=""/>
-        <symbol table="Punctuation" row="" id="copyright" description=""/>
-        <symbol table="Punctuation" row="" id="diaeresis" description=""/>
-        <symbol table="Punctuation" row="" id="exclamation" description=""/>
-        <symbol table="Punctuation" row="" id="fullstop" description=""/>
-        <symbol table="Punctuation" row="" id="grave" description=""/>
-        <symbol table="Punctuation" row="" id="hashmark" description=""/>
-        <symbol table="Punctuation" row="" id="hyphen" description=""/>
-        <symbol table="Punctuation" row="" id="hyphen_nobr" description=""/>
-        <symbol table="Punctuation" row="" id="inv_question" description=""/>
-        <symbol table="Punctuation" row="" id="ldquote" description=""/>
-        <symbol table="Punctuation" row="" id="left_dbl_bar" description=""/>
-        <symbol table="Punctuation" row="" id="leftbracket" description=""/>
-        <symbol table="Punctuation" row="" id="leftcurly" description=""/>
-        <symbol table="Punctuation" row="" id="leftparens" description=""/>
-        <symbol table="Punctuation" row="" id="lsquote" description=""/>
-        <symbol table="Punctuation" row="" id="ndash" description=""/>
-        <symbol table="Punctuation" row="" id="overline" description=""/>
-        <symbol table="Punctuation" row="" id="period" description=""/>
-        <symbol table="Punctuation" row="" id="question" description=""/>
-        <symbol table="Punctuation" row="" id="rdquote" description=""/>
-        <symbol table="Punctuation" row="" id="doublequote" description=""/>
-        <symbol table="Punctuation" row="" id="interrobang" description=""/>
-        <symbol table="Punctuation" row="" id="inv_exclamation" description=""/>
-        <symbol table="Punctuation" row="" id="mdash" description=""/>
-        <symbol table="Punctuation" row="" id="paragraph" description=""/>
-        <symbol table="Q" row="" id="bbQ" description=""/>
-        <symbol table="Q" row="" id="bbQprime" description=""/>
-        <symbol table="Q" row="" id="calQsm" description=""/>
-        <symbol table="Q" row="" id="doubleQ" description=""/>
+        <symbol table="Punctuation" row="0" id="ampersand" description=""/>
+        <symbol table="Punctuation" row="0" id="apostrophe" description=""/>
+        <symbol table="Punctuation" row="0" id="asterisk" description=""/>
+        <symbol table="Punctuation" row="0" id="asterism" description=""/>
+        <symbol table="Punctuation" row="0" id="backslash" description=""/>
+        <symbol table="Punctuation" row="0" id="bdagger" description=""/>
+        <symbol table="Punctuation" row="0" id="bddagger" description=""/>
+        <symbol table="Punctuation" row="0" id="brokenbar" description=""/>
+        <symbol table="Punctuation" row="0" id="bullet" description=""/>
+        <symbol table="Punctuation" row="0" id="bullet_op" description=""/>
+        <symbol table="Punctuation" row="0" id="colon" description=""/>
+        <symbol table="Punctuation" row="0" id="comma" description=""/>
+        <symbol table="Punctuation" row="0" id="dagger" description=""/>
+        <symbol table="Punctuation" row="0" id="doublequote" description=""/>
+        <symbol table="Punctuation" row="0" id="exclamation" description=""/>
+        <symbol table="Punctuation" row="0" id="fullstop" description=""/>
+        <symbol table="Punctuation" row="0" id="hashmark" description=""/>
+        <symbol table="Punctuation" row="0" id="interrobang" description=""/>
+        <symbol table="Punctuation" row="0" id="inv_exclamation" description=""/>
+        <symbol table="Punctuation" row="0" id="inv_question" description=""/>
+        <symbol table="Punctuation" row="0" id="ldquote" description=""/>
+        <symbol table="Punctuation" row="0" id="left_dbl_bar" description=""/>
+        <symbol table="Punctuation" row="0" id="leftbracket" description=""/>
+        <symbol table="Punctuation" row="0" id="leftcurly" description=""/>
+        <symbol table="Punctuation" row="0" id="leftparens" description=""/>
+        <symbol table="Punctuation" row="0" id="lsquote" description=""/>
+        <symbol table="Punctuation" row="0" id="macr" description=""/>
+        <symbol table="Punctuation" row="0" id="middot" description=""/>
+        <symbol table="Punctuation" row="0" id="middot_acc" description=""/>
+        <symbol table="Punctuation" row="0" id="middot_op" description=""/>
+        <symbol table="Punctuation" row="0" id="overline" description=""/>
+        <symbol table="Punctuation" row="0" id="paragraph" description=""/>
+        <symbol table="Punctuation" row="0" id="period" description=""/>
+        <symbol table="Punctuation" row="0" id="question" description=""/>
+        <symbol table="Punctuation" row="0" id="rdquote" description=""/>
+        <symbol table="Punctuation" row="0" id="rightbracket" description=""/>
+        <symbol table="Punctuation" row="0" id="rightcurly" description=""/>
+        <symbol table="Punctuation" row="0" id="rightparens" description=""/>
+        <symbol table="Punctuation" row="0" id="ring_op" description=""/>
+        <symbol table="Punctuation" row="0" id="rsquote" description=""/>
+        <symbol table="Punctuation" row="0" id="section" description=""/>
+        <symbol table="Punctuation" row="0" id="semicolon" description=""/>
+        <symbol table="Punctuation" row="0" id="singlequote" description=""/>
+        <symbol table="Punctuation" row="0" id="slash" description=""/>
+        <symbol table="Punctuation" row="0" id="underscore" description=""/>
+        <symbol table="Q" row="0" id="bbQ" description=""/>
+        <symbol table="Q" row="0" id="bbQprime" description=""/>
+        <symbol table="Q" row="0" id="calQsm" description=""/>
+        <symbol table="Q" row="0" id="doubleQ" description=""/>
         <symbol table="Q" row="160" id="Qhat" description=""/>
         <symbol table="Q" row="160" id="qhat" description=""/>
         <symbol table="Q" row="170" id="Qhatbold" description=""/>
@@ -1588,9 +1567,9 @@
         <symbol table="Q" row="320" id="Qvecbolditalic" description=""/>
         <symbol table="Q" row="320" id="qvecbolditalic" description=""/>
         <symbol table="Q" row="335" id="calQ" description=""/>
-        <symbol table="R" row="" id="bbR" description=""/>
-        <symbol table="R" row="" id="calRsm" description=""/>
-        <symbol table="R" row="" id="doubleR" description=""/>
+        <symbol table="R" row="0" id="bbR" description=""/>
+        <symbol table="R" row="0" id="calRsm" description=""/>
+        <symbol table="R" row="0" id="doubleR" description=""/>
         <symbol table="R" row="130" id="rdot" description=""/>
         <symbol table="R" row="140" id="rdbldot" description=""/>
         <symbol table="R" row="160" id="Rhat" description=""/>
@@ -1629,25 +1608,25 @@
         <symbol table="R" row="335" id="calR" description=""/>
         <symbol table="R" row="340" id="circleR" description=""/>
         <symbol table="Rho" row="100" id="Rho" description=""/>
-        <symbol table="Rho" row="100" id="Rho2" description=""/>
-        <symbol table="Rho" row="100" id="Rhobar" description=""/>
-        <symbol table="Rho" row="100" id="Rhodbldot" description=""/>
-        <symbol table="Rho" row="100" id="Rhodot" description=""/>
-        <symbol table="Rho" row="100" id="Rhohat" description=""/>
-        <symbol table="Rho" row="100" id="Rhovec" description=""/>
         <symbol table="Rho" row="100" id="rho" description=""/>
+        <symbol table="Rho" row="100" id="Rho2" description=""/>
         <symbol table="Rho" row="100" id="rho2" description=""/>
         <symbol table="Rho" row="100" id="rho_acc" description=""/>
+        <symbol table="Rho" row="100" id="Rhobar" description=""/>
         <symbol table="Rho" row="100" id="rhobar" description=""/>
+        <symbol table="Rho" row="100" id="Rhodbldot" description=""/>
         <symbol table="Rho" row="100" id="rhodbldot" description=""/>
+        <symbol table="Rho" row="100" id="Rhodot" description=""/>
         <symbol table="Rho" row="100" id="rhodot" description=""/>
+        <symbol table="Rho" row="100" id="Rhohat" description=""/>
         <symbol table="Rho" row="100" id="rhohat" description=""/>
+        <symbol table="Rho" row="100" id="Rhovec" description=""/>
         <symbol table="Rho" row="100" id="rhovec" description=""/>
-        <symbol table="S" row="" id="Scaron" description=""/>
-        <symbol table="S" row="" id="scaron" description=""/>
-        <symbol table="S" row="" id="calS_bold" description=""/>
-        <symbol table="S" row="" id="calSsm" description=""/>
-        <symbol table="S" row="" id="calSsm_bold" description=""/>
+        <symbol table="S" row="0" id="calS_bold" description=""/>
+        <symbol table="S" row="0" id="calSsm" description=""/>
+        <symbol table="S" row="0" id="calSsm_bold" description=""/>
+        <symbol table="S" row="0" id="Scaron" description=""/>
+        <symbol table="S" row="0" id="scaron" description=""/>
         <symbol table="S" row="130" id="sdot" description=""/>
         <symbol table="S" row="160" id="Shat" description=""/>
         <symbol table="S" row="160" id="shat" description=""/>
@@ -1684,21 +1663,34 @@
         <symbol table="S" row="320" id="svecbolditalic" description=""/>
         <symbol table="S" row="335" id="calS" description=""/>
         <symbol table="S" row="340" id="circleS" description=""/>
+        <symbol table="Sets" row="0" id="complex" description=""/>
+        <symbol table="Sets" row="0" id="contains" description=""/>
+        <symbol table="Sets" row="0" id="element" description=""/>
+        <symbol table="Sets" row="0" id="integers" description=""/>
+        <symbol table="Sets" row="0" id="notsubset" description=""/>
+        <symbol table="Sets" row="0" id="Reals" description=""/>
+        <symbol table="Sets" row="0" id="Reals2" description=""/>
+        <symbol table="Sets" row="360" id="empty" description=""/>
+        <symbol table="Sets" row="370" id="empty_set" description=""/>
+        <symbol table="Sets" row="960" id="subset" description=""/>
+        <symbol table="Sets" row="970" id="subseteq" description=""/>
+        <symbol table="Sets" row="980" id="subsetneq" description=""/>
+        <symbol table="Sets" row="990" id="subset_neq" description=""/>
         <symbol table="Sigma" row="100" id="Sigma" description=""/>
-        <symbol table="Sigma" row="100" id="Sigma2" description=""/>
-        <symbol table="Sigma" row="100" id="Sigmabar" description=""/>
-        <symbol table="Sigma" row="100" id="Sigmadbldot" description=""/>
-        <symbol table="Sigma" row="100" id="Sigmadot" description=""/>
-        <symbol table="Sigma" row="100" id="Sigmahat" description=""/>
-        <symbol table="Sigma" row="100" id="Sigmavec" description=""/>
         <symbol table="Sigma" row="100" id="sigma" description=""/>
+        <symbol table="Sigma" row="100" id="Sigma2" description=""/>
         <symbol table="Sigma" row="100" id="sigma2" description=""/>
         <symbol table="Sigma" row="100" id="sigma_acc" description=""/>
+        <symbol table="Sigma" row="100" id="Sigmabar" description=""/>
         <symbol table="Sigma" row="100" id="sigmabar" description=""/>
+        <symbol table="Sigma" row="100" id="Sigmadbldot" description=""/>
         <symbol table="Sigma" row="100" id="sigmadbldot" description=""/>
+        <symbol table="Sigma" row="100" id="Sigmadot" description=""/>
         <symbol table="Sigma" row="100" id="sigmadot" description=""/>
         <symbol table="Sigma" row="100" id="sigmaf" description=""/>
+        <symbol table="Sigma" row="100" id="Sigmahat" description=""/>
         <symbol table="Sigma" row="100" id="sigmahat" description=""/>
+        <symbol table="Sigma" row="100" id="Sigmavec" description=""/>
         <symbol table="Sigma" row="100" id="sigmavec" description=""/>
         <symbol table="Spaces" row="100" id="tab" description=""/>
         <symbol table="Spaces" row="110" id="space" description="space"/>
@@ -1707,7 +1699,7 @@
         <symbol table="Spaces" row="140" id="space_nobr" description="non-breaking space"/>
         <symbol table="Spaces" row="150" id="double" description="2 non-breaking spaces"/>
         <symbol table="Spaces" row="160" id="quad" description="4 non-breaking spaces"/>
-        <symbol table="T" row="" id="calTsm" description=""/>
+        <symbol table="T" row="0" id="calTsm" description=""/>
         <symbol table="T" row="160" id="That" description=""/>
         <symbol table="T" row="160" id="that" description=""/>
         <symbol table="T" row="170" id="Thatbold" description=""/>
@@ -1744,66 +1736,66 @@
         <symbol table="T" row="335" id="calT" description=""/>
         <symbol table="T" row="340" id="circleT" description=""/>
         <symbol table="Tau" row="100" id="Tau" description=""/>
-        <symbol table="Tau" row="100" id="Tau2" description=""/>
-        <symbol table="Tau" row="100" id="Taubar" description=""/>
-        <symbol table="Tau" row="100" id="Taudbldot" description=""/>
-        <symbol table="Tau" row="100" id="Taudot" description=""/>
-        <symbol table="Tau" row="100" id="Tauhat" description=""/>
-        <symbol table="Tau" row="100" id="Tauvec" description=""/>
         <symbol table="Tau" row="100" id="tau" description=""/>
+        <symbol table="Tau" row="100" id="Tau2" description=""/>
         <symbol table="Tau" row="100" id="tau2" description=""/>
         <symbol table="Tau" row="100" id="tauarrowbold" description=""/>
+        <symbol table="Tau" row="100" id="Taubar" description=""/>
         <symbol table="Tau" row="100" id="taubar" description=""/>
         <symbol table="Tau" row="100" id="taubold" description=""/>
+        <symbol table="Tau" row="100" id="Taudbldot" description=""/>
         <symbol table="Tau" row="100" id="taudbldot" description=""/>
+        <symbol table="Tau" row="100" id="Taudot" description=""/>
         <symbol table="Tau" row="100" id="taudot" description=""/>
+        <symbol table="Tau" row="100" id="Tauhat" description=""/>
         <symbol table="Tau" row="100" id="tauhat" description=""/>
         <symbol table="Tau" row="100" id="tauhatbold" description=""/>
+        <symbol table="Tau" row="100" id="Tauvec" description=""/>
         <symbol table="Tau" row="100" id="tauvec" description=""/>
         <symbol table="Theta" row="100" id="Theta" description=""/>
-        <symbol table="Theta" row="100" id="Theta2" description=""/>
-        <symbol table="Theta" row="100" id="Thetabar" description=""/>
-        <symbol table="Theta" row="100" id="Thetadbldot" description=""/>
-        <symbol table="Theta" row="100" id="Thetadot" description=""/>
-        <symbol table="Theta" row="100" id="Thetahat" description=""/>
-        <symbol table="Theta" row="100" id="Thetavec" description=""/>
         <symbol table="Theta" row="100" id="theta" description=""/>
+        <symbol table="Theta" row="100" id="Theta2" description=""/>
         <symbol table="Theta" row="100" id="theta2" description=""/>
+        <symbol table="Theta" row="100" id="Thetabar" description=""/>
         <symbol table="Theta" row="100" id="thetabar" description=""/>
         <symbol table="Theta" row="100" id="thetabold" description=""/>
+        <symbol table="Theta" row="100" id="Thetadbldot" description=""/>
         <symbol table="Theta" row="100" id="thetadbldot" description=""/>
+        <symbol table="Theta" row="100" id="Thetadot" description=""/>
         <symbol table="Theta" row="100" id="thetadot" description=""/>
+        <symbol table="Theta" row="100" id="Thetahat" description=""/>
         <symbol table="Theta" row="100" id="thetahat" description=""/>
         <symbol table="Theta" row="100" id="thetahatbold" description=""/>
         <symbol table="Theta" row="100" id="thetasmall" description=""/>
         <symbol table="Theta" row="100" id="thetatilde" description=""/>
+        <symbol table="Theta" row="100" id="Thetavec" description=""/>
         <symbol table="Theta" row="100" id="thetavec" description=""/>
-        <symbol table="Triangles" row="" id="triangle_black_down" description=""/>
-        <symbol table="Triangles" row="" id="triangle_black_lf" description=""/>
-        <symbol table="Triangles" row="" id="triangle_black_rt" description=""/>
-        <symbol table="Triangles" row="" id="triangle_black_up" description=""/>
-        <symbol table="Triangles" row="" id="triangle_ne" description=""/>
-        <symbol table="Triangles" row="" id="triangle_nw" description=""/>
-        <symbol table="Triangles" row="" id="triangle_rt" description=""/>
-        <symbol table="Triangles" row="" id="triangle_se" description=""/>
-        <symbol table="Triangles" row="" id="triangle_sw" description=""/>
-        <symbol table="Triangles" row="" id="triangle_white_do" description=""/>
-        <symbol table="Triangles" row="" id="triangle_white_lf" description=""/>
-        <symbol table="Triangles" row="" id="triangle_white_rt" description=""/>
-        <symbol table="Triangles" row="" id="triangle_white_up" description=""/>
-        <symbol table="Triangles" row="" id="triangledown" description=""/>
-        <symbol table="Triangles" row="" id="triangleleft" description=""/>
-        <symbol table="Triangles" row="" id="triangleright" description=""/>
-        <symbol table="Triangles" row="" id="triangleup" description=""/>
-        <symbol table="U" row="" id="Ucirc" description=""/>
-        <symbol table="U" row="" id="ucirc" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_black_down" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_black_lf" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_black_rt" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_black_up" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_ne" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_nw" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_rt" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_se" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_sw" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_white_do" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_white_lf" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_white_rt" description=""/>
+        <symbol table="Triangles" row="0" id="triangle_white_up" description=""/>
+        <symbol table="Triangles" row="0" id="triangledown" description=""/>
+        <symbol table="Triangles" row="0" id="triangleleft" description=""/>
+        <symbol table="Triangles" row="0" id="triangleright" description=""/>
+        <symbol table="Triangles" row="0" id="triangleup" description=""/>
+        <symbol table="U" row="0" id="Ucirc" description=""/>
+        <symbol table="U" row="0" id="ucirc" description=""/>
         <symbol table="U" row="90" id="ubold" description=""/>
         <symbol table="U" row="100" id="Uacute" description=""/>
         <symbol table="U" row="100" id="uacute" description=""/>
         <symbol table="U" row="110" id="Ugrave" description=""/>
         <symbol table="U" row="110" id="ugrave" description=""/>
-        <symbol table="U" row="120" id="Uuml" description=""/>
         <symbol table="U" row="120" id="u-umlaut" description=""/>
+        <symbol table="U" row="120" id="Uuml" description=""/>
         <symbol table="U" row="120" id="uuml" description=""/>
         <symbol table="U" row="150" id="utilde" description=""/>
         <symbol table="U" row="160" id="Uhat" description=""/>
@@ -1840,36 +1832,37 @@
         <symbol table="U" row="320" id="uvecbolditalic" description=""/>
         <symbol table="U" row="330" id="scriptU" description=""/>
         <symbol table="U" row="340" id="circleU" description=""/>
-        <symbol table="Units" row="" id="yen" description=""/>
-        <symbol table="Units" row="" id="Angstrom" description=""/>
-        <symbol table="Units" row="" id="angstrom" description=""/>
-        <symbol table="Units" row="" id="cents" description=""/>
-        <symbol table="Units" row="" id="currency" description=""/>
-        <symbol table="Units" row="" id="dollar" description=""/>
-        <symbol table="Units" row="" id="euro" description=""/>
-        <symbol table="Units" row="" id="permille" description=""/>
-        <symbol table="Units" row="" id="redcents" description=""/>
-        <symbol table="Units" row="" id="degC" description=""/>
-        <symbol table="Units" row="" id="degF" description=""/>
-        <symbol table="Units" row="" id="kelvin" description=""/>
-        <symbol table="Units" row="" id="micro" description=""/>
-        <symbol table="Units" row="" id="micro2" description=""/>
-        <symbol table="Units" row="" id="ohm" description=""/>
-        <symbol table="Units" row="" id="percent" description=""/>
-        <symbol table="Units" row="" id="pound" description=""/>
+        <symbol table="Units" row="0" id="Angstrom" description=""/>
+        <symbol table="Units" row="0" id="cents" description=""/>
+        <symbol table="Units" row="0" id="currency" description=""/>
+        <symbol table="Units" row="0" id="degC" description=""/>
+        <symbol table="Units" row="0" id="degF" description=""/>
+        <symbol table="Units" row="0" id="dollar" description=""/>
+        <symbol table="Units" row="0" id="euro" description=""/>
+        <symbol table="Units" row="0" id="kelvin" description=""/>
+        <symbol table="Units" row="0" id="micro" description=""/>
+        <symbol table="Units" row="0" id="micro2" description=""/>
+        <symbol table="Units" row="0" id="ohm" description=""/>
+        <symbol table="Units" row="0" id="percent" description=""/>
+        <symbol table="Units" row="0" id="permille" description=""/>
+        <symbol table="Units" row="0" id="pound" description=""/>
+        <symbol table="Units" row="0" id="red_deg" description=""/>
+        <symbol table="Units" row="0" id="redcents" description=""/>
+        <symbol table="Units" row="0" id="yen" description=""/>
+        <symbol table="Units" row="320" id="degree" description=""/>
         <symbol table="Upsilon" row="100" id="Upsilon" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilon2" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilonbar" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilondbldot" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilondot" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilonhat" description=""/>
-        <symbol table="Upsilon" row="100" id="Upsilonvec" description=""/>
         <symbol table="Upsilon" row="100" id="upsilon" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilon2" description=""/>
         <symbol table="Upsilon" row="100" id="upsilon2" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilonbar" description=""/>
         <symbol table="Upsilon" row="100" id="upsilonbar" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilondbldot" description=""/>
         <symbol table="Upsilon" row="100" id="upsilondbldot" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilondot" description=""/>
         <symbol table="Upsilon" row="100" id="upsilondot" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilonhat" description=""/>
         <symbol table="Upsilon" row="100" id="upsilonhat" description=""/>
+        <symbol table="Upsilon" row="100" id="Upsilonvec" description=""/>
         <symbol table="Upsilon" row="100" id="upsilonvec" description=""/>
         <symbol table="V" row="90" id="vbold" description=""/>
         <symbol table="V" row="130" id="Vdot" description=""/>
@@ -1911,8 +1904,15 @@
         <symbol table="V" row="330" id="scriptV" description=""/>
         <symbol table="V" row="335" id="calV" description=""/>
         <symbol table="V" row="340" id="circleV" description=""/>
-        <symbol table="W" row="" id="bbW" description=""/>
-        <symbol table="W" row="" id="calWsm" description=""/>
+        <symbol table="Vectors" row="0" id="leftupvector" description=""/>
+        <symbol table="Vectors" row="0" id="PQvecitalic" description=""/>
+        <symbol table="Vectors" row="0" id="PRvecitalic" description=""/>
+        <symbol table="Vectors" row="0" id="rightdownvector" description=""/>
+        <symbol table="Vectors" row="0" id="vecthetahat" description=""/>
+        <symbol table="Vectors" row="1090" id="vecstart" description=""/>
+        <symbol table="Vectors" row="1100" id="vecstop" description=""/>
+        <symbol table="W" row="0" id="bbW" description=""/>
+        <symbol table="W" row="0" id="calWsm" description=""/>
         <symbol table="W" row="160" id="What" description=""/>
         <symbol table="W" row="160" id="what" description=""/>
         <symbol table="W" row="170" id="Whatbold" description=""/>
@@ -1991,25 +1991,25 @@
         <symbol table="X" row="320" id="xvecbolditalic" description=""/>
         <symbol table="X" row="340" id="circleX" description=""/>
         <symbol table="Xi" row="100" id="Xi" description=""/>
-        <symbol table="Xi" row="100" id="Xi2" description=""/>
-        <symbol table="Xi" row="100" id="Xibar" description=""/>
-        <symbol table="Xi" row="100" id="Xidbldot" description=""/>
-        <symbol table="Xi" row="100" id="Xidot" description=""/>
-        <symbol table="Xi" row="100" id="Xihat" description=""/>
-        <symbol table="Xi" row="100" id="Xivec" description=""/>
         <symbol table="Xi" row="100" id="xi" description=""/>
+        <symbol table="Xi" row="100" id="Xi2" description=""/>
         <symbol table="Xi" row="100" id="xi2" description=""/>
+        <symbol table="Xi" row="100" id="Xibar" description=""/>
         <symbol table="Xi" row="100" id="xibar" description=""/>
+        <symbol table="Xi" row="100" id="Xidbldot" description=""/>
         <symbol table="Xi" row="100" id="xidbldot" description=""/>
+        <symbol table="Xi" row="100" id="Xidot" description=""/>
         <symbol table="Xi" row="100" id="xidot" description=""/>
+        <symbol table="Xi" row="100" id="Xihat" description=""/>
         <symbol table="Xi" row="100" id="xihat" description=""/>
+        <symbol table="Xi" row="100" id="Xivec" description=""/>
         <symbol table="Xi" row="100" id="xivec" description=""/>
-        <symbol table="Y" row="" id="ybar_acc" description=""/>
+        <symbol table="Y" row="0" id="smYhatitalic" description=""/>
+        <symbol table="Y" row="0" id="ybar_acc" description=""/>
         <symbol table="Y" row="100" id="Yacute" description=""/>
         <symbol table="Y" row="100" id="yacute" description=""/>
         <symbol table="Y" row="120" id="Yuml" description=""/>
         <symbol table="Y" row="120" id="yuml" description=""/>
-        <symbol table="Miscellaneous" row="130" id="ydot" description=""/>
         <symbol table="Y" row="140" id="ydbldot" description=""/>
         <symbol table="Y" row="150" id="ytilde" description=""/>
         <symbol table="Y" row="160" id="Yhat" description=""/>
@@ -2050,8 +2050,8 @@
         <symbol table="Y" row="320" id="Yvecbolditalic" description=""/>
         <symbol table="Y" row="320" id="yvecbolditalic" description=""/>
         <symbol table="Y" row="340" id="circleY" description=""/>
-        <symbol table="Z" row="" id="bbZ" description=""/>
-        <symbol table="Z" row="" id="doubleZ" description=""/>
+        <symbol table="Z" row="0" id="bbZ" description=""/>
+        <symbol table="Z" row="0" id="doubleZ" description=""/>
         <symbol table="Z" row="130" id="zdot" description=""/>
         <symbol table="Z" row="140" id="zdbldot" description=""/>
         <symbol table="Z" row="160" id="Zhat" description=""/>
@@ -2090,24 +2090,42 @@
         <symbol table="Z" row="320" id="zvecbolditalic" description=""/>
         <symbol table="Z" row="340" id="circleZ" description=""/>
         <symbol table="Zeta" row="100" id="Zeta" description=""/>
-        <symbol table="Zeta" row="100" id="Zeta2" description=""/>
-        <symbol table="Zeta" row="100" id="Zetabar" description=""/>
-        <symbol table="Zeta" row="100" id="Zetadbldot" description=""/>
-        <symbol table="Zeta" row="100" id="Zetadot" description=""/>
-        <symbol table="Zeta" row="100" id="Zetahat" description=""/>
-        <symbol table="Zeta" row="100" id="Zetavec" description=""/>
         <symbol table="Zeta" row="100" id="zeta" description=""/>
+        <symbol table="Zeta" row="100" id="Zeta2" description=""/>
         <symbol table="Zeta" row="100" id="zeta2" description=""/>
+        <symbol table="Zeta" row="100" id="Zetabar" description=""/>
         <symbol table="Zeta" row="100" id="zetabar" description=""/>
+        <symbol table="Zeta" row="100" id="Zetadbldot" description=""/>
         <symbol table="Zeta" row="100" id="zetadbldot" description=""/>
+        <symbol table="Zeta" row="100" id="Zetadot" description=""/>
         <symbol table="Zeta" row="100" id="zetadot" description=""/>
+        <symbol table="Zeta" row="100" id="Zetahat" description=""/>
         <symbol table="Zeta" row="100" id="zetahat" description=""/>
+        <symbol table="Zeta" row="100" id="Zetavec" description=""/>
         <symbol table="Zeta" row="100" id="zetavec" description=""/>
     </xsl:variable>
     
     <xsl:variable name="allsymbols">
         <xsl:apply-templates select="//tr[./td]"/>
     </xsl:variable>
+    
+    <xsl:function name="fn:lowercase">
+        <xsl:param name="string"/>
+        <xsl:value-of select="translate($string,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+    </xsl:function>
+    
+    <xsl:function name="fn:nulltozero">
+        <xsl:param name="string"/>
+        <xsl:value-of select="replace(concat('0',normalize-space($string)),'^0(\d)','$1')"/>
+        <!--<xsl:choose>
+            <xsl:when test="string-length($string) > 0">
+                <xsl:value-of select="$string"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>0</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>-->
+    </xsl:function>
     
     <xsl:template match="/*" xml:space="preserve">
 <reference id="symbols_symbollist" xml:lang="en-us">
@@ -2149,9 +2167,10 @@
         <!-- For use when updating this XSL -->
         <xsl:comment>
         <xsl:for-each select="$knownIDs/symbol">
-        <xsl:sort 
-            select="concat(normalize-space(@table),replace(concat('000000',normalize-space(@row)),'^0*?(\d{6})$','$1'))"/><xsl:value-of 
-            select="concat('&lt;symbol table=&quot;',@table,'&quot; row=&quot;',@row,'&quot; id=&quot;',@id,'&quot; description=&quot;',@description,'&quot;/>')"/>
+            <xsl:sort select="@table"/>
+            <xsl:sort select="fn:nulltozero(@row)" data-type="number"/>
+            <xsl:sort select="fn:lowercase(@id)"/><xsl:value-of 
+            select="concat('&lt;symbol table=&quot;',@table,'&quot; row=&quot;',fn:nulltozero(@row),'&quot; id=&quot;',@id,'&quot; description=&quot;',@description,'&quot;/>')"/>
         </xsl:for-each>
         </xsl:comment>
         <!--  -->
@@ -2164,7 +2183,7 @@
                 <simpletable id="{concat('simpletable_',normalize-space(current-grouping-key()))}">
                     <sthead><stentry>Symbol</stentry><stentry>Code</stentry></sthead>
                     <xsl:for-each select="current-group()">
-            <xsl:sort select="@row" data-type="number"/><xsl:copy-of select="strow"/>
+            <xsl:sort select="@row" data-type="number"/><xsl:sort select="fn:lowercase(@id)"/><xsl:copy-of select="strow"/>
                     </xsl:for-each>
                 </simpletable>
             </section>
@@ -2183,15 +2202,12 @@
             </xsl:choose>
         </xsl:param>
         <xsl:param name="row">
-            <xsl:choose>
+            <xsl:value-of select="fn:nulltozero($knowndata/@row)"/>
+            <!--<xsl:choose>
                 <xsl:when test="$knowndata/@row and string-length($knowndata/@row) > 0"><xsl:value-of select="$knowndata/@row"/></xsl:when>
                 <xsl:otherwise>9999</xsl:otherwise>
-            </xsl:choose>
-        </xsl:param>
-            <!--<xsl:choose>
-                <xsl:when test="$knowndata/@description and string-length($knowndata/@description) > 0"><xsl:value-of select="$knowndata/@description"/></xsl:when>
-                <xsl:otherwise></xsl:otherwise>
             </xsl:choose>-->
+        </xsl:param>
         <xsl:param name="description" select="normalize-space($knowndata/@description)"/>
         
         <row id="{$symbolid}" table="{$table}" row="{$row}">
