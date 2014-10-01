@@ -4,11 +4,9 @@
     xmlns:fn="http:webassign.com"
     exclude-result-prefixes="xs fn"
     version="2.0">
-    
     <xsl:output 
         doctype-public="-//OASIS//DTD DITA 1.1 Reference//EN"
-        doctype-system="http://docs.oasis-open.org/dita/v1.1/OS/dtd/reference.dtd" 
-        xml:space="preserve"/>
+        doctype-system="http://docs.oasis-open.org/dita/v1.1/OS/dtd/reference.dtd" />
     
     <xsl:variable name="knownIDs">
         <symbol table="A" row="0" id="Acirc" description=""/>
@@ -249,14 +247,24 @@
         <symbol table="C" row="340" id="circleC" description=""/>
         <symbol table="Calculus" row="0" id="bottomintegral" description=""/>
         <symbol table="Calculus" row="0" id="contourintegral" description=""/>
+        <symbol table="Calculus" row="0" id="doubleint_r" description=""/>
         <symbol table="Calculus" row="0" id="fprimex_acc" description=""/>
         <symbol table="Calculus" row="0" id="fx_acc" description=""/>
         <symbol table="Calculus" row="0" id="gprimex_acc" description=""/>
         <symbol table="Calculus" row="0" id="gx_acc" description=""/>
         <symbol table="Calculus" row="0" id="hprimex_acc" description=""/>
         <symbol table="Calculus" row="0" id="hx_acc" description=""/>
+        <symbol table="Calculus" row="0" id="intbig" description=""/>
+        <symbol table="Calculus" row="0" id="lineint" description=""/>
+        <symbol table="Calculus" row="0" id="nablaarrow" description=""/>
+        <symbol table="Calculus" row="0" id="partial" description=""/>
+        <symbol table="Calculus" row="0" id="prime" description=""/>
+        <symbol table="Calculus" row="0" id="rev_doubleprime" description=""/>
+        <symbol table="Calculus" row="0" id="rev_prime" description=""/>
+        <symbol table="Calculus" row="0" id="rev_tripleprime" description=""/>
         <symbol table="Calculus" row="0" id="surfaceintegral" description=""/>
         <symbol table="Calculus" row="0" id="topintegral" description=""/>
+        <symbol table="Calculus" row="0" id="tripleprime" description=""/>
         <symbol table="Calculus" row="0" id="volumeintegral" description=""/>
         <symbol table="Calculus" row="345" id="doubleintegral" description=""/>
         <symbol table="Calculus" row="350" id="doublelineint" description=""/>
@@ -607,10 +615,6 @@
         <symbol table="Gamma" row="100" id="gammahat" description=""/>
         <symbol table="Gamma" row="100" id="Gammavec" description=""/>
         <symbol table="Gamma" row="100" id="gammavec" description=""/>
-        <symbol table="German" row="0" id="szlig" description=""/>
-        <symbol table="Greek" row="0" id="greenOmega" description=""/>
-        <symbol table="Greek" row="0" id="red_pi" description=""/>
-        <symbol table="Greek" row="0" id="redOmega" description=""/>
         <symbol table="H" row="0" id="bbH" description=""/>
         <symbol table="H" row="0" id="doubleH" description=""/>
         <symbol table="H" row="160" id="Hhat" description=""/>
@@ -953,16 +957,13 @@
         <symbol table="Math" row="0" id="lessthan_lq" description=""/>
         <symbol table="Math" row="0" id="measuredangle" description=""/>
         <symbol table="Math" row="0" id="models" description=""/>
-        <symbol table="Math" row="0" id="nablaarrow" description=""/>
         <symbol table="Math" row="0" id="nand" description=""/>
         <symbol table="Math" row="0" id="nary_and" description=""/>
         <symbol table="Math" row="0" id="nary_coproduct" description=""/>
         <symbol table="Math" row="0" id="nary_intersect" description=""/>
-        <symbol table="Math" row="0" id="nary_or" description=""/>
         <symbol table="Math" row="0" id="nary_product" description=""/>
         <symbol table="Math" row="0" id="nary_summation" description=""/>
         <symbol table="Math" row="0" id="nary_summation_acc" description=""/>
-        <symbol table="Math" row="0" id="nary_union" description=""/>
         <symbol table="Math" row="0" id="neither_approx" description=""/>
         <symbol table="Math" row="0" id="nor" description=""/>
         <symbol table="Math" row="0" id="norm_subgr" description=""/>
@@ -971,8 +972,6 @@
         <symbol table="Math" row="0" id="not_almostequal" description=""/>
         <symbol table="Math" row="0" id="not_approx" description=""/>
         <symbol table="Math" row="0" id="not_asymptotic" description=""/>
-        <symbol table="Math" row="0" id="not_contains" description=""/>
-        <symbol table="Math" row="0" id="not_element" description=""/>
         <symbol table="Math" row="0" id="not_exists" description=""/>
         <symbol table="Math" row="0" id="not_forces" description=""/>
         <symbol table="Math" row="0" id="not_greater" description=""/>
@@ -981,11 +980,7 @@
         <symbol table="Math" row="0" id="not_parallel" description=""/>
         <symbol table="Math" row="0" id="not_precedes" description=""/>
         <symbol table="Math" row="0" id="not_proves" description=""/>
-        <symbol table="Math" row="0" id="not_subset" description=""/>
-        <symbol table="Math" row="0" id="not_subset_neq" description=""/>
         <symbol table="Math" row="0" id="not_succeeds" description=""/>
-        <symbol table="Math" row="0" id="not_superset" description=""/>
-        <symbol table="Math" row="0" id="not_supersetneq" description=""/>
         <symbol table="Math" row="0" id="not_true" description=""/>
         <symbol table="Math" row="0" id="notcongruent" description=""/>
         <symbol table="Math" row="0" id="notdivides" description=""/>
@@ -993,7 +988,6 @@
         <symbol table="Math" row="0" id="notequiv" description=""/>
         <symbol table="Math" row="0" id="notgreater" description=""/>
         <symbol table="Math" row="0" id="notgreaterorequal" description=""/>
-        <symbol table="Math" row="0" id="notin" description=""/>
         <symbol table="Math" row="0" id="notless" description=""/>
         <symbol table="Math" row="0" id="notlessorequal" description=""/>
         <symbol table="Math" row="0" id="notrelated" description=""/>
@@ -1001,14 +995,10 @@
         <symbol table="Math" row="0" id="precedes_equal" description=""/>
         <symbol table="Math" row="0" id="precedes_equiv" description=""/>
         <symbol table="Math" row="0" id="precedes_rel" description=""/>
-        <symbol table="Math" row="0" id="prime" description=""/>
         <symbol table="Math" row="0" id="proportion" description=""/>
         <symbol table="Math" row="0" id="ratio" description=""/>
         <symbol table="Math" row="0" id="redmultiply" description=""/>
         <symbol table="Math" row="0" id="redplusminus" description=""/>
-        <symbol table="Math" row="0" id="rev_doubleprime" description=""/>
-        <symbol table="Math" row="0" id="rev_prime" description=""/>
-        <symbol table="Math" row="0" id="rev_tripleprime" description=""/>
         <symbol table="Math" row="0" id="righttack" description=""/>
         <symbol table="Math" row="0" id="rt_angle_arc" description=""/>
         <symbol table="Math" row="0" id="semiprod_lf" description=""/>
@@ -1024,8 +1014,6 @@
         <symbol table="Math" row="0" id="succeeds_equal" description=""/>
         <symbol table="Math" row="0" id="succeeds_equiv" description=""/>
         <symbol table="Math" row="0" id="succeeds_rel" description=""/>
-        <symbol table="Math" row="0" id="superset" description=""/>
-        <symbol table="Math" row="0" id="supersetneq" description=""/>
         <symbol table="Math" row="0" id="therefore_sm" description=""/>
         <symbol table="Math" row="0" id="tilde_op" description=""/>
         <symbol table="Math" row="0" id="tilde_sm" description=""/>
@@ -1051,7 +1039,6 @@
         <symbol table="Math" row="300" id="congruent" description=""/>
         <symbol table="Math" row="310" id="cross" description=""/>
         <symbol table="Math" row="330" id="divide" description=""/>
-        <symbol table="Math" row="340" id="doubleint_r" description=""/>
         <symbol table="Math" row="380" id="eqq" description=""/>
         <symbol table="Math" row="400" id="equivalent" description=""/>
         <symbol table="Math" row="410" id="greaterorequal" description=""/>
@@ -1059,9 +1046,6 @@
         <symbol table="Math" row="450" id="infinity" description=""/>
         <symbol table="Math" row="460" id="infinity_acc" description=""/>
         <symbol table="Math" row="470" id="infinitysm" description=""/>
-        <symbol table="Math" row="490" id="intbig" description=""/>
-        <symbol table="Math" row="540" id="intersect" description=""/>
-        <symbol table="Math" row="550" id="isin" description=""/>
         <symbol table="Math" row="560" id="italicf" description=""/>
         <symbol table="Math" row="570" id="ket" description=""/>
         <symbol table="Math" row="580" id="lceiling" description=""/>
@@ -1070,7 +1054,6 @@
         <symbol table="Math" row="610" id="lessorequal_acc" description=""/>
         <symbol table="Math" row="620" id="lessthan" description=""/>
         <symbol table="Math" row="630" id="lfloor" description=""/>
-        <symbol table="Math" row="640" id="lineint" description=""/>
         <symbol table="Math" row="650" id="minus" description=""/>
         <symbol table="Math" row="660" id="minus_acc" description=""/>
         <symbol table="Math" row="670" id="minusplus" description=""/>
@@ -1085,7 +1068,6 @@
         <symbol table="Math" row="780" id="parallel_black" description=""/>
         <symbol table="Math" row="790" id="parallel_s" description=""/>
         <symbol table="Math" row="800" id="parallel_white" description=""/>
-        <symbol table="Math" row="810" id="partial" description=""/>
         <symbol table="Math" row="830" id="plus" description=""/>
         <symbol table="Math" row="840" id="plusminus" description=""/>
         <symbol table="Math" row="850" id="plusminus_acc" description=""/>
@@ -1103,8 +1085,6 @@
         <symbol table="Math" row="1030" id="times_acc" description=""/>
         <symbol table="Math" row="1040" id="triangleminus" description=""/>
         <symbol table="Math" row="1050" id="triangleplus" description=""/>
-        <symbol table="Math" row="1070" id="tripleprime" description=""/>
-        <symbol table="Math" row="1080" id="union" description=""/>
         <symbol table="Miscellaneous" row="0" id="ankh" description=""/>
         <symbol table="Miscellaneous" row="0" id="at" description=""/>
         <symbol table="Miscellaneous" row="0" id="bullseye" description=""/>
@@ -1349,7 +1329,9 @@
         <symbol table="O" row="320" id="ovecbolditalic" description=""/>
         <symbol table="O" row="335" id="calO" description=""/>
         <symbol table="O" row="340" id="circleO" description=""/>
+        <symbol table="Omega" row="0" id="greenOmega" description=""/>
         <symbol table="Omega" row="0" id="inv_ohm" description=""/>
+        <symbol table="Omega" row="0" id="redOmega" description=""/>
         <symbol table="Omega" row="100" id="Omega" description=""/>
         <symbol table="Omega" row="100" id="omega" description=""/>
         <symbol table="Omega" row="100" id="Omega2" description=""/>
@@ -1390,6 +1372,7 @@
         <symbol table="Other_Letters" row="0" id="gimel" description=""/>
         <symbol table="Other_Letters" row="0" id="OElig" description=""/>
         <symbol table="Other_Letters" row="0" id="oelig" description=""/>
+        <symbol table="Other_Letters" row="0" id="szlig" description=""/>
         <symbol table="Other_Letters" row="0" id="THORN" description=""/>
         <symbol table="Other_Letters" row="0" id="thorn" description=""/>
         <symbol table="P" row="0" id="bbP" description=""/>
@@ -1454,6 +1437,7 @@
         <symbol table="Phi" row="100" id="phism" description=""/>
         <symbol table="Phi" row="100" id="Phivec" description=""/>
         <symbol table="Phi" row="100" id="phivec" description=""/>
+        <symbol table="Pi" row="0" id="red_pi" description=""/>
         <symbol table="Pi" row="100" id="Pi" description=""/>
         <symbol table="Pi" row="100" id="pi" description=""/>
         <symbol table="Pi" row="100" id="Pi2" description=""/>
@@ -1667,9 +1651,23 @@
         <symbol table="Sets" row="0" id="contains" description=""/>
         <symbol table="Sets" row="0" id="element" description=""/>
         <symbol table="Sets" row="0" id="integers" description=""/>
+        <symbol table="Sets" row="0" id="intersect" description=""/>
+        <symbol table="Sets" row="0" id="isin" description=""/>
+        <symbol table="Sets" row="0" id="nary_or" description=""/>
+        <symbol table="Sets" row="0" id="nary_union" description=""/>
+        <symbol table="Sets" row="0" id="not_contains" description=""/>
+        <symbol table="Sets" row="0" id="not_element" description=""/>
+        <symbol table="Sets" row="0" id="not_subset" description=""/>
+        <symbol table="Sets" row="0" id="not_subset_neq" description=""/>
+        <symbol table="Sets" row="0" id="not_superset" description=""/>
+        <symbol table="Sets" row="0" id="not_supersetneq" description=""/>
+        <symbol table="Sets" row="0" id="notin" description=""/>
         <symbol table="Sets" row="0" id="notsubset" description=""/>
         <symbol table="Sets" row="0" id="Reals" description=""/>
         <symbol table="Sets" row="0" id="Reals2" description=""/>
+        <symbol table="Sets" row="0" id="superset" description=""/>
+        <symbol table="Sets" row="0" id="supersetneq" description=""/>
+        <symbol table="Sets" row="0" id="union" description=""/>
         <symbol table="Sets" row="360" id="empty" description=""/>
         <symbol table="Sets" row="370" id="empty_set" description=""/>
         <symbol table="Sets" row="960" id="subset" description=""/>
@@ -2117,14 +2115,6 @@
     <xsl:function name="fn:nulltozero">
         <xsl:param name="string"/>
         <xsl:value-of select="replace(concat('0',normalize-space($string)),'^0(\d)','$1')"/>
-        <!--<xsl:choose>
-            <xsl:when test="string-length($string) > 0">
-                <xsl:value-of select="$string"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>0</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>-->
     </xsl:function>
     
     <xsl:template match="/*" xml:space="preserve">
@@ -2133,9 +2123,10 @@
     <shortdesc>This topic is resource-only.</shortdesc>
     <refbody>
         <section>
-            <p>To update this topic:</p>
+            <title>To update this topic:</title>
             <ol>
-                <li>Download http://phantom.office.webassign.net/webtool/symbols.html.</li>
+                <li>Download <xref href="http://phantom.office.webassign.net/webtool/symbols.html"
+                    scope="external" format="html">http://phantom.office.webassign.net/webtool/symbols.html</xref>.</li>
                 <li><q>Clean up</q> the downloaded HTML file.<ul>
                     <li>Add the following header:<codeblock>&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE html [
@@ -2145,42 +2136,28 @@
 &lt;!ENTITY lsaquo "&amp;#8249;">
 &lt;!ENTITY rsaquo "&amp;#8250;">
 ]></codeblock></li>
-                    <li>Change &lt;br> to &lt;br/>.</li>
+                    <li>Change <codeph>&lt;br></codeph> to <codeph>&lt;br/></codeph>.</li>
+                    <li>Change <codeph>&lt;img...></codeph> to <codeph>&lt;img.../></codeph>.</li>
+                    <li>Add an opening &lt;BODY> tag after the &lt;style>.</li>
                 </ul></li>
                 <li>Parse the file with parseSymbolsList.xsl to this topic.</li>
+                <li>Check for new symbols in <xref href="#symbols_symbollist/section_unknown"/>.</li>
+                <li>Update parseSymbolsList.xsl as needed:<ul>
+                    <li>Set the @table for any deprecated symbols to <userinput>Deprecated</userinput>.</li>
+                    <li>Add information for any new symbols.</li>
+                </ul></li>
+                <li>Parse the HTML file with parseSymbolsList.xsl to this topic again.</li>
             </ol>
         </section>
-    
-
-        <!-- 
-            
-            
-        To group and sort items correctly with XSL (and avoid a lot of manual stuff):
-        1) Add @table and @row attributes to <symbol> data above
-      X 2) Parse <xsl:apply-templates select="//tr[./td]"/> into a variable (allsymbols)
-      X 3) Incorporate @row & @table attributes in <xsl:template match="tr[./td]" xml:space="preserve">
-      X 4) For each table, copy and sort the appropriate rows from $allsymbols
-      X 5) Report any strow elements in $allsymbols that don't have @table & @row (these will be new) 
-        
-        
-        -->
-        <!-- For use when updating this XSL -->
-        <xsl:comment>
-        <xsl:for-each select="$knownIDs/symbol">
-            <xsl:sort select="@table"/>
-            <xsl:sort select="fn:nulltozero(@row)" data-type="number"/>
-            <xsl:sort select="fn:lowercase(@id)"/><xsl:value-of 
-            select="concat('&lt;symbol table=&quot;',@table,'&quot; row=&quot;',fn:nulltozero(@row),'&quot; id=&quot;',@id,'&quot; description=&quot;',@description,'&quot;/>')"/>
-        </xsl:for-each>
-        </xsl:comment>
-        <!--  -->
-        
+        <xsl:if test="count($allsymbols/row[@table='unknown']) = 0">
+            <section id="section_unknown"><xsl:comment>No new/unknown symbols</xsl:comment></section>
+        </xsl:if>
         <xsl:for-each-group select="$allsymbols/row" group-by="@table">
-            <xsl:sort select="@table"/>
-            <section id="{concat('section_',normalize-space(current-grouping-key()))}">
+            <xsl:sort select="replace(@table,'^unknown$','000')"/>
+            <section id="{concat('section_',current-grouping-key())}">
                 <title><xsl:value-of 
-                    select="normalize-space(replace(current-grouping-key(),'_',' '))"/></title>
-                <simpletable id="{concat('simpletable_',normalize-space(current-grouping-key()))}">
+                    select="replace(current-grouping-key(),'_',' ')"/></title>
+                <simpletable id="{concat('simpletable_',current-grouping-key())}">
                     <sthead><stentry>Symbol</stentry><stentry>Code</stentry></sthead>
                     <xsl:for-each select="current-group()">
             <xsl:sort select="@row" data-type="number"/><xsl:sort select="fn:lowercase(@id)"/><xsl:copy-of select="strow"/>
@@ -2188,11 +2165,19 @@
                 </simpletable>
             </section>
         </xsl:for-each-group>
+        <xsl:comment><!-- For use when updating this XSL -->
+        <xsl:for-each select="$knownIDs/symbol">
+            <xsl:sort select="@table"/>
+            <xsl:sort select="fn:nulltozero(@row)" data-type="number"/>
+            <xsl:sort select="fn:lowercase(@id)"/><xsl:value-of 
+            select="concat('&lt;symbol table=&quot;',@table,'&quot; row=&quot;',fn:nulltozero(@row),'&quot; id=&quot;',@id,'&quot; description=&quot;',@description,'&quot;/>')"/>
+        </xsl:for-each>
+        </xsl:comment>
     </refbody>
 </reference>
     </xsl:template>
     
-    <xsl:template match="tr[./td]" xml:space="preserve">
+    <xsl:template match="tr[./td]" xml:space="default">
         <xsl:param name="symbolid" select="replace( td[1]/text(), '\s*&lt;s:(.*?)&gt;\s*', '$1')"/>
         <xsl:param name="knowndata" select="$knownIDs/symbol[@id=$symbolid]"/>
         <xsl:param name="table">
@@ -2201,13 +2186,7 @@
                 <xsl:otherwise>unknown</xsl:otherwise>
             </xsl:choose>
         </xsl:param>
-        <xsl:param name="row">
-            <xsl:value-of select="fn:nulltozero($knowndata/@row)"/>
-            <!--<xsl:choose>
-                <xsl:when test="$knowndata/@row and string-length($knowndata/@row) > 0"><xsl:value-of select="$knowndata/@row"/></xsl:when>
-                <xsl:otherwise>9999</xsl:otherwise>
-            </xsl:choose>-->
-        </xsl:param>
+        <xsl:param name="row" select="fn:nulltozero($knowndata/@row)"/>
         <xsl:param name="description" select="normalize-space($knowndata/@description)"/>
         
         <row id="{$symbolid}" table="{$table}" row="{$row}">
