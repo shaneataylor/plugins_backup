@@ -2115,6 +2115,8 @@
     <xsl:variable name="ignoretags" 
         select="'(^|\s)(do_not_use|accessibility)($|\s)'"/>
     
+    <xsl:variable name="debug" select="false()"/>
+    
     <xsl:variable name="allsymbols">
         <xsl:apply-templates select="//tr[./td]"/>
     </xsl:variable>
@@ -2181,6 +2183,7 @@
                 </simpletable>
             </section>
         </xsl:for-each-group>
+        <xsl:if test="$debug">
         <xsl:comment>======================================================
             After running the transformation, you can use the  
             following sorted content when updating the XSL.
@@ -2193,6 +2196,7 @@
             select="concat('&lt;symbol table=&quot;',@table,'&quot; row=&quot;',fn:nulltozero(@row),'&quot; id=&quot;',@id,'&quot; description=&quot;',@description,'&quot;/>')"/>
         </xsl:for-each>
         </xsl:comment>
+        </xsl:if>
     </refbody>
 </reference>
     </xsl:template>
@@ -2225,8 +2229,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <stentry>
-                        <codeph id="{concat($symbolid,'_code')}">&lt;s:<xsl:value-of select="$symbolid"/>&gt;</codeph>
-                        <xsl:comment select="normalize-space($row)"/>
+                        <codeph>&lt;s:<xsl:value-of select="$symbolid"/>&gt;</codeph>
                     </stentry>
                 </strow>
             </row>
