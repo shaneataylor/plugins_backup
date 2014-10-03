@@ -2103,6 +2103,18 @@
         <symbol table="Zeta" row="100" id="zetavec" description=""/>
     </xsl:variable>
     
+    <xsl:variable name="htmlissearchtable"
+        select="normalize-space(//table[@id='symbolTable']/thead) = 'Id &lt;s:tag> Symbol Tags Value'"/>
+    
+    <xsl:variable name="symbolid_column"
+        select="number(replace(replace(string($htmlissearchtable),'true','1'),'false','0')) + 1"/>
+    
+    <xsl:variable name="symboldef_column"
+        select="$symbolid_column + 1"/>
+    
+    <xsl:variable name="ignoretags" 
+        select="'(^|\s)(do_not_use|accessibility)($|\s)'"/>
+    
     <xsl:variable name="allsymbols">
         <xsl:apply-templates select="//tr[./td]"/>
     </xsl:variable>
@@ -2125,8 +2137,12 @@
         <section>
             <title>To update this topic:</title>
             <ol>
-                <li>Download <xref href="http://phantom.office.webassign.net/webtool/symbols.html"
-                    scope="external" format="html">http://phantom.office.webassign.net/webtool/symbols.html</xref>.</li>
+                <li>Download <xref href="http://phantom.office.webassign.net/webtool/symbol-search.tpl"
+                    scope="external" 
+                    format="html">http://phantom.office.webassign.net/webtool/symbol-search.tpl</xref>
+                    (preferred) or <xref href="http://phantom.office.webassign.net/webtool/symbols.html"
+                    scope="external" 
+                    format="html">http://phantom.office.webassign.net/webtool/symbols.html</xref>.</li>
                 <li><q>Clean up</q> the downloaded HTML file.<ul>
                     <li>Add the following header:<codeblock>&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE html [
@@ -2138,7 +2154,7 @@
 ]></codeblock></li>
                     <li>Change <codeph>&lt;br></codeph> to <codeph>&lt;br/></codeph>.</li>
                     <li>Change <codeph>&lt;img...></codeph> to <codeph>&lt;img.../></codeph>.</li>
-                    <li>Add an opening &lt;BODY> tag after the &lt;style>.</li>
+                    <li>If needed, add an opening &lt;BODY> tag after the &lt;style>.</li>
                 </ul></li>
                 <li>Parse the file with parseSymbolsList.xsl to this topic.</li>
                 <li>Check for new symbols in <xref href="#symbols_symbollist/section_unknown"/>.</li>
@@ -2165,7 +2181,11 @@
                 </simpletable>
             </section>
         </xsl:for-each-group>
-        <xsl:comment><!-- For use when updating this XSL -->
+        <xsl:comment>======================================================
+            After running the transformation, you can use the  
+            following sorted content when updating the XSL.
+            ======================================================</xsl:comment>
+        <xsl:comment>
         <xsl:for-each select="$knownIDs/symbol">
             <xsl:sort select="@table"/>
             <xsl:sort select="fn:nulltozero(@row)" data-type="number"/>
@@ -2178,7 +2198,7 @@
     </xsl:template>
     
     <xsl:template match="tr[./td]" xml:space="default">
-        <xsl:param name="symbolid" select="replace( td[1]/text(), '\s*&lt;s:(.*?)&gt;\s*', '$1')"/>
+        <xsl:param name="symbolid" select="replace( td[$symbolid_column]/text(), '\s*&lt;s:(.*?)&gt;\s*', '$1')"/>
         <xsl:param name="knowndata" select="$knownIDs/symbol[@id=$symbolid]"/>
         <xsl:param name="table">
             <xsl:choose>
@@ -2189,29 +2209,31 @@
         <xsl:param name="row" select="fn:nulltozero($knowndata/@row)"/>
         <xsl:param name="description" select="normalize-space($knowndata/@description)"/>
         
-        <row id="{$symbolid}" table="{$table}" row="{$row}">
-            <strow id="{$symbolid}">
-                <xsl:choose xml:space="default">
-                    <xsl:when test="string-length($description) > 0">
-                        <stentry>
-                            <ph id="{concat($symbolid,'_symbol')}"><i><xsl:value-of select="$description"/></i></ph>
-                        </stentry>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="td[2]">
-                            <xsl:with-param name="symbolid" select="$symbolid"/>
-                        </xsl:apply-templates>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <stentry>
-                    <codeph id="{concat($symbolid,'_code')}">&lt;s:<xsl:value-of select="$symbolid"/>&gt;</codeph>
-                    <xsl:comment select="normalize-space($row)"/>
-                </stentry>
-            </strow>
-        </row>
+        <xsl:if test="not( $htmlissearchtable and matches(td[$symboldef_column + 1],$ignoretags) )">
+            <row id="{$symbolid}" table="{$table}" row="{$row}">
+                <strow id="{$symbolid}">
+                    <xsl:choose xml:space="default">
+                        <xsl:when test="string-length($description) > 0">
+                            <stentry>
+                                <ph id="{concat($symbolid,'_symbol')}"><i><xsl:value-of select="$description"/></i></ph>
+                            </stentry>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="td[$symboldef_column]">
+                                <xsl:with-param name="symbolid" select="$symbolid"/>
+                            </xsl:apply-templates>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <stentry>
+                        <codeph id="{concat($symbolid,'_code')}">&lt;s:<xsl:value-of select="$symbolid"/>&gt;</codeph>
+                        <xsl:comment select="normalize-space($row)"/>
+                    </stentry>
+                </strow>
+            </row>
+        </xsl:if>
     </xsl:template>
     
-    <xsl:template match="td[2]">
+    <xsl:template match="td[$symboldef_column]">
         <xsl:param name="symbolid"/>
         <stentry>
             <ph id="{concat($symbolid,'_symbol')}">
