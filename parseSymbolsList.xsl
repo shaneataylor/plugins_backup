@@ -129,7 +129,6 @@
         <symbol table="Arrows" row="0" id="NEarrow" description=""/>
         <symbol table="Arrows" row="0" id="NWarrow" description=""/>
         <symbol table="Arrows" row="0" id="rightarrow" description=""/>
-        <symbol table="Arrows" row="0" id="rightarrow_acc" description=""/>
         <symbol table="Arrows" row="0" id="rightdoublearrow" description=""/>
         <symbol table="Arrows" row="0" id="rtarrow" description=""/>
         <symbol table="Arrows" row="0" id="rtarrowlong" description=""/>
@@ -248,12 +247,6 @@
         <symbol table="Calculus" row="0" id="bottomintegral" description=""/>
         <symbol table="Calculus" row="0" id="contourintegral" description=""/>
         <symbol table="Calculus" row="0" id="doubleint_r" description=""/>
-        <symbol table="Calculus" row="0" id="fprimex_acc" description=""/>
-        <symbol table="Calculus" row="0" id="fx_acc" description=""/>
-        <symbol table="Calculus" row="0" id="gprimex_acc" description=""/>
-        <symbol table="Calculus" row="0" id="gx_acc" description=""/>
-        <symbol table="Calculus" row="0" id="hprimex_acc" description=""/>
-        <symbol table="Calculus" row="0" id="hx_acc" description=""/>
         <symbol table="Calculus" row="0" id="intbig" description=""/>
         <symbol table="Calculus" row="0" id="lineint" description=""/>
         <symbol table="Calculus" row="0" id="nablaarrow" description=""/>
@@ -274,17 +267,14 @@
         <symbol table="Calculus" row="520" id="integral_clock" description=""/>
         <symbol table="Calculus" row="530" id="integral_clock_cont" description=""/>
         <symbol table="Calculus" row="720" id="nabla" description=""/>
-        <symbol table="Calculus" row="730" id="nabla_acc" description=""/>
-        <symbol table="Calculus" row="820" id="partialderivative_acc" description=""/>
         <symbol table="Calculus" row="1060" id="tripleintegral" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="abline" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="alphaparticle" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="aromaticbond" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="aromaticbondshort" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="bicond" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="bicond_acc" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="blackdot" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="cleardot" description="clear dot"/>
+        <symbol table="Math" row="0" id="bicond" description=""/>
+        <symbol table="Miscellaneous" row="0" id="blackdot" description=""/>
+        <symbol table="Spaces" row="0" id="cleardot" description="clear dot"/>
         <symbol table="Chemistry_and_Physics" row="0" id="coldrtarrow" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="decrtarrow" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="doublebond" description=""/>
@@ -294,14 +284,14 @@
         <symbol table="Chemistry_and_Physics" row="0" id="energyarrowlong" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="energyarrowshort" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="energyarrowsmall" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="forces" description=""/>
+        <symbol table="Math" row="0" id="forces" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="H2Ortarrow" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="hbar" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="hbar2" description=""/>
+        <symbol table="H" row="200" id="hbar2" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="hbarred" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="implies" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="increment" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="intercalate" description=""/>
+        <symbol table="Math" row="0" id="implies" description=""/>
+        <symbol table="Math" row="0" id="increment" description=""/>
+        <symbol table="Math" row="0" id="intercalate" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="lewisdot" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="ml" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="neg" description=""/>
@@ -316,7 +306,7 @@
         <symbol table="Chemistry_and_Physics" row="0" id="planck" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="planckbar" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="positron" description=""/>
-        <symbol table="Chemistry_and_Physics" row="0" id="propto" description=""/>
+        <symbol table="Math" row="0" id="propto" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="proton" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="ptrtarrow" description=""/>
         <symbol table="Chemistry_and_Physics" row="0" id="revrxarrow" description=""/>
@@ -489,7 +479,6 @@
         <symbol table="E" row="340" id="circleE" description=""/>
         <symbol table="Ellipses" row="0" id="cdots" description=""/>
         <symbol table="Ellipses" row="0" id="hellipsis" description=""/>
-        <symbol table="Ellipses" row="0" id="hellipsis_acc" description=""/>
         <symbol table="Ellipses" row="0" id="lellipsis" description=""/>
         <symbol table="Ellipses" row="0" id="mellipsis" description=""/>
         <symbol table="Ellipses" row="0" id="rellipsis" description=""/>
@@ -499,7 +488,6 @@
         <symbol table="Epsilon" row="100" id="Epsilon2" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon2" description=""/>
         <symbol table="Epsilon" row="100" id="epsilon3" description=""/>
-        <symbol table="Epsilon" row="100" id="epsilon_acc" description=""/>
         <symbol table="Epsilon" row="100" id="Epsilonbar" description=""/>
         <symbol table="Epsilon" row="100" id="epsilonbar" description=""/>
         <symbol table="Epsilon" row="100" id="Epsilondbldot" description=""/>
@@ -604,7 +592,6 @@
         <symbol table="Gamma" row="100" id="gamma" description=""/>
         <symbol table="Gamma" row="100" id="Gamma2" description=""/>
         <symbol table="Gamma" row="100" id="gamma2" description=""/>
-        <symbol table="Gamma" row="100" id="Gamma_acc" description=""/>
         <symbol table="Gamma" row="100" id="Gammabar" description=""/>
         <symbol table="Gamma" row="100" id="gammabar" description=""/>
         <symbol table="Gamma" row="100" id="Gammadbldot" description=""/>
@@ -963,7 +950,6 @@
         <symbol table="Math" row="0" id="nary_intersect" description=""/>
         <symbol table="Math" row="0" id="nary_product" description=""/>
         <symbol table="Math" row="0" id="nary_summation" description=""/>
-        <symbol table="Math" row="0" id="nary_summation_acc" description=""/>
         <symbol table="Math" row="0" id="neither_approx" description=""/>
         <symbol table="Math" row="0" id="nor" description=""/>
         <symbol table="Math" row="0" id="norm_subgr" description=""/>
@@ -1044,20 +1030,16 @@
         <symbol table="Math" row="410" id="greaterorequal" description=""/>
         <symbol table="Math" row="420" id="greaterthan" description=""/>
         <symbol table="Math" row="450" id="infinity" description=""/>
-        <symbol table="Math" row="460" id="infinity_acc" description=""/>
         <symbol table="Math" row="470" id="infinitysm" description=""/>
         <symbol table="Math" row="560" id="italicf" description=""/>
         <symbol table="Math" row="570" id="ket" description=""/>
         <symbol table="Math" row="580" id="lceiling" description=""/>
         <symbol table="Math" row="590" id="leftgrint" description=""/>
         <symbol table="Math" row="600" id="lessorequal" description=""/>
-        <symbol table="Math" row="610" id="lessorequal_acc" description=""/>
         <symbol table="Math" row="620" id="lessthan" description=""/>
         <symbol table="Math" row="630" id="lfloor" description=""/>
         <symbol table="Math" row="650" id="minus" description=""/>
-        <symbol table="Math" row="660" id="minus_acc" description=""/>
         <symbol table="Math" row="670" id="minusplus" description=""/>
-        <symbol table="Math" row="680" id="minusplus_acc" description=""/>
         <symbol table="Math" row="690" id="muchgreaterthan" description=""/>
         <symbol table="Math" row="700" id="muchlessthan" description=""/>
         <symbol table="Math" row="710" id="multiply" description=""/>
@@ -1070,7 +1052,6 @@
         <symbol table="Math" row="800" id="parallel_white" description=""/>
         <symbol table="Math" row="830" id="plus" description=""/>
         <symbol table="Math" row="840" id="plusminus" description=""/>
-        <symbol table="Math" row="850" id="plusminus_acc" description=""/>
         <symbol table="Math" row="860" id="rceiling" description=""/>
         <symbol table="Math" row="880" id="repzero" description=""/>
         <symbol table="Math" row="900" id="rfloor" description=""/>
@@ -1082,7 +1063,6 @@
         <symbol table="Math" row="1000" id="thereexists" description=""/>
         <symbol table="Math" row="1010" id="therefore" description=""/>
         <symbol table="Math" row="1020" id="times" description=""/>
-        <symbol table="Math" row="1030" id="times_acc" description=""/>
         <symbol table="Math" row="1040" id="triangleminus" description=""/>
         <symbol table="Math" row="1050" id="triangleplus" description=""/>
         <symbol table="Miscellaneous" row="0" id="ankh" description=""/>
@@ -1104,7 +1084,7 @@
         <symbol table="Miscellaneous" row="0" id="circledot" description=""/>
         <symbol table="Miscellaneous" row="0" id="circlering" description=""/>
         <symbol table="Miscellaneous" row="0" id="circletimes" description=""/>
-        <symbol table="Miscellaneous" row="0" id="clearline" description="clear line"/>
+        <symbol table="Spaces" row="0" id="clearline" description="clear line"/>
         <symbol table="Miscellaneous" row="0" id="clubs" description=""/>
         <symbol table="Miscellaneous" row="0" id="copy" description=""/>
         <symbol table="Miscellaneous" row="0" id="copyright" description=""/>
@@ -1149,7 +1129,6 @@
         <symbol table="Miscellaneous" row="0" id="transform" description=""/>
         <symbol table="Miscellaneous" row="0" id="v2bar" description=""/>
         <symbol table="Miscellaneous" row="0" id="vas_rho" description=""/>
-        <symbol table="Miscellaneous" row="0" id="xbar_acc" description=""/>
         <symbol table="Miscellaneous" row="0" id="zigzagarrow" description=""/>
         <symbol table="Miscellaneous" row="0" id="zonar" description=""/>
         <symbol table="Miscellaneous" row="130" id="bdot" description=""/>
@@ -1159,7 +1138,6 @@
         <symbol table="Mu" row="100" id="mu" description=""/>
         <symbol table="Mu" row="100" id="Mu2" description=""/>
         <symbol table="Mu" row="100" id="mu2" description=""/>
-        <symbol table="Mu" row="100" id="mu_acc" description=""/>
         <symbol table="Mu" row="100" id="muarrowbold" description=""/>
         <symbol table="Mu" row="100" id="Mubar" description=""/>
         <symbol table="Mu" row="100" id="mubar" description=""/>
@@ -1422,7 +1400,6 @@
         <symbol table="Phi" row="100" id="phi1" description=""/>
         <symbol table="Phi" row="100" id="Phi2" description=""/>
         <symbol table="Phi" row="100" id="phi2" description=""/>
-        <symbol table="Phi" row="100" id="phi_acc" description=""/>
         <symbol table="Phi" row="100" id="Phibar" description=""/>
         <symbol table="Phi" row="100" id="phibar" description=""/>
         <symbol table="Phi" row="100" id="phibold" description=""/>
@@ -1442,7 +1419,6 @@
         <symbol table="Pi" row="100" id="pi" description=""/>
         <symbol table="Pi" row="100" id="Pi2" description=""/>
         <symbol table="Pi" row="100" id="pi2" description=""/>
-        <symbol table="Pi" row="100" id="pi_acc" description=""/>
         <symbol table="Pi" row="100" id="Pibar" description=""/>
         <symbol table="Pi" row="100" id="pibar" description=""/>
         <symbol table="Pi" row="100" id="Pidbldot" description=""/>
@@ -1495,7 +1471,6 @@
         <symbol table="Punctuation" row="0" id="lsquote" description=""/>
         <symbol table="Punctuation" row="0" id="macr" description=""/>
         <symbol table="Punctuation" row="0" id="middot" description=""/>
-        <symbol table="Punctuation" row="0" id="middot_acc" description=""/>
         <symbol table="Punctuation" row="0" id="middot_op" description=""/>
         <symbol table="Punctuation" row="0" id="overline" description=""/>
         <symbol table="Punctuation" row="0" id="paragraph" description=""/>
@@ -1595,7 +1570,6 @@
         <symbol table="Rho" row="100" id="rho" description=""/>
         <symbol table="Rho" row="100" id="Rho2" description=""/>
         <symbol table="Rho" row="100" id="rho2" description=""/>
-        <symbol table="Rho" row="100" id="rho_acc" description=""/>
         <symbol table="Rho" row="100" id="Rhobar" description=""/>
         <symbol table="Rho" row="100" id="rhobar" description=""/>
         <symbol table="Rho" row="100" id="Rhodbldot" description=""/>
@@ -1678,7 +1652,6 @@
         <symbol table="Sigma" row="100" id="sigma" description=""/>
         <symbol table="Sigma" row="100" id="Sigma2" description=""/>
         <symbol table="Sigma" row="100" id="sigma2" description=""/>
-        <symbol table="Sigma" row="100" id="sigma_acc" description=""/>
         <symbol table="Sigma" row="100" id="Sigmabar" description=""/>
         <symbol table="Sigma" row="100" id="sigmabar" description=""/>
         <symbol table="Sigma" row="100" id="Sigmadbldot" description=""/>
@@ -1693,7 +1666,6 @@
         <symbol table="Spaces" row="100" id="tab" description=""/>
         <symbol table="Spaces" row="110" id="space" description="space"/>
         <symbol table="Spaces" row="120" id="thinsp" description="thin space"/>
-        <symbol table="Spaces" row="130" id="thinsp_acc" description="thin space"/>
         <symbol table="Spaces" row="140" id="space_nobr" description="non-breaking space"/>
         <symbol table="Spaces" row="150" id="double" description="2 non-breaking spaces"/>
         <symbol table="Spaces" row="160" id="quad" description="4 non-breaking spaces"/>
@@ -2003,7 +1975,6 @@
         <symbol table="Xi" row="100" id="Xivec" description=""/>
         <symbol table="Xi" row="100" id="xivec" description=""/>
         <symbol table="Y" row="0" id="smYhatitalic" description=""/>
-        <symbol table="Y" row="0" id="ybar_acc" description=""/>
         <symbol table="Y" row="100" id="Yacute" description=""/>
         <symbol table="Y" row="100" id="yacute" description=""/>
         <symbol table="Y" row="120" id="Yuml" description=""/>
