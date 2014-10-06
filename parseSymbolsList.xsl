@@ -2127,7 +2127,9 @@
 ]></codeblock></li>
                     <li>Change <codeph>&lt;br></codeph> to <codeph>&lt;br/></codeph>.</li>
                     <li>Change <codeph>&lt;img...></codeph> to <codeph>&lt;img.../></codeph>.</li>
+                    <li>Change <codeph>&lt;meta...></codeph> to <codeph>&lt;meta.../></codeph>.</li>
                     <li>If needed, add an opening &lt;BODY> tag after the &lt;style>.</li>
+                    <li>Remove any script elements.</li>
                 </ul></li>
                 <li>Parse the file with parseSymbolsList.xsl to this topic.</li>
                 <li>Check for new symbols in <xref href="#symbols_symbollist/section_unknown"/>.</li>
