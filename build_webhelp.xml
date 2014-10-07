@@ -90,9 +90,9 @@
             <param name="h5help.google.cse.id" value="016381970951151729769:bdcsvwjjwci" />
             <param name="h5help.google.cse.refinement" value="Integrations" />
             <param name="h5help.feedback" value="yes" />
-            <param name="args.input" value="m_d_sysadmin.ditamap"/>
-            <param name="args.filter" value="${source.dir}/d_d_admin_help.ditaval" /><!-- 1.6.x -->
-            <param name="dita.temp.dir" location="temp/m_d_sysadmin" />
+            <param name="args.input" value="m_d_integrations.ditamap"/>
+            <param name="args.filter" value="${source.dir}/d_d_integrations_help.ditaval" /><!-- 1.6.x -->
+            <param name="dita.temp.dir" location="temp/m_d_integrations" />
             <param name="h5help.args.hdr" value="${basedir}/wa_help_style/brand_header.html"/>
         </antcall>
     </target>
