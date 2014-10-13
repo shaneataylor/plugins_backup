@@ -98,28 +98,5 @@ h5help.getSynonyms = function(stemlist){
         }
     }
     return synonyms;
-}
-
-h5help.searchListener = {
-    "currentquery"      : "",
-    "getQuery"          : function() {
-        var oldquery = h5help.searchListener.currentquery;
-        h5help.searchListener.currentquery = encodeURIComponent( $("div#searchbox input.gsc-input").val() );
-        return (oldquery != h5help.searchListener.currentquery);
-    },
-    "start"             : function() {
-        $("div#searchbox").on("keyup", "input.gsc-input", function(evt) {
-            if ( evt.which == 13 ) { h5help.searchListener.sendQueryToGA(); }
-        });
-        $("div#searchbox").on("change", "input.gsc-input", function(evt) {
-            // wait for field to be updated from autocomplete
-            window.setTimeout( h5help.searchListener.sendQueryToGA, 2000);
-        });
-    },
-    "sendQueryToGA"     : function() {
-        if (typeof(ga) == 'function' && h5help.searchListener.getQuery() ) {
-            ga('set', 'location', h5help.baseUrl + "?s=" + h5help.searchListener.currentquery );
-            ga('send', 'pageview');
-        }
-    }
 };
+

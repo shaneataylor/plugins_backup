@@ -138,7 +138,9 @@
         
         <!-- Add running heading XHTML code snippet if requested to -->
         <xsl:if test="string-length($HDRFILE) > 0">
-            <xsl:copy-of select="document($HDRFILE,/)"/>      
+            <div class="running-header">
+                <xsl:copy-of select="document($HDRFILE,/)"/>
+            </div>
         </xsl:if>
         <xsl:value-of select="$newline"/>
         <div id="content_container">

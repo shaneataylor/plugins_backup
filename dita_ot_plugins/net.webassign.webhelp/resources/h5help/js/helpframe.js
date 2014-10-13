@@ -34,7 +34,7 @@ h5help.framehtml =    '<div id="toolbar">'
                     + '  <div id="toc" title="Table of contents" role="navigation"></div>'
                     + '  <div id="sizer" class="slideright" alt="Show or hide the contents"'
                     + '    title="Show or hide the contents"><span class="ua_control"> </span></div>'
-                    + '  <iframe src="' + h5help.iframeSrc + '"></iframe>'
+                    + '  <div id="topic"><iframe name="contentwin" src="' + h5help.iframeSrc + '"></iframe></div>'
                     + '</div>';
 
 h5help.initAll = function() {
@@ -46,8 +46,42 @@ h5help.initAll = function() {
 };
 
 h5help.initFrame = function() {
-    $("body").html(h5help.framehtml);
+
+    // TO DO: 1. Add build flag specifying header file for the frame
+    //        2. Use that flag to get content here
+    //        3. Don't add runninghead to the frame
+
+    var runninghead = $("div.running-header").html();
+    $("body").addClass("h5helpframe");
+    $("body").html(runninghead + h5help.framehtml);
 };
+/*
+ * TO DO: Incorporate functionality tested in demo
+        $("div#topic > iframe").on("load",function(){
+            var iframetitle = $("div#topic > iframe").contents().find("head>title").text();
+            h5help.addMessage("loaded " + iframetitle);
+            if ( iframetitle.match(/^[1-5]\d\d /) ) {
+                $("div#topic > iframe").contents().find("head").append(
+                    '<link rel="stylesheet" href="css/style.css" type="text/css"/>');
+                var status = $("div#topic > iframe").contents().find("body").text();
+                $("div#topic > iframe").contents().find("body").addClass("errpage");
+                $("div#topic > iframe").contents().find("body").html(
+                    "<div><h1>There was a problem getting this content</h1>"
+                    + '<p>The server returned the following status:</p>'
+                    + '<pre>'+iframetitle+'</pre>'
+                    + '<pre>'+status+'</pre></div>'
+                    );
+            }
+        });
+*/
+/*
+ * TO DO: Incorporate functionality tested in demo
+    updateTopic : function(title, location) {
+        var newlocation = location.replace(/\?h5help=\d+/,'');
+        window.history.replaceState({}, title, newlocation);
+        $("head>title").text(title);
+    }
+*/
 
 
 h5help.improveCompatibility = function (){
@@ -106,7 +140,6 @@ h5help.loadInitialContent = function(){
     default:
         // nothing
         h5help.populateUserData();
-        h5help.prettifyIfEnabled();
         h5help.addCommentSection();
     }
 };
@@ -132,6 +165,9 @@ h5help.getServer = function(url){
 }
 
 h5help.handleLink = function(event){
+
+    // TO DO: pare this back to only what might now be needed to correctly handle search results
+    
     event.preventDefault(); // part 1 of 2 to prevent default behaviors
     var linkHref = $(this).attr("href");
     var linkTarget = $(this).attr("target");
@@ -296,7 +332,7 @@ h5help.defineHandlers = function (){
     $("div#searchbox").one("focus click", "input", h5help.showSearchResults); 
     $("div#searchresults").on("click", "a#closesearch", h5help.hideSearchResults);
     
-    $("div#toc,div#topic,div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
+    $("div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
     $("div#toc").on("click", "a", h5help.slideTOC);
     $("div#toc").on("click", "a", function(){
         $(this).addClass("clicked");
@@ -440,5 +476,30 @@ h5help.adjustForBanner = function() {
         $("div#sizer").css("top",adjustTop);
     }
     
-}
+};
+
+// TO DO: Remove the need for this if possible 
+h5help.searchListener = {
+    "currentquery"      : "",
+    "getQuery"          : function() {
+        var oldquery = h5help.searchListener.currentquery;
+        h5help.searchListener.currentquery = encodeURIComponent( $("div#searchbox input.gsc-input").val() );
+        return (oldquery != h5help.searchListener.currentquery);
+    },
+    "start"             : function() {
+        $("div#searchbox").on("keyup", "input.gsc-input", function(evt) {
+            if ( evt.which == 13 ) { h5help.searchListener.sendQueryToGA(); }
+        });
+        $("div#searchbox").on("change", "input.gsc-input", function(evt) {
+            // wait for field to be updated from autocomplete
+            window.setTimeout( h5help.searchListener.sendQueryToGA, 2000);
+        });
+    },
+    "sendQueryToGA"     : function() {
+        if (typeof(ga) == 'function' && h5help.searchListener.getQuery() ) {
+            ga('set', 'location', h5help.baseUrl + "?s=" + h5help.searchListener.currentquery );
+            ga('send', 'pageview');
+        }
+    }
+};
 

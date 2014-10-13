@@ -19,6 +19,12 @@ h5help.initAll = function() {
     h5help.addWatermark();
     // loadCommentScript();
 };
+/*
+ *  TO DO: Incorporate functionality tested in demo
+        var title = $("head>title").text();
+        var location = window.location.href;
+        window.parent.h5help.updateTopic(title, location);
+*/
 
 
 h5help.loadInitialContent = function(){

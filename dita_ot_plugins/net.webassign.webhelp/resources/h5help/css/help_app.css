@@ -1130,7 +1130,7 @@ div.parentlink {
     display: none;
 }
 
-div#topic, div#searchresults {
+.h5helpframe div#searchresults {
     position: absolute;
     top: 0px;
     bottom: 0px;
@@ -1141,6 +1141,30 @@ div#topic, div#searchresults {
     overflow:auto;
     -webkit-overflow-scrolling: touch;
 }
+.h5helpframe div#topic {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 312px;
+    right: 0px;
+    padding: 0px;
+    background-color: #fff;
+    overflow:hidden;
+}
+.h5helpframe div#topic > iframe {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0px none;
+}
+div.running-header {
+    display: none;
+}
+.h5helpframe div.running-header {
+    display: block;
+}
+
+
 @media screen and (min-width: 801px) {
     div#sizer {
         display: none;
