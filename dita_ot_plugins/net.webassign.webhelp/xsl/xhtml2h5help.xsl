@@ -141,35 +141,10 @@
             <xsl:copy-of select="document($HDRFILE,/)"/>      
         </xsl:if>
         <xsl:value-of select="$newline"/>
-        
-        <div id="toolbar">
-            <h1 class="help_name"><xsl:value-of select="$h5help.name"/></h1>
-            <!-- Skipahead link. See http://webaim.org/presentations/2012/ariahtml5/hiddenlinks2 -->
-            <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>
-            <div id="searchbox" role="search" aria-label="search"><xsl:comment></xsl:comment></div>
-        </div>
-        <div>
-            <!-- menu stuff needs to be outside of toolbar div so clicks on toolbar close the menu -->
-            <a id="menu_button" alt="Menu" title="Menu"><span class="ua_control"> </span></a>
-            <ul class="menu hidden" role="menu" id="menu">
-                <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>
-                <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>
-                <li role="menuitem" id="view_min" class="hidden"><a>Minimal View</a></li>
-                <li role="menuitem" id="view_max" class="hidden"><a>Expanded View</a></li>
-                <li role="menuitem" id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>
-                <li role="menuitem" id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>
-                <li role="menuitem" id="about_help" class="hidden"><a>About Help</a></li>
-            </ul>        
-        </div>
-        <div id="modal_back" class="hidden"><xsl:comment></xsl:comment></div>
-        <div id="modal" class="modal hidden" role="alert"><xsl:comment></xsl:comment></div>
         <div id="content_container">
-            <div id="searchresults" title="Search results" role="search"><xsl:comment></xsl:comment></div>
-            <div id="toc" title="Table of contents" role="navigation"><xsl:comment></xsl:comment></div>
-            <div id="sizer" class="slideright" alt="Show or hide the contents" title="Show or hide the contents"><span class="ua_control"> </span></div>
-                <xsl:call-template name="bodydiv">
-                    <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"></xsl:value-of></xsl:with-param>
-                </xsl:call-template>
+            <xsl:call-template name="bodydiv">
+                <xsl:with-param name="topicid"><xsl:value-of select="$bodyid"/></xsl:with-param>
+            </xsl:call-template>
         </div>
         <xsl:element name="script" use-attribute-sets="scriptattrs">
             <xsl:comment></xsl:comment>
