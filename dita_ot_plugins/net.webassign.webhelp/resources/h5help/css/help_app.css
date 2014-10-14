@@ -843,21 +843,46 @@ div#toolbar {
     color: white;
     vertical-align: middle;
     z-index: 90;
+    text-align: right;
 }
-h1.help_name {
-    margin: 0px;
-    padding: 6px 24px;
+div#toolbar > a {
     display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 0px 10px;
+}
+
+a#email_topic > span.ua_control {
+    background-position: 0px -150px;
+    cursor: pointer;
+}
+a#print_topic > span.ua_control {
+    background-position: 0px -225px;
+    cursor: pointer;
+}
+a#get_support > span.ua_control {
+    background-position: 0px -175px;
+    cursor: pointer;
+}
+
+h1.help_name {
+    position: absolute;
+    left: 24px;
+    top: 6px;
+    margin: 0px;
+    text-align: left;
     width: 300px;
     font-family: "Open Sans", Arial, sans-serif ;
     font-size: 18px;
     font-weight: bold;
 }
 div#searchbox {
-    position: absolute;
+    display: inline-block;
+    /*position: absolute;
     top: 0px;
     left: 302px;
-    right: 50px;
+    right: 200px;*/
+    min-width: 300px;
     height: 40px;
     vertical-align: middle;
     padding: 6px 0px;
@@ -880,6 +905,10 @@ div#searchbox input[type="text"], div#searchbox input.gsc-input {
     border-radius: 6px;
     width: 100%;
     padding-left: 6px;
+}
+span#search_icon {
+    background-position: 0px -200px;
+    cursor: pointer;
 }
 div#searchbox td.gsc-search-button, div#searchbox td.gsc-clear-button {
     display: none;

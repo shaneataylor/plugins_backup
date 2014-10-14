@@ -242,6 +242,8 @@ h5help.updateGoogleAnalytics = function() {
 
 h5help.defineHandlers = function (){
     
+    // TO DO: Trigger event for parent to close menu on clicks in topic
+    
     $("div#toc,div#topic,div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
     $("div#toc").on("click", "a", function(){
         $(this).addClass("clicked");

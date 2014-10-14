@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="150"
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="250"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <style type="text/css">
         * {
-            stroke: #666;
+            stroke: #333;
             stroke-opacity: 1;
             stroke-linejoin: round;
         }
@@ -12,11 +12,19 @@
         rect { stroke-width: 0.5; }
         .shadearrow {
             stroke-width: 1.5;
-            fill: url(#grayfill);
+            fill: #333;
         }
         .controlbox {
             fill: white;
-            fill-opacity: 0.75; 
+            fill-opacity: 1;
+            stroke-width: 2;
+        }
+        .whiteline {
+            stroke-width: 5;
+            stroke: white;
+        }
+        .boldline {
+            stroke-width: 4;
         }
     </style>
     <defs>
@@ -41,9 +49,10 @@
         <line x1="12" y1="7" x2="12" y2="17"/>
     </g>
     <g transform="translate(0,50)">
-        <use xlink:href="#largecontrol"/>
-        <line x1="5" y1="5" x2="19" y2="19"/>
-        <line x1="5" y1="19" x2="19" y2="5"/>
+        <circle r="11" cx="12" cy="12" fill="#333"/>
+        <!--<use xlink:href="#largecontrol"/>-->
+        <line x1="6" y1="6" x2="18" y2="18" class="whiteline"/>
+        <line x1="6" y1="18" x2="18" y2="6" class="whiteline"/>
     </g>
     <g transform="translate(0,75)">
         <use xlink:href="#largecontrol"/>
@@ -55,5 +64,23 @@
     </g>
     <g transform="translate(0,125)">
         <polygon points="20,12 5,1 5,22" class="shadearrow"/>
+    </g>
+    <g transform="translate(0,150)">
+        <polygon points="2,5 12,15 22,5 2,5 2,20 22,20 22,5" class="controlbox"/>
+    </g>
+    <g transform="translate(0,175)">
+        <path d="M8,22 l7,-6 4,0 a3,3 0 0,0 3,-3 l0,-7 a3,3 0 0,0 -3,-3 l-14,0 a3,3 0 0,0 -3,3 l0,7 a3,3 0 0,0 3,3 l3,0 Z" 
+            class="controlbox"/>
+    </g>
+    <g transform="translate(0,200)">
+        <line x1="14" y1="14" x2="21" y2="21" class="boldline"/>
+        <circle r="6" cx="10" cy="10" class="controlbox"/>
+        
+    </g>
+    <g transform="translate(0,225)">
+        <rect width="21" height="10" rx="3" ry="3" x="2" y="7" class="controlbox"/>
+        <rect width="11" height="9" x="7" y="12" class="controlbox"/>
+        <rect width="11" height="4" x="7" y="3" class="controlbox"/>
+        
     </g>
 </svg>

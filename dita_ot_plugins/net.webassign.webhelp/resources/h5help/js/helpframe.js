@@ -18,15 +18,18 @@ h5help.userdata = h5help.userdata || {};
 h5help.framehtml =    '<div id="toolbar">'
                     + '  <h1 class="help_name">' + h5help.params.help_name + '</h1>'
                     + '  <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>'
-                    + '  <div id="searchbox" role="search" aria-label="search"></div>'
-                    + '</div><div>'
-                    + '  <a id="menu_button" alt="Menu" title="Menu"><span class="ua_control"> </span></a>'
+                    + '  <span class="ua_control" id="search_icon"> </span><div id="searchbox" role="search" aria-label="search"></div>'
+                    + '  <a id="email_topic" alt="Email topic" title="Email topic"><span class="ua_control"> </span></a>'
+                    + '  <a id="print_topic" alt="Print topic" title="Print topic"><span class="ua_control"> </span></a>'
+                    + '  <a id="get_support" alt="Get support" title="Get support"><span class="ua_control"> </span></a>'
+                    + '</div>'
+                    + '<!--<div><a id="menu_button" alt="Menu" title="Menu"><span class="ua_control"> </span></a>'
                     + '  <ul class="menu hidden" role="menu" id="menu">'
                     + '    <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>'
                     + '    <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>'
                     + '    <li role="menuitem" id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>'
                     + '    <li role="menuitem" id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>'
-                    + '  </ul></div>'
+                    + '  </ul></div>-->'
                     + '<div id="modal_back" class="hidden"></div>'
                     + '<div id="modal" class="modal hidden" role="alert"></div>'
                     + '<div id="content_container">'
@@ -34,7 +37,7 @@ h5help.framehtml =    '<div id="toolbar">'
                     + '  <div id="toc" title="Table of contents" role="navigation"></div>'
                     + '  <div id="sizer" class="slideright" alt="Show or hide the contents"'
                     + '    title="Show or hide the contents"><span class="ua_control"> </span></div>'
-                    + '  <div id="topic"><iframe name="contentwin" src="' + h5help.iframeSrc + '"></iframe></div>'
+                    + '  <div id="topic"><iframe name="contentwin" id="contentwin" src="' + h5help.iframeSrc + '"></iframe></div>'
                     + '</div>';
 
 h5help.initAll = function() {
@@ -99,11 +102,14 @@ h5help.toggleMenu = function(){
 	$("ul#menu").toggleClass("hidden");
 }
 h5help.closeMenu = function(){
+    // TO DO: When menu is open, listen for menu close event to close it
+
 	$("ul#menu").addClass("hidden");
 }
 h5help.printTopic = function(){
     h5help.closeMenu();
-    window.print();
+    window.frames["contentwin"].focus();
+    window.frames["contentwin"].print();
 };
 
 h5help.showModal = function(modalContent){
@@ -317,6 +323,8 @@ h5help.defineHandlers = function (){
     $("#view_contents").on("click", function(){h5help.slideTOC(false)});
     $("#view_topic").on("click", function(){h5help.slideTOC(true)});
     $("#print_topic").on("click", h5help.printTopic);
+    // TO DO: If possible, redefine print method of frames window to print only the topic frame
+    
     $("#customer_support").on("click", h5help.closeMenu);
     
     $("#modal_back").on("click", h5help.hideModal);
@@ -379,7 +387,7 @@ h5help.initSearch = h5help.initSearch || function(){
     h5help.timer = window.setInterval(function() { // test for search box periodically until found
         if ($("div#searchbox input").length != 0) {
             window.clearInterval(h5help.timer);
-            $("div#searchbox input").attr({ placeholder:"Search the help", tabindex:3 });
+            $("div#searchbox input").attr({ placeholder:"Search", tabindex:3 });
             
             h5help.searchListener.start();
         }
