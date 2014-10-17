@@ -1,13 +1,11 @@
 var h5help = h5help || {};
 
-h5help.embeddedUA = parent.h5help.embeddedUA || h5help.embeddedUA || false;
 h5help.userdata = h5help.userdata || {};
 h5help.initialUrl=window.location.href; 
 h5help.baseUrl=h5help.initialUrl.replace(/\/[^\/]*$/gi,'/'); 
 h5help.baseUrl=h5help.baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
 h5help.href=h5help.initialUrl.replace(/^.*\//,""); // just the topic
 //var h5Path=window.location.pathname;
-//var h5help.timer;
 //var disqus_shortname = h5help.params.disqus_shortname; 
 
 h5help.initAll = function() {
@@ -46,7 +44,7 @@ h5help.loadInitialContent = function(){
         h5help.loadDiv("div#topic", query[1]);
         break;
     case "search":
-        h5help.showSearchResults(); // TO DO: Call parent to show search results
+        h5help.search.showResults(); // TO DO: Call parent to show search results
         break;
     default:
         // nothing
@@ -241,8 +239,6 @@ h5help.updateGoogleAnalytics = function() {
 
 
 h5help.defineHandlers = function (){
-    
-    // TO DO: Trigger event for parent to close menu on clicks in topic
     
     $("div#toc,div#topic,div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
     $("div#toc").on("click", "a", function(){

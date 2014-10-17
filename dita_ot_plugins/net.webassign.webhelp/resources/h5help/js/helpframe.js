@@ -9,31 +9,22 @@ h5help.iframeSrc = h5help.initialUrl + '?h5help=' + h5help.timestamp.getTime();
 h5help.baseUrl=h5help.initialUrl.replace(/\/[^\/]*$/gi,'/'); 
 h5help.baseUrl=h5help.baseUrl.replace(/^https?:/gi,""); // agnostic to http or https
 h5help.href=h5help.initialUrl.replace(/^.*\//,""); // just the topic
-h5help.embeddedUA = parent.h5help.embeddedUA || h5help.embeddedUA || false;
 h5help.userdata = h5help.userdata || {};
 //var h5Path=window.location.pathname;
-//var h5help.timer;
 //var disqus_shortname = h5help.params.disqus_shortname; 
 
 h5help.framehtml =    '<div id="toolbar">'
                     + '  <h1 class="help_name">' + h5help.params.help_name + '</h1>'
                     + '  <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>'
-                    + '  <span class="ua_control" id="search_icon"> </span><div id="searchbox" role="search" aria-label="search"></div>'
+                    + h5help.search.html.box
                     + '  <a id="email_topic" alt="Email topic" title="Email topic"><span class="ua_control"> </span></a>'
                     + '  <a id="print_topic" alt="Print topic" title="Print topic"><span class="ua_control"> </span></a>'
                     + '  <a id="get_support" alt="Get support" title="Get support"><span class="ua_control"> </span></a>'
                     + '</div>'
-                    + '<!--<div><a id="menu_button" alt="Menu" title="Menu"><span class="ua_control"> </span></a>'
-                    + '  <ul class="menu hidden" role="menu" id="menu">'
-                    + '    <li role="menuitem" id="view_contents" class="hidden"><a>View Contents</a></li>'
-                    + '    <li role="menuitem" id="view_topic" class="hidden"><a>View Topic</a></li>'
-                    + '    <li role="menuitem" id="print_topic"><a alt="Print help topic" title="Print help topic">Print</a></li>'
-                    + '    <li role="menuitem" id="customer_support"><a target="_blank" href="http://webassign.force.com/wakb2/?cu=1&amp;fs=ContactUs&amp;l=en_US" alt="Contact WebAssign Customer Support" title="Contact WebAssign Customer Support">Customer Support</a></li>'
-                    + '  </ul></div>-->'
                     + '<div id="modal_back" class="hidden"></div>'
                     + '<div id="modal" class="modal hidden" role="alert"></div>'
                     + '<div id="content_container">'
-                    + '  <div id="searchresults" title="Search results" role="search"></div>'
+                    + h5help.search.html.results
                     + '  <div id="toc" title="Table of contents" role="navigation"></div>'
                     + '  <div id="sizer" class="slideright" alt="Show or hide the contents"'
                     + '    title="Show or hide the contents"><span class="ua_control"> </span></div>'
@@ -45,7 +36,7 @@ h5help.initAll = function() {
     h5help.defineHandlers();
     h5help.improveCompatibility();
     h5help.loadInitialContent();
-    (h5help.params.search == "none") || h5help.initSearch(); // do this last so nothing else is waiting on google
+    !(h5help.search) || h5help.search.init();
 };
 
 h5help.initFrame = function() {
@@ -93,27 +84,16 @@ h5help.improveCompatibility = function (){
 
     // detect old Android browsers and override CSS to minimally address overflow scrolling limitation
     if (navigator.userAgent.match(/Android [12]\./gi)) {
-        $("div#toolbar,a#menu_button").css({'position':'fixed'});
         $("div#toc,div#topic,div#searchresults").css({'overflow':'visible','bottom':'auto','padding-bottom':'4in'});
         $("div#sizer").css({'overflow':'visible','bottom':'0px'});
     }
 }
-h5help.toggleMenu = function(){
-	$("ul#menu").toggleClass("hidden");
-}
-h5help.closeMenu = function(){
-    // TO DO: When menu is open, listen for menu close event to close it
-
-	$("ul#menu").addClass("hidden");
-}
 h5help.printTopic = function(){
-    h5help.closeMenu();
     window.frames["contentwin"].focus();
     window.frames["contentwin"].print();
 };
 
 h5help.showModal = function(modalContent){
-    h5help.closeMenu();
     $("div#modal").html(modalContent);
 	$("div#modal_back,div#modal").removeClass("hidden");
 	$("div#modal").focus();
@@ -140,8 +120,8 @@ h5help.loadInitialContent = function(){
     case "q":
         h5help.loadDiv("div#topic", query[1]);
         break;
-    case "search":
-        h5help.showSearchResults();
+    case "search":  // removing this functionality for now
+        // h5help.search.showResults(); 
         break;
     default:
         // nothing
@@ -224,7 +204,7 @@ h5help.loadDiv = function(targetDiv, linkHref, addHistory){
     h5help.href = h5help.href.replace(h5help.baseUrl,""); // Allow breadcrumbs, TOC expansion when full URL is specified
     
     if (targetDiv == "div#topic") { hrefDiv = ' div#topic>*' }
-    if (targetDiv == "div#toc" || targetDiv == "div#topic") { h5help.hideSearchResults() }
+    if (targetDiv == "div#toc" || targetDiv == "div#topic") { h5help.search.hideResults() }
     $(targetDiv).html('<div class="spinner"> </div>');
     // FUTURE: allow base to change when switching help system contexts (instructor/admin)
     //         --Treat as external link--
@@ -244,29 +224,12 @@ h5help.loadDiv = function(targetDiv, linkHref, addHistory){
         }
         switch(targetDiv) {
             case "div#toc"   : h5help.initTOC(); break;
-            case "div#topic" : h5help.initTopic(addHistory,h5help.href); break;
         }
         $(targetDiv).trigger('divloaded'); // use this to let other processes know this is done
     });
     
 }
-h5help.initTopic = function(addHistory,thishref){
-    if (Modernizr.history && addHistory) {
-        window.history.pushState(null,null, thishref); // add page to history for modern browsers
-    }
-    var title = $("div#topic h1").text();
-    $("title").html(title);
-    h5help.initEmbeddedUA();
-    h5help.populateUserData();
-    h5help.prettifyIfEnabled();
-    h5help.mobilize();
-    h5help.syncTOCandBreadcrumbs();
-    h5help.addCommentSection();
-    h5help.initTopicJSON();
-    h5help.initInteractions();
-    h5help.updateGoogleAnalytics();
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // parse topic with MathJax
-}
+
 
 h5help.populateUserData = function() {
     $("span.data.userdata").each(function(){
@@ -316,16 +279,11 @@ h5help.addCommentSection = function() {
 
 
 h5help.defineHandlers = function (){
-    $("a#menu_button").on("click focusin focusout", h5help.toggleMenu); 
-    $("div#topic,div#searchresults,div#toc,div#toolbar").on("click", h5help.closeMenu);
     
-    // need to enable menu items via keyboard
     $("#view_contents").on("click", function(){h5help.slideTOC(false)});
     $("#view_topic").on("click", function(){h5help.slideTOC(true)});
     $("#print_topic").on("click", h5help.printTopic);
     // TO DO: If possible, redefine print method of frames window to print only the topic frame
-    
-    $("#customer_support").on("click", h5help.closeMenu);
     
     $("#modal_back").on("click", h5help.hideModal);
     
@@ -337,10 +295,6 @@ h5help.defineHandlers = function (){
     
     // delegation binds handler to current and future a descendants of selector
     
-    $("div#searchbox").one("focus click", "input", h5help.showSearchResults); 
-    $("div#searchresults").on("click", "a#closesearch", h5help.hideSearchResults);
-    
-    $("div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
     $("div#toc").on("click", "a", h5help.slideTOC);
     $("div#toc").on("click", "a", function(){
         $(this).addClass("clicked");
@@ -351,7 +305,6 @@ h5help.defineHandlers = function (){
     
     $("div#sizer").on("click", h5help.slideTOC);
     $(window).resize(h5help.mobilize);
-    
 };
 
 h5help.initTOC = function(){
@@ -380,38 +333,6 @@ h5help.collapseTOCItem = function(){
     $(this).parent().addClass("expandable").removeClass("collapsible");
     $(this).attr("title","Click to expand");
     return false; // don't bubble event up to parents
-}
-h5help.initSearch = h5help.initSearch || function(){
-    // if internal search, this function should already be defined by internal-search.js
-    // rest is for Google search
-    h5help.timer = window.setInterval(function() { // test for search box periodically until found
-        if ($("div#searchbox input").length != 0) {
-            window.clearInterval(h5help.timer);
-            $("div#searchbox input").attr({ placeholder:"Search", tabindex:3 });
-            
-            h5help.searchListener.start();
-        }
-    },100);
-    $("div#searchbox").html('<div class="gcse-searchbox" data-gname="wasearch" data-queryParameterName="search" data-defaultToRefinement="' + h5help.params.google_cse_refinement + '" data-webSearchResultSetSize="20"></div>');
-    $("div#searchresults").html('<h1 tabindex="4">Search Results</h1>'+
-    '<a id="closesearch" alt="Close" title="Close"><span class="ua_control"> </span></a>'+
-    '<div class="gcse-searchresults" data-gname="wasearch"></div>');
-    (function() {
-        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + h5help.params.google_cse_id;
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-    })();
-};
-
-h5help.showSearchResults = function(){
-    $("div#searchresults").removeClass("hidden");
-    $("div#topic").addClass("hidden");
-    h5help.slideTOC(true);
-}
-h5help.hideSearchResults = function(){
-    $("div#searchbox").one("focus click", "input", h5help.showSearchResults);
-    $("div#searchresults").addClass("hidden");
-    $("div#topic").removeClass("hidden");
 }
 
 h5help.mobilize = function() {
@@ -447,7 +368,6 @@ h5help.mobilize = function() {
 h5help.slideTOC = function(hideTOC) {
     var myWin = h5help.windowWidth();
     hideTOC = (typeof hideTOC == 'boolean') ? myWin.isSmall && hideTOC : myWin.isSmall && myWin.toc.isOpen;
-    h5help.closeMenu();
     if (hideTOC) {
         $("div#toc").css("left",myWin.toc.closedLeft);
         $("div#sizer").css("left",myWin.sizer.closedLeft);
@@ -486,28 +406,4 @@ h5help.adjustForBanner = function() {
     
 };
 
-// TO DO: Remove the need for this if possible 
-h5help.searchListener = {
-    "currentquery"      : "",
-    "getQuery"          : function() {
-        var oldquery = h5help.searchListener.currentquery;
-        h5help.searchListener.currentquery = encodeURIComponent( $("div#searchbox input.gsc-input").val() );
-        return (oldquery != h5help.searchListener.currentquery);
-    },
-    "start"             : function() {
-        $("div#searchbox").on("keyup", "input.gsc-input", function(evt) {
-            if ( evt.which == 13 ) { h5help.searchListener.sendQueryToGA(); }
-        });
-        $("div#searchbox").on("change", "input.gsc-input", function(evt) {
-            // wait for field to be updated from autocomplete
-            window.setTimeout( h5help.searchListener.sendQueryToGA, 2000);
-        });
-    },
-    "sendQueryToGA"     : function() {
-        if (typeof(ga) == 'function' && h5help.searchListener.getQuery() ) {
-            ga('set', 'location', h5help.baseUrl + "?s=" + h5help.searchListener.currentquery );
-            ga('send', 'pageview');
-        }
-    }
-};
 
