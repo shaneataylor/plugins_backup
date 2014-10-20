@@ -17,7 +17,7 @@ h5help.framehtml =    '<div id="toolbar">'
                     + '  <h1 class="help_name">' + h5help.params.help_name + '</h1>'
                     + '  <a href="#topic" class="hidden508nav" tabindex="1">Skip to start of help topic</a>'
                     + h5help.search.html.box
-                    + '  <a id="email_topic" alt="Email topic" title="Email topic"><span class="ua_control"> </span></a>'
+                    /*+ '  <a id="email_topic" alt="Email topic" title="Email topic"><span class="ua_control"> </span></a>'*/
                     + '  <a id="print_topic" alt="Print topic" title="Print topic"><span class="ua_control"> </span></a>'
                     + '  <a id="get_support" alt="Get support" title="Get support"><span class="ua_control"> </span></a>'
                     + '</div>'
@@ -36,7 +36,12 @@ h5help.initAll = function() {
     h5help.defineHandlers();
     h5help.improveCompatibility();
     h5help.loadInitialContent();
-    !(h5help.search) || h5help.search.init();
+    if (h5help.search) {
+        h5help.search.init();
+    }
+    else {
+        window.alert("no search today");
+    }
 };
 
 h5help.initFrame = function() {
@@ -92,6 +97,10 @@ h5help.printTopic = function(){
     window.frames["contentwin"].focus();
     window.frames["contentwin"].print();
 };
+h5help.emailTopic = function(){
+    // TO DO: Use topic title for subject and include link (and short description?) in body
+    window.open('mailto:?subject=subject&body=body');
+}
 
 h5help.showModal = function(modalContent){
     $("div#modal").html(modalContent);
@@ -282,6 +291,7 @@ h5help.defineHandlers = function (){
     
     $("#view_contents").on("click", function(){h5help.slideTOC(false)});
     $("#view_topic").on("click", function(){h5help.slideTOC(true)});
+    $("a#email_topic").on("click", h5help.emailTopic);
     $("#print_topic").on("click", h5help.printTopic);
     // TO DO: If possible, redefine print method of frames window to print only the topic frame
     

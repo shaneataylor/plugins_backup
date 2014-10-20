@@ -2,10 +2,9 @@ h5help.search = {
     "init"      : function() { /* redefined for each search type */  },
     "timer"     : null,
     "handlers"  : function() {
-                    $("div#searchresults").on("click", "a#closesearch", h5help.search.hideResults);
-                    $("div#searchresults").on("click", "a:not(#closesearch)", h5help.handleLink); 
-                    $("div#searchbox").one("focus click", "input", h5help.search.showResults); 
-                    $("div#searchbox").on("keyup", "input", function(){
+                    $("div#content_container").on("click", "div#searchresults a", h5help.search.hideResults);
+                    $("div#toolbar").one("focus click", "div#searchbox input", h5help.search.showResults); 
+                    $("div#toolbar").on("keyup", "div#searchbox input", function(){
                         window.clearTimeout(h5help.search.timer);
                         h5help.search.timer = window.setTimeout(h5help.search.search,500);
                     });
@@ -47,7 +46,7 @@ h5help.search = {
                             resultsHTML += '<li data-score="' + results[i].score 
                                             + ' data-stems="' + results[i].terms 
                                             + ' data-labels="' + results[i].labels.join(" ") + '">'
-                                            + '<a href="' + results[i].href + '">' + results[i].title + '</a>'
+                                            + '<a target="contentwin" href="' + results[i].href + '">' + results[i].title + '</a>'
                                             + shortdesc + context 
                                             + '</li>';
                         }

@@ -48,7 +48,7 @@ h5help.search = $.extend(h5help.search, {
                         results.push({
                             "labels"    : labels,
                             "title"     : json.items[i].title,
-                            "href"      : json.items[i].link,
+                            "href"      : h5help.search.relativeURL(json.items[i].link),
                             "context"   : snippet,
                             "shortdesc" : shortdesc,
                             "terms"     : "",
@@ -63,6 +63,10 @@ h5help.search = $.extend(h5help.search, {
                     }
                     return results;
                     // TO DO: return flag if (no) more results exist
+    },
+    "relativeURL" : function( url ) {
+                    var relativeLocations = /^https?:\/\/(www\.)?webassign\.(net|com)\/manual\//;
+                    return url.replace(relativeLocations,"../");
     },
     "init"      : function() {
                     h5help.search.handlers();
