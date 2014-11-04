@@ -31,8 +31,8 @@
                 <required-cleanup><xsl:value-of select="summary"/></required-cleanup>
             </stentry>
             <stentry>
-                <ph audience="admin instructor student"><xsl:value-of select="key"/></ph>
-                <xref format="html" scope="external" otherprops="comment" audience="internal">
+                <ph audience="lms_admin instructor student"><xsl:value-of select="key"/></ph>
+                <xref format="html" scope="external" audience="internal">
                     <xsl:attribute name="href">
                         <xsl:value-of select="link"/>
                     </xsl:attribute>
